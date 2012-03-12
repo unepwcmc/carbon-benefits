@@ -1,10 +1,13 @@
 class ApiController < ApplicationController
 
   def work
-    if params[:id]
-      render :text => '[{"polygons":[],"stats":{},"total":true},{"polygons":[],"stats":{}}]'
+    if params[:work_hash] && params[:work_hash] != 'undefined'
+      work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
     else
-      render :text => '{"id": "BX2K"}'
+      work = Work.create
+    end
+    respond_to do |format|
+      format.json { render :json => work.to_json  }
     end
   end
 
