@@ -11,6 +11,12 @@ Carbontool::Application.routes.draw do
   match 'ie6' => 'home#ie6'
   match 'tool' => 'tool#index'
 
+  scope 'api/v0' do
+    match 'error' => 'api#error'
+    match 'work' => 'api#work'
+    match 'proxy' => 'api#proxy'
+  end
+
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
