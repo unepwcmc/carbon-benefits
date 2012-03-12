@@ -13,7 +13,7 @@ Carbontool::Application.routes.draw do
 
   scope 'api/v0' do
     match 'error' => 'api#error'
-    match 'work' => 'api#work'
+    match 'work(/:id)' => 'api#work'
     match 'proxy' => 'api#proxy'
   end
 

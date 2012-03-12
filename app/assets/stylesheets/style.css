@@ -560,14 +560,14 @@ div.right {
   display: block;
   width: 22px;
   height: 23px;
-  background: url("../img/layers_editor.png") no-repeat 0 0;
+  background: url("layers_editor.png") no-repeat 0 0;
 }
 /* line 49, ../../css_src/partials/_map.scss */
 .map_container div.layer_editor .layer_google_maps {
   display: block;
   width: 22px;
   height: 22px;
-  background: url("../img/layers_editor.png") no-repeat 0 -23px;
+  background: url("layers_editor.png") no-repeat 0 -23px;
 }
 /* line 58, ../../css_src/partials/_map.scss */
 .map_container div.zoom_control {
@@ -585,7 +585,7 @@ div.right {
   width: 26px;
   height: 26px;
   text-indent: -9999px;
-  background: url("../img/icons/zoom.png") no-repeat 0 0;
+  background: url("icons/zoom.png") no-repeat 0 0;
 }
 /* line 74, ../../css_src/partials/_map.scss */
 .map_container div.zoom_control a.zoom_in:hover {
