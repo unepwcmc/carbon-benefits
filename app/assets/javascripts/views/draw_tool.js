@@ -12,7 +12,7 @@ var PolygonDrawTool = Backbone.View.extend({
         this.listeners = [];
         this.reset();
 
-        this.image = new google.maps.MarkerImage('/img/sprite.png',
+        this.image = new google.maps.MarkerImage('/assets/sprite.png',
                     new google.maps.Size(13, 13),
                     new google.maps.Point(457, 1234),
                     new google.maps.Point(6,6)
