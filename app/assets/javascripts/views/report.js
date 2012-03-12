@@ -3,9 +3,9 @@ $(function() {
 
       tagName:  "div",
 
-      template: _.template($('#report-tmpl').html()),
-      template_no_content: _.template($('#report-tmpl-no-content').html()),
-      template_header: _.template($('#report-tmpl-common').html()),
+      template: JST["templates/report"],
+      template_no_content: JST["templates/report_common_no_template"],
+      template_header: JST["templates/report_common"],
 
       events: {
           'click .non_editing .go_edit': 'go_edit',

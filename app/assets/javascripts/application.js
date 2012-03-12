@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require_tree ./templates
 //= require libs/jquery.mousewheel
 //= require libs/jquery.jscrollpane
 //= require libs/underscore
