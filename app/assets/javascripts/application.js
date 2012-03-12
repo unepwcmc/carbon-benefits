@@ -12,4 +12,59 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require libs/jquery.mousewheel
+//= require libs/jquery.jscrollpane
+//= require libs/underscore-min
+//= require libs/class
+//= require libs/backbone-min
+//= require app
+//= require modules/log
+//= require modules/config
+//= require modules/bus
+//= require modules/map
+//= require modules/work
+//= require modules/panel
+//= require modules/start_banner
+//= require modules/ws
+//= require modules/header
+//= require modules/cartodb
+//= require modules/error
+//= require views/draw_tool
+//= require views/projector
+//= require views/map
+//= require views/report
+//= require views/polygon
+//= require views/layers
+//= require views/sharepopup
+//= require views/searchbox
+//= require carbon
+
+function number_format(n) {
+  var s = n.toFixed(0);
+  var chrs = [];
+  var c = 0;
+  for(var i = s.length - 1; i != -1; --i, ++c) {
+    if(((c % 3) == 0) && c > 0) {
+      chrs.push(',');
+    }
+    chrs.push(s.charAt(i));
+  }
+  return chrs.reverse().join('');
+}
+
+function init() {
+  // use timeout trick to avoid jquery catch the exceptions thrown
+  setTimeout(function() {
+    App(function(app) {
+      var carbon = new app.Carbon();
+      carbon.run();
+      //debug
+      window.carbon = carbon;
+      window._app= app;
+    });
+  }, 100);
+}
+
+$(document).ready(function() {
+  init();
+});

@@ -1,284 +1,140 @@
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 8 ]>    <html class="no-js ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <noscript><meta http-equiv="refresh" content="0; RL=/nojavascript"/></noscript>
-
-  <!--[if lt IE 7 ]> 
-  <script type="text/javascript">
-        window.location = '/ie6';
-  </script>
-
-  <![endif]-->
-  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-       Remove this if you use the .htaccess -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <title>Carbon Calculator</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
- -->
-
-  <!-- CSS: implied media="all" -->
-  <link rel="stylesheet" href="css/style.css?v=2">
-  <link rel="stylesheet" href="css/jquery.jscrollpane.css">
-
-  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
-
-  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="js/libs/modernizr-2.0.6.js"></script>
-
-</head>
-
-<body class="tool">
-
-  <div id="container">
-    <header>
-      <div class="left">
-        <h1>CARBON CALCULATOR</h1>
-        <p>a joint product of The CBD Secretariat, LifeWeb and UNEP-WCMC</p>
-      </div>
-      <div class="right">
-        <ul>
-          <li><a class="no_bkg" href="/about">ABOUT</a></li>
-          <li><a href="#share" class='share_button'><span><strong>SHARE</strong> THIS REPORT</span></a></li>
-        </ul>
-        <div class="share_tooltip">
-            <a href='#' class="close"></a>
-            <h1>share your report using this link</h1>
-            <input class="link" value=""  readonly="readonly"></input>
-        </div>
-      </div>
-    </header>
-
-    <div id="main" role="main">
-
-        <div class="map_container" id="main_map">
-            <div class="map"></div>
-            <!-- zoom-control -->
-            <div class="zoom_control">
-              <a href="#zoom_in" class="zoom_in">zoom_in</a>
-              <a href="#zoom_out" class="zoom_out">zoom_out</a>
-            </div>
-            <!-- end zoom control -->
-            <!--
-            <div class="layer_editor">
-                <a href="#" class="layer_raster"></a>
-                <a href="#" class="layer_google_maps"></a>
-            </div>
-            -->
-            <div class="crosshair">
-                <img src="/img/icons/crosshair_map.png" />
-            </div>
-            <div class="tiles_info"><span></span></div>
-            <div class="layers">
-                <a href="#view" class="view"><span>VIEWING <b class="layer_number">3 LAYERS</b></span></a>
-                <div class="show">
-                    <span class="top"></span>
-                    <ul class="dropdown">
-                        <a class="expand" href="#expand">expand</a>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- search box -->
-            <div class="search">
-              <h1>search</h1>
-              <input type='text' placeholder='............................' />
-              <a href="#search">&nbsp;&nbsp;</a>
-            </div>
-
-            <div id="polygon_popup">
-                <a id='done' href="">done</a>
-                <a id='delete' href="">delete</a>
-            </div> <!-- polygon_popup -->
-
-            <div id="protected_popup" class="popup_text">
-                <div class="top"></div>
-                <div class="center">
-                  <a href='#' class="close"></a>
-                  <h1 class="name">name</h1>
-                </div>
-                <div class="bottom">
-                  <a id='add_protected' href="#"><span>add this to the analisys</span></a>
-                </div>
-            </div> <!-- polygon_popup -->
-
-
-            <a class="cartodb_logo" href="http://cartodb.com"></a>
-        </div>
-
-
-        <div id="panel">
-            <div id="tabs">
-                <ul>
-                   <li class="add"><a href="#add_new_one" class="add">+</a></li>
-                   <li class="total last"><a href="#summary">summary</a></li>
-                </ul>
-            </div>
-            <div id="tab_content">
-            </div>
-            <!-- tooltip -->
-            <div class="list_tooltip">
-            </div>
-            {% include "_help_tooltips.html" %}
-        </div>
-
-        <div id="start_banner">
-            <div class="inner">
-                <div class="help">
-                    <h1>welcome to the carbon calculator tool</h1>
-                    <p>Draw polygons around your area of interest (AOI) to get an initial estimate about the potential contribution of this area to climate change mitigation and get information on its conservation values and forest status.</p>
-                    <button id="create_work"><span class="button_info">create an AOI</span></button>
-                </div> <!-- help -->
-            </div> <!-- inner -->
-        </div>
-
-      <div id="error_dialog">
-        <div class="error_wrapper">
-          <!--<a href='#' class="close"></a>-->
-          <!--<h1 id="title">ERROR</h1>-->
-          <p id="error_text">An error ocurred</p>
-          <a id="ok" href="#">ok</a>
-        </div>
-      </div>
-
+<% content_for :body_class, 'tool' %>
+<div id="container">
+  <header>
+    <div class="left">
+      <h1>CARBON CALCULATOR</h1>
+      <p>a joint product of The CBD Secretariat, LifeWeb and UNEP-WCMC</p>
     </div>
-
-
-    <footer>
-    </footer>
-  </div> <!--! end of #container -->
-
-  <!-- templates -->
-  <script type="text/template" id="report-tmpl">
-     {% include "_report.html" %}
-  </script>
-
-  <script type="text/template" id="report-tmpl-common">
-     {% include "_report_common.html" %}
-  </script>
-
-
-   <script type="text/template" id="report-tmpl-no-content">
-    <div class="no_content">
-      <div class="inner">
-          <span class="title">
-              <h2>DRAW YOUR FIRST POLYGON</h2>
-          </span>
-          <p>Start this AOI with a polygon. Click here is you want to start drawing your first polygon or select a Protected Area in the map</p>
-          <p><a href="#start_polygon" class="start_drawing"><span>DRAW POLYGON</span></a></p>
+    <div class="right">
+      <ul>
+        <li><a class="no_bkg" href="/about">ABOUT</a></li>
+        <li><a href="#share" class='share_button'><span><strong>SHARE</strong> THIS REPORT</span></a></li>
+      </ul>
+      <div class="share_tooltip">
+          <a href='#' class="close"></a>
+          <h1>share your report using this link</h1>
+          <input class="link" value=""  readonly="readonly"></input>
       </div>
-      <span class="end"></span>
-      <span style="display:none" class="loader"></span>
     </div>
-  </script>
+  </header>
+  <div id="main" role="main">
+      <div class="map_container" id="main_map">
+          <div class="map"></div>
+          <!-- zoom-control -->
+          <div class="zoom_control">
+            <a href="#zoom_in" class="zoom_in">zoom_in</a>
+            <a href="#zoom_out" class="zoom_out">zoom_out</a>
+          </div>
+          <!-- end zoom control -->
+          <!--
+          <div class="layer_editor">
+              <a href="#" class="layer_raster"></a>
+              <a href="#" class="layer_google_maps"></a>
+          </div>
+          -->
+          <div class="crosshair">
+              <%= image_tag "icons/crosshair_map.png" %>
+          </div>
+          <div class="tiles_info"><span></span></div>
+          <div class="layers">
+              <a href="#view" class="view"><span>VIEWING <b class="layer_number">3 LAYERS</b></span></a>
+              <div class="show">
+                  <span class="top"></span>
+                  <ul class="dropdown">
+                      <a class="expand" href="#expand">expand</a>
+                  </ul>
+              </div>
+          </div>
 
-  <!-- JavaScript at the bottom for fast page loading -->
+          <!-- search box -->
+          <div class="search">
+            <h1>search</h1>
+            <input type='text' placeholder='............................' />
+            <a href="#search">&nbsp;&nbsp;</a>
+          </div>
 
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-  <script>window.jQuery || document.write("<script src='js/libs/jquery-1.5.1.min.js'>\x3C/script>")</script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry""></script>
-  <script>window.JSON || document.write("<script src='js/libs/json2.js'>\x3C/script>")</script>
+          <div id="polygon_popup">
+              <a id='done' href="">done</a>
+              <a id='delete' href="">delete</a>
+          </div> <!-- polygon_popup -->
 
-  <!-- scripts concatenated and minified via ant build script-->
-  <!-- libraries -->
-  <script src="js/libs/jquery.mousewheel.js"></script>
-  <!--<script src="js/libs/jquery.jscrollpane.min.js"></script>-->
-  <script src="js/libs/jquery.jscrollpane.js"></script>
-  <script src="js/libs/underscore-min.js"></script>
-  <script src="js/libs/class.js"></script>
-  <script src="js/libs/backbone-min.js"></script>
-  <!--<script src="js/libs/backbone-localstorage.js"></script>-->
+          <div id="protected_popup" class="popup_text">
+              <div class="top"></div>
+              <div class="center">
+                <a href='#' class="close"></a>
+                <h1 class="name">name</h1>
+              </div>
+              <div class="bottom">
+                <a id='add_protected' href="#"><span>add this to the analisys</span></a>
+              </div>
+          </div> <!-- polygon_popup -->
 
-  <!-- app -->
-  <script src="js/app.js"></script>
-  <script src="js/modules/log.js"></script>
-  <script src="js/modules/config.js"></script>
-  <script src="js/modules/bus.js"></script>
-  <script src="js/modules/map.js"></script>
-  <script src="js/modules/work.js"></script>
-  <script src="js/modules/panel.js"></script>
-  <script src="js/modules/start_banner.js"></script>
-  <script src="js/modules/ws.js"></script>
-  <script src="js/modules/header.js"></script>
-  <script src="js/modules/cartodb.js"></script>
-  <script src="js/modules/error.js"></script>
+          <a class="cartodb_logo" href="http://cartodb.com"></a>
+      </div>
 
-  <!-- backbone components -->
-  <script src="js/views/draw_tool.js"></script>
-  <script src="js/views/projector.js"></script>
-  <script src="js/views/map.js"></script>
-  <script src="js/views/report.js"></script>
-  <script src="js/views/polygon.js"></script>
-  <script src="js/views/layers.js"></script>
-  <script src="js/views/sharepopup.js"></script>
-  <script src="js/views/searchbox.js"></script>
+      <div id="panel">
+          <div id="tabs">
+              <ul>
+                 <li class="add"><a href="#add_new_one" class="add">+</a></li>
+                 <li class="total last"><a href="#summary">summary</a></li>
+              </ul>
+          </div>
+          <div id="tab_content">
+          </div>
+          <!-- tooltip -->
+          <div class="list_tooltip">
+          </div>
+          <%= render "shared/help_tooltips" %>
+      </div>
 
+      <div id="start_banner">
+          <div class="inner">
+              <div class="help">
+                  <h1>welcome to the carbon calculator tool</h1>
+                  <p>Draw polygons around your area of interest (AOI) to get an initial estimate about the potential contribution of this area to climate change mitigation and get information on its conservation values and forest status.</p>
+                  <button id="create_work"><span class="button_info">create an AOI</span></button>
+              </div> <!-- help -->
+          </div> <!-- inner -->
+      </div>
 
-  <!-- main -->
-  <script src="js/carbon.js"></script>
+    <div id="error_dialog">
+      <div class="error_wrapper">
+        <!--<a href='#' class="close"></a>-->
+        <!--<h1 id="title">ERROR</h1>-->
+        <p id="error_text">An error ocurred</p>
+        <a id="ok" href="#">ok</a>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    function number_format(n) {
-        var s = n.toFixed(0);
-        var chrs = [];
-        var c = 0;
-        for(var i = s.length - 1; i != -1; --i, ++c) {
-            if(((c % 3) == 0) && c > 0) {
-                chrs.push(',');
-            }
-            chrs.push(s.charAt(i));
-        }
-        return chrs.reverse().join('');
-    }
-  </script>
+  <footer>
+  </footer>
+</div> <!--! end of #container -->
 
+<!-- templates -->
+<script type="text/template" id="report-tmpl">
+   <%= render "tool/report" %>
+</script>
 
-  <!-- end scripts-->
-  <script>
-      function init() {
-          // use timeout trick to avoid jquery catch the exceptions thrown
-          setTimeout(function() {
-              App(function(app) {
-                  var carbon = new app.Carbon();
-                  carbon.run();
-                  //debug
-                  window.carbon = carbon;
-                  window._app= app;
-              });
-          }, 100);
-      }
-      $(document).ready(function() {
-      //$(function() {
-            init();
+<script type="text/template" id="report-tmpl-common">
+   <%= render "tool/report_common" %>
+</script>
 
-      });
-  </script>
+<script type="text/template" id="report-tmpl-no-content">
+  <div class="no_content">
+    <div class="inner">
+      <span class="title">
+        <h2>DRAW YOUR FIRST POLYGON</h2>
+      </span>
+      <p>Start this AOI with a polygon. Click here is you want to start drawing your first polygon or select a Protected Area in the map</p>
+      <p><a href="#start_polygon" class="start_drawing"><span>DRAW POLYGON</span></a></p>
+    </div>
+    <span class="end"></span>
+    <span style="display:none" class="loader"></span>
+  </div>
+</script>
 
-
-  <!--[if lt IE 7 ]>
-    <script src="js/libs/dd_belatedpng.js"></script>
-    <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
-  <![endif]-->
-
-
-  <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
-
-  {% include "_analytics.html" %}
-
-</body>
-</html>
+<!--[if lt IE 7 ]>
+  <script src="js/libs/dd_belatedpng.js"></script>
+  <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+<![endif]-->

@@ -351,7 +351,7 @@ body.tool div#error_dialog .error_wrapper {
   width: 372px;
   height: 108px;
   padding: 10px;
-  background: url("/img/sprite.png") left -1581px no-repeat;
+  background: url("sprite.png") left -1581px no-repeat;
 }
 /* line 71, ../../css_src/partials/_page.scss */
 body.tool div#error_dialog h1 {
@@ -380,7 +380,7 @@ body.tool div#error_dialog .close {
   float: right;
   width: 12px;
   height: 17px;
-  background: url("/img/sprite.png") right -1258px no-repeat;
+  background: url("sprite.png") right -1258px no-repeat;
 }
 /* line 98, ../../css_src/partials/_page.scss */
 body.tool header {
@@ -396,7 +396,7 @@ body.tool header div.share_tooltip {
   top: 30px;
   left: -145px;
   z-index: 200;
-  background: url("/img/sprite.png") left -1702px no-repeat;
+  background: url("sprite.png") left -1702px no-repeat;
   padding: 31px 20px 20px 20px;
   width: 312px;
 }
@@ -405,7 +405,7 @@ body.tool header div.share_tooltip .close {
   float: right;
   width: 12px;
   height: 17px;
-  background: url("/img/sprite.png") right -1258px no-repeat;
+  background: url("sprite.png") right -1258px no-repeat;
 }
 /* line 124, ../../css_src/partials/_page.scss */
 body.tool header div.share_tooltip h1 {
@@ -465,7 +465,7 @@ body.tool header div ul li a {
   height: 28px;
   height: 26px\9;
   padding: 0 0 0 12px;
-  background: url("/img/sprite.png") 0 0 no-repeat;
+  background: url("sprite.png") 0 0 no-repeat;
   font: normal 13px "WhitneyBookRegular","Myriad Pro";
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 black;
@@ -486,7 +486,7 @@ body.tool header div ul li a span {
   height: 12px\9;
   padding: 6px 12px 8px 0;
   margin: 0;
-  background: url("/img/sprite.png") right -28px no-repeat;
+  background: url("sprite.png") right -28px no-repeat;
   line-height: 13px;
 }
 /* line 190, ../../css_src/partials/_page.scss */
@@ -545,7 +545,7 @@ div.right {
   left: 70px;
   width: 69px;
   height: 27px;
-  background: url("/img/sprite.png") no-repeat right -1182px;
+  background: url("sprite.png") no-repeat right -1182px;
 }
 /* line 36, ../../css_src/partials/_map.scss */
 .map_container div.layer_editor {
@@ -624,21 +624,21 @@ div.right {
 .map_container .popup_text .top {
   padding: 18px 18px 0 18px;
   width: 100%;
-  background: url("/img/sprite.png") left -1469px no-repeat;
+  background: url("sprite.png") left -1469px no-repeat;
   height: 0px;
 }
 /* line 120, ../../css_src/partials/_map.scss */
 .map_container .popup_text .center {
   padding: 0px 18px 0 18px;
   width: 100%;
-  background: url("/img/sprite.png") left -1480px no-repeat;
+  background: url("sprite.png") left -1480px no-repeat;
   float: left;
 }
 /* line 126, ../../css_src/partials/_map.scss */
 .map_container .popup_text .bottom {
   padding: 0px 18px 18px 18px;
   width: 100%;
-  background: url("/img/sprite.png") left -1515px no-repeat;
+  background: url("sprite.png") left -1515px no-repeat;
   float: left;
   height: 48px;
 }
@@ -661,7 +661,7 @@ div.right {
   float: right;
   width: 12px;
   height: 17px;
-  background: url("/img/sprite.png") right -1258px no-repeat;
+  background: url("sprite.png") right -1258px no-repeat;
 }
 /* line 152, ../../css_src/partials/_map.scss */
 .map_container .popup_text #add_protected {
@@ -670,11 +670,11 @@ div.right {
   height: 30px;
   margin: 10px 0 0 0px;
   padding: 0 0 0 11px;
-  background: url("/img/sprite.png") -2px -453px no-repeat;
+  background: url("sprite.png") -2px -453px no-repeat;
   font: bold 13px "WhitneyBold";
   color: white;
   text-transform: uppercase;
-  background: url("/img/sprite.png") 0 -790px no-repeat;
+  background: url("sprite.png") 0 -790px no-repeat;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 #3c7d7d;
   text-decoration: none;
@@ -685,7 +685,7 @@ div.right {
   width: auto;
   height: 14px;
   padding: 8px 12px 8px 0;
-  background: url("/img/sprite.png") right -820px no-repeat;
+  background: url("sprite.png") right -820px no-repeat;
 }
 /* line 174, ../../css_src/partials/_map.scss */
 .map_container .popup_text #add_protected:hover {
@@ -700,7 +700,7 @@ div.right {
   width: 99px;
   height: 11px;
   padding: 21px 20px 33px 20px;
-  background: url("/img/sprite.png") -325px -478px no-repeat;
+  background: url("sprite.png") -325px -478px no-repeat;
 }
 /* line 189, ../../css_src/partials/_map.scss */
 .map_container #polygon_popup a {
@@ -734,7 +734,7 @@ div.right {
   height: 25px;
   z-index: 10;
   padding: 5px 0px 3px 8px;
-  background: url("/img/sprite.png") no-repeat 0 -1858px;
+  background: url("sprite.png") no-repeat 0 -1858px;
 }
 /* line 216, ../../css_src/partials/_map.scss */
 .map_container .search h1 {
@@ -774,7 +774,7 @@ div.right {
   width: auto;
   height: 33px;
   padding: 0 0 0 15px;
-  background: url("/img/sprite.png") no-repeat 0 -1035px;
+  background: url("sprite.png") no-repeat 0 -1035px;
   text-decoration: none;
 }
 /* line 254, ../../css_src/partials/_map.scss */
@@ -785,7 +785,7 @@ div.right {
   padding: 11px 32px 9px 5px;
   font: normal 13px "WhitneyBookRegular","Myriad Pro";
   color: #333333;
-  background: url("/img/sprite.png") no-repeat right -1035px;
+  background: url("sprite.png") no-repeat right -1035px;
   text-indent: 0px;
   text-decoration: none;
 }
@@ -807,7 +807,7 @@ div.right {
   float: right;
   width: 100%;
   height: 12px;
-  background: url("/img/sprite.png") no-repeat right -2302px;
+  background: url("sprite.png") no-repeat right -2302px;
 }
 /* line 286, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul {
@@ -817,7 +817,7 @@ div.right {
   margin: 0;
   list-style: none;
   text-align: left;
-  background: url("/img/sprite.png") no-repeat right bottom;
+  background: url("sprite.png") no-repeat right bottom;
 }
 /* line 295, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul:last-child {
@@ -851,33 +851,33 @@ div.right {
 .map_container .layers div.show ul li span.color {
   width: 7px;
   height: 7px;
-  background: url("/img/sprite.png") no-repeat -224px -2491px;
+  background: url("sprite.png") no-repeat -224px -2491px;
   margin-right: 10px;
   display: inline-block;
 }
 /* line 321, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled span.color.carbon {
-  background: url("/img/sprite.png") no-repeat -224px -2312px;
+  background: url("sprite.png") no-repeat -224px -2312px;
 }
 /* line 324, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled span.color.protected_areas {
-  background: url("/img/sprite.png") no-repeat -224px -2342px;
+  background: url("sprite.png") no-repeat -224px -2342px;
 }
 /* line 327, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled span.color.carbon_sequestration {
-  background: url("/img/sprite.png") no-repeat -224px -2372px;
+  background: url("sprite.png") no-repeat -224px -2372px;
 }
 /* line 330, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled span.color.restoration_potential {
-  background: url("/img/sprite.png") no-repeat -224px -2401px;
+  background: url("sprite.png") no-repeat -224px -2401px;
 }
 /* line 333, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled span.color.forest_status {
-  background: url("/img/sprite.png") no-repeat -224px -2432px;
+  background: url("sprite.png") no-repeat -224px -2432px;
 }
 /* line 336, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled span.color.KBA {
-  background: url("/img/sprite.png") no-repeat -224px -2462px;
+  background: url("sprite.png") no-repeat -224px -2462px;
 }
 /* line 344, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.last {
@@ -885,7 +885,7 @@ div.right {
 }
 /* line 348, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li:hover {
-  background: url("/img/sprite.png") no-repeat -270px -1372px;
+  background: url("sprite.png") no-repeat -270px -1372px;
   background-color: #EDEDED;
   cursor: pointer!important;
 }
@@ -906,7 +906,7 @@ div.right {
   text-indent: -9999px;
   font-size: 0;
   line-height: 0;
-  background: url("/img/sprite.png") no-repeat 0 -1444px;
+  background: url("sprite.png") no-repeat 0 -1444px;
 }
 /* line 372, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul a.expand:hover {
@@ -967,21 +967,21 @@ div.right {
 #panel .help_popup .top {
   padding: 18px 18px 0 18px;
   width: 100%;
-  background: url("/img/sprite.png") left -1469px no-repeat;
+  background: url("sprite.png") left -1469px no-repeat;
   height: 0px;
 }
 /* line 46, ../../css_src/partials/_panel.scss */
 #panel .help_popup .center {
   padding: 0px 18px 0 18px;
   width: 100%;
-  background: url("/img/sprite.png") left -1480px no-repeat;
+  background: url("sprite.png") left -1480px no-repeat;
   float: left;
 }
 /* line 52, ../../css_src/partials/_panel.scss */
 #panel .help_popup .bottom {
   padding: 0px 18px 18px 18px;
   width: 100%;
-  background: url("/img/sprite.png") left -1535px no-repeat;
+  background: url("sprite.png") left -1535px no-repeat;
   float: left;
   height: 37px;
 }
@@ -994,7 +994,7 @@ div.right {
   padding: 17px 22px 31px 22px;
   margin: 0;
   z-index: 300;
-  background: url("/img/sprite.png") no-repeat -267px -1436px;
+  background: url("sprite.png") no-repeat -267px -1436px;
 }
 /* line 71, ../../css_src/partials/_panel.scss */
 #panel div.list_tooltip h4 {
@@ -1011,11 +1011,11 @@ div.right {
 }
 /* line 82, ../../css_src/partials/_panel.scss */
 #panel div.list_tooltip span.blue {
-  background: url("/img/sprite.png") no-repeat -464px -1452px;
+  background: url("sprite.png") no-repeat -464px -1452px;
 }
 /* line 83, ../../css_src/partials/_panel.scss */
 #panel div.list_tooltip span.white {
-  background: url("/img/sprite.png") no-repeat -464px -1536px;
+  background: url("sprite.png") no-repeat -464px -1536px;
 }
 /* line 85, ../../css_src/partials/_panel.scss */
 #panel div.list_tooltip span h6 {
@@ -1078,7 +1078,7 @@ div.right {
 #panel #tabs ul li a.add, #panel #tabs ul li a#add_report {
   height: 100%;
   padding: 0;
-  background: url("/img/sprite.png") no-repeat 15px -912px;
+  background: url("sprite.png") no-repeat 15px -912px;
   background-color: #EDEDED;
   text-indent: -9999px;
   font-size: 0;
@@ -1109,7 +1109,7 @@ div.right {
   -moz-box-shadow: 3px -1px 2px 0 rgba(0, 0, 0, 0.05), -3px -1px 2px 0 rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 3px -1px 2px 0 rgba(0, 0, 0, 0.05), -3px -1px 2px 0 rgba(0, 0, 0, 0.05);
   box-shadow: 3px -1px 2px 0 rgba(0, 0, 0, 0.05), -3px -1px 2px 0 rgba(0, 0, 0, 0.05);
-  background: url("/img/sprite.png") no-repeat -61px -923px;
+  background: url("sprite.png") no-repeat -61px -923px;
 }
 /* line 162, ../../css_src/partials/_panel.scss */
 #panel #tabs ul li span.stats span.stats_inner {
@@ -1117,7 +1117,7 @@ div.right {
   float: left;
   width: 100%;
   padding: 20px 20px 12px 0;
-  background: url("/img/sprite.png") no-repeat right -923px;
+  background: url("sprite.png") no-repeat right -923px;
 }
 /* line 170, ../../css_src/partials/_panel.scss */
 #panel #tabs ul li span.stats h5 {
@@ -1212,7 +1212,7 @@ div.right {
   width: 100%;
   height: 34px;
   margin: 10px 0 0 0;
-  background: url("/img/sprite.png") 0 -474px no-repeat;
+  background: url("sprite.png") 0 -474px no-repeat;
 }
 /* line 271, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.tools h2 {
@@ -1276,7 +1276,7 @@ div.right {
   overflow: hidden;
   /*font-size:0;*/
   /*line-height:0;*/
-  background: url("/img/sprite.png") -22px -453px no-repeat;
+  background: url("sprite.png") -22px -453px no-repeat;
 }
 /* line 318, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.tools a.remove {
@@ -1290,7 +1290,7 @@ div.right {
   text-indent: -9999px;
   font-size: 0;
   line-height: 0;
-  background: url("/img/sprite.png") -2px -453px no-repeat;
+  background: url("sprite.png") -2px -453px no-repeat;
 }
 /* line 329, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.tools a.finish {
@@ -1299,10 +1299,10 @@ div.right {
   height: 30px;
   margin: 2px 0 0 2px;
   padding: 0 0 0 12px;
-  background: url("/img/sprite.png") -2px -453px no-repeat;
+  background: url("sprite.png") -2px -453px no-repeat;
   font: bold 13px "WhitneyBold";
   color: white;
-  background: url("/img/sprite.png") 0 -790px no-repeat;
+  background: url("sprite.png") 0 -790px no-repeat;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 #3c7d7d;
   text-decoration: none;
@@ -1313,7 +1313,7 @@ div.right {
   width: auto;
   height: 14px;
   padding: 8px 12px 8px 0;
-  background: url("/img/sprite.png") right -820px no-repeat;
+  background: url("sprite.png") right -820px no-repeat;
 }
 /* line 350, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.tools a.finish:hover {
@@ -1321,7 +1321,7 @@ div.right {
 }
 /* line 352, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.tools a.remove_it_please {
-  background: url("/img/sprite.png") 0 -1817px no-repeat;
+  background: url("sprite.png") 0 -1817px no-repeat;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 #cc3300;
   height: 30px;
@@ -1343,7 +1343,7 @@ div.right {
   margin: 100px 0 0 0;
   text-align: center;
   overflow: hidden;
-  background: url("/img/sprite.png") -83px -1908px no-repeat;
+  background: url("sprite.png") -83px -1908px no-repeat;
 }
 /* line 376, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.start_drawing {
@@ -1352,10 +1352,10 @@ div.right {
   height: 30px;
   margin: 2px 0 0 90px;
   padding: 0 0 0 12px;
-  background: url("/img/sprite.png") -2px -453px no-repeat;
+  background: url("sprite.png") -2px -453px no-repeat;
   font: bold 13px "WhitneyBold";
   color: white;
-  background: url("/img/sprite.png") 0 -790px no-repeat;
+  background: url("sprite.png") 0 -790px no-repeat;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 #3c7d7d;
   text-decoration: none;
@@ -1366,7 +1366,7 @@ div.right {
   width: auto;
   height: 14px;
   padding: 8px 12px 8px 0;
-  background: url("/img/sprite.png") right -820px no-repeat;
+  background: url("sprite.png") right -820px no-repeat;
 }
 /* line 397, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.start_drawing:hover {
@@ -1406,7 +1406,7 @@ div.right {
 #panel #tab_content div.no_content span.end {
   width: 312px;
   height: 5px;
-  background: url("/img/sprite.png") 0 -785px no-repeat;
+  background: url("sprite.png") 0 -785px no-repeat;
 }
 /* line 429, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block {
@@ -1428,7 +1428,7 @@ div.right {
   margin: 27px 0 0 0;
   font: bold 11px "WhitneyBold","Myriad Pro";
   color: #333333;
-  background: url("/img/icons/help.png") no-repeat right 2px;
+  background: url("icons/help.png") no-repeat right 2px;
 }
 /* line 447, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block span.title h2.nohelp {
@@ -1510,14 +1510,14 @@ div.right {
   height: 8px;
   padding: 0 0 0 3px;
   margin: 4px 0 0 0;
-  background: url("/img/sprite.png") no-repeat 0 -904px;
+  background: url("sprite.png") no-repeat 0 -904px;
 }
 /* line 525, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block ul li div.stats_bar span.r_bar {
   float: left;
   width: 100%;
   height: 100%;
-  background: url("/img/sprite.png") no-repeat right -904px;
+  background: url("sprite.png") no-repeat right -904px;
 }
 /* line 532, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block ul li div.stats_bar.inner {
@@ -1547,12 +1547,12 @@ div.right {
 /* line 556, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block ul li p.ok {
   padding: 0 15px 0 0;
-  background: url("/img/sprite.png") no-repeat right -384px;
+  background: url("sprite.png") no-repeat right -384px;
 }
 /* line 557, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block ul li p.ko {
   padding: 0 15px 0 0;
-  background: url("/img/sprite.png") no-repeat right -397px;
+  background: url("sprite.png") no-repeat right -397px;
 }
 /* line 560, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.block ul li.last {
@@ -1673,7 +1673,7 @@ div.right {
   height: 47px;
   margin: 0;
   padding: 0;
-  background: url("/img/loading.gif") no-repeat -37px 0;
+  background: url("loading.gif") no-repeat -37px 0;
 }
 
 /* Golden ratio scale from http://modularscale.com/scale/?px1=12&px2=48&ra1=1.618&ra2=0
@@ -1706,7 +1706,7 @@ html, body {
   height: 324px;
   margin: 0 auto;
   text-align: left;
-  background: url("/img/sprite.png") right -56px no-repeat;
+  background: url("sprite.png") right -56px no-repeat;
 }
 /* line 24, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner .help {
@@ -1741,7 +1741,7 @@ html, body {
   margin: 23px 0 0 0;
   padding: 0 0 0 21px;
   border: none;
-  background: url("/img/sprite.png") left -380px no-repeat;
+  background: url("sprite.png") left -380px no-repeat;
   font: bold 15px "WhitneyBold","Myriad Pro";
   color: #333333;
 }
@@ -1751,7 +1751,7 @@ html, body {
   min-width: 150px\9;
   height: 15px;
   padding: 17px 21px 19px 0;
-  background: url("/img/sprite.png") right -427px no-repeat;
+  background: url("sprite.png") right -427px no-repeat;
   line-height: 15px;
   text-transform: uppercase;
 }
@@ -1844,7 +1844,7 @@ body.out section.results {
   *display: inline;
   width: 100%;
   margin: 80px 0 0 0;
-  background: url("/img/pattern.jpg") repeat 0 0;
+  background: url("pattern.jpg") repeat 0 0;
 }
 /* line 11, ../../css_src/partials/_layout.scss */
 body.out section.results div.inner {
@@ -1893,7 +1893,7 @@ body.out section.results div.inner table a.butt {
   height: 26px;
   padding: 0 0 0 4px;
   margin: 0 4px 0 0;
-  background: url("/img/sprite.png") no-repeat 0 -1337px;
+  background: url("sprite.png") no-repeat 0 -1337px;
   font: bold 11px "WhitneyBold","Myriad Pro";
   color: #66CCCC;
   text-decoration: none;
@@ -1904,7 +1904,7 @@ body.out section.results div.inner table a.butt span {
   width: auto;
   height: 11px;
   padding: 7px 8px 8px 4px;
-  background: url("/img/sprite.png") no-repeat right -1337px;
+  background: url("sprite.png") no-repeat right -1337px;
 }
 /* line 65, ../../css_src/partials/_layout.scss */
 body.out section.results div.inner table a.butt:hover {
@@ -2021,7 +2021,7 @@ body.out div.layout article.data_sources p {
 }
 /* line 159, ../../css_src/partials/_layout.scss */
 body.out div.layout article.data_sources ul {
-  list-style-image: url("/img/icons/list.png");
+  list-style-image: url("icons/list.png");
   width: 100%;
   margin: 0;
   padding: 5px 0 0 0;
@@ -2043,7 +2043,7 @@ body.out div.layout section.start {
   -moz-box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.08);
   -webkit-box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.08);
   box-shadow: 0 0 4px 3px rgba(0, 0, 0, 0.08);
-  background: url("/img/start.jpg") no-repeat 0 0;
+  background: url("start.jpg") no-repeat 0 0;
 }
 /* line 186, ../../css_src/partials/_layout.scss */
 body.out div.layout section.start div.mamufas {
@@ -2053,7 +2053,7 @@ body.out div.layout section.start div.mamufas {
   left: 0;
   width: 918px;
   height: 402px;
-  background: url("/img/mamufas.png") no-repeat 0 0;
+  background: url("mamufas.png") no-repeat 0 0;
 }
 /* line 195, ../../css_src/partials/_layout.scss */
 body.out div.layout section.start div.mamufas a {
@@ -2064,7 +2064,7 @@ body.out div.layout section.start div.mamufas a {
   left: 50%;
   margin: -39px 0 0 -158px;
   text-decoration: none;
-  background: url("/img/sprite.png") no-repeat 0 -1181px;
+  background: url("sprite.png") no-repeat 0 -1181px;
 }
 /* line 204, ../../css_src/partials/_layout.scss */
 body.out div.layout section.start div.mamufas a:hover {
@@ -2144,7 +2144,7 @@ body.out div.layout section.two_columns p.orange {
 }
 /* line 263, ../../css_src/partials/_layout.scss */
 body.out div.layout section.two_columns ul {
-  list-style-image: url("/img/icons/list_green.png");
+  list-style-image: url("icons/list_green.png");
   width: 100%;
   margin: 6px 0 0 0;
 }
@@ -2230,32 +2230,32 @@ body.out div.layout footer div.collab ul li a {
 body.out div.layout footer div.collab ul li a.cbd {
   width: 145px;
   height: 48px;
-  background: url("/img/sprite.png") no-repeat 0 -1126px;
+  background: url("sprite.png") no-repeat 0 -1126px;
 }
 /* line 335, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.lifeweb {
   width: 121px;
   height: 48px;
-  background: url("/img/sprite.png") no-repeat -150px -1127px;
+  background: url("sprite.png") no-repeat -150px -1127px;
 }
 /* line 336, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.unep-wcmc {
   width: 96px;
   height: 49px;
-  background: url("/img/sprite.png") no-repeat -375px -1123px;
+  background: url("sprite.png") no-repeat -375px -1123px;
 }
 /* line 337, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.vizzuality {
   width: 89px;
   height: 47px;
-  background: url("/img/sprite.png") no-repeat -280px -1126px;
+  background: url("sprite.png") no-repeat -280px -1126px;
 }
 /* line 338, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.federal_agency {
   width: 211px;
   height: 92px;
   margin-left: -10px;
-  background: url("/img/sprite.png") no-repeat left -2312px;
+  background: url("sprite.png") no-repeat left -2312px;
 }
 /* line 339, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.nature {
@@ -2263,7 +2263,7 @@ body.out div.layout footer div.collab ul li a.nature {
   width: 53px;
   height: 57px;
   margin: -8px 0 0 12px;
-  background: url("/img/sprite.png") no-repeat 0 -1369px;
+  background: url("sprite.png") no-repeat 0 -1369px;
   text-indent: -9999px;
   line-height: 0;
   font-size: 0;
@@ -2298,7 +2298,7 @@ body.out div.layout footer div.right a.nature {
   width: 240px;
   height: 57px;
   margin: 15px 0 0;
-  background: url("/img/sprite.png") no-repeat 0 -1369px;
+  background: url("sprite.png") no-repeat 0 -1369px;
   text-indent: -9999px;
   line-height: 0;
   font-size: 0;

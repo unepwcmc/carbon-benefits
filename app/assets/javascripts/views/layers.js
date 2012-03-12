@@ -40,7 +40,7 @@ var Layer = Backbone.View.extend({
         });
         var html = this.template(d);
         if(leg = this.LEGENDS[this.layer.name]) {
-            html += '<img src="/img/'+ leg +'" />';
+            html += '<img src="/assets/'+ leg +'" />';
         }
         el.html(html).addClass('sortable').attr('id', this.layer.name);
         if(this.layer.enabled) {
