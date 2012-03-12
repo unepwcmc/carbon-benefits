@@ -9,6 +9,7 @@ Carbontool::Application.routes.draw do
   match 'data' => 'home#data'
   match 'nojavascript' => 'home#nojs'
   match 'ie6' => 'home#ie6'
+  match 'tool' => 'tool#index'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
