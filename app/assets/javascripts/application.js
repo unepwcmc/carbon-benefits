@@ -14,9 +14,9 @@
 //= require jquery_ujs
 //= require libs/jquery.mousewheel
 //= require libs/jquery.jscrollpane
-//= require libs/underscore-min
+//= require libs/underscore
 //= require libs/class
-//= require libs/backbone-min
+//= require libs/backbone
 //= require app
 //= require modules/log
 //= require modules/config

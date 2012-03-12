@@ -13,3 +13,13 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ruby
+/vendor/ruby
+
+# VIM
+*.swp
+*.un~
+
+# OS X
+*.DS_Store
