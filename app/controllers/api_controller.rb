@@ -10,16 +10,18 @@ class ApiController < ApplicationController
       work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
       render :json => work.to_json
     else
-      render :file => "404.html"
+      render :json => ''
     end
   end
 
   def update_work
     if params[:work_hash] && params[:work_hash] != 'undefined'
       work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
-      work.json = params[:_json]
+      work.json = params[:_json].to_json
       work.save
       render :json => params[:_json]
+    else
+      render :json => ''
     end
   end
 
