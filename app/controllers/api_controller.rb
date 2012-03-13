@@ -1,13 +1,33 @@
 class ApiController < ApplicationController
 
+  def create_work
+    work = Work.create
+    render :json => work.to_json
+  end
+
   def work
     if params[:work_hash] && params[:work_hash] != 'undefined'
       work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
+      render :json => work.to_json
     else
-      work = Work.create
+      render :file => "404.html"
     end
-    respond_to do |format|
-      format.json { render :json => work.to_json  }
+  end
+
+  def update_work
+    if params[:work_hash] && params[:work_hash] != 'undefined'
+      work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
+      work.json = params[:_json]
+      work.save
+      render :json => params[:_json]
+    end
+  end
+
+  def destroy_work
+    if params[:work_hash] && params[:work_hash] != 'undefined'
+      work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
+      work.delete
+      render :json => ''
     end
   end
 

@@ -13,8 +13,12 @@ Carbontool::Application.routes.draw do
 
   scope 'api/v0' do
     match 'error' => 'api#error'
-    match 'work(/:work_hash)' => 'api#work'
     match 'proxy/*url' => 'api#proxy'
+    #work
+    post 'work' => 'api#create_work'
+    get 'work/:work_hash' => 'api#work'
+    put 'work/:work_hash' => 'api#update_work'
+    delete 'work/:work_hash' => 'api#destroy_work'
   end
 
   # Sample of named route:
