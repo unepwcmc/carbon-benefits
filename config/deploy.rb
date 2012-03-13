@@ -3,6 +3,8 @@ gem 'brightbox', '>=2.3.9'
 require 'brightbox/recipes'
 require 'brightbox/passenger'
 
+load 'deploy/assets'
+
 # The name of your application.  Used for deployment directory and filenames
 # and Apache configs. Should be unique on the Brightbox
 set :application, "carbon-benefits"
@@ -145,10 +147,3 @@ default_run_options[:pty] = true
 # lingering until the workers time out
 # set :passenger_restart_strategy, :hard
 
-namespace :deploy do
-  task :pipeline_precompile do
-    run "cd #{release_path}; RAILS_ENV=#{env} bundle exec rake assets:precompile"
-  end
-end
-
-after "deploy:update_code", "deploy:pipeline_precompile"
