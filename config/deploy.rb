@@ -1,7 +1,10 @@
 ## Generated with 'brightbox' on 2012-03-13 16:12:26 +0000
 gem 'brightbox', '>=2.3.9'
+require 'capistrano/ext/multistage'
 require 'brightbox/recipes'
 require 'brightbox/passenger'
+
+set :default_stage, 'staging'
 
 load 'deploy/assets'
 
