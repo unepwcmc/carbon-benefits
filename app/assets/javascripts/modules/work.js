@@ -1,10 +1,5 @@
-
-
 App.modules.Data = function(app) {
-
-
     var Report = Backbone.Model.extend({
-
         defaults: function() {
             return {
                 "polygons": new Array(),
@@ -206,10 +201,10 @@ App.modules.Data = function(app) {
           var polygons = self.get_all_polygons();
 
           app.WS.CartoDB.aggregate_stats(reports, polygons, function(stats) {
-            self.get_total_report().set({stats: stats});
+            if(self.get_total_report()) {
+              self.get_total_report().set({stats: stats});
+            }
           });
-          /*this.filter(function(r) { return r.get('total') === undefined; }).each(function(r) {
-          });*/
         },
 
         on_report_change: function(r) {

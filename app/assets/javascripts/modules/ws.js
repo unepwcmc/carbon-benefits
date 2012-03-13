@@ -135,7 +135,7 @@ App.modules.WS = function(app) {
                 var percent = 0;
                 var percent_seq = 0;
                 var s = r.get('stats');
-                if(total_carbon > 0 && s && s.carbon && s.carbon.qty) {
+                if(total_carbon > 0 && s && s.carbon && s.carbon.qty && s.carbon_sequestration && s.carbon_sequestration.qty) {
                     percent =  s.carbon.qty/total_carbon;
                     percent_seq =  percent*s.carbon_sequestration.qty/s.carbon.qty;
                 }

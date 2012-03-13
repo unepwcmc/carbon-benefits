@@ -78,9 +78,14 @@ $(function() {
 
       show_tooltip_help: function(e) {
         var el = $(e.currentTarget);
-        var what = el.html().replace(/ /g, '_').replace('.','_')
+        var what = el.html().replace(/ /g, '_').replace('.','_');
         var tooltip = $('#panel').find('.help_popup.' + what);
-        var _top = $(this.el).find('.jspPane').position().top
+        var _top;
+        if( $(this.el).find('.jspPane').length > 0 ) {
+          _top = $(this.el).find('.jspPane').position().top;
+        } else {
+          _top = $(this.el).find('.no_content').position().top;
+        }
         var pos = el.position();
         var h = tooltip.outerHeight();
         tooltip.css({top: pos.top + _top + 170 - h - 10 , left: 20});
