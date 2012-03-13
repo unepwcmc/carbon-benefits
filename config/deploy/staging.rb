@@ -29,8 +29,7 @@ set :branch, "master"
 # set :local_shared_dirs, %w(public/upload)
 # set :local_shared_files, %w(config/database.yml)
 set :global_shared_dirs, %w(public/system)
-set :global_shared_files, %w(config/database.yml)
-set :global_shared_files, %w(config/production.sqlite3)
+set :global_shared_files, %w(config/database.yml config/production.sqlite3) 
 
 # Forces a Pty so that svn+ssh repository access will work. You
 # don't need this if you are using a different SCM system. Note that

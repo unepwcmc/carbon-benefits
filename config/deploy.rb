@@ -17,7 +17,6 @@ set(:deploy_to) { File.join("", "home", user, application) }
 
 set :repository, "git@github.com:unepwcmc/carbon-benefits"
 set :scm, :git
-set :branch, "develop"
 set :scm_username, "unepwcmc-read"
 
 ### Other options you can set ##
@@ -145,3 +144,11 @@ default_run_options[:pty] = true
 # :soft uses the standard touch tmp/restart.txt which leaves database connections
 # lingering until the workers time out
 # set :passenger_restart_strategy, :hard
+
+namespace :deploy do
+  task :pipeline_precompile do
+    run "cd #{release_path}; RAILS_ENV=#{env} bundle exec rake assets:precompile"
+  end
+end
+
+after "deploy:update_code", "deploy:pipeline_precompile"
