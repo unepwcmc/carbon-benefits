@@ -1,4 +1,3 @@
-// 
 Projector = function(map) { 
     this.setMap(map); 
     this.map = map;
@@ -13,5 +12,3 @@ Projector.prototype.untransformCoordinates = function(point) {
   return this.getProjection().fromContainerPixelToLatLng(point);
   //return this.map.getProjection().fromPointToLatLng(point);
 };
-
-        

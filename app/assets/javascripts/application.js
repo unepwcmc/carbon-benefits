@@ -31,14 +31,20 @@
 //= require modules/header
 //= require modules/cartodb
 //= require modules/error
-//= require views/draw_tool
-//= require views/projector
+//= require views/layer
+//= require views/layer_editor
 //= require views/map
-//= require views/report
+//= require views/panel
 //= require views/polygon
-//= require views/layers
-//= require views/sharepopup
+//= require views/polygon_draw_tool
+//= require views/polygon_draw_edit_tool
+//= require views/projector
+//= require views/report
+//= require views/result
 //= require views/searchbox
+//= require views/search_results
+//= require views/share_popup
+//= require views/tabs
 //= require carbon
 
 function number_format(n) {

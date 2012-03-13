@@ -1,4 +1,3 @@
-
 var SharePopup = Backbone.View.extend({
     el: $('.share_tooltip'),
 
@@ -28,5 +27,4 @@ var SharePopup = Backbone.View.extend({
     focus: function() {
         this.link_el.select();
     }
-
 });

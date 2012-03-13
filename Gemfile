@@ -40,5 +40,5 @@ group :development, :test do
   #gem 'linecache19', '0.5.13', :path => "~/.rvm/gems/ruby-1.9.3-head/gems/linecache19-0.5.13/"
   #gem 'ruby-debug-base19', '0.11.26', :path => "~/.rvm/gems/ruby-1.9.3-head/gems/ruby-debug-base19-0.11.26/"
 
-  gem 'ruby-debug19', :require => 'ruby-debug'
+  #gem 'ruby-debug19', :require => 'ruby-debug'
 end

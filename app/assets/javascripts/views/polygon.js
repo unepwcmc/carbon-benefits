@@ -1,6 +1,4 @@
-
 var PolygonView = Backbone.View.extend({
-
     //COLOR: 'rgba(102, 204, 204, 0.3)',
     COLOR: 'rgba(255, 204, 204, 0.5)',
 
@@ -70,6 +68,4 @@ var PolygonView = Backbone.View.extend({
             this.poly.setMap(null);
         }
     }
-
-}); 
-
+});

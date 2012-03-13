@@ -1,27 +1,4 @@
-
-var Result = Backbone.Model.extend({
-});
-
-var SearchResults = Backbone.Collection.extend({
-    model: Result,
-
-    initialize: function() {
-        this.geocoder = new google.maps.Geocoder();
-    },
-
-    fetch: function() {
-        var self = this;
-        this.geocoder.geocode( { 'address': this.to_search }, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            self.reset(results);
-          }
-        });
-    }
-
-});
-
 var Searchbox = Backbone.View.extend({
-
     events: {
         'click a': 'typing'
     },
@@ -54,6 +31,4 @@ var Searchbox = Backbone.View.extend({
             this.typing();
         }
     }
-
-
 });

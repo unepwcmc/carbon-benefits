@@ -1,4 +1,3 @@
-
 /*
 //=======================================
 // map layer
@@ -232,5 +231,4 @@ var MapView = Backbone.View.extend({
     remove_layer: function(name) {
         //TODO
     }
-
 });
