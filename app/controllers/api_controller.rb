@@ -43,7 +43,7 @@ class ApiController < ApplicationController
     if params[:q]
       proxy_page = Net::HTTP.get_response(uri.host, uri.path+"?q=#{params[:q]}")
     elsif request.method == "POST"
-      proxy_page = Net::HTTP.post_form(uri, JSON.parse(params[:data]))
+      proxy_page = Net::HTTP.post_form(uri, data: params[:data])
     else
       proxy_page = Net::HTTP.get_response(uri)
     end
