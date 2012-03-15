@@ -692,7 +692,7 @@ div.right {
   text-decoration: underline;
 }
 /* line 178, ../../css_src/partials/_map.scss */
-.map_container #polygon_popup {
+.map_container #polygon_popup, .map_container #polygon_add_popup {
   position: absolute;
   display: none;
   top: 0;
@@ -703,7 +703,7 @@ div.right {
   background: url("sprite.png") -325px -478px no-repeat;
 }
 /* line 189, ../../css_src/partials/_map.scss */
-.map_container #polygon_popup a {
+.map_container #polygon_popup a, .map_container #polygon_add_popup a {
   display: inline-block;
   vertical-align: top;
   zoom: 1;
@@ -716,12 +716,12 @@ div.right {
   line-height: 11px;
 }
 /* line 201, ../../css_src/partials/_map.scss */
-.map_container #polygon_popup a#delete {
+.map_container #polygon_popup a#delete, .map_container #polygon_add_popup a#cancel {
   width: 50px;
   color: #FF9933;
 }
 /* line 202, ../../css_src/partials/_map.scss */
-.map_container #polygon_popup a:hover {
+.map_container #polygon_popup a:hover, .map_container #polygon_add_popup a:hover {
   text-decoration: underline;
 }
 /* line 206, ../../css_src/partials/_map.scss */

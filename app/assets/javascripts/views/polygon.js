@@ -50,8 +50,8 @@ var PolygonView = Backbone.View.extend({
         this.poly.setPaths(this.path());
     },
 
-    click: function(event) {
-        this.trigger('click', this);
+    click: function() {
+      this.trigger('click', this);
     },
 
     hide: function() {
