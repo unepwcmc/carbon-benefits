@@ -1720,7 +1720,7 @@ html, body {
 }
 
 #upload_box .inner {
-  width: 500px;
+  width: 50%;
 }
 /* line 24, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner .help, #upload_box .inner .help {
