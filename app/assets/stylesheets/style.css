@@ -1686,7 +1686,7 @@ html, body {
 
 /* Carbon tool mixins */
 /* line 3, ../../css_src/partials/_start_banner.scss */
-#start_banner {
+#start_banner, #upload_box {
   position: absolute;
   top: 50%;
   left: 0;
@@ -1701,21 +1701,34 @@ html, body {
   -webkit-box-shadow: 0 -10px 10px 0 rgba(0, 0, 0, 0.1), 0 10px 10px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 -10px 10px 0 rgba(0, 0, 0, 0.1), 0 10px 10px 0 rgba(0, 0, 0, 0.1);
 }
+
+#upload_box {
+  display: none;
+  width: 50%;
+  left: 25%;
+  top: 60%;
+}
 /* line 17, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner {
-  width: 765px;
+#start_banner .inner , #upload_box .inner{
   height: 324px;
   margin: 0 auto;
   text-align: left;
+}
+#start_banner .inner {
+  width: 765px;
   background: url("sprite.png") right -56px no-repeat;
 }
+
+#upload_box .inner {
+  width: 500px;
+}
 /* line 24, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help {
+#start_banner .inner .help, #upload_box .inner .help {
   width: 385px;
   padding: 58px 0 0 0;
 }
 /* line 28, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help h1 {
+#start_banner .inner .help h1, #upload_box .inner .help h1 {
   display: block;
   width: 100%;
   padding: 0 0 10px 0;
@@ -1725,17 +1738,17 @@ html, body {
   color: #333333;
 }
 /* line 38, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help p {
+#start_banner .inner .help p, #upload_box .inner .help p {
   margin: 12px 0 0 0;
   font: normal 15px "Helvetica Neue",Arial;
   color: #333333;
 }
 /* line 42, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help p.margin {
+#start_banner .inner .help p.margin, #upload_box .inner .help p.margin {
   margin: 20px 0 0 0;
 }
 /* line 45, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help button {
+#start_banner .inner .help button, #upload_box .inner .help button {
   float: right;
   width: auto;
   height: 47px;
@@ -1747,7 +1760,7 @@ html, body {
   color: #333333;
 }
 /* line 56, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help button span {
+#start_banner .inner .help button span, #upload_box .inner .help button span {
   float: right;
   min-width: 150px\9;
   height: 15px;
@@ -1757,12 +1770,12 @@ html, body {
   text-transform: uppercase;
 }
 /* line 67, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help button:hover span {
+#start_banner .inner .help button:hover span, #upload_box .inner .help button:hover span {
   color: black;
   text-decoration: underline;
 }
 /* line 73, ../../css_src/partials/_start_banner.scss */
-#start_banner button {
+#start_banner button, #upload_box button {
   float: right;
 }
 

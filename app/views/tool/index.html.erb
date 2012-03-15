@@ -105,6 +105,21 @@
         <a id="ok" href="#">ok</a>
       </div>
     </div>
+      <div id="upload_box">
+          <div class="inner">
+              <div class="help">
+                  <h1>welcome to the carbon calculator tool</h1>
+                  <p><label for="file">File to Upload</label></p>
+                  <%= form_tag :url => '/', :multipart => true do%>
+                  <p>
+                    <%= file_field_tag "file" %>
+                  </p>
+                  <button id="close_upload_box"><span class="button_info">Cancel</span></button>
+                  <button><span class="button_info">Upload</span></button>
+                  <% end %>
+              </div> <!-- help -->
+          </div> <!-- inner -->
+      </div>
   </div>
 
   <footer>
