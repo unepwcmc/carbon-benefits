@@ -13,6 +13,7 @@ $(function() {
           'click .removing .cancel': 'leave_edit',
           'click .removing .remove_it_please': 'remove_polygons',
           'click .start_drawing': 'go_edit',
+          'click .start_uploading': 'go_upload',
           'mouseover .tooltip li': 'show_tooltip',
           'mouseleave .tooltip li': 'hide_tooltip',
 
@@ -127,6 +128,11 @@ $(function() {
           this.$('.editing').show();
           if(this.showing)
             this.bus.emit('map:edit_mode');
+      },
+
+      go_upload: function(e) {
+        if(e) e.preventDefault();
+        var uB = new UploadBox();
       },
 
       leave_edit: function(e) {

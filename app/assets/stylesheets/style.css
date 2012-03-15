@@ -1344,7 +1344,7 @@ div.right {
   overflow: hidden;
 }
 /* line 376, ../../css_src/partials/_panel.scss */
-#panel #tab_content div.no_content a.start_drawing {
+#panel #tab_content div.no_content a.action_button {
   float: left;
   width: auto;
   height: 30px;
@@ -1359,7 +1359,7 @@ div.right {
   text-decoration: none;
 }
 /* line 389, ../../css_src/partials/_panel.scss */
-#panel #tab_content div.no_content a.start_drawing span {
+#panel #tab_content div.no_content a.action_button span {
   float: left;
   width: auto;
   height: 14px;
@@ -1367,7 +1367,7 @@ div.right {
   background: url("sprite.png") right -820px no-repeat;
 }
 /* line 397, ../../css_src/partials/_panel.scss */
-#panel #tab_content div.no_content a.start_drawing:hover {
+#panel #tab_content div.no_content a.action_button:hover {
   text-decoration: underline;
 }
 /* line 400, ../../css_src/partials/_panel.scss */
