@@ -133,6 +133,7 @@ $(function() {
       go_upload: function(e) {
         if(e) e.preventDefault();
         var uB = new UploadBox();
+        uB.open();
       },
 
       leave_edit: function(e) {

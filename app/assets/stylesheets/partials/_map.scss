@@ -1,0 +1,397 @@
+
+
+.ie7 .map_container {
+  height: 100%;
+}
+
+.ie7 .main {
+  height: 100%;
+}
+
+.map_container {
+  position: absolute;
+  top:72px;
+  //width:100%;
+  left:0;
+  //right:352px;
+  right:0;
+  bottom:0;
+
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .cartodb_logo {
+    display: block;
+    position: absolute;
+    bottom: 7px;
+    left: 70px;
+    width: 69px;
+    height: 27px;
+    @include background(no-repeat,right,-1182px);
+  }
+
+  div.layer_editor {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 21;
+    
+    .layer_raster {
+      display: block;
+      width: 22px;
+      height: 23px;
+      background: url('../img/layers_editor.png') no-repeat 0 0;
+    }
+    .layer_google_maps {
+      display: block;
+      width: 22px;
+      height: 22px;
+      background: url('../img/layers_editor.png') no-repeat 0 -23px;
+    }
+
+  }
+
+  div.zoom_control {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 26px;
+    height: 50px;
+    z-index: 10;
+
+    a {
+      display: block;
+      width: 26px;
+      height: 26px;
+      text-indent: -9999px;
+      background: url('../img/icons/zoom.png') no-repeat 0 0;
+      &.zoom_in {
+        &:hover {
+          background-position: -26px 0px;
+        }
+
+      }
+      &.zoom_out {
+        background-position: 0 -26px;
+        &:hover {
+          background-position: -26px -26px;
+        }
+
+      }
+
+    }
+
+  }
+
+  div.crosshair {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    img {
+      margin-left: -7px;
+      margin-top: -7px;
+    }
+
+  }
+
+  .popup_text {
+    position: absolute;
+    //@include background(left,-1469px,no-repeat);
+    display: none;
+    top: 100px;
+    left: 100px;
+    width: 193px;
+    height: 80px;
+    //padding: 18px;
+
+    .top {
+      padding: 18px 18px 0 18px;
+      width: 100%;
+      @include background(left,-1469px,no-repeat);
+      height: 0px;
+    }
+
+    .center {
+      padding: 0px 18px 0 18px;
+      width: 100%;
+      @include background(left,-1480px,no-repeat);
+      float: left;
+    }
+    .bottom {
+      padding: 0px 18px 18px 18px;
+      width: 100%;
+      @include background(left,-1515px,no-repeat);
+      float: left;
+      height: 48px;
+    }
+
+    h1.name {
+        font:bold 13px "WhitneyBookRegular","Myriad Pro";
+        color:#333333;
+        text-transform: uppercase;
+        border-bottom: 2px solid #333;
+        letter-spacing: -1px;
+        padding-bottom: 5px;
+        a {
+          color:#333333;
+          text-decoration: none;
+        }
+    }
+    .close {
+        float: right;
+        width: 12px;
+        height: 17px;
+        @include background(right,-1258px,no-repeat);
+    }
+    #add_protected {
+        float:left;
+        width:auto;
+        height:30px;
+        margin:10px 0 0 0px;
+        padding:0 0 0 11px;
+        @include background(-2px,-453px,no-repeat);
+        font:bold 13px "WhitneyBold";
+        color:white;
+        text-transform: uppercase;
+        @include background(0,-790px,no-repeat);
+        @include text-shadow(#3C7D7D);
+        text-decoration:none;
+
+        span {
+          float:left;
+          width:auto;
+          height:14px;
+          padding:8px 12px 8px 0;
+          @include background(right,-820px,no-repeat);
+        }
+
+        &:hover {text-decoration:underline;}
+    }
+  }
+
+  #polygon_popup {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width:99px;
+    height:11px;
+    padding:21px 20px 33px 20px;
+
+    @include background(-325px,-478px,no-repeat);
+
+    a {
+      display:inline-block;
+      vertical-align:top;
+      zoom:1;
+      width:42px;
+      font:bold 11px "","Myriad Pro";
+      color:#66CCCC;
+      text-decoration:none;
+      text-align:center;
+      text-transform:uppercase;
+      line-height:11px;
+
+      &#delete {width:50px; color:#FF9933;}
+      &:hover {text-decoration:underline}
+    }
+  }
+
+  .search {
+      display: none;
+      position: absolute;
+      top: 25px;
+      right: 190px;
+      width: 192px;
+      height: 25px;
+      z-index:10;
+      padding: 5px 0px 3px 8px;
+      @include background(no-repeat,0,-1858px);
+      h1 {
+          margin: 0;
+          padding: 0;
+          display: inline;
+          text-transform: uppercase;
+          font:bold 13px "WhitneyBookRegular","Myriad Pro";
+          color:#333333;
+          letter-spacing: -1px;
+      }
+      input {
+          outline:none;
+          width: 105px;
+          display: inline;
+          border: 0;
+          font:normal 13px "Helvetica";
+       }
+       a {
+          text-decoration: none;
+       }
+   }
+
+  .layers {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 375px - 352px;
+    width:224px;
+    z-index:100;
+
+    a.view {
+      float:right;
+      display:block;
+      width:auto;
+      height:33px;
+      padding:0 0 0 15px;
+      @include background(no-repeat,0,-1035px);
+      text-decoration:none;
+
+      span {
+        float:left;
+        height:13px;
+        margin:0;
+        padding:11px 32px 9px 5px;
+        font:normal 13px "WhitneyBookRegular","Myriad Pro";
+        color:#333333;
+        @include background(no-repeat,right,-1035px);
+        text-indent:0px;
+        text-decoration:none;
+
+        strong {
+         font:bold 13px "WhitneyBold","Myriad Pro";
+        }
+      }
+    }
+
+    div.show {
+      position:absolute;
+      top:21px;
+      right:0;
+      display: none;
+      width:224px;
+      z-index:-1;
+
+      span.top {
+        float:right;
+        width:100%;
+        height:12px;
+        @include background(no-repeat,right,-2302px);
+      }
+
+      ul {
+        float:right;
+        width: 212px;
+        padding: 0 6px 6px;
+        margin:0;
+        list-style: none;
+        text-align: left;
+        @include background(no-repeat,right, bottom);
+
+        &:last-child {
+          border:none;
+          @include border-bottom-radius(4px);
+        }
+
+        li {
+          padding: 5px 9px;
+          border:none;
+          border-bottom: 1px solid #F2F2F2;
+          font:normal 13px "Helvetica Neue";
+          color:#333333;
+
+          img {
+            margin: 3px 0 0 18px;
+
+          }
+          span.color {
+            width: 7px;
+            height: 7px;
+            @include background(no-repeat,-224px,-2491px);
+            margin-right: 10px;
+            display: inline-block;
+          }
+
+          &.enabled {
+            span.color {
+              &.carbon {
+                 @include background(no-repeat,-224px,-2312px);
+              }
+              &.protected_areas{
+                 @include background(no-repeat,-224px,-2342px);
+              }
+              &.carbon_sequestration {
+                 @include background(no-repeat,-224px,-2372px);
+              }
+              &.restoration_potential {
+                 @include background(no-repeat,-224px,-2401px);
+              }
+              &.forest_status {
+                 @include background(no-repeat,-224px,-2432px);
+              }
+              &.KBA{
+                 @include background(no-repeat,-224px,-2462px);
+              }
+            }
+          }
+
+
+
+          &.last {
+            border:none;
+          }
+
+          &:hover {
+            @include background(no-repeat,-270px,-1372px);
+            background-color:#EDEDED;
+            cursor:pointer!important;
+          }
+
+          &.enabled {
+            font-weight:bold;
+          }
+
+          &.moving {
+            border-top:1px solid #CCCCCC;
+            border-bottom:1px solid #CCCCCC;
+          }
+        }
+
+        a.expand {
+          display:block;
+          width:100%;
+          height:9px;
+          text-indent:-9999px;
+          font-size:0;
+          line-height:0;
+          @include background(no-repeat,0,-1444px);
+          &:hover {background-position:0 -1452px}
+        }
+      }
+
+    }
+
+    &.open {
+
+      a.view {
+        background-position:left -1072px;
+
+        span {
+          background-position:right -1072px;
+        }
+      }
+
+      .show {
+        display: block;
+      }
+    }
+
+  }
+
+}
+
+
