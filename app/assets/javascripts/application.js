@@ -45,6 +45,7 @@
 //= require views/search_results
 //= require views/share_popup
 //= require views/tabs
+//= require views/upload_box
 //= require carbon
 
 function number_format(n) {
