@@ -1,20 +1,20 @@
 window.UploadBox = Backbone.View.extend({
-  el: $("#upload_box"),
+  el: '#upload_box',
 
   events: {
-    'click #close_upload_box': 'close',
+    'click .close': 'close'
   },
 
   initialize: function() {
-    _.bindAll(this, 'open', 'close');
+    _.bindAll(this, 'open');
   },
 
   close: function(e) {
     if(e) e.preventDefault();
-    $('#upload_box').hide();
+    $(this.el).hide();
   },
 
   open: function() {
-    $('#upload_box').show();
+    $(this.el).show();
   }
 });
