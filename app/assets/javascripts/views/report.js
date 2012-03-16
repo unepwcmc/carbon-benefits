@@ -18,7 +18,8 @@ $(function() {
           'mouseleave .tooltip li': 'hide_tooltip',
 
           'mouseover .title h2': 'show_tooltip_help',
-          'mouseleave .title h2': 'hide_tooltip_help'
+          'mouseleave .title h2': 'hide_tooltip_help',
+          'click .select_classes': 'toggle_classes_list'
       },
 
       initialize: function() {
@@ -119,6 +120,11 @@ $(function() {
         //var el = $(e.target);
         var tooltip = $('#panel').find('.list_tooltip');
         tooltip.hide();
+      },
+
+      toggle_classes_list: function(e) {
+        if(e) e.preventDefault();
+        $(".classes_list").toggle();
       },
 
       go_edit: function(e) {
