@@ -16,7 +16,10 @@
           </h2>
         </div>
     </div>
-
+  
+  <% if( selected_class !== null){ %>
+    <h2><%= selected_class %></h2>
+  <% } %>
   <% if(stats.carbon) { %>
     <div class="block">
         <span class="title">

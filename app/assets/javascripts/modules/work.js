@@ -4,6 +4,7 @@ App.modules.Data = function(app) {
             return {
                 "polygons": new Array(),
                 "classes": new Array(),
+                "selected_class": null,
                 'stats': new Object()
             };
         },
