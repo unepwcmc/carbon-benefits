@@ -1188,6 +1188,7 @@ div.right {
   width: 324px;
   top: 80px;
   bottom: 0;
+  outline: none;
 }
 /* line 247, ../../css_src/partials/_panel.scss */
 #panel #tab_content .report_stats .jspVerticalBar {
@@ -1214,10 +1215,69 @@ div.right {
   background: url("sprite.png") 0 -512px no-repeat;
 }
 
-#panel #tab_content div.classes_summary ul.classes_list{
+#panel #tab_content div.classes_summary ul.classes_list {
   list-style: none;
-  display: none;
-  clear:both;
+  float: left;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+#panel #tab_content div.classes_summary ul.classes_list li {
+  float: left;
+  width: 100%;
+  padding: 7px 0;
+  border-bottom: 1px solid #CCC;
+}
+
+ul.classes_list li .class-square {
+  border: 1px solid #CCC;
+  padding: 1px;
+  height: 14px;
+  display: inline-block;
+  margin: 0 5px;
+  position: relative;
+  top: 2px;
+}
+
+ul.classes_list li .class-square i {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+}
+
+.class-square i.class-0 {
+  background-color: #E5E5E5;
+}
+.class-square i.class-1 {
+  background-color: #3A7676;
+}
+.class-square i.class-2 {
+  background-color: #FF9933;
+}
+.class-square i.class-3 {
+  background-color: #ff5e99;
+}
+.class-square i.class-4 {
+  background-color: #cc3300;
+}
+.class-square i.class-5 {
+  background-color: #ff9;
+}
+.class-square i.class-6 {
+  background-color: #bbd;
+}
+.class-square i.class-7 {
+  background-color: #C7C7C7;
+}
+.class-square i.class-8 {
+  background-color: #003366;
+}
+.class-square i.class-9 {
+  background-color: #607890;
 }
 
 /* line 265, ../../css_src/partials/_panel.scss */
