@@ -87,7 +87,11 @@ var PolygonDrawTool = Backbone.View.extend({
 
     },
 
-    edit_polygon: function(paths) {
+    edit_polygon: function(paths, draggable) {
+        if(draggable == null) {
+          draggable = true;
+        }
+
         var self = this;
         self.reset();
 
@@ -106,7 +110,7 @@ var PolygonDrawTool = Backbone.View.extend({
                     position: new google.maps.LatLng(p[0], p[1]),
                     map: self.map,
                     icon: self.image,
-                    draggable: true,
+                    draggable: draggable,
                     flat : true,
                     raiseOnDrag: false
                 });
@@ -163,6 +167,4 @@ var PolygonDrawTool = Backbone.View.extend({
         var v = _.map(vertex, function(p) { return [p.lat(), p.lng()]; });
         this.trigger('polygon', {paths: [v]});
     }
-
-
 });
