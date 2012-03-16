@@ -343,53 +343,66 @@ App.modules.Map = function(app) {
 
       self.remove_all();
 
-      // recreate
+      // reorder - selected AOI's polygon should be at the top
+      var selected = {}, others = {}, report_polygons_ordered, x;
       _(this.report_polygons).each(function(report_polys, report_id) {
-        _(report_polys).each(function(paths, i) {
-          var p = new PolygonView({
-            mapview: self.map,
-            paths: paths,
-            color: rid == report_id ? "#66CCCC": "#FFCC00"
-          });
-          p.report = rid;
-          p.polygon_id = i;
-          if(rid == report_id) {
-            p.bind('click', self.start_edit_polygon);
-          } else {
-            p.bind('click', function(p) {
-              self.finish_editing();
-              self.editing_poly = p;
-              p.hide();
-              self.paths = [p.paths];
-              self.polygon_edit.editing_state(false);
-              self.polygon_edit.edit_polygon(self.paths, false);
-              self.polygon_edit.bind('mousemove', function(p, e) {
-                self.polygon_add_popup.show(e.latLng);
-              });
-              self.map.bind('mousemove', function(e) {
-                self.polygon_add_popup.show(e.latLng);
-              });
-              self.polygon_add_popup.bind('add', function() {
-                self.polygon_edit.unbind('mousemove');
-                self.map.unbind('mousemove');
-                self.polygon_add_popup.hide();
-                self.finish_editing();
-
-                var p = self.editing_poly;
-                app.Log.debug("changing polygon", p.report, p.polygon_id);
-                self.bus.emit('model:update_polygon', p.report, p.polygon_id, self.paths[0]);
-              });
-              self.polygon_add_popup.bind('cancel', function() {
-                self.polygon_edit.unbind('mousemove');
-                self.map.unbind('mousemove');
-                self.polygon_add_popup.hide();
-                self.finish_editing();
-              });
-            });
-          }
-          self.polygons.push(p.render());
-        });
+        if(rid == report_id) {
+          selected[report_id] = report_polys;
+        } else {
+          others[report_id] = report_polys;
+        }
       });
+      report_polygons_ordered = [others, selected];
+
+      for(x in report_polygons_ordered) {
+        // recreate
+        _(report_polygons_ordered[x]).each(function(report_polys, report_id) {
+          _(report_polys).each(function(paths, i) {
+            var p = new PolygonView({
+              mapview: self.map,
+              paths: paths,
+              color: rid == report_id ? "#66CCCC": "#FFCC00"
+            });
+            p.report = rid;
+            p.polygon_id = i;
+            if(rid == report_id) {
+              p.bind('click', self.start_edit_polygon);
+            } else {
+              p.bind('click', function(p) {
+                self.finish_editing();
+                self.editing_poly = p;
+                p.hide();
+                self.paths = [p.paths];
+                self.polygon_edit.editing_state(false);
+                self.polygon_edit.edit_polygon(self.paths, false);
+                self.polygon_edit.bind('mousemove', function(p, e) {
+                  self.polygon_add_popup.show(e.latLng);
+                });
+                self.map.bind('mousemove', function(e) {
+                  self.polygon_add_popup.show(e.latLng);
+                });
+                self.polygon_add_popup.bind('add', function() {
+                  self.polygon_edit.unbind('mousemove');
+                  self.map.unbind('mousemove');
+                  self.polygon_add_popup.hide();
+                  self.finish_editing();
+
+                  var p = self.editing_poly;
+                  app.Log.debug("changing polygon", p.report, p.polygon_id);
+                  self.bus.emit('model:update_polygon', p.report, p.polygon_id, self.paths[0]);
+                });
+                self.polygon_add_popup.bind('cancel', function() {
+                  self.polygon_edit.unbind('mousemove');
+                  self.map.unbind('mousemove');
+                  self.polygon_add_popup.hide();
+                  self.finish_editing();
+                });
+              });
+            }
+            self.polygons.push(p.render());
+          });
+        });
+      }
     },
 
     start_edit_polygon: function(p) {
