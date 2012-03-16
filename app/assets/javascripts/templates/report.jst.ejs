@@ -7,13 +7,16 @@
             <p href="#edit" class="edit">
               <span class="polygon_num"><%= polygons.length %></span> classes selected.
               <a class='select_classes' href="#classes_selection">Select another?</a>
-              <ul class="classes_list">
-                <% for (var c = 0; c < classes.length; c ++) { %>
-                  <li><%= classes[c] %></li>
-                <% } %>
-              </ul>
             </p>
           </h2>
+          <ul class="classes_list" style="display:none">
+            <% for(var c = 0; c < classes.length; c++) { %>
+              <li><span class="class-square"><i class="class-<%= c %>"></i></span> <%= classes[c] %></li>
+            <% } %>
+            <% if(classes.length === 0) { %>
+              <li class="empty-classes"><span class="class-square"><i></i></span> No classes selected.</li>
+            <% } %>
+          </ul>
         </div>
     </div>
 
