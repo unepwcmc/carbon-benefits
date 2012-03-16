@@ -3,6 +3,7 @@ App.modules.Data = function(app) {
         defaults: function() {
             return {
                 "polygons": new Array(),
+                "classes": new Array(),
                 'stats': new Object()
             };
         },
