@@ -131,7 +131,7 @@ $(function() {
       select_class: function(e) {
         if(e) e.preventDefault();
         $(".classes_list").hide();
-        this.bus.emit('model:select_class', this.rid, $(e.currentTarget).data("id"));
+        this.bus.emit('model:select_class', this.rid, $(e.currentTarget).data("id"), $(e.currentTarget).data("colour"));
       },
 
       go_edit: function(e) {
