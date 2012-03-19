@@ -5,6 +5,7 @@ App.modules.Data = function(app) {
                 "polygons": new Array(),
                 "classes": new Array(),
                 "selected_class": null,
+                "selected_colour": null,
                 'stats': new Object()
             };
         },
@@ -15,7 +16,8 @@ App.modules.Data = function(app) {
           this.save = _.debounce(this._save, 800);
         },
 
-        select_class: function(id) {
+        select_class: function(id, colour) {
+          this.set({'selected_colour': colour});
           this.set({'selected_class': id});
           this.save();
         },
@@ -39,6 +41,7 @@ App.modules.Data = function(app) {
         },
 
         add_polygon: function(path) {
+          debugger;
             if(this.get('total')) {
                 app.Log.error("can't add polygons to total");
                 return;
@@ -300,10 +303,10 @@ App.modules.Data = function(app) {
             }
         },
         
-        on_select_class: function(rid, class_id) {
+        on_select_class: function(rid, class_id, colour) {
           var r = this.work.getByCid(rid);
           if(r) {
-              r.select_class(class_id);
+              r.select_class(class_id, colour);
           } else {
               app.Log.error("can't get report: ", rid);
           }

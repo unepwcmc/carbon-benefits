@@ -16,7 +16,7 @@
           </h2>
           <ul class="classes_list" style="display:none">
             <% for(var c = 0; c < classes.length; c++) { %>
-              <li><span class="class-square"><i class="class-<%= c %>"></i></span><a class='select_class' data-id='<%= classes[c] %>' href='#select_class'><%= classes[c] %></a></li>
+              <li><span class="class-square"><i style='background-color: <%= classes[c][1]%>'></i></span><a class='select_class' data-id='<%= classes[c][0] %>' data-colour='<%= classes[c][1] %>' href='#select_class'><%= classes[c][0] %></a></li>
             <% } %>
             <% if(classes.length === 0) { %>
               <li class="empty-classes"><span class="class-square"><i></i></span> No classes selected.</li>
@@ -26,7 +26,7 @@
     </div>
   
   <% if( selected_class !== null){ %>
-    <h2><%= selected_class %></h2>
+    <h2><span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span> <%= selected_class %></h2>
   <% } %>
   <% if(stats.carbon) { %>
     <div class="block">
