@@ -1,16 +1,47 @@
 window.UploadBox = Backbone.View.extend({
-  tagName: 'div',
-
-  template: JST["templates/upload_box"],
+  el: '#upload_box',
 
   events: {
+    'click .close': 'close',
+    'click .submit': 'submit'
   },
 
-  initialize: function(){
-    _.bindAll(this, 'show');
+  initialize: function() {
+    _.bindAll(this, 'open');
+    this.form_el = this.$('form');
   },
 
-  show: function() {
-    this.show();
+  close: function(e) {
+    if(e) e.preventDefault();
+    $(this.el).hide();
+  },
+
+  open: function() {
+    this.resetValidationErrors();
+    $(this.el).show();
+  },
+
+  submit: function() {
+    this.resetValidationErrors();
+    if(this.validateForm()){
+      this.form_el.submit();
+    } else {
+      return false;
+    }
+  },
+
+  validateForm: function(){
+    var validationMessages = [];
+    var fileInput = $(this.form_el).find('input:file');
+    if (fileInput.val() === ''){
+      fileInput.parent().prepend('<p class="validation_error">Please select a file for upload.</p>');
+      return false;
+    }
+    return true;
+  },
+
+  resetValidationErrors: function(){
+    $('.validation_error').remove();
   }
+
 });
