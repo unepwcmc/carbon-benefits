@@ -14,9 +14,10 @@ App.modules.Data = function(app) {
           this.bind('change:polygons', this.fetch);
           this.save = _.debounce(this._save, 800);
         },
-        
+
         select_class: function(id) {
           this.set({'selected_class': id});
+          this.save();
         },
 
         _save: function() {
