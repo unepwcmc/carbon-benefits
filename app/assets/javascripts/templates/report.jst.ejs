@@ -5,13 +5,18 @@
         <div class="classes_summary">
           <h2>
             <p href="#edit" class="edit">
-              <span class="polygon_num"><%= polygons.length %></span> classes selected.
-              <a class='select_classes' href="#classes_selection">Select another?</a>
+              <% if(selected_class !== null) { %>
+                <span class="polygon_num"><%= selected_class %></span> selected.
+                <a class='select_classes' href="#classes_selection">Select another?</a>
+              <% } else { %>
+                No class selected. Displaying all polygons.
+                <a class='select_classes' href='#classes_selection'>Select a class?</a>
+              <% } %>
             </p>
           </h2>
           <ul class="classes_list" style="display:none">
             <% for(var c = 0; c < classes.length; c++) { %>
-              <li><span class="class-square"><i class="class-<%= c %>"></i></span> <%= classes[c] %></li>
+              <li><span class="class-square"><i class="class-<%= c %>"></i></span><a class='select_class' id='<%= classes[c] %>' href='#select_class'><%= classes[c] %></a></li>
             <% } %>
             <% if(classes.length === 0) { %>
               <li class="empty-classes"><span class="class-square"><i></i></span> No classes selected.</li>
