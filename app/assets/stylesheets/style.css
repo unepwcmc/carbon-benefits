@@ -1376,7 +1376,7 @@ div.right {
 /* line 389, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.action_button span {
   float: left;
-  width: auto;
+  width: 103px;
   height: 14px;
   padding: 8px 12px 8px 0;
   background: url("sprite.png") right -820px no-repeat;
