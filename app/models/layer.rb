@@ -16,6 +16,10 @@ class Layer < ActiveRecord::Base
     #TODO
   end
 
+  def classes=(the_classes)
+    #TODO
+  end
+
   def polygons=(polygons_ary)
     write_attribute(:polygons, polygons_ary.to_json)
   end
