@@ -41,7 +41,6 @@ App.modules.Data = function(app) {
         },
 
         add_polygon: function(path) {
-          debugger;
             if(this.get('total')) {
                 app.Log.error("can't add polygons to total");
                 return;
