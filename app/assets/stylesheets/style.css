@@ -1186,7 +1186,7 @@ div.right {
 #panel #tab_content .report_stats {
   position: absolute;
   width: 324px;
-  top: 80px;
+  top: 140px;
   bottom: 0;
   outline: none;
 }
@@ -1221,16 +1221,19 @@ div.right {
 
 .classes_list {
   padding: 18px 18px 0 18px;
-  background: url("sprite.png") left -1469px no-repeat;
+  background: url("sprite.png") no-repeat left bottom;
   float: left;
-  width: 193px;
-  height: 92px;
+  width: 188px;
+  height: 121px;
+  position: absolute;
+  z-index: 1;
+  top: 103px;
 }
 
 .classes_list ul {
   list-style: none;
   margin: 0;
-  height: 70px;
+  height: 110px;
   overflow: auto;
 }
 
@@ -1255,6 +1258,11 @@ div.right {
   width: 14px;
   height: 14px;
   line-height: 14px;
+}
+
+#panel h2.selected_class {
+  float: left;
+  margin: 10px 5px;
 }
 
 .class-square i.class-0 {

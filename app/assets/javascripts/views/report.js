@@ -74,6 +74,7 @@ $(function() {
               this.header = null;
               //this.go_edit();
           }
+          $(this.el).find(".classes_wrap").remove();
           this.loading(this.showing_loading);
           return this;
       },

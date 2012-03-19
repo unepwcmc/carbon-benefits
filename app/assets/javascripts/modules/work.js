@@ -376,6 +376,5 @@ App.modules.Data = function(app) {
 
         select_report: function() {
         }
-
     });
 };
