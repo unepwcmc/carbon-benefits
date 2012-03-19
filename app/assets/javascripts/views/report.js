@@ -19,11 +19,13 @@ $(function() {
 
           'mouseover .title h2': 'show_tooltip_help',
           'mouseleave .title h2': 'hide_tooltip_help',
-          'click .select_classes': 'toggle_classes_list'
+          'click .select_classes': 'toggle_classes_list',
+          'click .select_class': 'select_class'
+
       },
 
       initialize: function() {
-          _.bindAll(this, 'show', 'hide', 'render', '_render_stats');
+          _.bindAll(this, 'show', 'hide', 'render', '_render_stats', 'select_class');
           $(this.el).addClass('tab_content_item');
           this.bus = this.options.bus;
           this.rid = this.options.rid;
@@ -127,13 +129,20 @@ $(function() {
         $(".classes_list").toggle();
       },
 
+      select_class: function(e) {
+        if(e) e.preventDefault();
+        $(".classes_list").hide();
+        this.bus.emit('model:select_class', $(e.currentTarget).attr("id"));
+      },
+
       go_edit: function(e) {
           if(e) e.preventDefault();
           this.$('.non_editing').hide();
           this.$('.removing').hide();
           this.$('.editing').show();
-          if(this.showing)
+          if(this.showing){
             this.bus.emit('map:edit_mode');
+          }
       },
 
       go_upload: function(e) {
