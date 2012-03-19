@@ -2,6 +2,12 @@ class Layer < ActiveRecord::Base
   belongs_to :work
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
+  has_attached_file :user_layer_file
+
+  def user_layer_file_columns
+    #need to parse columns from the uploaded file
+    []
+  end
 
   def as_json(options={})
     {

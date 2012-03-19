@@ -9,6 +9,7 @@ window.UploadBox = Backbone.View.extend({
   initialize: function() {
     _.bindAll(this, 'open');
     this.form_el = this.$('form');
+    this.layer_id = this.options['layer_id'];
   },
 
   close: function(e) {
@@ -18,6 +19,7 @@ window.UploadBox = Backbone.View.extend({
 
   open: function() {
     this.resetValidationErrors();
+    $(this.form_el).find('input[type="hidden"]').val(this.layer_id);
     $(this.el).show();
   },
 
