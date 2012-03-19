@@ -1363,13 +1363,15 @@ div.right {
   height: 30px;
   margin: 2px 0 0 90px;
   padding: 0 0 0 12px;
-  background: url("sprite.png") -2px -453px no-repeat;
   font: bold 13px "WhitneyBold";
   color: white;
   background: url("sprite.png") 0 -790px no-repeat;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 #3c7d7d;
   text-decoration: none;
+}
+#panel #tab_content div.no_content a.action_button.active {
+  background: url("sprite.png") 0 1px no-repeat;
 }
 /* line 389, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.action_button span {
@@ -1378,6 +1380,9 @@ div.right {
   height: 14px;
   padding: 8px 12px 8px 0;
   background: url("sprite.png") right -820px no-repeat;
+}
+#panel #tab_content div.no_content a.action_button.active span {
+  background: url("sprite.png") right -27px no-repeat;
 }
 /* line 397, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.action_button:hover {

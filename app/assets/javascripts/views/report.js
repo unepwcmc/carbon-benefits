@@ -132,6 +132,11 @@ $(function() {
           this.$('.non_editing').hide();
           this.$('.removing').hide();
           this.$('.editing').show();
+
+          // Update display
+          this.$('.start_drawing span').text('DRAWING ....');
+          this.$('.start_drawing').addClass('active');
+
           if(this.showing)
             this.bus.emit('map:edit_mode');
       },
