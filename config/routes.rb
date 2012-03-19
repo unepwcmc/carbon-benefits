@@ -19,6 +19,7 @@ Carbontool::Application.routes.draw do
     get 'work/:work_hash' => 'api#work'
     put 'work/:work_hash' => 'api#update_work'
     delete 'work/:work_hash' => 'api#destroy_work'
+    post 'upload_layer_file' => 'api#upload_layer_file'
   end
 
   # Sample of named route:
