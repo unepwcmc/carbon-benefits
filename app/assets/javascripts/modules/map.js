@@ -281,6 +281,10 @@ App.modules.Map = function(app) {
 
     enable_layer: function(name, enable) {
       this.map.enable_layer(name, enable);
+      if (name === 'protected areas'){
+        // If the protected area layer is being switched, toggle the PA Popup
+        this.togglePAPopup(enable);
+      }
     },
 
     reoder_layers: function(new_order) {
@@ -291,9 +295,14 @@ App.modules.Map = function(app) {
     editing: function(b) {
       this._editing = b;
       this.polygon_edit.editing_state(b);
+      this.togglePAPopup(!this._editing);
+    },
+
+    togglePAPopup: function(enable) {
+      // either binds or unbinds the PA popup, depending on 'enable'
       // always try to unbind to avoid bind twice
       this.map.unbind('click', this.protected_area_click);
-      if(!this._editing) {
+      if(!this._editing && enable) {
         this.map.bind('click', this.protected_area_click);
       }
     },
