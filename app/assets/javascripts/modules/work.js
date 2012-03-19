@@ -2,6 +2,7 @@ App.modules.Data = function(app) {
     var Report = Backbone.Model.extend({
         defaults: function() {
             return {
+                'id': null,
                 "polygons": new Array(),
                 "classes": new Array(),
                 'stats': new Object()
