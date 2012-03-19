@@ -16,7 +16,7 @@
           </h2>
           <ul class="classes_list" style="display:none">
             <% for(var c = 0; c < classes.length; c++) { %>
-              <li><span class="class-square"><i class="class-<%= c %>"></i></span><a class='select_class' id='<%= classes[c] %>' href='#select_class'><%= classes[c] %></a></li>
+              <li><span class="class-square"><i class="class-<%= c %>"></i></span><a class='select_class' data-id='<%= classes[c] %>' href='#select_class'><%= classes[c] %></a></li>
             <% } %>
             <% if(classes.length === 0) { %>
               <li class="empty-classes"><span class="class-square"><i></i></span> No classes selected.</li>
