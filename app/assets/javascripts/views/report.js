@@ -21,7 +21,6 @@ $(function() {
           'mouseleave .title h2': 'hide_tooltip_help',
           'click .select_classes': 'toggle_classes_list',
           'click .select_class': 'select_class'
-
       },
 
       initialize: function() {
@@ -132,7 +131,7 @@ $(function() {
       select_class: function(e) {
         if(e) e.preventDefault();
         $(".classes_list").hide();
-        this.bus.emit('model:select_class', $(e.currentTarget).attr("id"));
+        this.bus.emit('model:select_class', this.rid, $(e.currentTarget).data("id"));
       },
 
       go_edit: function(e) {
