@@ -1,21 +1,30 @@
 <!-- report backbone template -->
 <div class="report_stats">
 
+  <div class="classes_list" style="display:none">
+    <ul>
+      <% for(var c = 0; c < classes.length; c++) { %>
+        <li><span class="class-square"><i style="background-color: <%= classes[c][1]%>"></i></span><a class='select_class' data-id='<%= classes[c][0] %>' data-colour='<%= classes[c][1] %>' href='#select_class'><%= classes[c][0] %></a></li>
+      <% } %>
+      <% if(classes.length === 0) { %>
+        <li class="empty-classes"><span class="class-square"><i></i></span> No classes selected.</li>
+      <% } %>
+    </ul>
+  </div>
+
+  <% if(selected_class !== null) { %>
     <div class="classes_filters">
-        <div class="classes_summary">
-          <h2>
-            <p href="#edit" class="edit">
-              <span class="polygon_num"><%= polygons.length %></span> classes selected.
-              <a class='select_classes' href="#classes_selection">Select another?</a>
-              <ul class="classes_list">
-                <% for (var c = 0; c < classes.length; c ++) { %>
-                  <li><%= classes[c] %></li>
-                <% } %>
-              </ul>
-            </p>
-          </h2>
-        </div>
+      <div class="classes_summary">
+        <h2>
+          <p href="#edit" class="edit">
+            <span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span>
+            <%= selected_class %> selected.
+            <a class='select_classes' href="#classes_selection">Select another?</a>
+          </p>
+        </h2>
+      </div>
     </div>
+  <% } %>
 
   <% if(stats.carbon) { %>
     <div class="block">
