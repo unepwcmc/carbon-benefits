@@ -1210,28 +1210,37 @@ div.right {
 }
 #panel #tab_content div.classes_summary {
   width: 100%;
-  height: 34px;
-  margin: 10px 0 0 0;
+  float: left;
+  margin: 0;
   background: url("sprite.png") 0 -512px no-repeat;
 }
 
-#panel #tab_content div.classes_summary ul.classes_list {
-  list-style: none;
-  float: left;
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
+#panel #tab_content div.classes_summary .class-square {
+  margin: 0;
 }
 
-#panel #tab_content div.classes_summary ul.classes_list li {
+.classes_list {
+  padding: 18px 18px 0 18px;
+  background: url("sprite.png") left -1469px no-repeat;
+  float: left;
+  width: 193px;
+  height: 92px;
+}
+
+.classes_list ul {
+  list-style: none;
+  margin: 0;
+  height: 70px;
+  overflow: auto;
+}
+
+.classes_list ul li {
   float: left;
   width: 100%;
   padding: 7px 0;
-  border-bottom: 1px solid #CCC;
 }
 
-ul.classes_list li .class-square, h2 span.class-square {
+.classes_list ul li .class-square, h2 span.class-square {
   border: 1px solid #CCC;
   padding: 1px;
   height: 14px;
@@ -1241,7 +1250,7 @@ ul.classes_list li .class-square, h2 span.class-square {
   top: 2px;
 }
 
-ul.classes_list li .class-square i, h2 span.class-square i {
+.classes_list ul li .class-square i, h2 span.class-square i {
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -1302,7 +1311,6 @@ ul.classes_list li .class-square i, h2 span.class-square i {
 #panel #tab_content div.tools p, #panel #tab_content div.classes_summary p {
   float: left;
   width: auto;
-  height: 13px;
   padding: 10px;
   margin: 0;
   font: normal 13px "Helvetica Neue",Arial;
