@@ -22,7 +22,6 @@ class Work < ActiveRecord::Base
       ar_layer.attributes= layer
       layers<< ar_layer
     end
-    
     self
   end
 
