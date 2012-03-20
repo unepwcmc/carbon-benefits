@@ -9,6 +9,20 @@ window.UploadBox = Backbone.View.extend({
   initialize: function() {
     _.bindAll(this, 'open');
     this.form_el = this.$('form');
+    //this.form_el.target = 'upload_target';
+    this.layer_id = this.options['layer_id'];
+
+    var status = $('#status'); 
+
+    $(this.form_el).ajaxForm({
+      beforeSend: function() {
+        status.empty();
+      },
+      complete: function(xhr) {
+        status.html('Upload complete');
+        var response = xhr.responseText;
+      }
+    });
   },
 
   close: function(e) {
@@ -18,6 +32,7 @@ window.UploadBox = Backbone.View.extend({
 
   open: function() {
     this.resetValidationErrors();
+    $(this.form_el).find('input[type="hidden"]').val(this.layer_id);
     $(this.el).show();
   },
 
