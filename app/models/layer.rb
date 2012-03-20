@@ -2,11 +2,16 @@ class Layer < ActiveRecord::Base
   belongs_to :work
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
-  has_attached_file :user_layer_file
+  has_attached_file :user_layer_file,
+    :styles => {'meta-data' => []},
+    :processors => ['meta_data_extractor']
+  validates_attachment_content_type :user_layer_file,
+    :content_type => [ 'application/zip', 'application/json', 'text/csv', 'application/vnd.google-earth.kml+xml' ]
+  validates_attachment_size :user_layer_file, :less_than => 100.megabytes
 
   def user_layer_file_columns
-    #need to parse columns from the uploaded file
-    []
+    #need to read columns from meta data
+    File.read(File.join(Rails.root, 'public', user_layer_file('meta-data').sub(/\?.+$/,'')))
   end
 
   def as_json(options={})
