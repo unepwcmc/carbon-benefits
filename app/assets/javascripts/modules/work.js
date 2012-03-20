@@ -4,7 +4,10 @@ App.modules.Data = function(app) {
             return {
                 'id': null,
                 "polygons": new Array(),
-                'stats': new Object()
+                "classes": new Array(),
+                "selected_class": null,
+                "selected_colour": null,
+                "stats": new Object()
             };
         },
 
@@ -34,7 +37,6 @@ App.modules.Data = function(app) {
         },
 
         add_polygon: function(path) {
-        	debugger;
             if(this.get('total')) {
                 app.Log.error("can't add polygons to total");
                 return;
