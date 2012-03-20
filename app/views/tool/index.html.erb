@@ -115,11 +115,13 @@
               <div class="help">
                   <h1>welcome to the carbon calculator tool</h1>
                   <p><label for="file">File to Upload</label></p>
-                  <%= form_tag :url => '/', :multipart => true do%>
+                  <%= form_tag upload_layer_file_url, :multipart => true do%>
+                    <%= hidden_field_tag "layer_id" %>
                   <p>
-                    <%= file_field_tag "file" %>
+                    <%= file_field_tag "user_layer_file", :id => 'user_layer_file' %>
                   </p>
                   <% end %>
+                  <p id="status"></p>
                   <button class="close"><span class="button_info">Cancel</span></button>
                   <button class="submit"><span class="button_info">Upload</span></button>
               </div> <!-- help -->
