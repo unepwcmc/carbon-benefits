@@ -70,7 +70,7 @@
                 <h1 class="name">name</h1>
               </div>
               <div class="bottom">
-                <a id='add_protected' href="#"><span>add this to the analisys</span></a>
+                <a id='add_protected' href="#"><span>add this to the analysis</span></a>
               </div>
           </div> <!-- polygon_popup -->
 
@@ -115,9 +115,10 @@
               <div class="help">
                   <h1>welcome to the carbon calculator tool</h1>
                   <p><label for="file">File to Upload</label></p>
-                  <%= form_tag :url => '/', :multipart => true do%>
+                  <%= form_tag upload_layer_file_url, :multipart => true do%>
+                    <%= hidden_field_tag "layer_id" %>
                   <p>
-                    <%= file_field_tag "file" %>
+                    <%= file_field_tag "user_layer_file" %>
                   </p>
                   <% end %>
                   <button class="close"><span class="button_info">Cancel</span></button>

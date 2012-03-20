@@ -3,6 +3,10 @@ class Work < ActiveRecord::Base
 
   has_many :layers
 
+  def classes=(the_classes)
+    #TODO
+  end
+
   def import_from_json(the_json)
     parsed_work = the_json.first
     parsed_layers = the_json[1..the_json.length]
