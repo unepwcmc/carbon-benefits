@@ -15,7 +15,12 @@ App.modules.Data = function(app) {
           _.bindAll(this, '_save');
           this.bind('change:polygons', this.fetch);
           this.save = _.debounce(this._save, 800);
+        },
 
+        select_class: function(id, colour) {
+          this.set({'selected_colour': colour});
+          this.set({'selected_class': id});
+          this.save();
         },
 
         _save: function() {
@@ -92,16 +97,16 @@ App.modules.Data = function(app) {
         model: Report,
 
         initialize: function() {
-            _.bindAll(this, 'on_report_change', 'on_add', 'on_add_all');
-            this.bind('add', this.on_add);
-            this.bind('reset', this.on_add_all);
+          _.bindAll(this, 'on_report_change', 'on_add', 'on_add_all');
+          this.bind('add', this.on_add);
+          this.bind('reset', this.on_add_all);
         },
 
         set_work_id: function(id) {
-            this.work_id = id;
-            if(app.config.LOCAL_STORAGE) {
-                this.localStorage = new Store(this.work_id);
-            }
+          this.work_id = id;
+          if(app.config.LOCAL_STORAGE) {
+            this.localStorage = new Store(this.work_id);
+          }
         },
 
         url: function() {
@@ -234,7 +239,7 @@ App.modules.Data = function(app) {
 
         init: function(bus) {
             var self = this;
-            _.bindAll(this, 'on_polygon', 'on_work', 'on_new_report','add_report', 'on_create_work', 'active_report', 'on_remove_polygon', 'on_update_polygon', 'on_clear', 'on_delete_report');
+            _.bindAll(this, 'on_polygon', 'on_work', 'on_new_report','add_report', 'on_create_work', 'active_report', 'on_remove_polygon', 'on_update_polygon', 'on_clear', 'on_delete_report', 'on_select_class');
             this.bus = bus;
             this.work = new WorkModel();
             this.work.bus = bus;
@@ -248,7 +253,8 @@ App.modules.Data = function(app) {
                 'model:remove_polygon': 'on_remove_polygon',
                 'model:update_polygon': 'on_update_polygon',
                 'model:clear': 'on_clear',
-                'model:delete_report': 'on_delete_report'
+                'model:delete_report': 'on_delete_report',
+                'model:select_class': 'on_select_class'
             });
 
             this.work.bind('add', this.on_new_report);
@@ -295,6 +301,15 @@ App.modules.Data = function(app) {
                     self.on_new_report(r);
                 });
             }
+        },
+        
+        on_select_class: function(rid, class_id, colour) {
+          var r = this.work.getByCid(rid);
+          if(r) {
+              r.select_class(class_id, colour);
+          } else {
+              app.Log.error("can't get report: ", rid);
+          }
         },
 
         on_polygon: function(polygon) {
@@ -363,6 +378,5 @@ App.modules.Data = function(app) {
 
         select_report: function() {
         }
-
     });
 };

@@ -55,4 +55,12 @@ class ApiController < ApplicationController
     Error.create(:error => params)
     render :text => "Error logged, thanks!"
   end
+
+  def upload_layer_file
+    @layer = Layer.find(params[:layer_id])
+    @layer.user_layer_file = params[:user_layer_file]
+    @layer.save
+    render :json => @layer.user_layer_file_columns
+  end
+
 end
