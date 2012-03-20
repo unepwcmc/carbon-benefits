@@ -118,9 +118,10 @@
                   <%= form_tag upload_layer_file_url, :multipart => true do%>
                     <%= hidden_field_tag "layer_id" %>
                   <p>
-                    <%= file_field_tag "user_layer_file" %>
+                    <%= file_field_tag "user_layer_file", :id => 'user_layer_file' %>
                   </p>
                   <% end %>
+                  <p id="status"></p>
                   <button class="close"><span class="button_info">Cancel</span></button>
                   <button class="submit"><span class="button_info">Upload</span></button>
               </div> <!-- help -->
