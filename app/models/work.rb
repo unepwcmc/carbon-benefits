@@ -9,17 +9,16 @@ class Work < ActiveRecord::Base
     #populate the work object
     self.summary = parsed_work['stats'].to_json
     #populate the layer objects
-    build_layers = []
-    parsed_layers.each do |layer|
-      puts layer.inspect
-      if layer['id']
-        l = Layer.find(layer['id'])
-        l.update_attributes(layer)
+    parsed_layers.each_with_index do |layer, i|
+      ar_layer = if layer['id']
+        Layer.find(layer['id'])
       else
-        build_layers<< layer
+        Layer.new()
       end
+      ar_layer.attributes= layer
+      layers<< ar_layer
     end
-    self.layers.build build_layers
+    
     self
   end
 
