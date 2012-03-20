@@ -1813,15 +1813,15 @@ html, body {
 }
 
 #upload_box .inner {
-  width: 50%;
+  padding: 25px;
 }
 /* line 24, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help, #upload_box .inner .help {
+#start_banner .inner .help{
   width: 385px;
   padding: 58px 0 0 0;
 }
 /* line 28, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help h1, #upload_box .inner .help h1 {
+#start_banner .inner .help h1, #upload_box .inner h1 {
   display: block;
   width: 100%;
   padding: 0 0 10px 0;
@@ -1830,18 +1830,36 @@ html, body {
   font: bold 11px "WhitneyBold","Myriad Pro";
   color: #333333;
 }
+
+#upload_box .inner h1 {
+  font-size: 17px;
+}
+
 /* line 38, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help p, #upload_box .inner .help p {
+#start_banner .inner .help p {
   margin: 12px 0 0 0;
   font: normal 15px "Helvetica Neue",Arial;
   color: #333333;
 }
+
+#upload-form {
+  padding: 15px;
+}
+
+#upload-form input[type=file]{
+  padding: 5px;
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  width: 97%;
+  margin-top: 10px;
+}
+
 /* line 42, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help p.margin, #upload_box .inner .help p.margin {
+#start_banner .inner .help p.margin, #upload_box .inner p.margin {
   margin: 20px 0 0 0;
 }
 /* line 45, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help button, #upload_box .inner .help button {
+#start_banner .inner .help button, #upload_box .inner button {
   float: right;
   width: auto;
   height: 47px;
@@ -1853,7 +1871,7 @@ html, body {
   color: #333333;
 }
 /* line 56, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help button span, #upload_box .inner .help button span {
+#start_banner .inner .help button span, #upload_box .inner button span {
   float: right;
   min-width: 150px\9;
   height: 15px;
@@ -1863,7 +1881,7 @@ html, body {
   text-transform: uppercase;
 }
 /* line 67, ../../css_src/partials/_start_banner.scss */
-#start_banner .inner .help button:hover span, #upload_box .inner .help button:hover span {
+#start_banner .inner .help button:hover span, #upload_box .inner button:hover span {
   color: black;
   text-decoration: underline;
 }
