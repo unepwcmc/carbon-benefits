@@ -1,4 +1,4 @@
-<% if(selected_class !== null) { %>
+<% if(classes.length > 0) { %>
   <div class="classes_wrap">
     <div class="classes_filters">
       <div class="classes_summary">
@@ -18,11 +18,13 @@
       </ul>
     </div>
 
-    <h2 class="selected_class"><span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span> <%= selected_class %> selected.</h2>
+    <% if(selected_class !== null) { %>
+      <h2 class="selected_class"><span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span> <%= selected_class %> selected.</h2>
+    <% } %>
   </div>
 <% } %>
 
-<div class="report_stats"<% if(selected_class === null) { %> style="top: 80px"<% } %>>
+<div class="report_stats"<% if(selected_class === null) { %> style="top: 103px"<% } %>>
   <% if(stats.carbon) { %>
     <div class="block">
         <span class="title">
