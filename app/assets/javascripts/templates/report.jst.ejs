@@ -1,20 +1,40 @@
-<!-- report backbone template -->
-<div class="report_stats">
+<% if(classes.length > 0) { %>
+  <div class="classes_wrap">
+    <div class="classes_filters">
+      <div class="classes_summary">
+        <h2>
+          <p href="#edit" class="edit">
+            <%= selected_class %> <a class='select_classes' href="#classes_selection">Select another?</a>
+          </p>
+        </h2>
+      </div>
+    </div>
 
-<% if(stats.carbon) { %>
-<div class="block">
-    <span class="title">
-        <h2>CARBON</h2>
-        <p><% print(number_format(stats.carbon.qty)); %><small>T</small></p>
-    </span>
-    <% if(stats.carbon) { %>
-    <ul class="normal list">
-      <% if(stats.carbon.countries.length === 0) { %>
-        <ul><li class="last"></li></ul>
-      <% } else { %>
-          <% _.each(stats.carbon.countries, function(ct, idx) { %>
-          <% if( idx == (stats.carbon.countries.length - 1)) { %>
-          <li class="last">
+    <div class="classes_list" style="display:none">
+      <ul>
+        <% for(var c = 0; c < classes.length; c++) { %>
+          <li><span class="class-square"><i style="background-color: <%= classes[c][1]%>"></i></span><a class='select_class' data-id='<%= classes[c][0] %>' data-colour='<%= classes[c][1] %>' href='#select_class'><%= classes[c][0] %></a></li>
+        <% } %>
+      </ul>
+    </div>
+
+    <% if(selected_class !== null) { %>
+      <h2 class="selected_class"><span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span> <%= selected_class %> selected.</h2>
+    <% } %>
+  </div>
+<% } %>
+
+<div class="report_stats"<% if(selected_class === null) { %> style="top: 103px"<% } %>>
+  <% if(stats.carbon) { %>
+    <div class="block">
+        <span class="title">
+            <h2>CARBON</h2>
+            <p><% print(number_format(stats.carbon.qty)); %><small>T</small></p>
+        </span>
+        <% if(stats.carbon) { %>
+        <ul class="normal list">
+          <% if(stats.carbon.countries.length === 0) { %>
+            <ul><li class="last"></li></ul>
           <% } else { %>
           <li>
           <% } %>
