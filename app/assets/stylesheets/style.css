@@ -1243,6 +1243,11 @@ div.right {
   padding: 7px 0;
 }
 
+.classes_list ul li:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
 .classes_list ul li .class-square, h2 span.class-square {
   border: 1px solid #CCC;
   padding: 1px;
