@@ -29,26 +29,22 @@
 <div class="report_stats"<% if(selected_class === null) { %> style="top: 103px"<% } %>>
   <% if(stats.carbon) { %>
     <div class="block">
-        <span class="title">
-            <h2>CARBON</h2>
-            <p><% print(number_format(stats.carbon.qty)); %><small>T</small></p>
-        </span>
-        <% if(stats.carbon) { %>
-        <ul class="normal list">
-          <% if(stats.carbon.countries.length === 0) { %>
-            <ul><li class="last"></li></ul>
-          <% } else { %>
+      <span class="title">
+        <h2>CARBON</h2>
+        <p><% print(number_format(stats.carbon.qty)); %><small>T</small></p>
+      </span>
+      <ul class="normal list">
+        <% if(stats.carbon.countries.length === 0) { %>
+          <ul><li class="last"></li></ul>
+        <% } else { %>
           <li>
-          <% } %>
-                <h5><%= ct.name %></h5>
-                <p class="info"><% print(number_format(ct.qty)); %> T</p>
+            <h5><%= ct.name %></h5>
+            <p class="info"><% print(number_format(ct.qty)); %> T</p>
           </li>
-          <% }); %>
-      <% } %>
-    </ul>
-    <% } %>
-</div>
-<% } %>
+        <% } %>
+      </ul>
+    </div>
+  <% } %>
 
 <% if(stats.carbon_sequestration) { %>
 <div class="block">
