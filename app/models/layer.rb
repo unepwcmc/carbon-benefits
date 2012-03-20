@@ -23,4 +23,13 @@ class Layer < ActiveRecord::Base
   def stats=(stats_hash)
     write_attribute(:stats, stats_hash.to_json)
   end
+
+  def classes= the_classes
+  end
+
+  def selected_class= selected_class
+  end
+
+  def selected_colour= selected_colour
+  end
 end
