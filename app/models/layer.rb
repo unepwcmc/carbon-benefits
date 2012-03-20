@@ -10,8 +10,8 @@ class Layer < ActiveRecord::Base
   validates_attachment_size :user_layer_file, :less_than => 100.megabytes
 
   def user_layer_file_columns
-    #need to parse columns from the uploaded file
-    []
+    #need to read columns from meta data
+    File.read(File.join(Rails.root, 'public', user_layer_file('meta-data').sub(/\?.+$/,'')))
   end
 
   def as_json(options={})

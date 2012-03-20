@@ -26,9 +26,9 @@ module Paperclip
         output = Paperclip.run('ogrinfo', cmd)
         attributes = []
         output.each_line do |l|
-          if l =~ /^(.+): (.+)$/
+          if l =~ /^(.+): .+$/
             unless ['INFO', 'Layer Name', 'Geometry', 'Feature Count', 'Extent', 'Layer SRS WKT'].include? $1
-              attributes<< {:name => $1, :type => $2}
+              attributes<< $1
             end
           end
         end
