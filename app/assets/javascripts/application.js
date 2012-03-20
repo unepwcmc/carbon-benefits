@@ -19,6 +19,7 @@
 //= require libs/underscore
 //= require libs/class
 //= require libs/backbone
+//= require libs/jquery.form
 //= require app
 //= require modules/log
 //= require modules/config
