@@ -1801,6 +1801,7 @@ html, body {
 }
 
 #upload_box {
+  height:auto;
   display: none;
   width: 50%;
   left: 25%;
@@ -1808,11 +1809,11 @@ html, body {
 }
 /* line 17, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner , #upload_box .inner{
-  height: 324px;
   margin: 0 auto;
   text-align: left;
 }
 #start_banner .inner {
+  height: 324px;
   width: 765px;
   background: url("sprite.png") right -56px no-repeat;
 }
