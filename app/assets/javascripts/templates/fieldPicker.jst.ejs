@@ -6,16 +6,16 @@
         <thead>
           <tr>
             <td class='wider'>Field Name</td>
-            <td>Name</td>
-            <td>Class</td>
+            <td class='input'>Name</td>
+            <td class='input'>Class</td>
           </tr>
         </thead>
         <tbody>
           <% for(var i=0, il=fields.length; i < il; i++) {%>
             <tr>
               <td><%= fields[i] %></td>
-              <td><input type="checkbox"/></td>
-              <td><input type="checkbox"/></td>
+              <td class='input'><input type="radio" name="name" value="<%= fields[i] %>"/></td>
+              <td class='input'><input type="radio" name="class" value="<%= fields[i] %>"/></td>
             </tr>
           <% } %>
         </tbody>
