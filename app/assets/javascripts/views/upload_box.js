@@ -57,7 +57,7 @@ window.UploadBox = Backbone.View.extend({
     // takes the server response with the users fields and creates a new fieldPicker view
     this.status.html('Upload complete');
     $(this.el).empty();
-    this.fieldPicker = new FieldPicker({fields:xhr.responseText, layer_id: this.layer_id});
+    this.fieldPicker = new FieldPicker({fields:$.parseJSON(xhr.responseText), layer_id: this.layer_id});
   },
 
   resetValidationErrors: function(){
