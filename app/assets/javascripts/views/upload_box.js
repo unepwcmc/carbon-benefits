@@ -7,21 +7,19 @@ window.UploadBox = Backbone.View.extend({
   },
 
   initialize: function() {
-    _.bindAll(this, 'open');
+    var that = this;
+    _.bindAll(this, 'open', 'chooseFields');
     this.form_el = this.$('form');
     //this.form_el.target = 'upload_target';
     this.layer_id = this.options['layer_id'];
 
-    var status = $('#status'); 
+    this.status = $('#status'); 
 
     $(this.form_el).ajaxForm({
       beforeSend: function() {
-        status.empty();
+        that.status.empty();
       },
-      complete: function(xhr) {
-        status.html('Upload complete');
-        var response = xhr.responseText;
-      }
+      complete: this.chooseFields
     });
   },
 
@@ -53,6 +51,13 @@ window.UploadBox = Backbone.View.extend({
       return false;
     }
     return true;
+  },
+
+  chooseFields: function(xhr) {
+    // takes the server response with the users fields and creates a new fieldPicker view
+    this.status.html('Upload complete');
+    $(this.el).empty();
+    this.fieldPicker = new FieldPicker({fields:$.parseJSON(xhr.responseText), layer_id: this.layer_id});
   },
 
   resetValidationErrors: function(){
