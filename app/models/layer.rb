@@ -19,16 +19,18 @@ class Layer < ActiveRecord::Base
       'id' => id,
       'polygons' => JSON.parse(polygons),
       'stats' => JSON.parse(stats),
-      'colours' => polygon_class_colours.map{ |c| {:class_id => c.class_id, :colour => c.colour} }
+      'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] }
     }.to_json
   end
 
-  def colours=(the_colours)
-    #TODO
-  end
-
   def classes=(the_classes)
-    #TODO
+    the_classes.each do |class_name, the_colour|
+      polygon_class = PolygonClass.find_or_create_by_name(class_name)
+
+      poly_class_colour = polygon_class_colours.find_or_create_by_polygon_class_id(polygon_class.id)
+      poly_class_colour.colour = the_colour
+      poly_class_colour.save if poly_class_colour.changed?
+    end
   end
 
   def polygons=(polygons_ary)
@@ -37,9 +39,6 @@ class Layer < ActiveRecord::Base
 
   def stats=(stats_hash)
     write_attribute(:stats, stats_hash.to_json)
-  end
-
-  def classes= the_classes
   end
 
   def selected_class= selected_class
