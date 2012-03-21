@@ -1,5 +1,6 @@
 window.FieldPicker = Backbone.View.extend({
   el: '#upload_box',
+  template: JST["templates/fieldPicker"],
 
   events: {
   },
@@ -7,14 +8,14 @@ window.FieldPicker = Backbone.View.extend({
   initialize: function() {
     _.bindAll(this, 'render');
 
-    this.layer_id = this.options['layer_id'];
+    this.fields = this.options['fields'];
     this.layer_id = this.options['layer_id'];
 
     this.render();
   },
 
-
   render: function() {
-    $(this.el).html('insert field picker here');
+    console.log(this.fields);
+    $(this.el).append(this.template());
   }
 });
