@@ -54,3 +54,8 @@ group :development, :test do
   gem 'capistrano-ext'
   gem 'brightbox'
 end
+
+group :test do
+  gem 'minitest'
+  gem 'turn'
+end
