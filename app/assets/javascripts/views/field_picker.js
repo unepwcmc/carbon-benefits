@@ -15,7 +15,7 @@ window.FieldPicker = Backbone.View.extend({
   },
 
   render: function() {
-    console.log(this.fields);
-    $(this.el).append(this.template());
+    $(this.el).css('height', 'auto');
+    $(this.el).append(this.template({fields: this.fields}));
   }
 });
