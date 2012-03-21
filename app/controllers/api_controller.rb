@@ -8,7 +8,7 @@ class ApiController < ApplicationController
   def work
     if params[:work_hash] && params[:work_hash] != 'undefined'
       work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
-      render :json => work.export_to_json
+      render :json => work.to_json
     else
       render :json => ''
     end
@@ -17,7 +17,6 @@ class ApiController < ApplicationController
   def update_work
     if params[:work_hash] && params[:work_hash] != 'undefined'
       work = Work.find(params[:work_hash].alphadecimal - Work::BASE_ID)
-      work.import_from_json(params[:_json])
       work.json = params[:_json].to_json
       work.save
       render :json => params[:_json]
