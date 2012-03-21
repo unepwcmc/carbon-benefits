@@ -2445,14 +2445,24 @@ body.out div.layout footer div.right a.nature {
   color: #666;
 }
 
+#field-picker-table tbody tr {
+  border-top: 1px solid #EFEFEF;
+}
+#field-picker-table tbody tr:first-child {
+  border-top: 0;
+}
+
 #field-picker-table td {
-  width: 55px;
+  width: 30px;
   padding: 7px;
   border-left: 1px solid #E5E5E5;
 }
 
 #field-picker-table td:first-child {
-  border-left: 0px;
+  border-left: 0;
+}
+#field-picker-table td.input {
+  text-align:center;
 }
 
 #field-picker-table thead td.wider{
