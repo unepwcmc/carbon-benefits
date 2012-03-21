@@ -1,0 +1,26 @@
+<div class="inner">
+    <h1>File Uploaded - Select Fields</h1>
+    <div id='upload-form'>
+      <p>Please tell us which of these fields is the <b>layer name</b> and which is the <b>class</b></p>
+      <table id='field-picker-table'>
+        <thead>
+          <tr>
+            <td class='wider'>Field Name</td>
+            <td class='input'>Name</td>
+            <td class='input'>Class</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0, il=fields.length; i < il; i++) {%>
+            <tr>
+              <td><%= fields[i] %></td>
+              <td class='input'><input type="radio" name="name" value="<%= fields[i] %>"/></td>
+              <td class='input'><input type="radio" name="class" value="<%= fields[i] %>"/></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <button class="close"><span class="button_info">Cancel</span></button>
+    <button class="submit"><span class="button_info">Upload</span></button>
+</div> <!-- inner -->

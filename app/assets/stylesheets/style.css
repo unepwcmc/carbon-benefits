@@ -1801,6 +1801,7 @@ html, body {
 }
 
 #upload_box {
+  height:auto;
   display: none;
   width: 50%;
   left: 25%;
@@ -1808,11 +1809,11 @@ html, body {
 }
 /* line 17, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner , #upload_box .inner{
-  height: 324px;
   margin: 0 auto;
   text-align: left;
 }
 #start_banner .inner {
+  height: 324px;
   width: 765px;
   background: url("sprite.png") right -56px no-repeat;
 }
@@ -1868,7 +1869,7 @@ html, body {
   float: right;
   width: auto;
   height: 47px;
-  margin: 23px 0 0 0;
+  margin: 23px 0 25px 0;
   padding: 0 0 0 21px;
   border: none;
   background: url("sprite.png") left -380px no-repeat;
@@ -2432,4 +2433,43 @@ body.out div.layout footer div.right a.nature {
   text-indent: -9999px;
   line-height: 0;
   font-size: 0;
+}
+
+#field-picker-table {
+  margin: 15px 0px 0 20px;
+  max-height: 200px;
+  overflow: scroll;
+  width: 90%;
+}
+
+#field-picker-table thead {
+  background-color: #EDEDED;
+  border-top: 2px solid #666;
+  border-bottom: 1px solid #CCC;
+  font: normal 13px "Helvetica Neue",Arial
+  color: #666;
+}
+
+#field-picker-table tbody tr {
+  border-top: 1px solid #EFEFEF;
+}
+#field-picker-table tbody tr:first-child {
+  border-top: 0;
+}
+
+#field-picker-table td {
+  width: 30px;
+  padding: 7px;
+  border-left: 1px solid #E5E5E5;
+}
+
+#field-picker-table td:first-child {
+  border-left: 0;
+}
+#field-picker-table td.input {
+  text-align:center;
+}
+
+#field-picker-table thead td.wider{
+  width: 150px
 }
