@@ -1,4 +1,5 @@
 Carbontool::Application.routes.draw do
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -20,6 +21,12 @@ Carbontool::Application.routes.draw do
     put 'work/:work_hash' => 'api#update_work'
     delete 'work/:work_hash' => 'api#destroy_work'
     post 'upload_layer_file' => 'api#upload_layer_file'
+  end
+
+  resources :layers do
+    member do
+      post "select_fields"
+    end
   end
 
   # Sample of named route:
