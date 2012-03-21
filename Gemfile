@@ -5,7 +5,10 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'pg'
+
 gem 'sqlite3'
+
 gem 'alphadecimal'
 gem 'ejs'
 gem 'cartodb-rb-client', :git => 'git://github.com/decioferreira/cartodb-rb-client.git'
