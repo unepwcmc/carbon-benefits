@@ -80,7 +80,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.18)
+<<<<<<< HEAD
     minitest (2.11.4)
+=======
+>>>>>>> 3a6758d... added validation for uploaded file -- if ogrinfo fails, something must be wrong with the file and we won't process it
     multi_json (1.1.0)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -148,8 +151,11 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+<<<<<<< HEAD
     turn (0.9.4)
       ansi
+=======
+>>>>>>> 3a6758d... added validation for uploaded file -- if ogrinfo fails, something must be wrong with the file and we won't process it
     typhoeus (0.3.3)
       mime-types
     tzinfo (0.3.32)
@@ -176,5 +182,8 @@ DEPENDENCIES
   rubyzip
   sqlite3
   therubyracer
+<<<<<<< HEAD
   turn
+=======
+>>>>>>> 3a6758d... added validation for uploaded file -- if ogrinfo fails, something must be wrong with the file and we won't process it
   uglifier (>= 1.0.3)
