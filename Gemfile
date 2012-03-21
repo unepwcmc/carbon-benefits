@@ -8,6 +8,7 @@ gem 'rails', '3.2.2'
 gem 'sqlite3'
 gem 'alphadecimal'
 gem 'ejs'
+gem 'cartodb-rb-client', :git => 'git://github.com/decioferreira/cartodb-rb-client.git'
 
 # Gems used only for assets and not required
 # in production environments by default.

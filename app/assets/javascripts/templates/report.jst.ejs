@@ -12,11 +12,11 @@
 
     <div class="classes_list" style="display:none">
       <ul>
-        <li><span class="class-square"><i style="background-color: black"></i></span><a class='select_class' data-id='All Classes' data-colour='black' href='#select_class'>All Classes</a></li>
+        <li class='select_class' data-id='All Classes' data-colour='black'><span class="class-square"><i style="background-color: black"></i></span>All Classes</li>
         <% for(var c = 0; c < classes.length; c++) { %>
-          <li><span class="class-square"><i style="background-color: <%= classes[c][1]%>"></i></span><a class='select_class' data-id='<%= classes[c][0] %>' data-colour='<%= classes[c][1] %>' href='#select_class'><%= classes[c][0] %></a></li>
+          <li class='select_class' data-id='<%= classes[c][0] %>' data-colour='<%= classes[c][1] %>'><span class="class-square"><i style="background-color: <%= classes[c][1]%>"></i></span><%= classes[c][0] %></li>
         <% } %>
-        <li><span class="class-square"><i style="background-color: white"></i></span><a class='select_class' data-id='No Class' data-colour='white' href='#select_class'>No Class</a></li>
+        <li class='select_class' data-id='No Class' data-colour='white'><span class="class-square"><i style="background-color: white"></i></span>No Class</li>
       </ul>
     </div>
 
