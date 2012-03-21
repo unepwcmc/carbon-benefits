@@ -11,7 +11,7 @@ gem 'sqlite3'
 
 gem 'alphadecimal'
 gem 'ejs'
-gem 'cartodb-rb-client', :git => 'git://github.com/decioferreira/cartodb-rb-client.git'
+gem 'cartodb-rb-client', :git => 'git://github.com/agnessa/cartodb-rb-client.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,7 +20,7 @@ group :assets do
   #gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer'
+  gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
 end
