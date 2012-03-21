@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  error: MyText
-  when: 2012-03-12 16:27:50
-
-two:
-  error: MyText
-  when: 2012-03-12 16:27:50
