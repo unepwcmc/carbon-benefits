@@ -4,6 +4,7 @@ class CreateLayers < ActiveRecord::Migration
       t.integer :work_id
       t.string :name
       t.text :stats
+      t.text :polygons
 
       t.timestamps
     end
