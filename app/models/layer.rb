@@ -1,17 +1,26 @@
 class Layer < ActiveRecord::Base
+  include ActiveModel::Validations
   belongs_to :work
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
-  has_attached_file :user_layer_file,
-    :styles => {'meta-data' => []},
-    :processors => ['meta_data_extractor']
-  validates_attachment_content_type :user_layer_file,
-    :content_type => [ 'application/zip', 'application/json', 'text/csv', 'application/vnd.google-earth.kml+xml' ]
-  validates_attachment_size :user_layer_file, :less_than => 100.megabytes
+  has_attached_file :user_layer_file
 
-  def user_layer_file_columns
-    #need to read columns from meta data
-    File.read(File.join(Rails.root, 'public', user_layer_file('meta-data').sub(/\?.+$/,'')))
+  validates_attachment_content_type :user_layer_file,
+    :content_type => [ 'application/zip', 'application/json', 'text/csv',
+      'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz' ]
+  validates_attachment_size :user_layer_file, :less_than => 100.megabytes
+  validates :user_layer_file, :ogr_parsable => true
+
+  before_save :extract_meta_data
+
+  def extract_meta_data
+    self.meta_data = unless self.user_layer_file.exists?
+      []
+    else
+      mde = MetaDataExtractor.new(self.user_layer_file)
+      mde.make
+    end.to_json
+    return true
   end
 
   def as_json(options={})
