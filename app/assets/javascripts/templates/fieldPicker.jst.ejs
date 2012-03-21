@@ -1,10 +1,25 @@
 <div class="inner">
-    <h1>File uploaded</h1>
+    <h1>File Uploaded - Select Fields</h1>
     <div id='upload-form'>
-      <p>We support layer uploads in SHP and KML</p>
-        <p>
-        </p>
-      <p id="status"></p>
+      <p>Please tell us which of these fields is the <b>layer name</b> and which is the <b>class</b></p>
+      <table id='field-picker-table'>
+        <thead>
+          <tr>
+            <td class='wider'>Field Name</td>
+            <td>Name</td>
+            <td>Class</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0, il=fields.length; i < il; i++) {%>
+            <tr>
+              <td><%= fields[i] %></td>
+              <td><input type="checkbox"/></td>
+              <td><input type="checkbox"/></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
     </div>
     <button class="close"><span class="button_info">Cancel</span></button>
     <button class="submit"><span class="button_info">Upload</span></button>
