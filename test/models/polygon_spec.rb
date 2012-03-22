@@ -34,4 +34,32 @@ describe Polygon do
       assert_equal @cartodb_id, @it.cartodb_id
     end
   end
+
+  describe "#save" do
+    before do
+      @polygon_name = "Name1"
+      @cartodb_polygon = { :name => @polygon_name }
+      @cartodb_connection = MiniTest::Mock.new
+      @cartodb_connection.expect(:insert_row, @cartodb_polygon, [Object, Hash])
+
+      CartoDB::Connection = @cartodb_connection
+
+      @it = Polygon.new(@cartodb_polygon).save
+    end
+
+    after do 
+      @cartodb_connection.verify
+    end
+
+    it "should return the saved object similar to @cartodb_polygon" do
+      assert_equal @cartodb_polygon[:name], @it[:name]
+    end
+  end
+
+  describe "#attributes" do
+    it "returns an hash" do
+      polygon = Polygon.new
+      assert_equal true, polygon.attributes.is_a?(Hash)
+    end
+  end
 end
