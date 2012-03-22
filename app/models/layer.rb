@@ -17,7 +17,7 @@ class Layer < ActiveRecord::Base
     self.meta_data = unless self.user_layer_file.present?
       []
     else
-      mde = MetaDataExtractor.new(self.user_layer_file.queued_for_write[:original])
+      mde = MetaDataExtractor.new(self.user_layer_file)
       mde.make
     end.to_json
     return true
