@@ -44,19 +44,7 @@ class Layer < ActiveRecord::Base
 
   def polygons=(polygons_arr)
     polygons_arr.each do |attributes|
-      if attributes[:cartodb_id].nil?
-        polygon = Polygon.new(attributes)
-        polygon.layer_id = self.id
-        polygon.save
-      else
-        polygon = Polygon.find(attributes[:cartodb_id])
-        if polygon.layer_id == self.id
-          polygon.name = attributes[:name]
-          polygon.the_geom = attributes[:the_geom]
-          polygon.class_id = attributes[:class_id]
-          polygon.update
-        end
-      end
+      Polygon.create_or_update_from attributes, self.id
     end
   end
   
