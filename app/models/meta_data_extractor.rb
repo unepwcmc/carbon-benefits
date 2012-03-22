@@ -7,7 +7,7 @@ class MetaDataExtractor
   def unzip
     require 'zip/zip'
 
-    Zip::ZipFile.open(@file) do |zip_file|
+    Zip::ZipFile.open(@file.path) do |zip_file|
       zip_file.each do |f|
         f_path=File.join(@file_dir, f.name)
         FileUtils.mkdir_p(File.dirname(f_path))

@@ -14,10 +14,10 @@ class Layer < ActiveRecord::Base
   before_save :extract_meta_data
 
   def extract_meta_data
-    self.meta_data = unless self.user_layer_file.exists?
+    self.meta_data = unless self.user_layer_file.present?
       []
     else
-      mde = MetaDataExtractor.new(self.user_layer_file)
+      mde = MetaDataExtractor.new(self.user_layer_file.queued_for_write[:original])
       mde.make
     end.to_json
     return true
