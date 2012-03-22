@@ -1075,7 +1075,7 @@ div.right {
   background-color: #EDEDED;
 }
 /* line 131, ../../css_src/partials/_panel.scss */
-#panel #tabs ul li a.add, #panel #tabs ul li a#add_report {
+#panel #tabs ul li a.add, #panel #tabs ul li a#add_layer {
   height: 100%;
   padding: 0;
   background: url("sprite.png") no-repeat 15px -912px;
@@ -1085,7 +1085,7 @@ div.right {
   line-height: 0;
 }
 /* line 140, ../../css_src/partials/_panel.scss */
-#panel #tabs ul li a.add:hover, #panel #tabs ul li a#add_report:hover {
+#panel #tabs ul li a.add:hover, #panel #tabs ul li a#add_layer:hover {
   background-position: 15px -952px;
 }
 /* line 143, ../../css_src/partials/_panel.scss */
@@ -1183,7 +1183,7 @@ div.right {
   height: 44px;
 }
 /* line 242, ../../css_src/partials/_panel.scss */
-#panel #tab_content .report_stats {
+#panel #tab_content .layer_stats {
   position: absolute;
   width: 324px;
   top: 140px;
@@ -1191,21 +1191,21 @@ div.right {
   outline: none;
 }
 /* line 247, ../../css_src/partials/_panel.scss */
-#panel #tab_content .report_stats .jspVerticalBar {
+#panel #tab_content .layer_stats .jspVerticalBar {
   width: 7px;
   right: 0px;
   background: #BBD;
 }
 /* line 252, ../../css_src/partials/_panel.scss */
-#panel #tab_content .report_stats .jspTrack {
+#panel #tab_content .layer_stats .jspTrack {
   background: #FFF;
 }
 /* line 254, ../../css_src/partials/_panel.scss */
-#panel #tab_content .report_stats .jspTrack .jspDrag {
+#panel #tab_content .layer_stats .jspTrack .jspDrag {
   background-color: rgba(127, 127, 127, 0.9);
 }
 /* line 258, ../../css_src/partials/_panel.scss */
-#panel #tab_content .report_stats .jspPane {
+#panel #tab_content .layer_stats .jspPane {
   width: 310px !important;
 }
 #panel #tab_content div.classes_summary {

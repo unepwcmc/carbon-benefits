@@ -1,5 +1,5 @@
 App.modules.Data = function(app) {
-    var Report = Backbone.Model.extend({
+    var Layer = Backbone.Model.extend({
         defaults: function() {
             return {
                 'id': null,
@@ -46,7 +46,11 @@ App.modules.Data = function(app) {
                 app.Log.error("can't add polygons to total");
                 return;
             }
-            this.get('polygons').push(path);
+            this.get('polygons').push(new App.Polygon({
+              the_geom: path,
+              layer_id: this.id
+            }));
+
             // activate the signal machinery
             this.trigger('change:polygons', this);
             this.trigger('change', this);
@@ -94,10 +98,10 @@ App.modules.Data = function(app) {
     var WorkModel = Backbone.Collection.extend({
 
         API_URL: app.config.API_URL,
-        model: Report,
+        model: Layer,
 
         initialize: function() {
-          _.bindAll(this, 'on_report_change', 'on_add', 'on_add_all');
+          _.bindAll(this, 'on_layer_change', 'on_add', 'on_add_all');
           this.bind('add', this.on_add);
           this.bind('reset', this.on_add_all);
         },
@@ -118,8 +122,8 @@ App.modules.Data = function(app) {
             function _done(data) {
                 // default data
                 self.set_work_id(data.id);
-                self.new_report({total: true});
-                self.new_report();
+                self.new_layer({total: true});
+                self.new_layer();
                 self.save({
                     success: function() {
                         success(data.id);
@@ -140,9 +144,9 @@ App.modules.Data = function(app) {
             }
         },
 
-        // create empty report
-        new_report: function(defaults, options) {
-            var r = new Report();
+        // create empty layer
+        new_layer: function(defaults, options) {
+            var r = new Layer();
             r.set(defaults);
             if(this.bus) {
                 r.bus = this.bus;
@@ -151,7 +155,7 @@ App.modules.Data = function(app) {
             return r.cid;
         },
 
-        get_total_report: function() {
+        get_total_layer: function() {
            for(var i = 0; i < this.models.length; ++i) {
               var r = this.models[i];
               if(r.get('total')) {
@@ -160,14 +164,14 @@ App.modules.Data = function(app) {
            }
         },
 
-        get_reports: function() {
+        get_layers: function() {
             return _.filter(this.models, function(r) {
                 return r.get('total')=== undefined;
             });
         },
 
         on_add: function(r) {
-            r.bind('change', this.on_report_change);
+            r.bind('change', this.on_layer_change);
             if(this.bus) {
                 r.bus = this.bus;
             }
@@ -178,10 +182,10 @@ App.modules.Data = function(app) {
             this.each(function(r) { self.on_add(r); });
         },
 
-        delete_report: function(rid) {
+        delete_layer: function(rid) {
             var r = this.getByCid(rid);
             this.remove(r);
-            r.unbind('change', this.on_report_change);
+            r.unbind('change', this.on_layer_change);
             //r.remove();
             this.save();
             this.aggregate_stats();
@@ -189,11 +193,11 @@ App.modules.Data = function(app) {
 
         get_all_polygons: function() {
           // get all polygons in the same array
-          var reports = _(this.get_reports()).filter(function(r) {
+          var layers = _(this.get_layers()).filter(function(r) {
                 return r.get('stats') !== undefined;
           });
           var polygons = [];
-          _.each(reports, function(r) {
+          _.each(layers, function(r) {
                 _.each(r.get('polygons'), function(p) {
                     polygons.push(p);
                 });
@@ -201,26 +205,26 @@ App.modules.Data = function(app) {
           return polygons;
         },
 
-        // agregate all the stats in the total report
+        // agregate all the stats in the total layer
         aggregate_stats: function() {
           var self = this;
-          var reports = _(this.get_reports()).filter(function(r) {
+          var layers = _(this.get_layers()).filter(function(r) {
                 return r.get('stats') !== undefined;
           });
           var polygons = self.get_all_polygons();
 
-          app.WS.CartoDB.aggregate_stats(reports, polygons, function(stats) {
-            if(self.get_total_report()) {
-              self.get_total_report().set({stats: stats});
+          app.WS.CartoDB.aggregate_stats(layers, polygons, function(stats) {
+            if(self.get_total_layer()) {
+              self.get_total_layer().set({stats: stats});
             }
           });
         },
 
-        on_report_change: function(r) {
+        on_layer_change: function(r) {
             if(!r.is_total()) {
               this.aggregate_stats();
             }
-            this.trigger('report_change', r);
+            this.trigger('layer_change', r);
         },
 
         save: function(options) {
@@ -239,34 +243,34 @@ App.modules.Data = function(app) {
 
         init: function(bus) {
             var self = this;
-            _.bindAll(this, 'on_polygon', 'on_work', 'on_new_report','add_report', 'on_create_work', 'active_report', 'on_remove_polygon', 'on_update_polygon', 'on_clear', 'on_delete_report', 'on_select_class');
+            _.bindAll(this, 'on_polygon', 'on_work', 'on_new_layer','add_layer', 'on_create_work', 'active_layer', 'on_remove_polygon', 'on_update_polygon', 'on_clear', 'on_delete_layer', 'on_select_class');
             this.bus = bus;
             this.work = new WorkModel();
             this.work.bus = bus;
-            this.active_report_id = -1;
+            this.active_layer_id = -1;
             this.bus.link(this, {
                 'polygon': 'on_polygon',
                 'work': 'on_work',
-                'model:add_report': 'add_report',
+                'model:add_layer': 'add_layer',
                 'model:create_work': 'on_create_work',
-                'model:active_report': 'active_report',
+                'model:active_layer': 'active_layer',
                 'model:remove_polygon': 'on_remove_polygon',
                 'model:update_polygon': 'on_update_polygon',
                 'model:clear': 'on_clear',
-                'model:delete_report': 'on_delete_report',
+                'model:delete_layer': 'on_delete_layer',
                 'model:select_class': 'on_select_class'
             });
 
-            this.work.bind('add', this.on_new_report);
+            this.work.bind('add', this.on_new_layer);
             this.work.bind('reset', function() {
                 app.Log.log("reset", this.models);
                 self.bus.emit('view:remove_all');
                 this.each(function(r) {
-                    self.on_new_report(r);
+                    self.on_new_layer(r);
                 });
             });
-            this.work.bind('report_change', function(r) {
-                self.bus.emit('view:update_report', r.cid, r.toJSON());
+            this.work.bind('layer_change', function(r) {
+                self.bus.emit('view:update_layer', r.cid, r.toJSON());
             });
         },
 
@@ -275,7 +279,7 @@ App.modules.Data = function(app) {
             if(r) {
                 r.remove_polygon(index);
             } else {
-                app.Log.error("can't get report: ", rid);
+                app.Log.error("can't get layer: ", rid);
             }
         },
 
@@ -284,21 +288,21 @@ App.modules.Data = function(app) {
             if(r) {
                 r.update_polygon(index, new_path);
             } else {
-                app.Log.error("can't get report: ", rid);
+                app.Log.error("can't get layer: ", rid);
             }
         },
 
-        on_delete_report: function(rid) {
+        on_delete_layer: function(rid) {
             var self = this;
-            // if we only have the total and another report
+            // if we only have the total and another layer
             // dont remove, only clear polygons
             if(this.work.models.length == 2) {
                 this.on_clear();
             } else {
-                this.work.delete_report(rid);
+                this.work.delete_layer(rid);
                 this.bus.emit('view:remove_all');
                 this.work.each(function(r) {
-                    self.on_new_report(r);
+                    self.on_new_layer(r);
                 });
             }
         },
@@ -308,13 +312,13 @@ App.modules.Data = function(app) {
           if(r) {
               r.select_class(class_id, colour);
           } else {
-              app.Log.error("can't get report: ", rid);
+              app.Log.error("can't get layer: ", rid);
           }
         },
 
         on_polygon: function(polygon) {
-            // append polygon to current report
-            var r = this.work.getByCid(this.active_report_id);
+            // append polygon to current layer
+            var r = this.work.getByCid(this.active_layer_id);
             var path = _.map(polygon.paths[0], function(p) {
               return new google.maps.LatLng(p[0], p[1]);
             });
@@ -328,7 +332,7 @@ App.modules.Data = function(app) {
         },
 
         on_clear: function() {
-            var r = this.work.getByCid(this.active_report_id);
+            var r = this.work.getByCid(this.active_layer_id);
             r.clear();
         },
 
@@ -344,9 +348,9 @@ App.modules.Data = function(app) {
             //TODO: does not exists
         },
 
-        on_new_report: function(r) {
-            this.bus.emit('view:new_report', r.cid, r.toJSON());
-            this.active_report(r.cid);
+        on_new_layer: function(r) {
+            this.bus.emit('view:new_layer', r.cid, r.toJSON());
+            this.active_layer(r.cid);
         },
 
         on_create_work: function() {
@@ -359,24 +363,24 @@ App.modules.Data = function(app) {
 
         },
 
-        add_report: function() {
-            this.work.new_report();
+        add_layer: function() {
+            this.work.new_layer();
             this.work.save();
             this.work.fetch();
         },
 
-        update_report: function() {
+        update_layer: function() {
         },
 
-        active_report: function(rid) {
-            this.active_report_id = rid;
+        active_layer: function(rid) {
+            this.active_layer_id = rid;
             var r = this.work.getByCid(rid);
             if(r) {
-              this.bus.emit('view:show_report', rid, r.toJSON());
+              this.bus.emit('view:show_layer', rid, r.toJSON());
             }
         },
 
-        select_report: function() {
+        select_layer: function() {
         }
     });
 };

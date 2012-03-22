@@ -204,11 +204,11 @@ App.modules.Map = function(app) {
 
   app.Map = Class.extend({
     init: function(bus) {
-      _.bindAll(this, 'show_report', 'start_edit_polygon', 'end_edit_polygon', 'remove_polygon', 'disable_editing', 'enable_editing', 'enable_layer', 'reoder_layers', 'protected_area_click','reorder_layers', 'update_report', 'remove_all', 'clear');
+      _.bindAll(this, 'show_layer', 'start_edit_polygon', 'end_edit_polygon', 'remove_polygon', 'disable_editing', 'enable_editing', 'enable_map_layer', 'reoder_layers', 'protected_area_click','reorder_layers', 'update_layer', 'remove_all', 'clear');
       var self = this;
       this.map = new MapView({el: $('.map_container')});
       this.seachbox = new Searchbox({el: $('.map_container .search')});
-      this.report_polygons = {};
+      this.layer_polygons = {};
       // add layers to the map
       _(app.config.MAP_LAYERS).each(function(layer) {
         self.map.add_layer(layer.name, layer);
@@ -231,14 +231,14 @@ App.modules.Map = function(app) {
       this.movement_timeout = -1;
 
       bus.link(this, {
-        'view:show_report': 'show_report',
-        'view:update_report': 'update_report',
-        'view:new_report': 'update_report',
+        'view:show_layer': 'show_layer',
+        'view:update_layer': 'update_layer',
+        'view:new_layer': 'update_layer',
         'view:remove_all': 'clear',
         'polygon': 'disable_editing',
         'map:edit_mode': 'enable_editing',
         'map:no_edit_mode': 'disable_editing',
-        'map:enable_layer': 'enable_layer',
+        'map:enable_map_layer': 'enable_map_layer',
         'map:reorder_layers':'reorder_layers'
       });
 
@@ -279,8 +279,8 @@ App.modules.Map = function(app) {
       $('.map_container').css({right: '352px'});
     },
 
-    enable_layer: function(name, enable) {
-      this.map.enable_layer(name, enable);
+    enable_map_layer: function(name, enable) {
+      this.map.enable_map_layer(name, enable);
       if (name === 'protected areas'){
         // If the protected area layer is being switched, toggle the PA Popup
         this.togglePAPopup(enable);
@@ -325,13 +325,13 @@ App.modules.Map = function(app) {
       this.editing(true);
     },
 
-    update_report: function(rid, data) {
-      this.report_polygons[rid] = data.polygons;
-      this.show_report(this.showing, data);
+    update_layer: function(rid, data) {
+      this.layer_polygons[rid] = data.polygons;
+      this.show_layer(this.showing, data);
     },
 
     clear: function() {
-      this.report_polygons = {};
+      this.layer_polygons = {};
       this.remove_all();
     },
 
@@ -346,35 +346,35 @@ App.modules.Map = function(app) {
     },
 
     // render polygons
-    show_report: function(rid, data) {
+    show_layer: function(rid, data) {
       this.showing = rid;
       var self = this;
 
       self.remove_all();
 
       // reorder - selected AOI's polygon should be at the top
-      var selected = {}, others = {}, report_polygons_ordered, x;
-      _(this.report_polygons).each(function(report_polys, report_id) {
-        if(rid == report_id) {
-          selected[report_id] = report_polys;
+      var selected = {}, others = {}, layer_polygons_ordered, x;
+      _(this.layer_polygons).each(function(layer_polys, layer_id) {
+        if(rid == layer_id) {
+          selected[layer_id] = layer_polys;
         } else {
-          others[report_id] = report_polys;
+          others[layer_id] = layer_polys;
         }
       });
-      report_polygons_ordered = [others, selected];
+      layer_polygons_ordered = [others, selected];
 
-      for(x in report_polygons_ordered) {
+      for(x in layer_polygons_ordered) {
         // recreate
-        _(report_polygons_ordered[x]).each(function(report_polys, report_id) {
-          _(report_polys).each(function(paths, i) {
+        _(layer_polygons_ordered[x]).each(function(layer_polys, layer_id) {
+          _(layer_polys).each(function(paths, i) {
             var p = new PolygonView({
               mapview: self.map,
               paths: paths,
-              color: rid == report_id ? "#66CCCC": "#FFCC00"
+              color: rid == layer_id ? "#66CCCC": "#FFCC00"
             });
-            p.report = rid;
+            p.layer = rid;
             p.polygon_id = i;
-            if(rid == report_id) {
+            if(rid == layer_id) {
               p.bind('click', self.start_edit_polygon);
             } else {
               p.bind('click', function(p) {
@@ -397,8 +397,8 @@ App.modules.Map = function(app) {
                   self.finish_editing();
 
                   var p = self.editing_poly;
-                  app.Log.debug("changing polygon", p.report, p.polygon_id);
-                  self.bus.emit('model:update_polygon', p.report, p.polygon_id, self.paths[0]);
+                  app.Log.debug("changing polygon", p.layer, p.polygon_id);
+                  self.bus.emit('model:update_polygon', p.layer, p.polygon_id, self.paths[0]);
                 });
                 self.polygon_add_popup.bind('cancel', function() {
                   self.polygon_edit.unbind('mousemove');
@@ -440,14 +440,14 @@ App.modules.Map = function(app) {
     end_edit_polygon: function() {
       this.finish_editing();
       var p = this.editing_poly;
-      app.Log.debug("changing polygon", p.report, p.polygon_id);
-      this.bus.emit('model:update_polygon', p.report, p.polygon_id, this.paths[0]);
+      app.Log.debug("changing polygon", p.layer, p.polygon_id);
+      this.bus.emit('model:update_polygon', p.layer, p.polygon_id, this.paths[0]);
     },
 
     remove_polygon: function() {
       this.finish_editing();
       var p = this.editing_poly;
-      this.bus.emit('model:remove_polygon', p.report, p.polygon_id);
+      this.bus.emit('model:remove_polygon', p.layer, p.polygon_id);
     },
 
     reorder_layers: function(order) {
