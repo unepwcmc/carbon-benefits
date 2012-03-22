@@ -52,7 +52,7 @@ describe Polygon do
     end
 
     it "should return the saved object similar to @cartodb_polygon" do
-      assert_equal @cartodb_polygon[:name], @it[:name]
+      assert_equal @cartodb_polygon[:name], @it.name
     end
   end
 
