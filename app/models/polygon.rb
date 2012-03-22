@@ -35,6 +35,16 @@ class Polygon
     }]
   end
 
+  # Build a new object using the params from backbone
+  #
+  # @param [Hash] params posted from backbone, slightly denormalised attributes
+  # @return [Polygon] the newly built polygon
+  def self.new_from_params params
+    class_name = params.delete(:class)
+    polygon = Polygon.new(params)
+    polygon.class_id = PolygonClass.find_or_create_by_name(class_name).id
+  end
+
   def self.find cartodb_id
     new(CartoDB::Connection.row(TABLENAME, cartodb_id))
   end

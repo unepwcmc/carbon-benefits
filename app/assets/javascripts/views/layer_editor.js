@@ -31,8 +31,8 @@ $(function() {
         if (v) {
           delete self.views[layer.name];
         }
-        v = new Layer({
-          layer: layer,
+        v = new MapLayer({
+          map_layer: layer,
           bus: self.bus
         });
         self.views[layer.name] = v;
