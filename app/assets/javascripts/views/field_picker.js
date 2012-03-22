@@ -27,10 +27,8 @@ window.FieldPicker = Backbone.View.extend({
     this.form_el = this.$('form');
     $(this.form_el).ajaxForm({
       beforeSend: function() {
-        alert('totally sending via ajax n that');
       },
       complete: function() {
-        alert('great success');
       }
     });
   }
