@@ -14,14 +14,19 @@ class Polygon
 
   #Inserts a polygon into CartoDB
   def save
-    response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
-    self.cartodb_id = response[:cartodb_id]
-    self
+    if cartodb_id
+      update
+    else
+      response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
+      cartodb_id = response[:cartodb_id]
+      self
+    end
   end
 
   #Updates a record in CartoDB
   def update
     CartoDB::Connection.update_row(TABLENAME, cartodb_id, attributes.delete_if{|k,v| k == :cartodb_id})
+    self
   end
 
   def attributes
