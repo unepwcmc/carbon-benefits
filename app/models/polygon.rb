@@ -20,7 +20,7 @@ class Polygon
   end
 
   def attributes
-    Hash[Polygon::ATTRIBUTES.map{ |attr|
+    Hash[ATTRIBUTES.map{ |attr|
       [attr,send(attr)]
     }]
   end
