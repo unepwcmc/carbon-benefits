@@ -57,9 +57,25 @@ describe Polygon do
   end
 
   describe "#attributes" do
+    before do
+      @it = Polygon.new
+    end
     it "returns an hash" do
-      polygon = Polygon.new
-      assert_equal true, polygon.attributes.is_a?(Hash)
+      assert_equal true, @it.attributes.is_a?(Hash)
+    end
+
+    it "returns an hash with as many elements as there are attributes in the model" do
+      assert_equal Polygon::ATTRIBUTES.size, @it.attributes.size
+    end
+
+    it "returns the cartodb_id if set" do
+      @it.cartodb_id = 1
+      assert_equal 1, @it.attributes[:cartodb_id]
+    end
+
+    it "returns the name if set" do
+      @it.name = "bazinga"
+      assert_equal "bazinga", @it.attributes[:name]
     end
   end
 end
