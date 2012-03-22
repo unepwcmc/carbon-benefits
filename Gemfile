@@ -12,6 +12,8 @@ gem 'sqlite3'
 gem 'alphadecimal'
 gem 'ejs'
 gem 'cartodb-rb-client', :git => 'git://github.com/agnessa/cartodb-rb-client.git'
+gem 'resque'
+gem 'resque-status'
 
 # Gems used only for assets and not required
 # in production environments by default.
