@@ -1,0 +1,40 @@
+<div class="inner">
+    <h1>File Uploaded - Select Fields</h1>
+    <div id='upload-form'>
+      <p>Please tell us which of these fields is the <b>layer name</b> and which is the <b>classifier</b></p>
+      <table id='field-picker-table'>
+        <thead>
+          <tr>
+            <td class='wider'>Field Name</td>
+            <td>Name</td>
+            <td>Class</td>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+            var field= '', isName=false, isClass=false, nameFound = false, classFound = false;
+            for(var i=0, il=fields.length; i < il; i++) {
+              field = fields[i];
+
+              isName = field.match(/.*name.*/i) && !nameFound;
+              nameFound = isName || nameFound;
+
+              isClass = field.match(/.*class.*/i) && !classFound;
+              classFound = isClass || classFound;
+          %>
+            <tr>
+              <td class='wider'><%= field %></td>
+              <td>
+                <input type="radio" name="name" value="<%= field %>" <%= isName ? 'checked=true' : '' %>/>
+              </td>
+              <td>
+                <input type="radio" name="class" value="<%= field %>" <%= isClass ? 'checked=true' : '' %>/>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <button class="close"><span class="button_info">Cancel</span></button>
+    <button class="submit"><span class="button_info">Upload</span></button>
+</div> <!-- inner -->
