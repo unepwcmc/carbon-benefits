@@ -42,12 +42,29 @@ class Layer < ActiveRecord::Base
     end
   end
 
-  def polygons=(polygons_ary)
-    write_attribute(:polygons, polygons_ary.to_json)
+  def polygons=(polygons_arr)
+    polygons_arr.each do |attributes|
+      if attributes[:cartodb_id].nil?
+        polygon = Polygon.new(attributes)
+        polygon.layer_id = self.id
+        polygon.save
+      else
+        polygon = Polygon.find(attributes[:cartodb_id])
+        if polygon.layer_id == self.id
+          polygon.name = attributes[:name]
+          polygon.the_geom = attributes[:the_geom]
+          polygon.class_id = attributes[:class_id]
+          polygon.update
+        end
+      end
+    end
   end
   
   def polygons
-    #TODO
+    response = CartoDB::Connection.query "SELECT * FROM #{Polygon::TABLENAME} WHERE layer_id = #{self.id}"
+    response[:rows].map do |polygon|
+      Polygon.new(polygon)
+    end
   end
 
   def stats=(stats_hash)
