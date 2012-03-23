@@ -26,9 +26,12 @@ window.FieldPicker = Backbone.View.extend({
     // ajaxify the newly created form
     this.form_el = this.$('form');
     $(this.form_el).ajaxForm({
-      beforeSend: function() {
+      dataType: 'json',
+      success: function(res_json){
+        alert('success ' + res_json['job_id']);
       },
-      complete: function() {
+      error: function(xhr){
+        alert('import failed');
       }
     });
   }

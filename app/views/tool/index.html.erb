@@ -118,7 +118,10 @@
               <%= form_tag upload_layer_file_url, :multipart => true do%>
                 <%= hidden_field_tag "layer_id" %>
                 <p>
-                  <%= file_field_tag "user_layer_file", :id => 'user_layer_file' %>
+                  <label>Layer name</label>
+                  <%= text_field_tag "layer[name]"%>
+                <p>
+                  <%= file_field_tag "layer[user_layer_file]", :id => 'user_layer_file' %>
                 </p>
               <% end %>
               <p id="status"></p>
