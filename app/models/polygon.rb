@@ -70,6 +70,16 @@ class Polygon
     "ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))', 4326)"
   end
 
+  # Translates a geojson object to a gmaps path
+  #
+  # @params [Hash] geojson the geojson to convert to gmaps
+  # @return [Array] an array of the points 
+  def self.geojson_to_gmaps_path geojson
+    path = geojson['coordinates'].flatten 2
+    path.delete_at(path.length-1)
+    path
+  end
+
   def self.find cartodb_id
     new(CartoDB::Connection.row(TABLENAME, cartodb_id))
   end
