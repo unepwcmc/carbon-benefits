@@ -78,4 +78,23 @@ describe Polygon do
       assert_equal "bazinga", @it.attributes[:name]
     end
   end
+
+  describe '#geojson_to_gmaps_path' do
+    before do
+      geo_json = {"type"=>"MultiPolygon", "coordinates"=>[[[[-11.317766854539514, 90.0], [26.267053249292076, 90.0], [-69.46152242459357, 90.0], [-11.317766854539514, 90.0]]]]}
+      @path = Polygon.geojson_to_gmaps_path geo_json
+    end
+
+    it "returns an array" do
+      assert @path.is_a?(Array)
+    end
+
+    it "contains 3 points" do
+      assert_equal 3, @path.length
+    end
+
+    it "should have [-11.317766854539514, 90.0] as the first element" do
+      assert_equal [-11.317766854539514, 90.0], @path[0]
+    end
+  end
 end
