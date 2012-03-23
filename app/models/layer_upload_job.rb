@@ -4,8 +4,8 @@ class LayerUploadJob
   def perform
     @layer = Layer.find(options['layer_id'])
     @layer_file = @layer.user_layer_file
-    @class_field = options['class_field']
-    @name_field = options['name_field']
+    @class_field = options['class_field'].downcase
+    @name_field = options['name_field'].downcase
     create_in_carto_db
 
     unless validate
@@ -53,32 +53,41 @@ private
   end
 
   def insert_into_polygons
-    puts "inserting data into polygons"
-    #create a lookup hash with class names / ids mapping
+    #puts "inserting into polygons"
+    #insert into polygons
+    res = CartoDB::Connection.query(
+      "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom)" +
+      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", the_geom FROM #{@table_name};"
+    )
+
+    #get the missing classes
+    class_names_to_add = CartoDB::Connection.query(
+      "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
+    ).rows.map{ |c| c[:"#{@class_field}"] }
+    class_names_to_add.each do |c|
+      PolygonClass.find_or_create_by_name(c)
+    end
+
+    #fetch the updated classes dictionary
     polygon_classes = PolygonClass.select('id, name').all
+    #create a lookup hash with class names / ids mapping
     polygon_classes_mapping = Hash[*polygon_classes.map do |c|
         [c.name, c.id]
     end.flatten]
-    puts polygon_classes_mapping.inspect
 
-    #read data in batches of 1000
-    page = 1
-    puts @table_name
-    begin
-      res = CartoDB::Connection.query "SELECT #{@class_field}, #{@name_field}, the_geom AS the_master_geom FROM #{@table_name}", :page => page, :rows_per_page => 1000
-      #resolve class_id
-      res.rows.each do |row|
-        class_id = polygon_classes_mapping[row[@class_field]]
-        unless class_id
-          PolygonClass.create!(:name => row[@class_field])
-          new_class = PolygonClass.find_by_name(row[@class_field])
-          polygon_classes_mapping[new_class.name] = new_class.id
-          class_id = new_class.id
-        end
-        CartoDB::Connection.insert_row Polygon::TABLENAME, :layer_id => @layer.id, :class_id => class_id, :the_geom => row[:the_master_geom]
-      end
-      page += 1
-    end while !res.rows.empty?
+    #puts "updating polygons"
+    polygon_classes_mapping.keys.each do |k|
+      CartoDB::Connection.query(
+        ActiveRecord::Base.send(
+          :sanitize_sql_array,
+          [
+            "UPDATE #{Polygon::TABLENAME} SET class_id = ? WHERE class_name = ?",
+            polygon_classes_mapping[k],
+            k
+          ]
+        )
+      )
+    end
   end
 
 end
