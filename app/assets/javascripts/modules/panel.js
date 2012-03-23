@@ -45,23 +45,23 @@ App.modules.Panel = function(app) {
     app.Panel = Class.extend({
 
         init: function(bus) {
-            _.bindAll(this, 'on_new_report', 'on_remove_all', 'on_update_report', 'on_show_report');
+            _.bindAll(this, 'on_new_layer', 'on_remove_all', 'on_update_layer', 'on_show_layer');
 
             var self = this;
             this.bus = bus;
             this.loader = new Loader();
             this.panel = new Panel({bus: this.bus});
-            this.panel.bind('add_report', function() {
-                bus.emit('model:add_report');
+            this.panel.bind('add_layer', function() {
+                bus.emit('model:add_layer');
             });
             this.panel.tabs.bind('enable', function(cid) {
-                bus.emit('model:active_report', cid);
+                bus.emit('model:active_layer', cid);
             });
             this.bus.link(this, {
-                'view:new_report': 'on_new_report',
+                'view:new_layer': 'on_new_layer',
                 'view:remove_all': 'on_remove_all',
-                'view:update_report': 'on_update_report',
-                'view:show_report': 'on_show_report'
+                'view:update_layer': 'on_update_layer',
+                'view:show_layer': 'on_show_layer'
             });
             this.bus.on('loading_start', function() {
                 self.loader.show();
@@ -73,23 +73,23 @@ App.modules.Panel = function(app) {
             this.loader.hide();
         },
 
-        on_new_report: function(cid, data) {
-            this.panel.add_report(cid, data);
+        on_new_layer: function(cid, data) {
+            this.panel.add_layer(cid, data);
         },
 
         on_remove_all: function() {
             this.panel.remove_all();
         },
 
-        on_update_report: function(cid, r) {
-            this.panel.update_report(cid, r);
+        on_update_layer: function(cid, r) {
+            this.panel.update_layer(cid, r);
             if(r.polygons.length > 0) {
                 this.show();
             }
         },
 
-        on_show_report: function(cid) {
-            this.panel.show_report(cid);
+        on_show_layer: function(cid) {
+            this.panel.show_layer(cid);
         },
 
         hide: function() {
