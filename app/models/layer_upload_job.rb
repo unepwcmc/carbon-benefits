@@ -62,7 +62,7 @@ private
     #insert into polygons
     res = CartoDB::Connection.query(
       "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom)" +
-      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", the_geom FROM #{@table_name};"
+      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
     )
 
     #get the missing classes
