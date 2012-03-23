@@ -4,19 +4,19 @@ var PolygonView = Backbone.View.extend({
     initialize: function() {
       _.bindAll(this, 'click', 'remove', 'update', 'render');
       this.mapview = this.options.mapview;
-      this.paths = this.options.paths;
+      this.polygon = this.options.polygon;
       this.color = this.options.color || this.COLOR;
     },
 
     path: function() {
-      return _.map(this.paths, function(p) {
+      return _.map(this.polygon.the_geom, function(p) {
         return new google.maps.LatLng(p[0], p[1]);
       });
     },
 
     bounds: function() {
       var b = new google.maps.LatLngBounds();
-      _.each(this.paths, function(p) {
+      _.each(this.polygon.the_geom, function(p) {
         b.extend(new google.maps.LatLng(p[0], p[1]));
       });
       return b;

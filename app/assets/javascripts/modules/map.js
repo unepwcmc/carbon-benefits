@@ -366,10 +366,10 @@ App.modules.Map = function(app) {
       for(x in layer_polygons_ordered) {
         // recreate
         _(layer_polygons_ordered[x]).each(function(layer_polys, layer_id) {
-          _(layer_polys).each(function(paths, i) {
+          _(layer_polys).each(function(polygon, i) {
             var p = new PolygonView({
               mapview: self.map,
-              paths: paths,
+              polygon: polygon,
               color: rid == layer_id ? "#66CCCC": "#FFCC00"
             });
             p.layer = rid;
