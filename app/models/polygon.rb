@@ -9,7 +9,7 @@ class Polygon
   ATTRIBUTES.each do |attr| attr_accessor attr end
 
   def initialize attributes = nil
-    assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k)}, :without_protection => true) if attributes
+    assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k.to_sym)}, :without_protection => true) if attributes
   end
 
   #Inserts a polygon into CartoDB
@@ -19,6 +19,7 @@ class Polygon
     else
       #puts self.the_geom
       #response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
+      self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
       sql = <<-SQL
         INSERT INTO #{TABLENAME} (the_geom, name, class_id, layer_id) VALUES (#{self.the_geom||"NULL"}, '#{self.name}', #{self.class_id||"NULL"}, #{self.layer_id||"NULL"});
         SELECT cartodb_id , ST_Transform(the_geom, 900913) as the_geom FROM #{TABLENAME} WHERE cartodb_id = currval('public.#{TABLENAME}_cartodb_id_seq');
