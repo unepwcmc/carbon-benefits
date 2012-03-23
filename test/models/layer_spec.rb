@@ -32,24 +32,29 @@ describe Layer do
       assert_equal 1, polygons.size
     end
   end
-  
-  
+
   describe "#polygons=" do
     before do
       @cartodb_connection = MiniTest::Mock.new
       CartoDB::Connection = @cartodb_connection
+
+      @rgeo_mock = MiniTest::Mock.new
+      RGeo::GeoJSON = @rgeo_mock
 
       @it = Layer.new
     end
 
     after do
       @cartodb_connection.verify
+      @rgeo_mock.verify
     end
 
     it "should insert one polygon if single object passed" do
       @cartodb_polygon = {:name => "bazinga"}
-      @cartodb_response = {:id => 1, :name => @cartodb_polygon[:name]}
-      @cartodb_connection.expect(:insert_row, @cartodb_polygon, [Object, Hash])
+      @cartodb_response = {:rows => [ {:cartodb_id => 1, :name => @cartodb_polygon[:name], :the_geom => {} } ] }
+      @cartodb_connection.expect(:query, @cartodb_response, [String])
+
+      @rgeo_mock.expect(:encode, "", [Hash])
 
       response = (@it.polygons = [@cartodb_polygon])
       assert response
