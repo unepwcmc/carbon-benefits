@@ -103,19 +103,19 @@ App.modules.WS = function(app) {
              }
         },
 
-        aggregate_stats: function(reports, polygons, callback) {
+        aggregate_stats: function(layers, polygons, callback) {
             if(polygons.length === 0) {
                 callback({});
             }
-            function sum(reports, what) {
+            function sum(layers, what) {
                 var t = 0;
-                _(reports).each(function(r) {
+                _(layers).each(function(r) {
                     t += what(r);
                 });
                 return t;
             }
             // carbon
-            var total_carbon = sum(reports, function(r) {
+            var total_carbon = sum(layers, function(r) {
                 var s = r.get('stats');
                 if(s && s.carbon && s.carbon.qty) {
                     return s.carbon.qty;
@@ -123,7 +123,7 @@ App.modules.WS = function(app) {
                 return 0;
             });
 
-            var total_area = sum(reports, function(r) {
+            var total_area = sum(layers, function(r) {
                 var s = r.get('stats');
                 if(s && s.carbon && s.carbon.area) {
                     return s.carbon.area;
@@ -131,7 +131,7 @@ App.modules.WS = function(app) {
                 return 0;
             });
 
-            var carbon_per_polygon = _(reports).map(function(r, i) {
+            var carbon_per_polygon = _(layers).map(function(r, i) {
                 var percent = 0;
                 var percent_seq = 0;
                 var s = r.get('stats');
@@ -149,7 +149,7 @@ App.modules.WS = function(app) {
                 };
             });
 
-            var covered_by_kba = sum(reports, function(r) {
+            var covered_by_kba = sum(layers, function(r) {
                 var s = r.get('stats');
                 if(total_area && s && s.carbon && s.carbon.area && s.covered_by_KBA) {
                     return s.covered_by_KBA.percent*s.carbon.area/total_area;
@@ -157,7 +157,7 @@ App.modules.WS = function(app) {
                 return 0;
             });
 
-            var covered_by_pa = sum(reports, function(r) {
+            var covered_by_pa = sum(layers, function(r) {
                 var s = r.get('stats');
                 if(total_area && s && s.covered_by_PA) {
                     return 1e6*s.covered_by_PA.km2/total_area;
