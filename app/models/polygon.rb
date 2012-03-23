@@ -18,9 +18,13 @@ class Polygon
       update
     else
       self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
-      puts self.the_geom
-      debugger
-      response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
+      #puts self.the_geom
+      #response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
+      sql = <<-SQL
+        INSERT INTO #{TABLENAME} (the_geom, name, class_id, layer_id) VALUES (#{self.the_geom}, '#{self.name}', #{self.class_id||"NULL"}, #{self.layer_id||"NULL"})
+      SQL
+      puts sql
+      response = CartoDB::Connection.query(sql)
       cartodb_id = response[:cartodb_id]
       self
     end
