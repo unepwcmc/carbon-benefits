@@ -9,7 +9,7 @@ $(function() {
           this.tab_count = 0;
       },
 
-      add_report: function(cid, data) {
+      add_layer: function(cid, data) {
           var el = null;
           var area = '0';
           if(data && data.stats && data.stats.carbon) {
@@ -25,7 +25,7 @@ $(function() {
           } else {
               this.tab_count++;
               var li = $("<li><a class='tab' href='#" + cid + "'>#"+this.tab_count+"</a><span class='stats'><span class='stats_inner'><h5>AOI #"+this.tab_count+"</h5><p><span class='area'>"+ area +"</span> km<sup>2</sup></p></span></span></li>");
-              li.insertBefore(this.$('#add_report').parent());
+              li.insertBefore(this.$('#add_layer').parent());
               el = li;
           }
 
@@ -59,7 +59,7 @@ $(function() {
 
       clear: function() {
           this.tab_el.html('');
-          this.tab_el.append("<li id='add_tab'><a id='add_report' href='#add_report'>+</a></li>");
+          this.tab_el.append("<li id='add_tab'><a id='add_layer' href='#add_layer'>+</a></li>");
           this.tab_count = 0;
       },
 
