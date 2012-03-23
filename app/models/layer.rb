@@ -26,7 +26,7 @@ class Layer < ActiveRecord::Base
   def as_json(options={})
     {
       'id' => id,
-      'polygons' => JSON.parse(read_attribute(:polygons)),
+      'polygons' => polygons.map(&:to_json),
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] }
     }.to_json
