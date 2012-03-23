@@ -7,6 +7,6 @@ class LayersController < ApplicationController
       :layer_id => params[:id]
     }
     job_id = LayerUploadJob.create(job_params)
-    #TODO return this id to the front end and tie it to the layer tab somehow to show progress
+    render :json => {:job_id => job_id}
   end
 end
