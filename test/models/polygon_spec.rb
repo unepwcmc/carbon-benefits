@@ -40,7 +40,8 @@ describe Polygon do
       @polygon_name = "Name1"
       @cartodb_polygon = { :name => @polygon_name }
       @cartodb_connection = MiniTest::Mock.new
-      @cartodb_connection.expect(:insert_row, @cartodb_polygon, [Object, Hash])
+      @cartodb_response = {:rows => [ @cartodb_polygon.merge({:cartodb_id => 1, :the_geom => {} }) ] }
+      @cartodb_connection.expect(:query, @cartodb_response, [String])
 
       CartoDB::Connection = @cartodb_connection
 

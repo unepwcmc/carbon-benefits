@@ -17,7 +17,7 @@ class Polygon
     if cartodb_id
       update
     else
-      self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
+      self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom) if self.the_geom
       #puts self.the_geom
       #response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
       sql = <<-SQL
