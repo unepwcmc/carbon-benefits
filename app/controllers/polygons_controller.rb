@@ -1,8 +1,8 @@
 class PolygonsController < ApplicationController
 
   def create
-    Polygon.new_from_params(params[:polygon])
-    Polygon.save
+    @polygon = Polygon.new_from_params(params[:polygon])
+    @polygon.save
   end
 
 end
