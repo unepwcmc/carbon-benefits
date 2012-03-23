@@ -1,7 +1,7 @@
 class MetaDataExtractor
   def initialize(attachment)
-    @file = attachment
-    @file_dir = File.dirname(@file.path)
+    @file = attachment.queued_for_write[:original]
+    @file_dir = File.dirname(attachment.path)
   end
 
   def unzip
