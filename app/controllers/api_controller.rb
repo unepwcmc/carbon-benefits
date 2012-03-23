@@ -58,8 +58,7 @@ class ApiController < ApplicationController
 
   def upload_layer_file
     @layer = Layer.find(params[:layer_id])
-    @layer.user_layer_file = params[:user_layer_file]
-    unless @layer.save
+    unless @layer.update_attributes(params[:layer])
       render :json => {:status => :error, :data => @layer.errors.messages}
     else
       render :json => {:status => :success, :data => JSON.parse(@layer.meta_data)}
