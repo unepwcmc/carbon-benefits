@@ -43,23 +43,31 @@ private
   def validate
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
-    if first_row && first_row[:geom_type] == 'MULTIPOLYGON'
+    @geom_type = first_row && first_row[:geom_type]
+    if @geom_type == 'MULTIPOLYGON'
       # http://postgis.17.n6.nabble.com/Convert-multipolygons-to-separate-polygons-td3555935.html
       res = CartoDB::Connection.query "SELECT GeometryType((ST_Dump(the_geom)).geom) AS geom_type FROM #{@table_name} GROUP BY geom_type"
       res.rows.each do |row|
         return false if row[:geom_type] != 'POLYGON'
       end
-      return true
+    elsif @geom_type == 'POLYGON'
     end
-    return false
+    true
   end
 
   def insert_into_polygons
     #insert into polygons
-    res = CartoDB::Connection.query(
-      "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom)" +
-      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
-    )
+    sql = if @geom_type == 'POINT'
+      #need to buffer points
+      "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom) " +
+      "SELECT #{@layer.id} AS layer_id, '#{@class_field}', '#{@name_field}', ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
+    else
+      #need to dump multi polygons into polygons
+      "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom) " +
+      "SELECT #{@layer.id} AS layer_id, '#{@class_field}', '#{@name_field}', ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
+    end
+
+    res = CartoDB::Connection.query(sql)
 
     #get the missing classes
     class_names_to_add = CartoDB::Connection.query(
