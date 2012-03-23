@@ -47,6 +47,11 @@ private
     first_row = res.rows.first
     puts first_row.inspect
     if first_row && first_row[:geom_type] == 'MULTIPOLYGON'
+      # http://postgis.17.n6.nabble.com/Convert-multipolygons-to-separate-polygons-td3555935.html
+      res = CartoDB::Connection.query "SELECT GeometryType((ST_Dump(the_geom)).geom) AS geom_type FROM #{@table_name} GROUP BY geom_type"
+      res.rows.each do |row|
+        return false if row[:geom_type] != 'POLYGON'
+      end
       return true
     end
     return false
