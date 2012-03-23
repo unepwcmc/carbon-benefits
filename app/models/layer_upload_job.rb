@@ -13,39 +13,36 @@ class LayerUploadJob
       raise "Invalid input file"
     end
 
-    #begin
+    begin
       insert_into_polygons
-    #rescue
-      #rollback TODO
-      #delete file
-      #drop table
-      #raise some_exception_for_resque
-    #end
+    rescue
+      rollback
+      raise "Import failed"
+    end
     drop_in_carto_db
   end
 
 private
 
   def rollback
-    #drop_in_carto_db if @table_name
+    puts 'ROLLBACK'
+    drop_in_carto_db if @table_name
+    @layer.user_layer_file = nil
+    @layer.save
   end
 
   def create_in_carto_db
-    puts "creating new table"
     res = CartoDB::Connection.create_table '', @layer_file.to_file
-    puts res.inspect
     @table_name = res[:name]
   end
 
   def drop_in_carto_db
-    puts "dropping the table"
     CartoDB::Connection.drop_table @table_name
   end
 
   def validate
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
-    puts first_row.inspect
     if first_row && first_row[:geom_type] == 'MULTIPOLYGON'
       # http://postgis.17.n6.nabble.com/Convert-multipolygons-to-separate-polygons-td3555935.html
       res = CartoDB::Connection.query "SELECT GeometryType((ST_Dump(the_geom)).geom) AS geom_type FROM #{@table_name} GROUP BY geom_type"
@@ -58,7 +55,6 @@ private
   end
 
   def insert_into_polygons
-    #puts "inserting into polygons"
     #insert into polygons
     res = CartoDB::Connection.query(
       "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom)" +
@@ -80,7 +76,6 @@ private
         [c.name, c.id]
     end.flatten]
 
-    #puts "updating polygons"
     polygon_classes_mapping.keys.each do |k|
       CartoDB::Connection.query(
         ActiveRecord::Base.send(
