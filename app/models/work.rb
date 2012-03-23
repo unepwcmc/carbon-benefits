@@ -17,7 +17,7 @@ class Work < ActiveRecord::Base
       ar_layer = if layer['id']
         Layer.find(layer['id'])
       else
-        Layer.new()
+        Layer.create
       end
       ar_layer.attributes= layer
       layers<< ar_layer
