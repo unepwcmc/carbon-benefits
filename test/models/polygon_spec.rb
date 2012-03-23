@@ -97,4 +97,22 @@ describe Polygon do
       assert_equal [-11.317766854539514, 90.0], @path[0]
     end
   end
+
+  describe '#to_json' do
+    before do
+      @polygon = Polygon.new
+      @polygon.cartodb_id = 5
+      @polygon.the_geom = {"type"=>"MultiPolygon", "coordinates"=>[[[[-11.317766854539514, 90.0], [26.267053249292076, 90.0], [-69.46152242459357, 90.0], [-11.317766854539514, 90.0]]]]}
+
+      @json = JSON.parse(@polygon.to_json)
+    end
+
+    it "should return the correct cartodb id" do
+      assert_equal 5, @json['cartodb_id']
+    end
+
+    it "should return the geometry as a gmaps path" do
+      assert_equal Polygon.geojson_to_gmaps_path(@polygon.the_geom), @json['the_geom']
+    end
+  end
 end

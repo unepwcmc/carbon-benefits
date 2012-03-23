@@ -80,6 +80,16 @@ class Polygon
     path
   end
 
+  # Overrides to_json to return the geom as gmaps path
+  #
+  # @return [String] json representation of object, with gmaps path as geom
+  def to_json
+    json = super
+    json = JSON.parse(json)
+    json['the_geom'] = Polygon.geojson_to_gmaps_path(self.the_geom)
+    json.to_json
+  end
+
   def self.find cartodb_id
     new(CartoDB::Connection.row(TABLENAME, cartodb_id))
   end
