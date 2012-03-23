@@ -17,6 +17,9 @@ class Polygon
     if cartodb_id
       update
     else
+      self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
+      puts self.the_geom
+      debugger
       response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
       cartodb_id = response[:cartodb_id]
       self
@@ -41,8 +44,24 @@ class Polygon
   # @return [Polygon] the newly built polygon
   def self.new_from_params params
     class_name = params.delete(:class)
-    polygon = Polygon.new(params)
-    polygon.class_id = PolygonClass.find_or_create_by_name(class_name).id
+    params[:class_id] = PolygonClass.find_or_create_by_name(class_name).id
+
+    Polygon.new(params)
+  end
+
+  # Translates a google maps path to WKT, suitable for inserting
+  # into postgis
+  #
+  # @params [String] path the path to translate
+  # @return [String] Geojson string
+  def self.gmaps_path_to_wkt path
+    coordinates = []
+    path.each do |coordinate|
+      coordinates << "#{coordinate[1]} #{coordinate[0]}"
+    end
+    coordinates << "#{path[0][1]} #{path[0][0]}" # Close the polygon
+
+    "ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))', 4326)"
   end
 
   def self.find cartodb_id
