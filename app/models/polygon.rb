@@ -20,11 +20,11 @@ class Polygon
       self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
       #puts self.the_geom
       #response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
-  sql = <<-SQL
+      sql = <<-SQL
         INSERT INTO #{TABLENAME} (the_geom, name, class_id, layer_id) VALUES (#{self.the_geom}, '#{self.name}', #{self.class_id||"NULL"}, #{self.layer_id||"NULL"});
         SELECT cartodb_id , ST_Transform(the_geom, 900913) as the_geom FROM #{TABLENAME} WHERE cartodb_id = currval('public.#{TABLENAME}_cartodb_id_seq');
       SQL
-      
+
       response = CartoDB::Connection.query(sql)
       self.cartodb_id = response[:rows][0][:cartodb_id]
       self.the_geom = RGeo::GeoJSON.encode(response[:rows][0][:the_geom])
