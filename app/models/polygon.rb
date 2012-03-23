@@ -5,7 +5,7 @@ class Polygon
   TABLENAME = :polygon_test
 
   #Model to access cartodb's polygons
-  ATTRIBUTES = [ :cartodb_id, :name, :the_geom, :class_id, :layer_id ]
+  ATTRIBUTES = [ :cartodb_id, :name, :the_geom, :class_id, :layer_id, :class_name]
   ATTRIBUTES.each do |attr| attr_accessor attr end
 
   def initialize attributes = nil
@@ -20,12 +20,14 @@ class Polygon
       self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
       #puts self.the_geom
       #response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
-      sql = <<-SQL
-        INSERT INTO #{TABLENAME} (the_geom, name, class_id, layer_id) VALUES (#{self.the_geom}, '#{self.name}', #{self.class_id||"NULL"}, #{self.layer_id||"NULL"})
+  sql = <<-SQL
+        INSERT INTO #{TABLENAME} (the_geom, name, class_id, layer_id) VALUES (#{self.the_geom}, '#{self.name}', #{self.class_id||"NULL"}, #{self.layer_id||"NULL"});
+        SELECT cartodb_id , ST_Transform(the_geom, 900913) as the_geom FROM #{TABLENAME} WHERE cartodb_id = currval('public.#{TABLENAME}_cartodb_id_seq');
       SQL
-      puts sql
+      
       response = CartoDB::Connection.query(sql)
-      cartodb_id = response[:cartodb_id]
+      self.cartodb_id = response[:rows][0][:cartodb_id]
+      self.the_geom = RGeo::GeoJSON.encode(response[:rows][0][:the_geom])
       self
     end
   end
