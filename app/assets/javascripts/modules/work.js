@@ -231,6 +231,15 @@ App.modules.Data = function(app) {
             Backbone.sync('update', this, options);
         },
 
+        parse: function(data) {
+          _.each(data, function(layer, key){
+            _.each(layer.polygons, function(polygon, polygon_key){
+              data[key].polygons[polygon_key] = new App.Polygon(polygon);
+            });
+          });
+          return data;
+        },
+
         polygon_count: function() {
             return this.reduce(function(memo, r) {
                 return memo + r.get('polygons').length;
@@ -273,6 +282,7 @@ App.modules.Data = function(app) {
                 self.bus.emit('view:update_layer', r.cid, r.toJSON());
             });
         },
+
 
         on_remove_polygon: function(rid, index) {
             var r = this.work.getByCid(rid);
