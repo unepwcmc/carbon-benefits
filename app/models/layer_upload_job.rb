@@ -84,11 +84,11 @@ private
     sql = if @geom_type == 'POINT'
       #need to buffer points
       "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom) " +
-      "SELECT #{@layer.id} AS layer_id, '#{@class_field}', '#{@name_field}', ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
+      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
     else
       #need to dump multi polygons into polygons
       "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom) " +
-      "SELECT #{@layer.id} AS layer_id, '#{@class_field}', '#{@name_field}', ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
+      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
     end
 
     res = CartoDB::Connection.query(sql)
