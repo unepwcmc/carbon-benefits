@@ -3,7 +3,7 @@ App.modules.Data = function(app) {
         defaults: function() {
             return {
                 'id': null,
-                "polygons": new Array(),
+                "polygons": new App.PolygonCollection(),
                 "classes": new Array(),
                 "selected_class": null,
                 "selected_colour": null,
@@ -28,14 +28,14 @@ App.modules.Data = function(app) {
         },
 
         update_polygon: function(index, path) {
-            this.get('polygons')[index] = path;
+            this.get('polygons').at(index).set({the_geom: path});
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
         },
 
         remove_polygon: function(index) {
-            this.get('polygons').splice(index, 1);
+            this.get('polygons').remove(this.get('polygons').at(index));
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
@@ -46,7 +46,7 @@ App.modules.Data = function(app) {
                 app.Log.error("can't add polygons to total");
                 return;
             }
-            this.get('polygons').push(new App.Polygon({
+            this.get('polygons').add(new App.Polygon({
               the_geom: path,
               layer_id: this.id
             }));
@@ -58,7 +58,7 @@ App.modules.Data = function(app) {
         },
 
         clear: function() {
-            this.set({'polygons': [], 'stats': {}});
+            this.set({'polygons': new App.PolygonCollection(), 'stats': {}});
             this.trigger('change:polygons', this);
             this.trigger('change:stats', this);
             this.trigger('change', this);
