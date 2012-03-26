@@ -82,11 +82,11 @@ class Polygon
   def self.gmaps_path_to_wkt path
     coordinates = []
     path.each do |coordinate|
-      coordinates << "#{coordinate[0]} #{coordinate[1]}"
+      coordinates << "#{coordinate[1]} #{coordinate[0]}"
     end
-    coordinates << "#{path[0][0]} #{path[0][1]}" # Close the polygon
+    coordinates << "#{path[0][1]} #{path[0][0]}" # Close the polygon
 
-    "ST_Transform(ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))', 900913),4326)"
+    "ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))', 4326)"
   end
 
   # Translates a geojson object to a gmaps path
