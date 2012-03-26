@@ -207,7 +207,7 @@ var MapView = Backbone.View.extend({
         });
     },
 
-    enable_layer: function(name, enable) {
+    enable_map_layer: function(name, enable) {
         this.layers[name].enabled = enable;
         this.reorder_layers();
     },
