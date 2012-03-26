@@ -71,7 +71,7 @@ App.modules.Data = function(app) {
             if(self.get('polygons').length === 0) {
                 return;
             }
-            app.WS.CartoDB.calculate_stats(this.get('polygons'), function(stats) {
+            app.WS.CartoDB.calculate_stats(this.get('polygons').models, function(stats) {
               var new_stats = _.extend(self.get('stats'), stats);
               self.set({'stats': new_stats});
               //trigger manually
@@ -198,7 +198,7 @@ App.modules.Data = function(app) {
           });
           var polygons = [];
           _.each(layers, function(r) {
-                _.each(r.get('polygons'), function(p) {
+                _.each(r.get('polygons').models, function(p) {
                     polygons.push(p);
                 });
           });
