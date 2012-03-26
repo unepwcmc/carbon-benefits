@@ -3,7 +3,7 @@ App.modules.Data = function(app) {
         defaults: function() {
             return {
                 'id': null,
-                "polygons": new Array(),
+                "polygons": new App.PolygonCollection(),
                 "classes": new Array(),
                 "selected_class": null,
                 "selected_colour": null,
@@ -28,14 +28,14 @@ App.modules.Data = function(app) {
         },
 
         update_polygon: function(index, path) {
-            this.get('polygons')[index] = path;
+            this.get('polygons').at(index).set({the_geom: path});
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
         },
 
         remove_polygon: function(index) {
-            this.get('polygons').splice(index, 1);
+            this.get('polygons').remove(this.get('polygons').at(index));
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
@@ -46,7 +46,7 @@ App.modules.Data = function(app) {
                 app.Log.error("can't add polygons to total");
                 return;
             }
-            this.get('polygons').push(new App.Polygon({
+            this.get('polygons').add(new App.Polygon({
               the_geom: path,
               layer_id: this.id
             }));
@@ -58,7 +58,7 @@ App.modules.Data = function(app) {
         },
 
         clear: function() {
-            this.set({'polygons': [], 'stats': {}});
+            this.set({'polygons': new App.PolygonCollection(), 'stats': {}});
             this.trigger('change:polygons', this);
             this.trigger('change:stats', this);
             this.trigger('change', this);
@@ -71,7 +71,7 @@ App.modules.Data = function(app) {
             if(self.get('polygons').length === 0) {
                 return;
             }
-            app.WS.CartoDB.calculate_stats(this.get('polygons'), function(stats) {
+            app.WS.CartoDB.calculate_stats(this.get('polygons').models, function(stats) {
               var new_stats = _.extend(self.get('stats'), stats);
               self.set({'stats': new_stats});
               //trigger manually
@@ -198,7 +198,7 @@ App.modules.Data = function(app) {
           });
           var polygons = [];
           _.each(layers, function(r) {
-                _.each(r.get('polygons'), function(p) {
+                _.each(r.get('polygons').models, function(p) {
                     polygons.push(p);
                 });
           });
@@ -229,6 +229,18 @@ App.modules.Data = function(app) {
 
         save: function(options) {
             Backbone.sync('update', this, options);
+        },
+
+        parse: function(data) {
+          var layer_polys;
+          _.each(data, function(layer, key){
+            layer_polys = [];
+            _.each(layer.polygons, function(polygon, polygon_key){
+              layer_polys.push(new App.Polygon(polygon));
+            });
+            data[key].polygons = new App.PolygonCollection(layer_polys);
+          });
+          return data;
         },
 
         polygon_count: function() {
@@ -273,6 +285,7 @@ App.modules.Data = function(app) {
                 self.bus.emit('view:update_layer', r.cid, r.toJSON());
             });
         },
+
 
         on_remove_polygon: function(rid, index) {
             var r = this.work.getByCid(rid);

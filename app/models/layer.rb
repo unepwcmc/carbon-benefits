@@ -26,7 +26,7 @@ class Layer < ActiveRecord::Base
   def as_json(options={})
     {
       'id' => id,
-      'polygons' => polygons.map(&:to_json),
+      'polygons' => polygons.map{|p| JSON.parse(p.to_json)},
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] }
     }.to_json
@@ -50,8 +50,10 @@ class Layer < ActiveRecord::Base
   
   def polygons
     response = CartoDB::Connection.query "SELECT * FROM #{Polygon::TABLENAME} WHERE layer_id = #{self.id}"
-    response[:rows].map do |polygon|
-      Polygon.new(polygon)
+    response[:rows].map do |row|
+      p = Polygon.new(row)
+      p.the_geom = RGeo::GeoJSON.encode(p.the_geom) if p.the_geom
+      p
     end
   end
 

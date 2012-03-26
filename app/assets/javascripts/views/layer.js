@@ -36,8 +36,11 @@ $(function() {
       },
 
       _render_stats: function(data) {
+          // Renders stats and class list from template
           var self = this;
+          // Remove existing stats view
           this.$('.layer_stats').remove();
+          this.$(".classes_wrap").remove();
           $(this.el).append(this.template(data));
           var s = this.$('.layer_stats');
           s.hide().fadeIn();
@@ -74,7 +77,6 @@ $(function() {
               this.header = null;
               //this.go_edit();
           }
-          $(this.el).find(".classes_wrap").remove();
           this.loading(this.showing_loading);
           return this;
       },
