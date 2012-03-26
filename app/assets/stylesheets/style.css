@@ -1211,7 +1211,7 @@ div.right {
 #panel #tab_content div.classes_summary {
   width: 100%;
   float: left;
-  margin: 0;
+  margin: 10px 0;
   background: url("sprite.png") 0 -512px no-repeat;
 }
 
