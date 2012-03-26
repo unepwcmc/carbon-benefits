@@ -1,22 +1,25 @@
 class LayerUploadJob
   include Resque::Plugins::Status
+  MAX_POLYGON_AREA = 8000000
 
   def perform
     @layer = Layer.find(options['layer_id'])
     @layer_file = @layer.user_layer_file
     @class_field = options['class_field'].downcase
     @name_field = options['name_field'].downcase
+
     create_in_carto_db
 
     unless validate
       rollback
-      raise "Invalid input file"
+      raise "Invalid input file: #{self.status['message']}"
     end
 
     begin
       insert_into_polygons
     rescue
       rollback
+      self.status = "Errors copying data"
       raise "Import failed"
     end
     drop_in_carto_db
@@ -44,13 +47,34 @@ private
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
     @geom_type = first_row && first_row[:geom_type]
+    unless @geom_type
+      self.status = 'We were unable to reproject your data, this tool works best with data in 4326'
+      return false
+    end
     if @geom_type == 'MULTIPOLYGON'
       # http://postgis.17.n6.nabble.com/Convert-multipolygons-to-separate-polygons-td3555935.html
       res = CartoDB::Connection.query "SELECT GeometryType((ST_Dump(the_geom)).geom) AS geom_type FROM #{@table_name} GROUP BY geom_type"
       res.rows.each do |row|
-        return false if row[:geom_type] != 'POLYGON'
+        if row[:geom_type] != 'POLYGON'
+          self.status = 'Expected POLYGON'
+          return false
+        end
+        return false unless validate_size
       end
     elsif @geom_type == 'POLYGON'
+      return false unless validate_size
+    end
+    true
+  end
+
+  def validate_size
+    res = CartoDB::Connection.query "SELECT MAX(ST_Area(the_geom)) AS area_km2, SUM(ST_Area(the_geom)) AS total_area_km2 FROM #{@table_name}"
+    first_row = res.rows.first
+    area_km2 = first_row && first_row[:area_km2]
+    total_area_km2 = first_row && first_row[:total_area_km2]
+    unless area_km2 <= MAX_POLYGON_AREA && total_area_km2 <= MAX_POLYGON_AREA
+      self.status = 'We are sorry, but the layer you are trying to analyze is too big'
+      return false
     end
     true
   end
