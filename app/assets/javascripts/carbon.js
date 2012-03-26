@@ -132,7 +132,7 @@ App.modules.Carbon = function(app) {
           self.map.map.set_center(new google.maps.LatLng(st.lat,st.lon));
           self.map.map.set_zoom(st.zoom);
           _.each(st.layers, function(layer) {
-            self.map.enable_layer(layer.name, layer.enabled);
+            self.map.enable_map_layer(layer.name, layer.enabled);
           });
           self.map.layer_editor.sort_by(st.layers.reverse());
           self.bus.emit('map:reorder_layers', _.pluck(st.layers, 'name'));
