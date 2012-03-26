@@ -35,7 +35,7 @@ class MetaDataExtractor
         end
       end
     end
-    attributes
+    attributes.map{ |a| a[0..9] }
   end
 
   def make
