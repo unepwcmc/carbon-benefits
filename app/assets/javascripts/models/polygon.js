@@ -18,3 +18,17 @@ App.Polygon = Backbone.Model.extend({
       this.save();
     }
 });
+
+App.PolygonCollection = Backbone.Collection.extend({
+    model: App.Polygon,
+    defaults: {
+      'layer_id': null
+    },
+    
+    initialize: function() {
+    },
+
+    fetch: function() {
+      return '/layer/' + this.layer_id + '/polygons';
+    }
+});
