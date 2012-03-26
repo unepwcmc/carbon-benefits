@@ -52,7 +52,7 @@ class Layer < ActiveRecord::Base
     response = CartoDB::Connection.query "SELECT * FROM #{Polygon::TABLENAME} WHERE layer_id = #{self.id}"
     response[:rows].map do |row|
       p = Polygon.new(row)
-      p.the_geom = RGeo::GeoJSON.encode(p.the_geom)
+      p.the_geom = RGeo::GeoJSON.encode(p.the_geom) if p.the_geom
       p
     end
   end
