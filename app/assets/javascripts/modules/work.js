@@ -232,10 +232,13 @@ App.modules.Data = function(app) {
         },
 
         parse: function(data) {
+          var layer_polys;
           _.each(data, function(layer, key){
+            layer_polys = [];
             _.each(layer.polygons, function(polygon, polygon_key){
-              data[key].polygons[polygon_key] = new App.Polygon(polygon);
+              layer_polys.push(new App.Polygon(polygon));
             });
+            data[key].polygons = new App.PolygonCollection(layer_polys);
           });
           return data;
         },
