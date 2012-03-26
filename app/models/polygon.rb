@@ -9,7 +9,10 @@ class Polygon
   ATTRIBUTES.each do |attr| attr_accessor attr end
 
   def initialize attributes = nil
-    assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k.to_sym)}, :without_protection => true) if attributes
+    #assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k.to_sym)}, :without_protection => true) if attributes
+    ATTRIBUTES.each do |attr|
+      send(attr.to_s+'=', attributes[attr]||attributes[attr.to_s])
+    end
   end
 
   #Inserts a polygon into CartoDB
@@ -36,7 +39,6 @@ class Polygon
   #Updates a record in CartoDB
   def update
     #CartoDB::Connection.update_row(TABLENAME, cartodb_id, attributes.delete_if{|k,v| k == :cartodb_id})
-    
     self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom) if self.the_geom
     sql = <<-SQL
         UPDATE #{TABLENAME}
