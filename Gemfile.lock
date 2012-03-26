@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/agnessa/cartodb-rb-client.git
-  revision: 06c5a7e665b4cea0ff643fab488c6db2bf8d08f3
+  revision: 96577a63a4d97ac3a34f490d9a6de92ee6261dd1
   specs:
     cartodb-rb-client (0.2.0)
       activesupport (>= 3.0.0, <= 3.2.2)
