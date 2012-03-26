@@ -9,7 +9,10 @@ class Polygon
   ATTRIBUTES.each do |attr| attr_accessor attr end
 
   def initialize attributes = nil
-    assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k.to_sym)}, :without_protection => true) if attributes
+    #assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k.to_sym)}, :without_protection => true) if attributes
+    ATTRIBUTES.each do |attr|
+      send(attr.to_s+'=', attributes[attr]||attributes[attr.to_s])
+    end
   end
 
   #Inserts a polygon into CartoDB
@@ -36,21 +39,21 @@ class Polygon
   #Updates a record in CartoDB
   def update
     #CartoDB::Connection.update_row(TABLENAME, cartodb_id, attributes.delete_if{|k,v| k == :cartodb_id})
-    the_geom = Polygon.gmaps_path_to_wkt(the_geom) if the_geom
+    self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom) if self.the_geom
     sql = <<-SQL
         UPDATE #{TABLENAME}
           SET
-            the_geom=#{the_geom||"NULL"},
-            name='#{name}',
-            class_id=#{class_id||"NULL"},
-            layer_id=#{layer_id||"NULL"}
-          WHERE cartodb_id = #{cartodb_id};
-        SELECT cartodb_id , ST_Transform(the_geom, 900913) as the_geom FROM #{TABLENAME} WHERE cartodb_id = #{cartodb_id};
+            the_geom=#{self.the_geom||"NULL"},
+            name='#{self.name}',
+            class_id=#{self.class_id||"NULL"},
+            layer_id=#{self.layer_id||"NULL"}
+          WHERE cartodb_id = #{self.cartodb_id};
+        SELECT cartodb_id , ST_Transform(the_geom, 900913) as the_geom FROM #{TABLENAME} WHERE cartodb_id = #{self.cartodb_id};
     SQL
 
     response = CartoDB::Connection.query(sql)
     row = response[:rows].first
-    the_geom = RGeo::GeoJSON.encode(row[:the_geom]) if row[:the_geom]
+    self.the_geom = RGeo::GeoJSON.encode(row[:the_geom]) if row[:the_geom]
     self
   end
 
