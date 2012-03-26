@@ -1,6 +1,6 @@
 class LayerUploadJob
   include Resque::Plugins::Status
-  MAX_POLYGON_AREA = 8000000
+  MAX_POLYGON_AREA = 8000000*1000*1000
 
   def perform
     @layer = Layer.find(options['layer_id'])
@@ -68,11 +68,11 @@ private
   end
 
   def validate_size
-    res = CartoDB::Connection.query "SELECT MAX(ST_Area(the_geom)) AS area_km2, SUM(ST_Area(the_geom)) AS total_area_km2 FROM #{@table_name}"
+    res = CartoDB::Connection.query "SELECT MAX(ST_Area(the_geom)) AS area_m2, SUM(ST_Area(the_geom)) AS total_area_m2 FROM #{@table_name}"
     first_row = res.rows.first
-    area_km2 = first_row && first_row[:area_km2]
-    total_area_km2 = first_row && first_row[:total_area_km2]
-    unless area_km2 <= MAX_POLYGON_AREA && total_area_km2 <= MAX_POLYGON_AREA
+    area_m2 = first_row && first_row[:area_m2]
+    total_area_m2 = first_row && first_row[:total_area_m2]
+    unless area_m2 <= MAX_POLYGON_AREA && total_area_m2 <= MAX_POLYGON_AREA
       self.status = 'We are sorry, but the layer you are trying to analyze is too big'
       return false
     end
