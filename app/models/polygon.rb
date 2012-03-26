@@ -74,9 +74,9 @@ class Polygon
   def self.gmaps_path_to_wkt path
     coordinates = []
     path.each do |coordinate|
-      coordinates << "#{coordinate[0]} #{coordinate[1]}"
+      coordinates << "#{coordinate[1]} #{coordinate[0]}"
     end
-    coordinates << "#{path[0][0]} #{path[0][1]}" # Close the polygon
+    coordinates << "#{path[0][1]} #{path[0][0]}" # Close the polygon
 
     "ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))',4326)"
   end
@@ -88,7 +88,9 @@ class Polygon
   def self.geojson_to_gmaps_path geojson
     path = geojson['coordinates'].flatten 2
     path.delete_at(path.length-1)
-    path
+    path.map do |coordinates|
+      coordinates.reverse
+    end
   end
 
   # Overrides to_json to return the geom as gmaps path
