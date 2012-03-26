@@ -28,7 +28,25 @@ window.FieldPicker = Backbone.View.extend({
     $(this.form_el).ajaxForm({
       dataType: 'json',
       success: function(res_json){
-        alert('success ' + res_json['job_id']);
+        var jobId = res_json['job_id'];
+        var timerId = setInterval(function(){
+          $.ajax({
+            url: "/layers/get_job_status?job_id="+jobId,
+            success: function(data){
+              if(data['status'] == 'completed'){
+                alert(data['message']);
+                //TODO now the time to refresh the layer
+                clearInterval(timerId);
+              }
+            },
+            error: function(data){
+              console.log(data);
+              console.log('zonk');
+              clearInterval(timerId);
+            },
+            dataType: "json"
+          });
+        }, 10000);
       },
       error: function(xhr){
         alert('import failed');

@@ -9,4 +9,9 @@ class LayersController < ApplicationController
     job_id = LayerUploadJob.create(job_params)
     render :json => {:job_id => job_id}
   end
+
+  def get_job_status
+    render :json => Resque::Plugins::Status::Hash.get(params[:job_id])
+  end
+
 end
