@@ -29,6 +29,7 @@ Carbontool::Application.routes.draw do
     end
   end
 
+  match 'polygons' => 'polygons#update'
   resources :polygons
 
   # Sample of named route:
