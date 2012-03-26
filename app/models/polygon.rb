@@ -29,8 +29,8 @@ class Polygon
       row = response[:rows].first
       self.cartodb_id = row[:cartodb_id]
       self.the_geom = RGeo::GeoJSON.encode(row[:the_geom]) if row[:the_geom]
-      self
     end
+    self
   end
 
   #Updates a record in CartoDB
