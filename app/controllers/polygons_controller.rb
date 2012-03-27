@@ -4,13 +4,13 @@ class PolygonsController < ApplicationController
     @polygon = Polygon.new(params[:polygon])
     @polygon.save
 
-    render :json =>  @polygon
+    render :json =>  @polygon.as_json
   end
 
   def update
     @polygon = Polygon.find(params[:id])
-    @polygon.update_attributes(params)
+    @polygon.update_attributes(params[:polygon])
 
-    render :json => @polygon
+    render :json => @polygon.as_json
   end
 end
