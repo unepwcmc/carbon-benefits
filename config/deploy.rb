@@ -177,3 +177,25 @@ namespace :deploy do
     run_remote_rake "resque:restart_scheduler"
   end
 end
+
+task :setup_cartodb_configuration do
+  host = Capistrano::CLI.ui.ask("CartoDB host: ")
+  oauth_key = Capistrano::CLI.ui.ask("CartoDB key: ")
+  oauth_secret = Capistrano::CLI.ui.ask("CartoDB secret: ")
+  username = Capistrano::CLI.ui.ask("CartoDB username: ")
+  password = Capistrano::CLI.password_prompt("CartoDB password: ")
+
+  require 'yaml'
+
+  spec = {
+    "host" => host,
+    "oauth_key" => oauth_key,
+    "oauth_secret" => oauth_secret,
+    "username" => username,
+    "password" => password
+  }
+
+  run "mkdir -p #{shared_path}/config"
+  put(spec.to_yaml, "#{shared_path}/config/cartodb_config.yml")
+end
+after "deploy:setup", :setup_cartodb_configuration
