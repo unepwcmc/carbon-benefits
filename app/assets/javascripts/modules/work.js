@@ -32,6 +32,7 @@ App.modules.Data = function(app) {
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
+            this.get('polygons').at(index).save();
         },
 
         remove_polygon: function(index) {
@@ -58,7 +59,6 @@ App.modules.Data = function(app) {
                 //self.save();
               },
               error: function(){
-                alert("ALERT SUCKS");
               }
             });
         },
