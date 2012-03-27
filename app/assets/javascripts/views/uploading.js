@@ -20,7 +20,7 @@ $(function() {
         $.ajax({
           url: "/layers/get_job_status?job_id="+jobId,
           success: function(data){
-            if(true){
+            if(data['status'] === 'completed'){
               that.upload_finished({status: 'success', 'message': 'Upload finished'});
             } else if (data['status'] === 'failed'){
               alert('failed');
