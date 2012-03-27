@@ -17,10 +17,14 @@ class LayerUploadJob
 
     begin
       insert_into_polygons
-    rescue
+    rescue CartoDB::Client::Error => e
+      rollback
+      self.status = e.message
+      raise e
+    rescue Exception => e
       rollback
       self.status = "Errors copying data"
-      raise "Import failed"
+      raise e
     end
     drop_in_carto_db
   end
@@ -92,7 +96,6 @@ private
     end
 
     res = CartoDB::Connection.query(sql)
-
     #get the missing classes
     class_names_to_add = CartoDB::Connection.query(
       "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
