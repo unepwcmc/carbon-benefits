@@ -20,6 +20,7 @@ class Work < ActiveRecord::Base
         Layer.create
       end
       ar_layer.attributes= layer.delete_if{|k,v| k == 'polygons'}
+      #ar_layer.attributes= layer
       layers<< ar_layer
     end
     self

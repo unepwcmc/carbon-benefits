@@ -44,7 +44,9 @@ class Layer < ActiveRecord::Base
 
   def polygons=(polygons_arr)
     polygons_arr.each do |attributes|
+      #if !attributes[:cartodb_id].nil?
       Polygon.create_or_update_from attributes, self.id
+      #end
     end
   end
   
