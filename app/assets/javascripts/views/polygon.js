@@ -9,7 +9,7 @@ var PolygonView = Backbone.View.extend({
     },
 
     path: function() {
-      return _.map(this.polygon.path, function(p) {
+      return _.map(this.polygon.polygon.path, function(p) {
         return new google.maps.LatLng(p[0], p[1]);
       });
     },
