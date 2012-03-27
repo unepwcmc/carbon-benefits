@@ -28,3 +28,6 @@
 # Netbeans
 /nbproject
 .project
+
+# CartoDB login configurations
+/config/cartodb_config.yml
