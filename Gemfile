@@ -7,10 +7,11 @@ gem 'rails', '3.2.2'
 
 gem 'pg'
 
-gem 'sqlite3'
+#gem 'sqlite3'
 
 gem 'alphadecimal'
 gem 'ejs'
+gem 'pg'
 gem 'cartodb-rb-client', :git => 'git://github.com/agnessa/cartodb-rb-client.git'
 gem 'resque'
 gem 'resque-status'

@@ -123,7 +123,7 @@ GROUP BY priority, country";
     function wtk_polygon(poly) {
         var multipoly = [];
         _.each(poly, function(p) {
-            p = p.get('the_geom');
+            p = p.get('path');
             var closed = p.concat([p[0]]);
             var wtk = _.map(closed, function(point) {
                 return point[1] + " " + point[0];

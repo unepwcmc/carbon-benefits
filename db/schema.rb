@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321162313) do
+ActiveRecord::Schema.define(:version => 20120327142232) do
 
   create_table "errors", :force => true do |t|
     t.text     "error",      :default => ""
@@ -48,11 +48,20 @@ ActiveRecord::Schema.define(:version => 20120321162313) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "polygons", :force => true do |t|
+    t.integer  "layer_id"
+    t.integer  "polygon_class_id"
+    t.string   "name"
+    t.text     "string_path"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "works", :force => true do |t|
     t.text     "json",       :default => "[]"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
-    t.string   "summary"
+    t.text     "summary"
   end
 
 end

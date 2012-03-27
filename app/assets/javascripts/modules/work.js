@@ -28,7 +28,7 @@ App.modules.Data = function(app) {
         },
 
         update_polygon: function(index, path) {
-            this.get('polygons').at(index).set({the_geom: path});
+            this.get('polygons').at(index).set({path: path});
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
@@ -42,19 +42,25 @@ App.modules.Data = function(app) {
         },
 
         add_polygon: function(path) {
+          var self = this;
             if(this.get('total')) {
                 app.Log.error("can't add polygons to total");
                 return;
             }
-            this.get('polygons').add(new App.Polygon({
-              the_geom: path,
-              layer_id: this.id
-            }));
-
-            // activate the signal machinery
-            this.trigger('change:polygons', this);
-            this.trigger('change', this);
-            this.save();
+            this.polygon = new App.Polygon({path: path, layer_id: this.id });
+            this.polygon.collection = this.get('polygons');
+            this.get('polygons').create(this.polygon, {
+              success: function(polygon) {
+                self.polygon = polygon;
+                // activate the signal machinery
+                self.trigger('change:polygons', self);
+                self.trigger('change', self);
+                //self.save();
+              },
+              error: function(){
+                alert("ALERT SUCKS");
+              }
+            });
         },
 
         clear: function() {
