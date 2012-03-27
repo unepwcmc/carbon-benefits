@@ -9,14 +9,14 @@ var PolygonView = Backbone.View.extend({
     },
 
     path: function() {
-      return _.map(this.polygon.the_geom, function(p) {
+      return _.map(this.polygon.path, function(p) {
         return new google.maps.LatLng(p[0], p[1]);
       });
     },
 
     bounds: function() {
       var b = new google.maps.LatLngBounds();
-      _.each(this.polygon.the_geom, function(p) {
+      _.each(this.polygon.path, function(p) {
         b.extend(new google.maps.LatLng(p[0], p[1]));
       });
       return b;

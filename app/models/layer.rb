@@ -1,6 +1,7 @@
 class Layer < ActiveRecord::Base
   include ActiveModel::Validations
   belongs_to :work
+  has_many :polygons
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
   has_attached_file :user_layer_file
@@ -39,23 +40,6 @@ class Layer < ActiveRecord::Base
       poly_class_colour = polygon_class_colours.find_or_create_by_polygon_class_id(polygon_class.id)
       poly_class_colour.colour = the_colour
       poly_class_colour.save if poly_class_colour.changed?
-    end
-  end
-
-  def polygons=(polygons_arr)
-    polygons_arr.each do |attributes|
-      #if !attributes[:cartodb_id].nil?
-      Polygon.create_or_update_from attributes, self.id
-      #end
-    end
-  end
-  
-  def polygons
-    response = CartoDB::Connection.query "SELECT * FROM #{Polygon::TABLENAME} WHERE layer_id = #{self.id}"
-    response[:rows].map do |row|
-      p = Polygon.new(row)
-      p.the_geom = RGeo::GeoJSON.encode(p.the_geom) if p.the_geom
-      p
     end
   end
 

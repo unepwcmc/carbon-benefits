@@ -362,7 +362,6 @@ App.modules.Map = function(app) {
         }
       });
       layer_polygons_ordered = [others, selected];
-
       for(x in layer_polygons_ordered) {
         // recreate
         _(layer_polygons_ordered[x]).each(function(layer_polys, layer_id) {
@@ -419,7 +418,7 @@ App.modules.Map = function(app) {
       this.finish_editing();
       this.editing_poly = p;
       p.hide();
-      this.paths = [p.polygon.the_geom];
+      this.paths = [p.polygon.path];
       this.polygon_edit.editing_state(false);
       this.polygon_edit.edit_polygon(this.paths);
       this.polygon_edit.bind('mousemove', function(p, e) {
