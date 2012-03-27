@@ -1,58 +1,9 @@
-class Polygon
-  include ActiveRecord::AttributeAssignment
+class Polygon < ActiveRecord::Base
 
-  #TABLENAME = :polygon
-  TABLENAME = :polygon_test_copy
+  belongs_to :layer
+  belongs_to :polygon_class
 
-  #Model to access cartodb's polygons
-  ATTRIBUTES = [ :cartodb_id, :name, :the_geom, :class_id, :layer_id, :class_name]
-  ATTRIBUTES.each do |attr| attr_accessor attr end
-
-  def initialize attributes = nil
-    #assign_attributes(attributes.delete_if{|k,v| !ATTRIBUTES.include?(k.to_sym)}, :without_protection => true) if attributes
-    ATTRIBUTES.each do |attr|
-      send(attr.to_s+'=', attributes[attr]||attributes[attr.to_s])
-    end
-  end
-
-  #Inserts a polygon into CartoDB
-  def save
-    if cartodb_id
-      update
-    else
-      self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
-      result = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
-      self.cartodb_id = result[:cartodb_id]
-      self.the_geom = RGeo::GeoJSON.encode(result[:the_geom]) if result[:the_geom]
-    end
-    self
-  end
-
-  #Updates a record in CartoDB
-  def update
-    self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom) if self.the_geom
-    result = CartoDB::Connection.update_row(TABLENAME, cartodb_id, attributes.delete_if{|k,v| k == :cartodb_id})
-
-    self.the_geom = RGeo::GeoJSON.encode(result[:the_geom]) if result[:the_geom]
-    self
-  end
-
-  def attributes
-    Hash[ATTRIBUTES.map{ |attr|
-      [attr,send(attr)]
-    }]
-  end
-
-  # Build a new object using the params from backbone
-  #
-  # @param [Hash] params posted from backbone, slightly denormalised attributes
-  # @return [Polygon] the newly built polygon
-  def self.new_from_params params
-    class_name = params.delete(:class)
-    params[:class_id] = PolygonClass.find_or_create_by_name(class_name).id
-
-    Polygon.new(params)
-  end
+  attr_accessor :path
 
   # Translates a google maps path to WKT, suitable for inserting
   # into postgis
@@ -84,16 +35,12 @@ class Polygon
   # Overrides to_json to return the geom as gmaps path
   #
   # @return [String] json representation of object, with gmaps path as geom
-  def to_json
-    json = super
-    json = JSON.parse(json)
-    json['the_geom'] = the_geom ? Polygon.geojson_to_gmaps_path(the_geom) : []
-    json.to_json
-  end
-
-  def self.find cartodb_id
-    new(CartoDB::Connection.row(TABLENAME, cartodb_id))
-  end
+  #def to_json
+  #  json = super
+  #  json = JSON.parse(json)
+  #  json['the_geom'] = the_geom ? Polygon.geojson_to_gmaps_path(the_geom) : []
+  #  json.to_json
+  #end
 
   def self.create_or_update_from attrs, layer_id
     if attrs[:cartodb_id].nil?
@@ -109,5 +56,13 @@ class Polygon
         polygon.update
       end
     end
+  end
+
+  def path
+    JSON.parse(self.string_path)
+  end
+
+  def path=(path)
+    write_attribute(:string_path, path.to_s)
   end
 end
