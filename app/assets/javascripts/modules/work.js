@@ -205,7 +205,7 @@ App.modules.Data = function(app) {
           return polygons;
         },
 
-        // agregate all the stats in the total layer
+        // aggregate all the stats in the total layer
         aggregate_stats: function() {
           var self = this;
           var layers = _(this.get_layers()).filter(function(r) {
@@ -356,9 +356,30 @@ App.modules.Data = function(app) {
             this.work.fetch({
                 success: function() {
                     self.bus.emit("app:work_loaded");
+                    // fetch any un-stated layers
+                    self.get_stats_if_missing();
                 }
             });
             //TODO: does not exists
+        },
+
+        get_stats_if_missing: function() {
+          // Gets the aggregate stats for layers if any are as yet uncalculated
+          var self = this;
+          this.work.each(function(layer) {
+            var key, keyCount;
+            if (layer.get('polygons').length > 0) {
+              // if the layer has polygons, it should have stats
+              keyCount = 0;
+              for(key in layer.get('stats')){
+                keyCount = keyCount + 1;
+              }
+              if (keyCount === 0) {
+                // If layer doesn't yet have stats, load all stats and exit
+                return self.work.on_layer_change(layer);
+              }
+            }
+          });
         },
 
         on_new_layer: function(r) {
