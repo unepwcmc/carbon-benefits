@@ -51,6 +51,7 @@
 //= require views/tabs
 //= require views/upload_box
 //= require views/field_picker
+//= require views/uploading
 //= require carbon
 
 function number_format(n) {
