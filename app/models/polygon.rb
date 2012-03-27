@@ -12,8 +12,8 @@ class Polygon < ActiveRecord::Base
   def path=(path)
     write_attribute(:string_path, path.to_s)
   end
-  
-  def to_json
+
+  def as_json
     super(:except => [:string_path], :methods => [:path])
   end
 end
