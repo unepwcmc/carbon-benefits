@@ -10,7 +10,6 @@ class PolygonsController < ApplicationController
   def update
     @polygon = Polygon.find(params[:cartodb_id])
     @polygon.the_geom = RGeo::GeoJSON.encode(@polygon.the_geom)
-    debugger
     render :json => @polygon.to_json
   end
 

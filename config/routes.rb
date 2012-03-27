@@ -27,6 +27,9 @@ Carbontool::Application.routes.draw do
     member do
       post "select_fields"
     end
+    collection do
+      get "get_job_status"
+    end
   end
 
   match 'polygons' => 'polygons#update', :via => :put
