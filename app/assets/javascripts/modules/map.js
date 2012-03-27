@@ -418,7 +418,7 @@ App.modules.Map = function(app) {
       this.finish_editing();
       this.editing_poly = p;
       p.hide();
-      this.paths = [p.polygon.path];
+      this.paths = [p.polygon.polygon.path];
       this.polygon_edit.editing_state(false);
       this.polygon_edit.edit_polygon(this.paths);
       this.polygon_edit.bind('mousemove', function(p, e) {
