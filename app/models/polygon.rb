@@ -2,7 +2,7 @@ class Polygon
   include ActiveRecord::AttributeAssignment
 
   #TABLENAME = :polygon
-  TABLENAME = :polygon_test
+  TABLENAME = :polygon_test_copy
 
   #Model to access cartodb's polygons
   ATTRIBUTES = [ :cartodb_id, :name, :the_geom, :class_id, :layer_id, :class_name]
@@ -20,18 +20,10 @@ class Polygon
     if cartodb_id
       update
     else
-      #puts self.the_geom
-      #response = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
       self.the_geom = Polygon.gmaps_path_to_wkt(self.the_geom)
-      sql = <<-SQL
-        INSERT INTO #{TABLENAME} (the_geom, name, class_id, layer_id) VALUES (#{self.the_geom||"NULL"}, '#{self.name}', #{self.class_id||"NULL"}, #{self.layer_id||"NULL"});
-        SELECT cartodb_id , ST_Transform(the_geom, 900913) as the_geom FROM #{TABLENAME} WHERE cartodb_id = currval('public.#{TABLENAME}_cartodb_id_seq');
-      SQL
-
-      response = CartoDB::Connection.query(sql)
-      row = response[:rows].first
-      self.cartodb_id = row[:cartodb_id]
-      self.the_geom = RGeo::GeoJSON.encode(row[:the_geom]) if row[:the_geom]
+      result = CartoDB::Connection.insert_row(TABLENAME, attributes.delete_if{|k,v| k == :cartodb_id})
+      self.cartodb_id = result[:cartodb_id]
+      self.the_geom = RGeo::GeoJSON.encode(result[:the_geom]) if result[:the_geom]
     end
     self
   end
@@ -86,7 +78,7 @@ class Polygon
     end
     coordinates << "#{path[0][1]} #{path[0][0]}" # Close the polygon
 
-    "ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))', 4326)"
+    "ST_GeomFromText('MULTIPOLYGON(((#{coordinates.join(',')})))',4326)"
   end
 
   # Translates a geojson object to a gmaps path
@@ -96,7 +88,9 @@ class Polygon
   def self.geojson_to_gmaps_path geojson
     path = geojson['coordinates'].flatten 2
     path.delete_at(path.length-1)
-    path
+    path.map do |coordinates|
+      coordinates.reverse
+    end
   end
 
   # Overrides to_json to return the geom as gmaps path
@@ -113,17 +107,17 @@ class Polygon
     new(CartoDB::Connection.row(TABLENAME, cartodb_id))
   end
 
-  def self.create_or_update_from attributes, layer_id
-    if attributes[:cartodb_id].nil?
-      polygon = self.new(attributes)
+  def self.create_or_update_from attrs, layer_id
+    if attrs[:cartodb_id].nil?
+      polygon = self.new(attrs)
       polygon.layer_id = layer_id
       polygon.save
     else
-      polygon = self.find(attributes[:cartodb_id])
+      polygon = self.find(attrs[:cartodb_id])
       if polygon && polygon.layer_id == layer_id
-        polygon.name = attributes[:name]
-        polygon.the_geom = attributes[:the_geom]
-        polygon.class_id = attributes[:class_id]
+        polygon.name = attrs[:name]
+        polygon.the_geom = attrs[:the_geom]
+        polygon.class_id = attrs[:class_id]
         polygon.update
       end
     end
