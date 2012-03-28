@@ -20,6 +20,7 @@ window.FieldPicker = Backbone.View.extend({
   },
 
   render: function() {
+    var that = this;
     $(this.el).css('height', 'auto');
     $(this.el).append(this.template({fields: this.fields, layer_id: this.layer_id}));
 
@@ -27,13 +28,17 @@ window.FieldPicker = Backbone.View.extend({
     this.form_el = this.$('form');
     $(this.form_el).ajaxForm({
       dataType: 'json',
+      beforeSend: function(){
+        $(that.el).hide();
+        that.uploadingView = new UploadingView({layerId: that.layer_id, work: carbon.work.work});
+      },
       success: function(res_json){
-        alert('success ' + res_json['job_id']);
+        that.uploadingView.pollForUploadProgress(res_json['job_id']);
       },
       error: function(xhr){
-        alert('import failed');
+        that.uploadingView.upload_finished({status: 'error', message: 'Upload failed'});
       }
     });
-  }
+  },
 
 });
