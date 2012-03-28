@@ -21,7 +21,7 @@
     </div>
 
     <% if(selected_class !== null) { %>
-      <h2 class="selected_class"><span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span> <%= selected_class %> selected.</h2>
+      <h2 class="selected_class<% if(selected_class !== 'No Class' && selected_class !== 'All Classes') { %> select_colorpicker<% } %>" data-id="<%= selected_class %>" data-colour="<%= selected_colour %>"><span class="class-square"><i style='background-color: <%= selected_colour %>'></i></span> <%= selected_class %> selected.</h2>
     <% } %>
   </div>
 <% } %>

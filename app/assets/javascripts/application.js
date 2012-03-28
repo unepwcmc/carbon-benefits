@@ -55,6 +55,7 @@
 //= require wax.g
 //= require cartodb-gmapsv3
 //= require carbon
+//= require colorpicker
 
 function number_format(n) {
   var s = n.toFixed(0);
