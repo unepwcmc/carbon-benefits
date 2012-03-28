@@ -199,3 +199,26 @@ task :setup_cartodb_configuration do
   put(spec.to_yaml, "#{shared_path}/config/cartodb_config.yml")
 end
 after "deploy:setup", :setup_cartodb_configuration
+
+task :setup_production_database_configuration do
+  the_host = Capistrano::CLI.ui.ask("Database IP address: ")
+  database_name = Capistrano::CLI.ui.ask("Database name: ")
+  database_user = Capistrano::CLI.ui.ask("Database username: ")
+  pg_password = Capistrano::CLI.password_prompt("Database user password: ")
+
+  require 'yaml'
+
+  spec = {
+    "#{rails_env}" => {
+      "adapter" => "postgresql",
+      "database" => database_name,
+      "username" => database_user,
+      "host" => the_host,
+      "password" => pg_password
+    }
+  }
+
+  run "mkdir -p #{shared_path}/config"
+  put(spec.to_yaml, "#{shared_path}/config/database.yml")
+end
+after "deploy:setup", :setup_production_database_configuration
