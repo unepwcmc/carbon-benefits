@@ -52,6 +52,8 @@
 //= require views/upload_box
 //= require views/field_picker
 //= require views/uploading
+//= require wax.g
+//= require cartodb-gmapsv3
 //= require carbon
 
 function number_format(n) {

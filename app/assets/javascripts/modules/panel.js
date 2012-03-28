@@ -83,7 +83,7 @@ App.modules.Panel = function(app) {
 
         on_update_layer: function(cid, r) {
             this.panel.update_layer(cid, r);
-            if(r.polygons.length > 0) {
+            if(r.polygons.length > 0 || r.is_uploaded) {
                 this.show();
             }
         },

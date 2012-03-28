@@ -347,6 +347,10 @@ App.modules.Map = function(app) {
 
     // render polygons
     show_layer: function(rid, data) {
+      if (data.is_uploaded){
+        this.show_tile_layer(rid, data);
+        return;
+      }
       this.showing = rid;
       var self = this;
 
@@ -411,6 +415,20 @@ App.modules.Map = function(app) {
           });
         });
       }
+    },
+
+    show_tile_layer: function(rid, data){
+      // CartoDB Uploaded Polygon Layer
+      var bla = {
+        map_canvas: 'map_canvas',
+        map: this.map.map,
+        user_name: 'carbon-tool',
+        table_name: 'polygon_simao',
+        query: "SELECT the_geom_webmercator FROM polygon_simao WHERE layer_id = " + data.id,
+        tile_style: "#polygon_simao{polygon-fill:#B15F00;polygon-opacity:0.7;line-width:0}"
+      }
+      // map_style: true
+      new google.maps.CartoDBLayer($.extend({}, bla));
     },
 
     start_edit_polygon: function(p) {
