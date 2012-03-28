@@ -2,29 +2,32 @@
 App.modules.Cartodb = function(app) {
 
 var SQL_CARBON= "SELECT SUM((ST_Value(rast, 1, x, y) / 100) * ((ST_Area(ST_Transform(ST_SetSRID(ST_PixelAsPolygon(rast, x, y), 4326), 954009)) / 10000) / 100)) AS total, \
-ST_Area(ST_GeomFromText('<%= polygon %>', 4326)::geography) as area \
+ST_Area(<%= geom %>::geography) as area \
 FROM carbonsequestration CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y \
-WHERE rid in ( SELECT rid FROM carbonsequestration WHERE ST_Intersects(rast, ST_GeomFromText('<%= polygon %>',4326)) ) \
+WHERE rid in ( SELECT rid FROM carbonsequestration WHERE ST_Intersects(rast, <%= geom %>) ) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
-  ST_GeomFromText('<%= polygon %>',4326) \
+  <%= geom %> \
 );";
 
 var SQL_CARBON_COUNTRIES = "\
 SET statement_timeout TO 100000; \
 SELECT country, SUM((ST_Value(rast, 1, x, y) / 100) * ((ST_Area(ST_Transform(ST_SetSRID(ST_PixelAsPolygon(rast, x, y), 4326), 954009)) / 10000) / 100)) AS total, \
-ST_Area(ST_GeomFromText('<%= polygon %>', 4326)::geography) as area \
-FROM carbonintersection CROSS JOIN \
+ST_Area(<%= geom %>::geography) as area \
+FROM carbonintersection \
+<%= union_select %> \
+CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN countries \
-WHERE rid IN ( SELECT rid FROM carbonintersection WHERE ST_Intersects(rast, ST_GeomFromText('<%= polygon %>',4326)) ) \
+ \
+WHERE rid IN ( SELECT rid FROM carbonintersection WHERE ST_Intersects(rast, <%= geom %>) ) \
 AND \
-objectid IN ( SELECT objectid FROM countries WHERE ST_Intersects(the_geom, ST_GeomFromText('<%= polygon %>',4326)) ) \
+objectid IN ( SELECT objectid FROM countries WHERE ST_Intersects(the_geom, <%= geom %>) ) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast) + (ST_ScaleX(rast)/2), ST_UpperLeftY(rast) + (ST_ScaleY(rast)/2)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
-  ST_GeomFromText('<%= polygon %>',4326) \
+  <%= geom %> \
 ) \
 AND \
 ST_Intersects( \
@@ -80,6 +83,10 @@ WHERE ST_Intersects(mg.the_geom, \
 ) \
 GROUP BY priority, country";
 
+
+var SQL_UNION_GEOM = " \
+, (SELECT ST_Union(the_geom) as unioned_geom FROM polygon_simao WHERE layer_id = <%= layer_id %>) as unioned_geom"
+
     var resource_path= 'carbon-tool.cartodb.com/api/v1/sql';
     var resource_url = 'https://' + resource_path;
 
@@ -130,7 +137,7 @@ GROUP BY priority, country";
             }).join(',');
             multipoly.push("((" + wtk + "))");
         });
-        return 'MULTIPOLYGON(' + multipoly.join(',') + ')';
+        return "ST_GeomFromText('MULTIPOLYGON(" + multipoly.join(',') + ")',4326)";
     }
 
     app.CartoDB = {};
@@ -160,8 +167,20 @@ GROUP BY priority, country";
 
     function stats_query(sql_query, polygon, callback) {
         var c = _.template(sql_query);
-        var poly = wtk_polygon(polygon);
-        var sql = c({polygon: poly});
+        var sql = '';
+        // This is evil, but we test if this is an upload is a special object :-S
+        if (polygon.length === 1 && polygon[0]['upload'] === true) {
+          // Build a query to get the layer geom
+          var union_sql_template = _.template(SQL_UNION_GEOM);
+          sql = c({
+            geom: 'unioned_geom.unioned_geom',
+            union_select: union_sql_template({layer_id: polygon[0]['layer_id']})
+          });
+        } else {
+          // Translate gmaps paths into polygon
+          var poly = wtk_polygon(polygon);
+          sql = c({geom: poly, union_select: ''});
+        }
         query(sql, function(data) {
             if(!data) {
                 app.Log.to_server("FAIL SQL(" + location.url + "): " + sql);
@@ -302,6 +321,8 @@ GROUP BY priority, country";
     };
 
     app.CartoDB.conservation_priorities = function(p, total_area, callback) {
+      // TODO remove this, you just need to clean up the SQL_COUNTRIES template
+      return;
         stats_query(SQL_COUNTRIES, p, function(data) {
             var countries = {};
             var priorities = {

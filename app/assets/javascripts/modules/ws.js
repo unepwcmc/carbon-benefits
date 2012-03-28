@@ -66,12 +66,12 @@ App.modules.WS = function(app) {
         calculate_stats: function(polygons, callback) {
             var stat;
             var stats = {};
-            var stats_to_get = ['carbon',
-                    'carbon_sequestration',
-                    'restoration_potential',
-                    'forest_status',
-                    'covered_by_KBA',
-                    'covered_by_PA'];
+            var stats_to_get = ['carbon']
+                    //'carbon_sequestration',
+                    //'restoration_potential',
+                    //'forest_status',
+                    //'covered_by_KBA',
+                    //'covered_by_PA'];
 
             function ready(what) {
                 if(what == 'carbon') {
@@ -104,9 +104,9 @@ App.modules.WS = function(app) {
         },
 
         aggregate_stats: function(layers, polygons, callback) {
-            if(polygons.length === 0) {
-                callback({});
-            }
+            //if(polygons.length === 0) {
+                //callback({});
+            //}
             function sum(layers, what) {
                 var t = 0;
                 _(layers).each(function(r) {
