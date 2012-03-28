@@ -42,6 +42,13 @@ $(function() {
           this.$('.layer_stats').remove();
           this.$(".classes_wrap").remove();
           $(this.el).append(this.template(data));
+
+          $('.selected_class.select_colorpicker .class-square i').ColorPicker({
+            onChange: function (hsb, hex, rgb) {
+              self.bus.trigger('model:select_class', self.rid, $('.selected_class').data("id"), '#' + hex);
+            }
+          });
+
           var s = this.$('.layer_stats');
           s.hide().fadeIn();
           if(data.total) {
