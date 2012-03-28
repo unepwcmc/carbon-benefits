@@ -31,7 +31,8 @@ class Layer < ActiveRecord::Base
       'polygons_count' => (is_uploaded ? get_polygons_count : polygons.size),
       'stats' => JSON.parse(stats),Resque::Plugins::Status::Hash.get(params[:job_id]),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] },
-      'is_uploaded' => is_uploaded
+      'is_uploaded' => is_uploaded,
+      'name' => name
     }.to_json
   end
 
