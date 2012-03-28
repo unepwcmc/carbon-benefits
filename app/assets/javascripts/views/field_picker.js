@@ -8,6 +8,7 @@ window.FieldPicker = Backbone.View.extend({
 
   initialize: function() {
     _.bindAll(this, 'render', 'submit');
+
     this.fields = this.options['fields'];
     this.layer_id = this.options['layer_id'];
 

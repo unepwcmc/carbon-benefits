@@ -96,6 +96,7 @@ private
     end
 
     res = CartoDB::Connection.query(sql)
+
     #get the missing classes
     class_names_to_add = CartoDB::Connection.query(
       "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
