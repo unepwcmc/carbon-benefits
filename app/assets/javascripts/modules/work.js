@@ -19,9 +19,10 @@ App.modules.Data = function(app) {
           this.save = _.debounce(this._save, 800);
         },
 
-        select_class: function(id, colour) {
+        select_class: function(id, name, colour) {
           this.set({'selected_colour': colour});
-          this.set({'selected_class': id});
+          this.set({'selected_class': name});
+          this.set({'selected_class_id': id});
           this.save();
         },
 
@@ -330,14 +331,16 @@ App.modules.Data = function(app) {
         
         on_select_class: function(rid, class_id, colour) {
           var r = this.work.getByCid(rid);
+          var class_name = class_id;
           if(r) {
               _.each(r.get('classes'), function(colour_class) {
-                if(colour_class[0] == class_id) {
+                if(colour_class[2] == class_id) {
                   colour_class[1] = colour;
+                  class_name = colour_class[0];
                 }
               });
               $(".classes_list .select_class[data-id='" + class_id + "']").data('colour', colour).find('i').css('background-color', colour);
-              r.select_class(class_id, colour);
+              r.select_class(class_id, class_name, colour);
           } else {
               app.Log.error("can't get layer: ", rid);
           }
