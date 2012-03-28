@@ -23,7 +23,6 @@ $(function() {
             if(data['status'] === 'completed'){
               that.upload_finished({status: 'success', 'message': 'Upload finished'});
             } else if (data['status'] === 'failed'){
-              alert('failed');
               that.upload_finished({status: 'error', 'message': data['message']});
             }
             console.log(data);
