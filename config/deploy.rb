@@ -150,8 +150,8 @@ default_run_options[:pty] = true
 # lingering until the workers time out
 # set :passenger_restart_strategy, :hard
 
-after "deploy:create_symlink", "deploy:restart_workers"
-after "deploy:restart_workers", "deploy:restart_scheduler"
+#after "deploy:create_symlink", "deploy:restart_workers"
+#after "deploy:restart_workers", "deploy:restart_scheduler"
 
 ##
 # Rake helper task.
