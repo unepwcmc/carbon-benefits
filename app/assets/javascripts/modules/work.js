@@ -76,11 +76,21 @@ App.modules.Data = function(app) {
 
         fetch: function() {
             var self = this;
+            var polygons = [];
             // get data using polygons
-            if(self.get('polygons').length === 0 && !self.is_uploaded) {
+            if(self.get('polygons').length === 0 && !self.get('is_uploaded')) {
                 return;
             }
-            app.WS.CartoDB.calculate_stats(this.get('polygons').findByClass(this.get('selected_class')), function(stats) {
+            if (!self.get('is_uploaded')){
+              polygons = this.get('polygons').findByClass(this.get('selected_class'));
+            } else {
+              // This is evil, but we test if this is an upload, we pass this magic object
+              polygons = [{
+                upload: true,
+                layer_id: this.get('id')
+              }];
+            }
+            app.WS.CartoDB.calculate_stats(polygons, function(stats) {
               var new_stats = _.extend(self.get('stats'), stats);
               self.set({'stats': new_stats});
               //trigger manually
@@ -385,7 +395,7 @@ App.modules.Data = function(app) {
           var self = this;
           this.work.each(function(layer) {
             var key, keyCount;
-            if (layer.get('polygons').length > 0 && !layer.is_uploaded) {
+            if (layer.get('polygons').length > 0 || layer.get('is_uploaded')) {
               // if the layer has polygons, it should have stats
               keyCount = 0;
               for(key in layer.get('stats')){
@@ -393,6 +403,7 @@ App.modules.Data = function(app) {
               }
               if (keyCount === 0) {
                 // If layer doesn't yet have stats, load all stats and exit
+                layer.fetch();
                 return self.work.on_layer_change(layer);
               }
             }
