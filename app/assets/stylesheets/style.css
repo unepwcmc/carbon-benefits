@@ -2471,3 +2471,7 @@ body.out div.layout footer div.right a.nature {
   width: 150px;
   text-align: left;
 }
+
+span.beta {
+  color:#DDD;
+}
