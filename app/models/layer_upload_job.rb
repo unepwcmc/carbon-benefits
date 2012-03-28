@@ -54,7 +54,7 @@ private
   def validate
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
-    @geom_type = first_row && first_row[:geom_type]    puts options['layer_id'].inspect
+    @geom_type = first_row && first_row[:geom_type]
     unless @geom_type
       self.status = 'We were unable to reproject your data, this tool works best with data in 4326'
       return false
