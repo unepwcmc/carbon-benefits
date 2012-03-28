@@ -28,10 +28,17 @@ class Layer < ActiveRecord::Base
     {
       'id' => id,
       'polygons' => polygons.map{|p| p.as_json},
+      'polygons_count' => (is_uploaded ? get_polygons_count : polygons.size),
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] },
       'is_uploaded' => is_uploaded
     }.to_json
+  end
+
+  def get_polygons_count
+    res = CartoDB::Connection.query "SELECT COUNT(*) AS polygon_count FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{self.id}"
+    first_row = res.rows.first
+    first_row && first_row[:polygon_count] || 0
   end
 
   def classes=(the_classes)
