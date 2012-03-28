@@ -1,9 +1,10 @@
 class LayerUploadJob
   include Resque::Plugins::Status
   MAX_POLYGON_AREA = 8000000*1000*1000
+  TABLENAME = "polygon_simao"
 
   def perform
-    @layer = Layer.find(options['layer_id'])
+    @layer = Layer.find(options['layer_id'].to_i)
     @layer_file = @layer.user_layer_file
     @class_field = options['class_field'].downcase
     @name_field = options['name_field'].downcase
@@ -87,11 +88,11 @@ private
     #insert into polygons
     sql = if @geom_type == 'POINT'
       #need to buffer points
-      "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom) " +
+      "INSERT INTO #{TABLENAME} (layer_id, class_name, name, the_geom) " +
       "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
     else
       #need to dump multi polygons into polygons
-      "INSERT INTO #{Polygon::TABLENAME} (layer_id, class_name, name, the_geom) " +
+      "INSERT INTO #{TABLENAME} (layer_id, class_name, name, the_geom) " +
       "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
     end
 
@@ -101,7 +102,7 @@ private
       "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
     ).rows.map{ |c| c[:"#{@class_field}"] }
     class_names_to_add.each do |c|
-      PolygonClass.find_or_create_by_name(c)
+      PolygonClass.find_or_create_by_name(c.to_s)
     end
 
     #fetch the updated classes dictionary
@@ -116,7 +117,7 @@ private
         ActiveRecord::Base.send(
           :sanitize_sql_array,
           [
-            "UPDATE #{Polygon::TABLENAME} SET class_id = ? WHERE class_name = ?",
+            "UPDATE #{TABLENAME} SET class_id = ? WHERE class_name = ?",
             polygon_classes_mapping[k],
             k
           ]
