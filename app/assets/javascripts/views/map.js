@@ -40,7 +40,7 @@ var MapView = Backbone.View.extend({
        var self = this;
        this.layers = {};
        this.layers_order = [];
-       this.userLayers = [];
+       this.userLayers = {};
        // hide controls until map is ready
        this.hide_controls();
        this.map = new google.maps.Map(this.$('.map')[0], this.mapOptions);

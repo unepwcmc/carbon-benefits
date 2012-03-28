@@ -420,14 +420,14 @@ App.modules.Map = function(app) {
     show_tile_layer: function(rid, data){
       // CartoDB Uploaded Polygon Layer
       var sql = "SELECT the_geom_webmercator FROM polygon_simao WHERE layer_id = " + data.id;
-      if(data.selected_class_id !== null && data.selected_class !== 'All Classes'){
-        if(data.selected_class === 'No Class'){
+      if(data.selected_class_id !== null && data.selected_class_id !== 'All Classes'){
+        if(data.selected_class_id === 'No Class'){
           sql += ' AND class_id IS NULL';
         } else {
           sql += ' AND class_id = ' + data.selected_class_id;
         }
       }
-      var bla = {
+      var cartodbLayerParams = {
         map_canvas: 'map_canvas',
         map: this.map.map,
         user_name: 'carbon-tool',
@@ -440,8 +440,8 @@ App.modules.Map = function(app) {
       // map_style: true
       
       // Add the user layers to the map view, so they can be appended after the 'stat' layers
-      this.map.userLayers.push($.extend({}, bla));
-      new google.maps.CartoDBLayer($.extend({}, bla));
+      this.map.userLayers[rid] = $.extend({}, cartodbLayerParams);
+      this.map.reorder_layers();
     },
 
     start_edit_polygon: function(p) {
