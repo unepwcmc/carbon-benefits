@@ -433,7 +433,9 @@ App.modules.Map = function(app) {
         user_name: 'carbon-tool',
         table_name: 'polygon_simao',
         query: sql,
-        tile_style: "#polygon_simao{polygon-fill:#B15F00;polygon-opacity:0.7;line-width:0}"
+        tile_style: "#polygon_simao{polygon-fill:" +
+        (data.selected_colour ? data.selected_colour : 'green') +
+        ";polygon-opacity:0.7;line-width:0}"
       }
       // map_style: true
       
