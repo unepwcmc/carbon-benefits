@@ -1267,7 +1267,7 @@ div.right {
 
 #panel h2.selected_class {
   float: left;
-  margin: 10px 5px;
+  margin: 0 5px;
 }
 
 .class-square i.class-0 {
