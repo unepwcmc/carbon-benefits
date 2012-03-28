@@ -420,8 +420,12 @@ App.modules.Map = function(app) {
     show_tile_layer: function(rid, data){
       // CartoDB Uploaded Polygon Layer
       var sql = "SELECT the_geom_webmercator FROM polygon_simao WHERE layer_id = " + data.id;
-      if(data.selected_class_id !== null){
-        sql += ' AND class_id =' + data.selected_class_id;
+      if(data.selected_class_id !== null && data.selected_class !== 'All Classes'){
+        if(data.selected_class === 'No Class'){
+          sql += ' AND class_id IS NULL';
+        } else {
+          sql += ' AND class_id = ' + data.selected_class_id;
+        }
       }
       var bla = {
         map_canvas: 'map_canvas',
