@@ -2,9 +2,12 @@ class LayerUploadJob
   include Resque::Plugins::Status
   MAX_POLYGON_AREA = 8000000*1000*1000
   TABLENAME = "polygon_simao"
+  COLOR_ARY = ['red', 'blue', 'green', 'yellow', 'purple', 'brown', 'black', 'white']
 
   def perform
-    @layer = Layer.find(options['layer_id'].to_i)
+    puts options['layer_id'].inspect
+    @layer = Layer.find(options['layer_id'])
+    puts @layer.inspect
     @layer_file = @layer.user_layer_file
     @class_field = options['class_field'].downcase
     @name_field = options['name_field'].downcase
@@ -51,7 +54,7 @@ private
   def validate
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
-    @geom_type = first_row && first_row[:geom_type]
+    @geom_type = first_row && first_row[:geom_type]    puts options['layer_id'].inspect
     unless @geom_type
       self.status = 'We were unable to reproject your data, this tool works best with data in 4326'
       return false
@@ -102,7 +105,10 @@ private
       "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
     ).rows.map{ |c| c[:"#{@class_field}"] }
     class_names_to_add.each do |c|
-      PolygonClass.find_or_create_by_name(c.to_s)
+      pc = PolygonClass.find_or_create_by_name(c.to_s)
+      pcc = PolygonClassColour.find_or_create_by_layer_id_and_polygon_class_id(@layer.id, pc.id)
+      pcc.colour = COLOR_ARY[rand(COLOR_ARY.size)]
+      pcc.save
     end
 
     #fetch the updated classes dictionary
