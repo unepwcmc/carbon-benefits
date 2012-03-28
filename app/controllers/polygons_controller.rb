@@ -10,7 +10,6 @@ class PolygonsController < ApplicationController
   def update
     @polygon = Polygon.find(params[:id])
     @polygon.update_attributes(params[:polygon])
-
     render :json => @polygon.as_json
   end
 end
