@@ -33,6 +33,7 @@
 //= require modules/cartodb
 //= require modules/error
 //= require models/polygon
+//= require collections/polygon_collection
 //= require views/layer
 //= require views/layer_editor
 //= require views/map
