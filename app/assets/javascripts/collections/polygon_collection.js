@@ -1,8 +1,4 @@
 (function() {
-<<<<<<< HEAD
-  App.PolygonCollection = Backbone.Collection.extend({
-      model: App.Polygon
-=======
   // Stores the polygons in a layer
   // is initialized by layer fetch, and never fetches/saves itself
   App.PolygonCollection = Backbone.Collection.extend({
@@ -20,6 +16,5 @@
            });
          }
       }
->>>>>>> e74ded966fcac897f0fa9d1e1b42fc5ea2f8d79b
   });
 })();
