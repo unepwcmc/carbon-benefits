@@ -3,6 +3,7 @@
   // is initialized by layer fetch, and never fetches/saves itself
   App.PolygonCollection = Backbone.Collection.extend({
       model: App.Polygon,
+      url: '/polygons',
       findByClass: function(klass) {
          if (typeof(klass) === 'undefined' || klass === null){
            //return everything if class isn't valid
