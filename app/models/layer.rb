@@ -9,7 +9,9 @@ class Layer < ActiveRecord::Base
 
   validates_attachment_content_type :user_layer_file,
     :content_type => [ 'application/zip', 'application/json', 'text/csv',
-      'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz' ]
+      'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz',
+      'application/x-zip', 'application/x-zip-compressed', 'application/octet-stream',
+      'application/x-compress', 'application/x-compressed', 'multipart/x-zip' ]
   validates_attachment_size :user_layer_file, :less_than => 100.megabytes
   validates :user_layer_file, :ogr_parsable => true
 
