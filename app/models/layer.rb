@@ -1,6 +1,7 @@
 class Layer < ActiveRecord::Base
   include ActiveModel::Validations
   belongs_to :work
+  belongs_to :selected_polygon_class_colour, :class_name => 'PolygonClassColour'
   has_many :polygons
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
@@ -32,7 +33,10 @@ class Layer < ActiveRecord::Base
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour, c.polygon_class_id] },
       'is_uploaded' => is_uploaded,
-      'name' => name
+      'name' => name,
+      'selected_class' => selected_polygon_class_colour && selected_polygon_class_colour.polygon_class.name,
+      'selected_class_id' => selected_polygon_class_colour_id,
+      'selected_colour' => selected_polygon_class_colour && selected_polygon_class_colour.colour
     }.to_json
   end
 
