@@ -47,11 +47,13 @@ $(function() {
     upload_finished: function(data){
       if(data['status'] == 'success'){
         this.render({message: 'Upload complete'});
-        this.hide();
-        this.work.on_layer_change(this.work.get(this.layerId));
+        //this.hide();
+        //this.work.on_layer_change(this.work.get(this.layerId));
+
+        // Fancy JavaScript panel control? Nope, just reload the page
+        location.reload(true);
       } else {
-        alert('failed');
-        this.render({message: 'Upload failed: ' + data['message']});
+        this.render({message: 'Sorry, there was a problem with your upload: ' + data['message']});
       }
       clearInterval(this.timerId);
     },
