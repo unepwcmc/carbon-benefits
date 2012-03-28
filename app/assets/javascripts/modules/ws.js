@@ -66,12 +66,12 @@ App.modules.WS = function(app) {
         calculate_stats: function(polygons, callback) {
             var stat;
             var stats = {};
-            var stats_to_get = ['carbon']
-                    //'carbon_sequestration',
-                    //'restoration_potential',
-                    //'forest_status',
-                    //'covered_by_KBA',
-                    //'covered_by_PA'];
+            var stats_to_get = ['carbon',
+                    'carbon_sequestration',
+                    'restoration_potential',
+                    'forest_status',
+                    'covered_by_KBA'
+                    ];
 
             function ready(what) {
                 if(what == 'carbon') {
