@@ -420,7 +420,7 @@ App.modules.Map = function(app) {
     show_tile_layer: function(rid, data){
 
       // CartoDB Uploaded Polygon Layer
-      var sql = "SELECT the_geom_webmercator FROM polygon_simao WHERE layer_id = " + data.id;
+      var sql = "SELECT the_geom_webmercator FROM polygon_simao_master WHERE layer_id = " + data.id;
       if(data.selected_class_id !== null && data.selected_class_id !== 'All Classes'){
         if(data.selected_class_id === 'No Class'){
           sql += ' AND class_id IS NULL';
@@ -428,15 +428,20 @@ App.modules.Map = function(app) {
           sql += ' AND class_id = ' + data.selected_class_id;
         }
       }
+      var tileStr = '';
+      _.each(data.classes, function(ele){
+        tileStr += '#polygon_simao_master[class_id=' + ele[2] + ']{polygon-fill:' + ele[1] +';polygon-opacity:0.7;line-width:0} ';
+      }); 
+      console.log(tileStr);
       var cartodbLayerParams = {
         map_canvas: 'map_canvas',
         map: this.map.map,
         user_name: 'carbon-tool',
-        table_name: 'polygon_simao',
+        table_name: 'polygon_simao_master',
         query: sql,
-        tile_style: "#polygon_simao{polygon-fill:" +
-        (data.selected_colour ? data.selected_colour : 'green') +
-        ";polygon-opacity:0.7;line-width:0}"
+        tile_style: "#polygon_simao_master{polygon-fill:" +
+          (data.selected_colour ? data.selected_colour : 'green') +
+          ";polygon-opacity:0.7;line-width:0}"
       };
       // map_style: true
       

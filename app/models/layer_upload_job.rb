@@ -1,7 +1,7 @@
 class LayerUploadJob
   include Resque::Plugins::Status
   MAX_POLYGON_AREA = 8000000*1000*1000
-  TABLENAME = "polygon_simao"
+  TABLENAME = "polygon_simao_master"
   COLOR_ARY = ['red', 'blue', 'green', 'yellow', 'purple', 'brown', 'black', 'white']
 
   def perform
@@ -9,7 +9,7 @@ class LayerUploadJob
     @layer = Layer.find(options['layer_id'])
     puts @layer.inspect
     @layer_file = @layer.user_layer_file
-    @class_field = options['class_field'].downcase
+    @class_field = options['class_field'] && options['class_field'].downcase
     @name_field = options['name_field'].downcase
 
     create_in_carto_db
@@ -92,12 +92,18 @@ private
     sql = if @geom_type == 'POINT'
       #need to buffer points
       "INSERT INTO #{TABLENAME} (layer_id, class_name, name, the_geom) " +
-      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
+      "SELECT #{@layer.id} AS layer_id, " +
+      (@class_field ? "\"#{@class_field}\", " : '') +
+      "\"#{@name_field}\", ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
     else
       #need to dump multi polygons into polygons
       "INSERT INTO #{TABLENAME} (layer_id, class_name, name, the_geom) " +
-      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
+      "SELECT #{@layer.id} AS layer_id, " +
+      (@class_field ? "\"#{@class_field}\", " : '') +
+      "\"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
     end
+
+    return unless @class_field
 
     res = CartoDB::Connection.query(sql)
     #get the missing classes
