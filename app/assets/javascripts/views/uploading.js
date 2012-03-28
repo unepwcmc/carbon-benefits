@@ -20,10 +20,9 @@ $(function() {
         $.ajax({
           url: "/layers/get_job_status?job_id="+jobId,
           success: function(data){
-            if(true){
+            if(data['status'] === 'completed'){
               that.upload_finished({status: 'success', 'message': 'Upload finished'});
             } else if (data['status'] === 'failed'){
-              alert('failed');
               that.upload_finished({status: 'error', 'message': data['message']});
             }
             console.log(data);
@@ -47,11 +46,13 @@ $(function() {
     upload_finished: function(data){
       if(data['status'] == 'success'){
         this.render({message: 'Upload complete'});
-        this.hide();
-        this.work.on_layer_change(this.work.get(this.layerId));
+        //this.hide();
+        //this.work.on_layer_change(this.work.get(this.layerId));
+
+        // Fancy JavaScript panel control? Nope, just reload the page
+        location.reload(true);
       } else {
-        alert('failed');
-        this.render({message: 'Upload failed: ' + data['message']});
+        this.render({message: 'Sorry, there was a problem with your upload: ' + data['message']});
       }
       clearInterval(this.timerId);
     },

@@ -25,7 +25,8 @@ class Work < ActiveRecord::Base
         polygon_class_colour.update_attributes({colour: layer['selected_colour']}).save
       end
 
-      ar_layer.attributes= layer.delete_if{|k,v| k == 'polygons' || k == 'selected_class_id'}
+      ar_layer.attributes= layer.delete_if{|k,v| ['polygons', 'polygons_count', 'selected_class_id'].include?(k)}
+
       layers<< ar_layer
     end
     self

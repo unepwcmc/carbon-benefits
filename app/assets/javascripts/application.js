@@ -33,6 +33,7 @@
 //= require modules/cartodb
 //= require modules/error
 //= require models/polygon
+//= require collections/polygon_collection
 //= require views/layer
 //= require views/layer_editor
 //= require views/map
@@ -51,6 +52,8 @@
 //= require views/upload_box
 //= require views/field_picker
 //= require views/uploading
+//= require wax.g
+//= require cartodb-gmapsv3
 //= require carbon
 //= require colorpicker
 
