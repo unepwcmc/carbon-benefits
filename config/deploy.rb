@@ -62,7 +62,7 @@ set :scm_username, "unepwcmc-read"
 # The shared area is prepared with 'deploy:setup' and all the shared
 # items are symlinked in when the code is updated.
 # set :local_shared_dirs, %w(public/upload)
-# set :local_shared_files, %w(config/database.yml)
+set :local_shared_files, %w(config/database.yml config/cartodb_config.yml)
 
 ## Global Shared Area
 # These are the list of files and directories that you want
