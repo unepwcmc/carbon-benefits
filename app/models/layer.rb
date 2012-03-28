@@ -30,7 +30,8 @@ class Layer < ActiveRecord::Base
       'polygons' => polygons.map{|p| p.as_json},
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] },
-      'is_uploaded' => is_uploaded
+      'is_uploaded' => is_uploaded,
+      'name' => name
     }.to_json
   end
 
