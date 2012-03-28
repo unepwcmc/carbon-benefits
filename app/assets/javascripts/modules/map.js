@@ -418,6 +418,7 @@ App.modules.Map = function(app) {
     },
 
     show_tile_layer: function(rid, data){
+
       // CartoDB Uploaded Polygon Layer
       var sql = "SELECT the_geom_webmercator FROM polygon_simao WHERE layer_id = " + data.id;
       if(data.selected_class_id !== null && data.selected_class_id !== 'All Classes'){
@@ -440,7 +441,7 @@ App.modules.Map = function(app) {
       // map_style: true
       
       // Add the user layers to the map view, so they can be appended after the 'stat' layers
-      this.map.userLayers[rid] = $.extend({}, cartodbLayerParams);
+      this.map.userLayers[data.id] = $.extend({}, cartodbLayerParams);
       this.map.reorder_layers();
     },
 
