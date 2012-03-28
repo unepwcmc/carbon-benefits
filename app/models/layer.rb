@@ -15,7 +15,7 @@ class Layer < ActiveRecord::Base
   before_save :extract_meta_data
 
   def extract_meta_data
-    self.meta_data = unless self.user_layer_file.present?
+    self.meta_data = unless self.user_layer_file.queued_for_write[:original]
       []
     else
       mde = MetaDataExtractor.new(self.user_layer_file)
@@ -29,7 +29,8 @@ class Layer < ActiveRecord::Base
       'id' => id,
       'polygons' => polygons.map{|p| p.as_json},
       'stats' => JSON.parse(stats),
-      'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] }
+      'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour] },
+      'is_uploaded' => is_uploaded
     }.to_json
   end
 

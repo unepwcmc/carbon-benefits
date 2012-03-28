@@ -58,7 +58,7 @@ $(function() {
 
       render: function(data) {
           var self = this;
-          if(data.polygons.length !== 0 || data.total) {
+          if(data.polygons.length !== 0 || data.total || data.is_uploaded) {
               // check if header has been already rendered and 
               // update only the stats part
               if(this.header) {

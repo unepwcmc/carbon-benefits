@@ -7,7 +7,8 @@ App.modules.Data = function(app) {
                 "classes": new Array(),
                 "selected_class": null,
                 "selected_colour": null,
-                "stats": new Object()
+                "stats": new Object(),
+                "is_uploaded": false
             };
         },
 
@@ -74,7 +75,7 @@ App.modules.Data = function(app) {
         fetch: function() {
             var self = this;
             // get data using polygons
-            if(self.get('polygons').length === 0) {
+            if(self.get('polygons').length === 0 && !self.is_uploaded) {
                 return;
             }
             app.WS.CartoDB.calculate_stats(this.get('polygons').findByClass(this.get('selected_class')), function(stats) {
@@ -374,7 +375,7 @@ App.modules.Data = function(app) {
           var self = this;
           this.work.each(function(layer) {
             var key, keyCount;
-            if (layer.get('polygons').length > 0) {
+            if (layer.get('polygons').length > 0 && !layer.is_uploaded) {
               // if the layer has polygons, it should have stats
               keyCount = 0;
               for(key in layer.get('stats')){
