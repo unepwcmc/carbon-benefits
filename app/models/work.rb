@@ -19,8 +19,7 @@ class Work < ActiveRecord::Base
       else
         Layer.create
       end
-      ar_layer.attributes= layer.delete_if{|k,v| k == 'polygons'}
-      #ar_layer.attributes= layer
+      ar_layer.attributes= layer.delete_if{|k,v| ['polygons', 'polygons_count'].include?(k)}
       layers<< ar_layer
     end
     self
