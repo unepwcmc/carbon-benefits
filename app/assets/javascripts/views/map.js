@@ -40,6 +40,7 @@ var MapView = Backbone.View.extend({
        var self = this;
        this.layers = {};
        this.layers_order = [];
+       this.userLayers = [];
        // hide controls until map is ready
        this.hide_controls();
        this.map = new google.maps.Map(this.$('.map')[0], this.mapOptions);
@@ -224,6 +225,10 @@ var MapView = Backbone.View.extend({
                 self.map.overlayMapTypes.setAt(idx, layer.layer);
             }
             idx++;
+        });
+        // Each any user layers on top
+        _(this.userLayers).each(function(userLayerParams) {
+            new google.maps.CartoDBLayer(userLayerParams);
         });
     },
 

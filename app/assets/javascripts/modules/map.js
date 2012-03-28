@@ -434,11 +434,12 @@ App.modules.Map = function(app) {
         table_name: 'polygon_simao',
         query: sql,
         tile_style: "#polygon_simao{polygon-fill:#B15F00;polygon-opacity:0.7;line-width:0}"
-      }
+      };
       // map_style: true
       
+      // Add the user layers to the map view, so they can be appended after the 'stat' layers
+      this.map.userLayers.push($.extend({}, bla));
       new google.maps.CartoDBLayer($.extend({}, bla));
-      
     },
 
     start_edit_polygon: function(p) {
