@@ -5,6 +5,7 @@ App.modules.Data = function(app) {
                 'id': null,
                 "polygons": new App.PolygonCollection(),
                 "classes": new Array(),
+                "selected_class_id": null,
                 "selected_class": null,
                 "selected_colour": null,
                 "stats": new Object()
@@ -329,6 +330,12 @@ App.modules.Data = function(app) {
         on_select_class: function(rid, class_id, colour) {
           var r = this.work.getByCid(rid);
           if(r) {
+              _.each(r.get('classes'), function(colour_class) {
+                if(colour_class[0] == class_id) {
+                  colour_class[1] = colour;
+                }
+              });
+              $(".classes_list .select_class[data-id='" + class_id + "']").data('colour', colour).find('i').css('background-color', colour);
               r.select_class(class_id, colour);
           } else {
               app.Log.error("can't get layer: ", rid);

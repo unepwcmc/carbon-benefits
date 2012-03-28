@@ -52,6 +52,7 @@
 //= require views/field_picker
 //= require views/uploading
 //= require carbon
+//= require colorpicker
 
 function number_format(n) {
   var s = n.toFixed(0);
