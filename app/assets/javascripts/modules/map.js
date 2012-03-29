@@ -421,8 +421,8 @@ App.modules.Map = function(app) {
 
       // CartoDB Uploaded Polygon Layer
       var sql = "SELECT the_geom_webmercator FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
-      if(data.selected_class_id !== null && data.selected_class_id !== 'All Classes'){
-        if(data.selected_class_id === 'No Class'){
+      if(data.selected_class_id !== null && data.selected_class_id !== window.ALL_CLASSES){
+        if(data.selected_class_id === window.NO_CLASS){
           sql += ' AND class_id IS NULL';
         } else {
           sql += ' AND class_id = ' + data.selected_class_id;
