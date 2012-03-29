@@ -420,7 +420,7 @@ App.modules.Map = function(app) {
     show_tile_layer: function(rid, data){
 
       // CartoDB Uploaded Polygon Layer
-      var sql = "SELECT the_geom_webmercator FROM polygon_simao WHERE layer_id = " + data.id;
+      var sql = "SELECT the_geom_webmercator FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
       if(data.selected_class_id !== null && data.selected_class_id !== 'All Classes'){
         if(data.selected_class_id === 'No Class'){
           sql += ' AND class_id IS NULL';
@@ -432,9 +432,9 @@ App.modules.Map = function(app) {
         map_canvas: 'map_canvas',
         map: this.map.map,
         user_name: 'carbon-tool',
-        table_name: 'polygon_simao',
+        table_name: window.CARTODB_TABLE,
         query: sql,
-        tile_style: "#polygon_simao{polygon-fill:" +
+        tile_style: "#" + window.CARTODB_TABLE + "{polygon-fill:" +
         (data.selected_colour ? data.selected_colour : 'green') +
         ";polygon-opacity:0.7;line-width:0}"
       }

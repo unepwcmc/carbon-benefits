@@ -1,0 +1,11 @@
+development:
+  cartodb_table: 'polygon_development'
+
+staging:
+  cartodb_table: 'polygon_development'
+
+test:
+  cartodb_table: 'polygon_development'
+
+production:
+  cartodb_table: 'polygon_production'
