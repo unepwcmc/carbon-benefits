@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328154044) do
+ActiveRecord::Schema.define(:version => 20120329112341) do
 
   create_table "errors", :force => true do |t|
     t.text     "error",      :default => ""
@@ -24,16 +24,15 @@ ActiveRecord::Schema.define(:version => 20120328154044) do
     t.integer  "work_id"
     t.string   "name"
     t.text     "stats"
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
-    t.text     "polygons"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "user_layer_file_file_name"
     t.string   "user_layer_file_content_type"
     t.integer  "user_layer_file_file_size"
     t.datetime "user_layer_file_updated_at"
     t.text     "meta_data"
-    t.boolean  "is_uploaded",                      :default => false
-    t.integer  "selected_polygon_class_colour_id"
+    t.boolean  "is_uploaded",                  :default => false
+    t.integer  "selected_polygon_class_id"
   end
 
   create_table "polygon_class_colours", :force => true do |t|
