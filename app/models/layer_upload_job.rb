@@ -9,7 +9,7 @@ class LayerUploadJob
     @layer = Layer.find(options['layer_id'])
     puts @layer.inspect
     @layer_file = @layer.user_layer_file
-    @class_field = options['class_field'].downcase
+    @class_field = options['class_field'] && options['class_field'].downcase
     @name_field = options['name_field'].downcase
 
     create_in_carto_db
@@ -88,18 +88,24 @@ private
   end
 
   def insert_into_polygons
-    #insert into polygons
-    sql = if @geom_type == 'POINT'
+    #copy from uploaded table to polygon table
+    sql = <<-END_SQL
+    INSERT INTO #{TABLENAME} (layer_id, name, #{@class_field ? 'class_name, ' : ''} the_geom)
+    SELECT #{@layer.id} AS layer_id, #{@name_field},
+    #{@class_field ? @class_field + ',' : ''}
+    END_SQL
+    sql += if @geom_type == 'POINT'
       #need to buffer points
-      "INSERT INTO #{TABLENAME} (layer_id, class_name, name, the_geom) " +
-      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
+      "ST_Multi(ST_Buffer(the_geom, 0.1)) FROM #{@table_name};"
     else
       #need to dump multi polygons into polygons
-      "INSERT INTO #{TABLENAME} (layer_id, class_name, name, the_geom) " +
-      "SELECT #{@layer.id} AS layer_id, \"#{@class_field}\", \"#{@name_field}\", ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
+      "ST_Multi((ST_Dump(the_geom)).geom) FROM #{@table_name};"
     end
 
     res = CartoDB::Connection.query(sql)
+
+    return unless @class_field
+
     #get the missing classes
     class_names_to_add = CartoDB::Connection.query(
       "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
