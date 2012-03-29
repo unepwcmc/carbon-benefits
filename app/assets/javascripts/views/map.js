@@ -228,10 +228,21 @@ var MapView = Backbone.View.extend({
         });
         // Each any user layers on top
         _(this.userLayers).each(function(userLayerParams) {
-            new google.maps.CartoDBLayer(userLayerParams);
+            if (userLayerParams.visible){
+                new google.maps.CartoDBLayer(userLayerParams);
+            }
         });
     },
 
+    showUserLayer: function(layerId){
+        this.userLayers[layerId].visible = true;
+        this.reorder_layers();
+    },
+
+    hideUserLayer: function(layerId){
+        this.userLayers[layerId].visible = false;
+        this.reorder_layers();
+    },
 
     remove_layer: function(name) {
         //TODO
