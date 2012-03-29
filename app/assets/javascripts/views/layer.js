@@ -70,7 +70,12 @@ $(function() {
               // update only the stats part
               if(this.header) {
                   this.render_stats(data);
-                  this.header.find('.polygon_num').html(data.polygons.length);
+                  if (data.is_uploaded){
+                    this.header.find('.polygon_num').html(data.total_count);
+                  } else {
+                    this.header.find('.polygon_num').html(data.polygons.length);
+                  }
+                  
               } else {
                   if(!data.total) {
                       $(this.el).html(this.template_header(data));
