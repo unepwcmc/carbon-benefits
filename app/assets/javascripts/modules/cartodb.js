@@ -84,7 +84,7 @@ GROUP BY priority, country";
 
 
 var SQL_UNION_GEOM = " \
-(SELECT ST_Union(the_geom) as unioned_geom FROM " + window.CARTODB_TABLE + " WHERE layer_id = <%= layer_id %>)"
+(SELECT ST_Union(the_geom) as unioned_geom FROM " + window.CARTODB_TABLE + " WHERE layer_id = <%= layer_id %> <%= sql_class_where_clause %>)"
 
     var resource_path= 'carbon-tool.cartodb.com/api/v1/sql';
     var resource_url = 'https://' + resource_path;
@@ -172,7 +172,10 @@ var SQL_UNION_GEOM = " \
           // Build a query to get the layer geom
           var union_sql_template = _.template(SQL_UNION_GEOM);
           sql = c({
-            polygon: union_sql_template({layer_id: polygon[0]['layer_id']})
+            polygon: union_sql_template({
+              layer_id: polygon[0]['layer_id'],
+              sql_class_where_clause: polygon[0]['sql_class_where_clause']
+            })
           });
         } else {
           // Translate gmaps paths into polygon
