@@ -1151,6 +1151,11 @@ div.right {
 #panel #tabs ul li.enabled span.stats {
   display: block;
 }
+#panel #tabs span.user-layer-visibility-toggle {
+  display:block;
+  width:20px;
+  float:right;
+}
 /* line 213, ../../css_src/partials/_panel.scss */
 #panel p {
   margin: 5px 0;
