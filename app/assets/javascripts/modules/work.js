@@ -14,7 +14,7 @@ App.modules.Data = function(app) {
         },
 
         initialize: function() {
-          _.bindAll(this, '_save');
+          _.bindAll(this, '_save', 'sql_class_where_clause');
           this.bind('change:polygons', this.fetch);
           this.save = _.debounce(this._save, 800);
         },
@@ -110,6 +110,19 @@ App.modules.Data = function(app) {
 
         is_total: function() {
           return this.get('total') !== undefined;
+        },
+
+        sql_class_where_clause: function() {
+          var sql = '';
+          // Returns a SQL where clause to filter by the selected class, prefixed with 'AND'
+          if(this.get('selected_class_id') !== null && this.get('selected_class_id') !== 'All Classes'){
+            if(this.get('selected_class_id') === 'No Class'){
+              sql += ' AND class_id IS NULL';
+            } else {
+              sql += ' AND class_id = ' + this.get('selected_class_id');
+            }
+          }
+          return sql;
         }
 
     });
@@ -301,7 +314,9 @@ App.modules.Data = function(app) {
                 });
             });
             this.work.bind('layer_change', function(r) {
-                self.bus.emit('view:update_layer', r.cid, r.toJSON());
+                var data = r.toJSON();
+                data['class_where_clause'] = r.sql_class_where_clause;
+                self.bus.emit('view:update_layer', r.cid, data);
             });
         },
 
@@ -411,7 +426,11 @@ App.modules.Data = function(app) {
         },
 
         on_new_layer: function(r) {
-            this.bus.emit('view:new_layer', r.cid, r.toJSON());
+            var data = r.toJSON();
+            // the tile layer needs the class_where_clause
+            data['class_where_clause'] = r.sql_class_where_clause;
+
+            this.bus.emit('view:new_layer', r.cid, data);
             this.active_layer(r.cid);
         },
 
@@ -437,8 +456,11 @@ App.modules.Data = function(app) {
         active_layer: function(rid) {
             this.active_layer_id = rid;
             var r = this.work.getByCid(rid);
+            var data = r.toJSON();
+            // the tile layer needs the class_where_clause
+            data['class_where_clause'] = r.sql_class_where_clause;
             if(r) {
-              this.bus.emit('view:show_layer', rid, r.toJSON());
+              this.bus.emit('view:show_layer', rid, data);
             }
         },
 
