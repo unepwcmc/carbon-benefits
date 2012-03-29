@@ -423,7 +423,7 @@ App.modules.Map = function(app) {
       var sql = "SELECT the_geom_webmercator FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
       sql = sql + data.class_where_clause();
 
-      if (this.map.userLayers[data.id] === undefined){
+      if (this.map.userLayers[data.id] === undefined || this.map.userLayers[data.id].query !== sql){
         var cartodbLayerParams = {
           map_canvas: 'map_canvas',
           map: this.map.map,
