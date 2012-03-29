@@ -75,7 +75,8 @@ function init() {
     App(function(app) {
       var carbon = new app.Carbon();
       carbon.run();
-      //debug
+      window.ALL_CLASSES = 'All Classes';
+      window.NO_CLASS = 'No Class';
       window.carbon = carbon;
       window._app= app;
     });
