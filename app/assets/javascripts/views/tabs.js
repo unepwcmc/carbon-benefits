@@ -23,8 +23,21 @@ $(function() {
               this.tab_el.append(li);
               el = li;
           } else {
+              var name = '';
+              if (data.is_uploaded){
+                  if (data.name !== ''){
+                      name = $.trim(data.name);
+                      if(name.length > 16){ name = name.substring(0,15) + '...'}
+                  } else {
+                      name = 'uploaded layer';
+                  }
+              } else {
+                  name = 'drawn polygons'
+              }
+
               this.tab_count++;
-              var li = $("<li><a class='tab' href='#" + cid + "'>#"+this.tab_count+"</a><span class='stats'><span class='stats_inner'><h5>AOI #"+this.tab_count+"</h5><p><span class='area'>"+ area +"</span> km<sup>2</sup></p></span></span></li>");
+              var li = $("<li><a class='tab' href='#" + cid + "'>#"+this.tab_count+"</a><span class='stats'><span class='stats_inner'><h5>AOI #"+this.tab_count+"</h5>" +
+              "<p>" + name +"</p></span></span></li>");
               li.insertBefore(this.$('#add_layer').parent());
               el = li;
           }
