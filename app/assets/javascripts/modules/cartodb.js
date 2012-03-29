@@ -2,29 +2,31 @@
 App.modules.Cartodb = function(app) {
 
 var SQL_CARBON= "SELECT SUM((ST_Value(rast, 1, x, y) / 100) * ((ST_Area(ST_Transform(ST_SetSRID(ST_PixelAsPolygon(rast, x, y), 4326), 954009)) / 10000) / 100)) AS total, \
-ST_Area(ST_GeomFromText('<%= polygon %>', 4326)::geography) as area \
+ST_Area(<%= polygon %>::geography) as area \
 FROM carbonsequestration CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y \
-WHERE rid in ( SELECT rid FROM carbonsequestration WHERE ST_Intersects(rast, ST_GeomFromText('<%= polygon %>',4326)) ) \
+WHERE rid in ( SELECT rid FROM carbonsequestration WHERE ST_Intersects(rast, <%= polygon %>) ) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
-  ST_GeomFromText('<%= polygon %>',4326) \
+  <%= polygon %> \
 );";
 
 var SQL_CARBON_COUNTRIES = "\
 SET statement_timeout TO 100000; \
 SELECT country, SUM((ST_Value(rast, 1, x, y) / 100) * ((ST_Area(ST_Transform(ST_SetSRID(ST_PixelAsPolygon(rast, x, y), 4326), 954009)) / 10000) / 100)) AS total, \
-ST_Area(ST_GeomFromText('<%= polygon %>', 4326)::geography) as area \
-FROM carbonintersection CROSS JOIN \
+ST_Area(<%= polygon %>::geography) as area \
+FROM carbonintersection \
+CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN countries \
-WHERE rid IN ( SELECT rid FROM carbonintersection WHERE ST_Intersects(rast, ST_GeomFromText('<%= polygon %>',4326)) ) \
+ \
+WHERE rid IN ( SELECT rid FROM carbonintersection WHERE ST_Intersects(rast, <%= polygon %>) ) \
 AND \
-objectid IN ( SELECT objectid FROM countries WHERE ST_Intersects(the_geom, ST_GeomFromText('<%= polygon %>',4326)) ) \
+objectid IN ( SELECT objectid FROM countries WHERE ST_Intersects(the_geom, <%= polygon %>) ) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast) + (ST_ScaleX(rast)/2), ST_UpperLeftY(rast) + (ST_ScaleY(rast)/2)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
-  ST_GeomFromText('<%= polygon %>',4326) \
+  <%= polygon %> \
 ) \
 AND \
 ST_Intersects( \
@@ -37,11 +39,11 @@ var SQL_RESTORATION ="  \
 SELECT band, AVG(ST_Value(rast, band, x, y)) AS percentage \
 FROM restorationpotencial CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN generate_series(1,4) As band \
-WHERE rid in ( SELECT rid FROM restorationpotencial WHERE ST_Intersects(rast, ST_GeomFromText('<%= polygon %>',4326)) ) \
+WHERE rid in ( SELECT rid FROM restorationpotencial WHERE ST_Intersects(rast, <%= polygon %>) ) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
-  ST_GeomFromText('<%= polygon %>',4326) \
+  <%= polygon %> \
 ) \
 GROUP BY band;"
 
@@ -50,22 +52,22 @@ var SQL_FOREST = " \
 SELECT band, SUM(ST_Value(rast, band, x, y)) AS total \
 FROM forestintactness CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN generate_series(1,4) As band \
-WHERE rid in ( SELECT rid FROM forestintactness WHERE ST_Intersects(rast, ST_GeomFromText('<%= polygon %>',4326)) ) \
+WHERE rid in ( SELECT rid FROM forestintactness WHERE ST_Intersects(rast, <%= polygon %>) ) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
-  ST_GeomFromText('<%= polygon %>',4326) \
+  <%= polygon %> \
 ) \
 GROUP BY band;"
 
-//var SQL_COVERED_KBA = "SELECT (overlapped_area / ( SELECT ST_Area(ST_GeomFromText('<%= polygon %>', 4326)) LIMIT 1 )) * 100 AS kba_percentage, count FROM ( SELECT COUNT(1), ST_Area( ST_Intersection( ST_Union(the_geom), ST_GeomFromText('<%= polygon %>',4326))) AS overlapped_area FROM kba WHERE ST_Intersects( ST_GeomFromText('<%= polygon %>',4326), the_geom) ) foo";
+//var SQL_COVERED_KBA = "SELECT (overlapped_area / ( SELECT ST_Area(<%= polygon %>) LIMIT 1 )) * 100 AS kba_percentage, count FROM ( SELECT COUNT(1), ST_Area( ST_Intersection( ST_Union(the_geom), <%= polygon %>)) AS overlapped_area FROM kba WHERE ST_Intersects( <%= polygon %>, the_geom) ) foo";
 
 var SQL_COVERED_KBA = " \
-SELECT (overlapped_area / ( SELECT ST_Area( ST_MakeValid(ST_GeomFromText('<%= polygon %>', 4326)) \
+SELECT (overlapped_area / ( SELECT ST_Area( ST_MakeValid(<%= polygon %>) \
 ) LIMIT 1 )) * 100 AS kba_percentage, count FROM ( SELECT COUNT(1), ST_Area( ST_Intersection( ST_Union(the_geom), \
-ST_MakeValid(ST_GeomFromText('<%= polygon %>',4326)) \
+ST_MakeValid(<%= polygon %>) \
 )) AS overlapped_area FROM kba WHERE ST_Intersects( \
-ST_MakeValid(ST_GeomFromText('<%= polygon %>',4326)) \
+ST_MakeValid(<%= polygon %>) \
 , the_geom) ) foo"
 
 
@@ -76,9 +78,13 @@ SELECT priority, country, ST_Area(ST_Intersection( \
 )) AS covered_area \
 FROM gaps_merged mg \
 WHERE ST_Intersects(mg.the_geom, \
- ST_GeometryFromText('<%= polygon %>', 4326) \
+ <%= polygon %> \
 ) \
 GROUP BY priority, country";
+
+
+var SQL_UNION_GEOM = " \
+(SELECT ST_Union(the_geom) as unioned_geom FROM polygon_simao WHERE layer_id = <%= layer_id %>)"
 
     var resource_path= 'carbon-tool.cartodb.com/api/v1/sql';
     var resource_url = 'https://' + resource_path;
@@ -130,7 +136,7 @@ GROUP BY priority, country";
             }).join(',');
             multipoly.push("((" + wtk + "))");
         });
-        return 'MULTIPOLYGON(' + multipoly.join(',') + ')';
+        return "ST_GeomFromText('MULTIPOLYGON(" + multipoly.join(',') + ")',4326)";
     }
 
     app.CartoDB = {};
@@ -160,8 +166,19 @@ GROUP BY priority, country";
 
     function stats_query(sql_query, polygon, callback) {
         var c = _.template(sql_query);
-        var poly = wtk_polygon(polygon);
-        var sql = c({polygon: poly});
+        var sql = '';
+        // This is evil, but we test if this is an upload is a special object :-S
+        if (polygon.length === 1 && polygon[0]['upload'] === true) {
+          // Build a query to get the layer geom
+          var union_sql_template = _.template(SQL_UNION_GEOM);
+          sql = c({
+            polygon: union_sql_template({layer_id: polygon[0]['layer_id']})
+          });
+        } else {
+          // Translate gmaps paths into polygon
+          var poly = wtk_polygon(polygon);
+          sql = c({polygon: poly});
+        }
         query(sql, function(data) {
             if(!data) {
                 app.Log.to_server("FAIL SQL(" + location.url + "): " + sql);
@@ -283,6 +300,20 @@ GROUP BY priority, country";
     }
 
     app.CartoDB.covered_by_PA = function(p, callback) {
+        var c = _.template(sql_query);
+        var sql = '';
+        // This is evil, but we test if this is an upload is a special object :-S
+        if (polygon.length === 1 && polygon[0]['upload'] === true) {
+          // Build a query to get the layer geom
+          var union_sql_template = _.template(SQL_UNION_GEOM);
+          sql = c({
+            polygon: union_sql_template({layer_id: polygon[0]['layer_id']})
+          });
+        } else {
+          // Translate gmaps paths into polygon
+          var poly = wtk_polygon(polygon);
+          sql = c({polygon: poly});
+        }
          // data from protected planet
          // but here to follow the same rule
          app.WS.ProtectedPlanet.PA_coverage(wtk_polygon(p), function(d) {
@@ -302,6 +333,8 @@ GROUP BY priority, country";
     };
 
     app.CartoDB.conservation_priorities = function(p, total_area, callback) {
+      // TODO remove this, you just need to clean up the SQL_COUNTRIES template
+      return;
         stats_query(SQL_COUNTRIES, p, function(data) {
             var countries = {};
             var priorities = {

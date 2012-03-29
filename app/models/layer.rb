@@ -1,6 +1,7 @@
 class Layer < ActiveRecord::Base
   include ActiveModel::Validations
   belongs_to :work
+  belongs_to :selected_polygon_class_colour, :class_name => 'PolygonClassColour'
   has_many :polygons
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
@@ -8,7 +9,9 @@ class Layer < ActiveRecord::Base
 
   validates_attachment_content_type :user_layer_file,
     :content_type => [ 'application/zip', 'application/json', 'text/csv',
-      'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz' ]
+      'application/vnd.google-earth.kml+xml', 'application/vnd.google-earth.kmz',
+      'application/x-zip', 'application/x-zip-compressed', 'application/octet-stream',
+      'application/x-compress', 'application/x-compressed', 'multipart/x-zip' ]
   validates_attachment_size :user_layer_file, :less_than => 100.megabytes
   validates :user_layer_file, :ogr_parsable => true
 
@@ -32,7 +35,10 @@ class Layer < ActiveRecord::Base
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour, c.polygon_class_id] },
       'is_uploaded' => is_uploaded,
-      'name' => name
+      'name' => name,
+      'selected_class' => selected_polygon_class_colour && selected_polygon_class_colour.polygon_class.name,
+      'selected_class_id' => selected_polygon_class_colour_id,
+      'selected_colour' => selected_polygon_class_colour && selected_polygon_class_colour.colour
     }.to_json
   end
 
