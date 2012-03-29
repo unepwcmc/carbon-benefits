@@ -1,12 +1,23 @@
 $(function() {
   window.Tabs = Backbone.View.extend({
       events: {
-          'click .tab': 'click_activate'
+          'click .tab': 'click_activate',
+          'change .user-layer-visibility-toggle': 'toggleUserLayerVisibility'
       },
 
       initialize: function() {
           this.tab_el = this.$("ul");
           this.tab_count = 0;
+      },
+
+      toggleUserLayerVisibility: function(e){
+        var layerId = $(e.target).attr('data-layer-id');
+        var layerData = carbon.map.map.userLayers[layerId];
+        if (layerData.visible){
+          carbon.map.map.hideUserLayer(layerId);
+        } else {
+          carbon.map.map.showUserLayer(layerId);
+        }
       },
 
       add_layer: function(cid, data) {
@@ -24,7 +35,11 @@ $(function() {
               el = li;
           } else {
               var name = '';
+              var visibilityToggle = '';
               if (data.is_uploaded){
+                  var isVisible = carbon.map.map.userLayers[data.id].visible;
+                  visibilityToggle = '<span class="user-layer-visibility-toggle">' +
+                  '<input type="checkbox" data-layer-id=' + data.id + ' checked="' + isVisible + '"></span>';
                   if (data.name !== ''){
                       name = $.trim(data.name);
                       if(name.length > 16){ name = name.substring(0,15) + '...'}
@@ -32,11 +47,11 @@ $(function() {
                       name = 'uploaded layer';
                   }
               } else {
-                  name = 'drawn polygons'
+                  name = 'drawn polygons';
               }
-
               this.tab_count++;
-              var li = $("<li><a class='tab' href='#" + cid + "'>#"+this.tab_count+"</a><span class='stats'><span class='stats_inner'><h5>AOI #"+this.tab_count+"</h5>" +
+              var li = $("<li><a class='tab' href='#" + cid + "'>#"+this.tab_count+"</a><span class='stats'><span class='stats_inner'>" +
+              "<h5>AOI #"+this.tab_count+" " + visibilityToggle + "</h5>" +
               "<p>" + name +"</p></span></span></li>");
               li.insertBefore(this.$('#add_layer').parent());
               el = li;
