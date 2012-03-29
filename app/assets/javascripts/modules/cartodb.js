@@ -84,7 +84,7 @@ GROUP BY priority, country";
 
 
 var SQL_UNION_GEOM = " \
-(SELECT ST_Union(the_geom) as unioned_geom FROM polygon_simao WHERE layer_id = <%= layer_id %>)"
+(SELECT ST_Union(the_geom) as unioned_geom FROM " + window.CARTODB_TABLE + " WHERE layer_id = <%= layer_id %>)"
 
     var resource_path= 'carbon-tool.cartodb.com/api/v1/sql';
     var resource_url = 'https://' + resource_path;

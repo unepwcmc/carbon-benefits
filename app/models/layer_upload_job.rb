@@ -1,7 +1,7 @@
 class LayerUploadJob
   include Resque::Plugins::Status
   MAX_POLYGON_AREA = 8000000*1000*1000
-  TABLENAME = "polygon_simao"
+  TABLENAME = APP_CONFIG['cartodb_table']
   COLOR_ARY = ['red', 'blue', 'green', 'yellow', 'purple', 'brown', 'black', 'white']
 
   def perform
