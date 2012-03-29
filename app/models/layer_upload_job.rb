@@ -56,7 +56,7 @@ private
     first_row = res.rows.first
     @geom_type = first_row && first_row[:geom_type]
     unless @geom_type
-      self.status = 'We were unable to reproject your data, this tool works best with data in 4326'
+      self.status = 'We were unable to reproject your data, this tool works best with data using WGS-84 projection (EPSG:4326)'
       return false
     end
     if @geom_type == 'MULTIPOLYGON'
