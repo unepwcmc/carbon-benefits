@@ -46,7 +46,8 @@ class Layer < ActiveRecord::Base
     {
       'id' => id,
       'polygons' => polygons.map{|p| p.as_json},
-      'polygons_count' => (is_uploaded ? get_polygons_count : polygons.size),
+      'total_count' => (is_uploaded ? get_polygons_count : polygons.size),
+      'selected_count' => (is_uploaded ? get_polygons_count(false) : polygons.size),
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour, c.polygon_class_id] },
       'is_uploaded' => is_uploaded,
@@ -57,16 +58,20 @@ class Layer < ActiveRecord::Base
     }.to_json
   end
 
-  def get_polygons_count
-    filter_class = case self.selected_polygon_class_id
+  def get_polygons_count total=true
+    filter_class = if total
+                     ""
+                   else
+                     case self.selected_polygon_class_id
                      when SELECTED_ALL_CLASSES
                        ""
                      when SELECTED_NO_CLASS
                        " AND class_id IS NULL"
                      else
-                       " AND class_id = #{self.selected_polygon_class_id}"
+                       self.selected_polygon_class ? " AND class_id = #{self.selected_polygon_class_id}" : ""
+                     end
                    end
-    res = CartoDB::Connection.query "SELECT COUNT(*) AS polygon_count FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{self.id}" + filter_class
+    res = CartoDB::Connection.query "SELECT COUNT(*) AS polygon_count FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{self.id} #{filter_class}"
     first_row = res.rows.first
     first_row && first_row[:polygon_count] || 0
   end
