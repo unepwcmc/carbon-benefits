@@ -1,7 +1,7 @@
 class Layer < ActiveRecord::Base
   include ActiveModel::Validations
   belongs_to :work
-  belongs_to :selected_polygon_class_colour, :class_name => 'PolygonClassColour'
+  belongs_to :selected_polygon_class, :class_name => 'PolygonClass'
   has_many :polygons
   has_many :polygon_class_colours
   has_many :polygon_classes, :through => :polygon_class_colours
@@ -17,6 +17,11 @@ class Layer < ActiveRecord::Base
 
   before_save :extract_meta_data
 
+  SELECTED_ALL_CLASSES_T = 'All Classes'
+  SELECTED_ALL_CLASSES = -1
+  SELECTED_NO_CLASS_T = 'No Class'
+  SELECTED_NO_CLASS = -2
+
   def extract_meta_data
     self.meta_data = unless self.user_layer_file.queued_for_write[:original]
       []
@@ -28,22 +33,45 @@ class Layer < ActiveRecord::Base
   end
 
   def as_json(options={})
+    selected_name, selected_id, selected_colour = case selected_polygon_class_id
+                             when SELECTED_ALL_CLASSES
+                               [SELECTED_ALL_CLASSES_T, SELECTED_ALL_CLASSES_T, "black"]
+                             when SELECTED_NO_CLASS
+                               [SELECTED_NO_CLASS_T, SELECTED_NO_CLASS_T, "white"]
+                             else
+                               [ selected_polygon_class ? selected_polygon_class.name : nil,
+                                 selected_polygon_class_id,
+                                 selected_polygon_class ? polygon_class_colours.find_by_polygon_class_id(selected_polygon_class_id).colour : nil ]
+                           end
     {
       'id' => id,
       'polygons' => polygons.map{|p| p.as_json},
-      'polygons_count' => (is_uploaded ? get_polygons_count : polygons.size),
+      'total_count' => (is_uploaded ? get_polygons_count : polygons.size),
+      'selected_count' => (is_uploaded ? get_polygons_count(false) : polygons.size),
       'stats' => JSON.parse(stats),
       'classes' => polygon_class_colours.map{ |c| [c.polygon_class.name, c.colour, c.polygon_class_id] },
       'is_uploaded' => is_uploaded,
       'name' => name,
-      'selected_class' => selected_polygon_class_colour && selected_polygon_class_colour.polygon_class.name,
-      'selected_class_id' => selected_polygon_class_colour_id,
-      'selected_colour' => selected_polygon_class_colour && selected_polygon_class_colour.colour
+      'selected_class' => selected_name,
+      'selected_class_id' => selected_id,
+      'selected_colour' => selected_colour
     }.to_json
   end
 
-  def get_polygons_count
-    res = CartoDB::Connection.query "SELECT COUNT(*) AS polygon_count FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{self.id}"
+  def get_polygons_count total=true
+    filter_class = if total
+                     ""
+                   else
+                     case self.selected_polygon_class_id
+                     when SELECTED_ALL_CLASSES
+                       ""
+                     when SELECTED_NO_CLASS
+                       " AND class_id IS NULL"
+                     else
+                       self.selected_polygon_class ? " AND class_id = #{self.selected_polygon_class_id}" : ""
+                     end
+                   end
+    res = CartoDB::Connection.query "SELECT COUNT(*) AS polygon_count FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{self.id} #{filter_class}"
     first_row = res.rows.first
     first_row && first_row[:polygon_count] || 0
   end

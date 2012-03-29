@@ -116,8 +116,8 @@ App.modules.Data = function(app) {
         sql_class_where_clause: function() {
           var sql = '';
           // Returns a SQL where clause to filter by the selected class, prefixed with 'AND'
-          if(this.get('selected_class_id') !== null && this.get('selected_class_id') !== 'All Classes'){
-            if(this.get('selected_class_id') === 'No Class'){
+          if(this.get('selected_class_id') !== null && this.get('selected_class_id') !== window.ALL_CLASSES){
+            if(this.get('selected_class_id') === window.NO_CLASS){
               sql += ' AND class_id IS NULL';
             } else {
               sql += ' AND class_id = ' + this.get('selected_class_id');
