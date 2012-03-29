@@ -20,7 +20,7 @@ class MetaDataExtractor
     #get the layers first
     layers_cmd = "-so \"#{@meta_file}\""
     layers_output = Paperclip.run('ogrinfo', layers_cmd)
-    if layers_output =~ /\d+: (.+) \(.+\)$/
+    if layers_output =~ /^\d+: ([^()\n]+)( \(.+\))?$/
       @layer_name = $1 #use the first layer if more
     end
     raise "No layers detected" unless @layer_name
