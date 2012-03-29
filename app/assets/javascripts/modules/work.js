@@ -87,7 +87,8 @@ App.modules.Data = function(app) {
               // This is evil, but we test if this is an upload, we pass this magic object
               polygons = [{
                 upload: true,
-                layer_id: this.get('id')
+                layer_id: this.get('id'),
+                sql_class_where_clause: this.sql_class_where_clause()
               }];
             }
             app.WS.CartoDB.calculate_stats(polygons, function(stats) {
@@ -366,6 +367,7 @@ App.modules.Data = function(app) {
               });
               $(".classes_list .select_class[data-id='" + class_id + "']").data('colour', colour).find('i').css('background-color', colour);
               r.select_class(class_id, class_name, colour);
+              r.fetch();
           } else {
               app.Log.error("can't get layer: ", rid);
           }
