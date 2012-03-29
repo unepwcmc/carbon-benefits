@@ -47,7 +47,7 @@ $(function() {
                       name = 'uploaded layer';
                   }
               } else {
-                  name = 'drawn polygons';
+                  name = "<p><span class='area'>"+ area +"</span> km<sup>2</sup></p>";
               }
               this.tab_count++;
               var li = $("<li><a class='tab' href='#" + cid + "'>#"+this.tab_count+"</a><span class='stats'><span class='stats_inner'>" +
