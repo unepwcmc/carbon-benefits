@@ -114,7 +114,10 @@
         <div class="inner">
             <h1>Upload a layer to analyse</h1>
             <div id='upload-form'>
-              <p>We support layer uploads in SHP and KML</p>
+              <p>
+                Formats supported are Shapefile, KML, CSV and GeoJSON. Shapefiles should be uploaded as a zipped archive.<br />
+                The preferred projection for all filetypes is WGS-84 (EPSG:4326). If you have any problems uploading, please reproject your file and try again.
+              </p>
               <%= form_tag upload_layer_file_url, :multipart => true do%>
                 <%= hidden_field_tag "layer_id" %>
                 <p>
