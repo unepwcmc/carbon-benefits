@@ -8,6 +8,8 @@
                   <a href='#edit' class="go_edit edit">edit</a>
                   <a href='#remove' class="remove">remove</a>
               </span>
+          <% } else { %>
+            <a class='filter_polygons' href='#'>Filter polygons</a></p></h2>
           <% } %>
         </div>
 
@@ -30,3 +32,7 @@
 
     <div class="loader"></div>
 </div> <!-- stats_header -->
+<% if(is_uploaded) { %>
+  <ul class='polygon_filter'>
+  </ul>
+<% } %>

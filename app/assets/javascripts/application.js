@@ -52,6 +52,7 @@
 //= require views/upload_box
 //= require views/field_picker
 //= require views/uploading
+//= require views/polygon_filter
 //= require wax.g
 //= require cartodb-gmapsv3
 //= require carbon
