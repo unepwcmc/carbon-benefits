@@ -92,7 +92,7 @@ $(function() {
           }
 
           // Add the polygon filtering view
-          this.polygon_filter_view = new PolygonFilterView({ el: this.$(".polygon_filter") });
+          this.polygon_filter_view = new PolygonFilterView({ el: this.$(".polygon_filter"), layer_id: data.id });
 
           this.loading(this.showing_loading);
           return this;
