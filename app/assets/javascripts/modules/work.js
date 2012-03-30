@@ -24,6 +24,9 @@ App.modules.Data = function(app) {
           this.set({'selected_class': name});
           this.set({'selected_class_id': id});
           this.save();
+
+          carbon.map.map.userLayers[this.id].changed = true;
+          carbon.map.reorder_layers();
         },
 
         _save: function() {

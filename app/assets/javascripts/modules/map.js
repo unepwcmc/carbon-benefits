@@ -423,7 +423,7 @@ App.modules.Map = function(app) {
       var sql = "SELECT the_geom_webmercator FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
       sql = sql + data.class_where_clause();
 
-      if (this.map.userLayers[data.id] === undefined || this.map.userLayers[data.id].query !== sql){
+      if (this.map.userLayers[data.id] === undefined || this.map.userLayers[data.id].changed){
         var cartodbLayerParams = {
           map_canvas: 'map_canvas',
           map: this.map.map,
@@ -433,7 +433,8 @@ App.modules.Map = function(app) {
           tile_style: "#" + window.CARTODB_TABLE + "{polygon-fill:" +
           (data.selected_colour ? data.selected_colour : 'green') +
           ";polygon-opacity:0.7;line-width:0}",
-          visible: true
+          visible: true,
+          changed: false
         };
         // map_style: true
         
