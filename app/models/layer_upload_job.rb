@@ -1,13 +1,11 @@
 class LayerUploadJob
   include Resque::Plugins::Status
-  MAX_POLYGON_AREA = 8000000*1000*1000
+  MAX_POLYGON_AREA = 20000000#in km2
   TABLENAME = APP_CONFIG['cartodb_table']
   COLOR_ARY = ['red', 'blue', 'green', 'yellow', 'purple', 'brown', 'black', 'white']
 
   def perform
-    puts options['layer_id'].inspect
     @layer = Layer.find(options['layer_id'])
-    puts @layer.inspect
     @layer_file = @layer.user_layer_file
     @class_field = options['class_field'] && options['class_field'].downcase
     @name_field = options['name_field'].downcase
@@ -43,15 +41,19 @@ private
   end
 
   def create_in_carto_db
+    puts "creating in carto db"
     res = CartoDB::Connection.create_table '', @layer_file.to_file
     @table_name = res[:name]
+    puts res.inspect
   end
 
   def drop_in_carto_db
+    puts "dropping in carto db"
     CartoDB::Connection.drop_table @table_name
   end
 
   def validate
+    puts "validating upload"
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
     @geom_type = first_row && first_row[:geom_type]
@@ -76,11 +78,14 @@ private
   end
 
   def validate_size
-    res = CartoDB::Connection.query "SELECT MAX(ST_Area(the_geom)) AS area_m2, SUM(ST_Area(the_geom)) AS total_area_m2 FROM #{@table_name}"
+    puts "validating upload size"
+    res = CartoDB::Connection.query "SELECT MAX(ST_Area(ST_transform(the_geom, 26918))/1000000) AS area_km2, " +
+    "SUM(ST_Area(ST_transform(the_geom, 26918))/1000000) AS total_area_km2 " +
+    "FROM #{@table_name}"
     first_row = res.rows.first
-    area_m2 = first_row && first_row[:area_m2]
-    total_area_m2 = first_row && first_row[:total_area_m2]
-    unless area_m2 <= MAX_POLYGON_AREA && total_area_m2 <= MAX_POLYGON_AREA
+    area_km2 = first_row && first_row[:area_km2]
+    total_area_km2 = first_row && first_row[:total_area_km2]
+    unless area_km2 < MAX_POLYGON_AREA && total_area_km2 < MAX_POLYGON_AREA
       self.status = 'We are sorry, but the layer you are trying to analyze is too big'
       return false
     end
