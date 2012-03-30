@@ -1,10 +1,11 @@
 $(function() {
-  // View to filter filter the polygons in an uploaded layer
+  // View to filter the polygons in an uploaded layer
   window.PolygonFilterView = Backbone.View.extend({
     template: JST["templates/polygon_filter"],
 
     initialize: function() {
       this.render();
+      this.polygon_names_collection = new PolygonNamesCollection({layer_id: this.layer_id});
     },
 
     render: function() {
