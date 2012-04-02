@@ -1,3 +1,5 @@
-<li>Polygon Name</li>
+<% for (polygon in polygons) {%>
+  <li><%= polygon.id + ': ' + polygon.name %></li>
+<% } %>
 <li>Another Name</li>
 <li>zOMG name Name</li>
