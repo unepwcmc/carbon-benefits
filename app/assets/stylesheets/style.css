@@ -876,8 +876,11 @@ div.right {
   background: url("sprite.png") no-repeat -224px -2432px;
 }
 /* line 336, ../../css_src/partials/_map.scss */
-.map_container .layers div.show ul li.enabled span.color.KBA {
+.map_container .layers div.show ul li.enabled span.color.Key_Biodiversity_Areas {
   background: url("sprite.png") no-repeat -224px -2462px;
+}
+.map_container .layers div.show ul li.enabled span.color.Gap_Analysis {
+  background: url("sprite.png") no-repeat -224px -2513px;
 }
 /* line 344, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.last {

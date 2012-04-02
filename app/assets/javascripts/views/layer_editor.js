@@ -68,7 +68,6 @@ $(function() {
       _(this.layers).each(function(a) {
         if(a.enabled) t++;
       });
-      this.$('.layer_number').html(t + " LAYER"+ (t==1?'':'S'));
     },
 
     sortLayers: function() {
