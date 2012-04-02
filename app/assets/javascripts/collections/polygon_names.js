@@ -3,7 +3,7 @@ $(function() {
   window.PolygonNamesCollection = Backbone.Collection.extend({
     model: PolygonName,
     url: function() {
-      return '/layers/' + this.layer_id + '/polygons';
+      return '/layers/' + this.layer_id + '/polygon_names';
     }
   });
 

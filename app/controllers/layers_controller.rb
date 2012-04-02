@@ -26,4 +26,21 @@ class LayersController < ApplicationController
     render :json => status
   end
 
+  # JSON list of the associated polygon names
+  def polygon_names
+    polygons = Polygon.find(:all, :conditions => {:layer_id => params[:id]}, :select => "id, name" )
+
+    @json = []
+
+    if polygons.present?
+      @json = polygons.map do |p|
+        {
+          :id => p.id,
+          :name => p.name
+        }
+      end
+    end
+    render :json => @json.to_json
+  end
+
 end

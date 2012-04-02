@@ -29,6 +29,7 @@ $(function() {
           $(this.el).addClass('tab_content_item');
           this.bus = this.options.bus;
           this.rid = this.options.rid;
+
           this.header = null;
           this.showing_loading = false;
           this.showing = false;
