@@ -1,5 +1,3 @@
-<% for (polygon in polygons) {%>
-  <li><%= polygon.id + ': ' + polygon.name %></li>
+<% for (var i=0, il = polygons.length; i<il ;i=i+1) {%>
+  <li><%= polygons[0].get('cartodb_id') + ': ' + polygons[0].get('name') %></li>
 <% } %>
-<li>Another Name</li>
-<li>zOMG name Name</li>

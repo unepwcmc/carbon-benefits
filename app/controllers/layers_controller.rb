@@ -26,21 +26,11 @@ class LayersController < ApplicationController
     render :json => status
   end
 
-  # JSON list of the associated polygon names
+  # JSON list of the associated uploaded polygon names
   def polygon_names
-    polygons = Polygon.find(:all, :conditions => {:layer_id => params[:id]}, :select => "id, name" )
+    polygons = CartoDB::Connection.query("SELECT cartodb_id, name FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{params[:id]}")[:rows]
 
-    @json = []
-
-    if polygons.present?
-      @json = polygons.map do |p|
-        {
-          :id => p.id,
-          :name => p.name
-        }
-      end
-    end
-    render :json => @json.to_json
+    render :json => polygons.to_json
   end
 
 end
