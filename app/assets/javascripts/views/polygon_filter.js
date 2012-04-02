@@ -3,6 +3,10 @@ $(function() {
   window.PolygonFilterView = Backbone.View.extend({
     template: JST["templates/polygon_filter"],
 
+    events: {
+      'change input': 'changeSelected'
+    },
+
     initialize: function() {
       _.bindAll(this, 'render');
       this.layer_id = this.options.layer_id;
@@ -24,6 +28,15 @@ $(function() {
 
     hide: function() {
       $(this.el).slideUp();
+    },
+
+    changeSelected: function() {
+      // called when user toggles a layer
+      var selected = [];
+      _.each(this.$('input[name=selected_layers]:checked'), function(input) {
+        selected.push($(input).val());
+      });
+      console.log(selected);
     }
 
   });
