@@ -33,7 +33,7 @@ App.modules.Config = function(app) {
             opacity: 0.7,
             enabled: false
           }, {
-            name: 'KBA',
+            name: 'Key Biodiversity Areas',
             url: 'http://carbon-tool.cartodb.com/tiles/kba/{Z}/{X}/{Y}.png',
             opacity: 0.7,
             enabled: false
