@@ -420,7 +420,7 @@ App.modules.Map = function(app) {
     show_tile_layer: function(rid, data){
 
       // CartoDB Uploaded Polygon Layer
-      var sql = "SELECT the_geom_webmercator FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
+      var sql = "SELECT the_geom_webmercator, class_id FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
       sql = sql + data.class_where_clause();
 
       var cartodbLayerParams = {
