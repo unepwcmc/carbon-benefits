@@ -14,7 +14,8 @@ $(function() {
     },
 
     render: function() {
-      $(this.el).html(this.template({polygons: this.polygon_names_collection.models}));
+      var templateHtml = this.template({polygons: this.polygon_names_collection.models});
+      $(this.el).html(templateHtml);
     },
 
     show: function() {
