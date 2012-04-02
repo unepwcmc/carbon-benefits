@@ -8,7 +8,8 @@ $(function() {
     },
 
     initialize: function() {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'changeSelected');
+      this.bus = this.options.bus;
       this.layer_id = this.options.layer_id;
       this.polygon_names_collection = new PolygonNamesCollection();
       this.polygon_names_collection.layer_id = this.layer_id;
@@ -36,7 +37,9 @@ $(function() {
       _.each(this.$('input[name=selected_layers]:checked'), function(input) {
         selected.push($(input).val());
       });
-      console.log(selected);
+      
+      console.log('selected polygons selected ' + selected + ' in layer ' + this.layer_id);
+      this.bus.emit('layer:select_polygons', this.layer_id, selected);
     }
 
   });
