@@ -29,6 +29,13 @@ App.modules.Data = function(app) {
           carbon.map.reorder_layers();
         },
 
+        setSelectedPolygons: function(selected_ids) {
+          // set the selected polygons from their cartodb_ids, and fetch the data
+          this.set({'selected_polygon_ids': selected_ids});
+
+          this.fetch();
+        },
+
         _save: function() {
             return this.collection.save();
         },
@@ -117,8 +124,8 @@ App.modules.Data = function(app) {
         },
 
         sql_class_where_clause: function() {
-          var sql = '';
-          // Returns a SQL where clause to filter by the selected class, prefixed with 'AND'
+          // Returns a SQL where clause to filter by the selected class and polygons, prefixed with 'AND'
+          var sql = '', selected_polygon_ids = this.get('selected_polygon_ids');
           if(this.get('selected_class_id') !== null && this.get('selected_class_id') !== window.ALL_CLASSES){
             if(this.get('selected_class_id') === window.NO_CLASS){
               sql += ' AND class_id IS NULL';
@@ -126,6 +133,14 @@ App.modules.Data = function(app) {
               sql += ' AND class_id = ' + this.get('selected_class_id');
             }
           }
+          
+          // Add SQL clause for selected polygon ids
+          if (typeof(selected_polygon_ids) !== 'undefined' && selected_polygon_ids.length > 0) {
+            sql += ' AND cartodb_id IN (';
+            sql += selected_polygon_ids.join(',');            
+            sql += ')';
+          }
+          console.log('fetch where clause: ' + sql);
           return sql;
         }
 
@@ -147,6 +162,15 @@ App.modules.Data = function(app) {
           if(app.config.LOCAL_STORAGE) {
             this.localStorage = new Store(this.work_id);
           }
+        },
+
+        findByLayerId: function(layer_id) {
+          // returns the first layer in the collection with the specified layer id
+          var i, il;
+          for (i=0, il=this.models.length; i=i+1; i++) {
+            if (this.models[i].id === layer_id) return this.models[i];
+          }
+          return null;
         },
 
         url: function() {
@@ -291,7 +315,7 @@ App.modules.Data = function(app) {
 
         init: function(bus) {
             var self = this;
-            _.bindAll(this, 'on_polygon', 'on_work', 'on_new_layer','add_layer', 'on_create_work', 'active_layer', 'on_remove_polygon', 'on_update_polygon', 'on_clear', 'on_delete_layer', 'on_select_class');
+            _.bindAll(this, 'on_polygon', 'on_work', 'on_new_layer','add_layer', 'on_create_work', 'active_layer', 'on_remove_polygon', 'on_update_polygon', 'on_clear', 'on_delete_layer', 'on_select_class', 'on_select_polygons');
             this.bus = bus;
             this.work = new WorkModel();
             this.work.bus = bus;
@@ -306,7 +330,8 @@ App.modules.Data = function(app) {
                 'model:update_polygon': 'on_update_polygon',
                 'model:clear': 'on_clear',
                 'model:delete_layer': 'on_delete_layer',
-                'model:select_class': 'on_select_class'
+                'model:select_class': 'on_select_class',
+                'layer:select_polygons': 'on_select_polygons'
             });
 
             this.work.bind('add', this.on_new_layer);
@@ -374,6 +399,12 @@ App.modules.Data = function(app) {
           } else {
               app.Log.error("can't get layer: ", rid);
           }
+        },
+        
+        on_select_polygons: function(layer_id, selected_ids) {
+          // find the layer that has been selected on, and set the selection
+          var layer = this.work.findByLayerId(layer_id);
+          layer.setSelectedPolygons(selected_ids);
         },
 
         on_polygon: function(polygon) {
