@@ -1,6 +1,8 @@
 $(function() {
   // View to filter the polygons in an uploaded layer
   window.PolygonFilterView = Backbone.View.extend({
+    tagName: 'ul',
+    className: 'polygon_filter',
     template: JST["templates/polygon_filter"],
 
     events: {
@@ -10,12 +12,22 @@ $(function() {
     initialize: function() {
       _.bindAll(this, 'render', 'changeSelected');
       this.bus = this.options.bus;
-      this.layer_id = this.options.layer_id;
       this.polygon_names_collection = new PolygonNamesCollection();
-      this.polygon_names_collection.layer_id = this.layer_id;
-      this.polygon_names_collection.fetch({
-        success: this.render
-      });
+    },
+
+    renderTo: function(layer_id) {
+      // render the view inside the given element, updating the layer if needed
+      if (layer_id !== this.polygon_names_collection.layer_id) {
+        // if we've updated the layer_id, fetch then render
+        this.polygon_names_collection.layer_id = layer_id;
+        this.polygon_names_collection.fetch({
+          success: this.render
+        });
+      } else {
+        // nothing's changed, just render
+        this.render();
+      }
+      return this;
     },
 
     render: function() {
@@ -39,7 +51,7 @@ $(function() {
       });
       
       console.log('selected polygons selected ' + selected + ' in layer ' + this.layer_id);
-      this.bus.emit('layer:select_polygons', this.layer_id, selected);
+      this.bus.emit('layer:select_polygons', this.polygon_names_collection.layer_id, selected);
     }
 
   });

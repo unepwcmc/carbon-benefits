@@ -167,7 +167,7 @@ App.modules.Data = function(app) {
         findByLayerId: function(layer_id) {
           // returns the first layer in the collection with the specified layer id
           var i, il;
-          for (i=0, il=this.models.length; i=i+1; i++) {
+          for (i=0, il=this.models.length; i < il; i=i+1) {
             if (this.models[i].id === layer_id) return this.models[i];
           }
           return null;

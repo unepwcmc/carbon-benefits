@@ -35,6 +35,7 @@ $(function() {
           this.showing = false;
           this.render_stats = _.debounce(this._render_stats, 300);
           this.tooltip_timer = undefined;
+          this.polygon_filter_view = new PolygonFilterView({bus: this.bus});
       },
 
       _render_stats: function(data) {
@@ -93,8 +94,7 @@ $(function() {
           }
 
           // Add the polygon filtering view
-
-          this.polygon_filter_view = new PolygonFilterView({ el: this.$(".polygon_filter"), bus: this.bus, layer_id: data.id });
+          $(this.el).append(this.polygon_filter_view.renderTo(data.id).el);
 
           this.loading(this.showing_loading);
           return this;
