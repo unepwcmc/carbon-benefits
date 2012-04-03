@@ -74,7 +74,7 @@ ST_MakeValid(<%= polygon %>) \
 var SQL_COUNTRIES = " \
 SELECT priority, country, ST_Area(ST_Intersection( \
  ST_Union(mg.the_geom)::geography, \
- ST_GeographyFromText('<%= polygon %>') \
+ <%= polygon %> \
 )) AS covered_area \
 FROM gaps_merged mg \
 WHERE ST_Intersects(mg.the_geom, \
@@ -127,6 +127,10 @@ var SQL_UNION_GEOM = " \
     }
 
     function wtk_polygon(poly) {
+        return "ST_GeomFromText('" + wkt_polygon(poly) + "',4326)";
+    }
+
+    function wkt_polygon(poly) {
         var multipoly = [];
         _.each(poly, function(p) {
             p = p.get('path');
@@ -136,7 +140,7 @@ var SQL_UNION_GEOM = " \
             }).join(',');
             multipoly.push("((" + wtk + "))");
         });
-        return "ST_GeomFromText('MULTIPOLYGON(" + multipoly.join(',') + ")',4326)";
+        return "MULTIPOLYGON(" + multipoly.join(',') + ")";
     }
 
     app.CartoDB = {};
@@ -303,41 +307,47 @@ var SQL_UNION_GEOM = " \
     }
 
     app.CartoDB.covered_by_PA = function(p, callback) {
-        var c = _.template(sql_query);
-        var sql = '';
         // This is evil, but we test if this is an upload is a special object :-S
-        if (polygon.length === 1 && polygon[0]['upload'] === true) {
-          // Build a query to get the layer geom
-          var union_sql_template = _.template(SQL_UNION_GEOM);
-          sql = c({
-            polygon: union_sql_template({layer_id: polygon[0]['layer_id']})
+        if (p.length === 1 && p[0]['upload'] === true) {
+          sql_query = "SELECT ST_AsText(ST_Union(the_geom)) AS geom FROM " + window.CARTODB_TABLE + " WHERE layer_id=<%= layer_id %> <%= sql_class_where_clause %>";
+          var query_template = _.template(sql_query);
+          sql = query_template({
+              layer_id: p[0]['layer_id'],
+              sql_class_where_clause: p[0]['sql_class_where_clause']
           });
-        } else {
-          // Translate gmaps paths into polygon
-          var poly = wtk_polygon(polygon);
-          sql = c({polygon: poly});
-        }
-         // data from protected planet
-         // but here to follow the same rule
-         app.WS.ProtectedPlanet.PA_coverage(wtk_polygon(p), function(d) {
-            if(d && d.sum_pa_cover_km2) {
-              var num = 0;
-              if(d.results && d.results.length >= 1) {
-                  num = d.results[0].protected_areas.length;
-              }
-              callback({
-                num_overlap: num,
-                km2: d.sum_pa_cover_km2 || 0
-              });
-            } else {
-              callback();
+          query(sql, function(data) {
+            if(!data) {
+                app.Log.to_server("FAIL SQL(" + location.url + "): " + sql);
             }
-         });
+            app.CartoDB._covered_by_PA(data.rows[0].geom, callback);
+          });
+          return false;
+        } else {
+          app.CartoDB._covered_by_PA(wkt_polygon(p), callback);
+        }
     };
 
+    app.CartoDB._covered_by_PA = function(p, callback){
+        // data from protected planet
+        // but here to follow the same rule
+        // params p is WKT Multipolygon to analyse on
+        app.WS.ProtectedPlanet.PA_coverage(p, function(d) {
+          if(d && d.sum_pa_cover_km2) {
+            var num = 0;
+            if(d.results && d.results.length >= 1) {
+                num = d.results[0].protected_areas.length;
+            }
+            callback({
+              num_overlap: num,
+              km2: d.sum_pa_cover_km2 || 0
+            });
+          } else {
+            callback();
+          }
+        });
+    }
+
     app.CartoDB.conservation_priorities = function(p, total_area, callback) {
-      // TODO remove this, you just need to clean up the SQL_COUNTRIES template
-      return;
         stats_query(SQL_COUNTRIES, p, function(data) {
             var countries = {};
             var priorities = {
