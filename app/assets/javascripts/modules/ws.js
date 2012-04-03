@@ -105,9 +105,6 @@ App.modules.WS = function(app) {
         },
 
         aggregate_stats: function(layers, polygons, callback) {
-            //if(polygons.length === 0) {
-                //callback({});
-            //}
             function sum(layers, what) {
                 var t = 0;
                 _(layers).each(function(r) {
