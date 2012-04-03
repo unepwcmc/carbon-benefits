@@ -135,8 +135,9 @@ private
         ActiveRecord::Base.send(
           :sanitize_sql_array,
           [
-            "UPDATE #{TABLENAME} SET class_id = ? WHERE class_name = ?",
+            "UPDATE #{TABLENAME} SET class_id = ? WHERE layer_id = ? AND class_name = ?",
             polygon_classes_mapping[k],
+            @layer.id,
             k
           ]
         )
