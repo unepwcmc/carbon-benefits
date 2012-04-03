@@ -70,7 +70,8 @@ App.modules.WS = function(app) {
                     'carbon_sequestration',
                     'restoration_potential',
                     'forest_status',
-                    'covered_by_KBA'
+                    'covered_by_KBA',
+                    'covered_by_PA'
                     ];
 
             function ready(what) {
