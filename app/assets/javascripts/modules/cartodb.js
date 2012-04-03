@@ -309,32 +309,29 @@ var SQL_UNION_GEOM = " \
     app.CartoDB.covered_by_PA = function(p, callback) {
         // This is evil, but we test if this is an upload is a special object :-S
         if (p.length === 1 && p[0]['upload'] === true) {
-          sql = "SELECT ST_AsGeoJSON(the_geom) AS geom, layer_id, class_id FROM " + window.CARTODB_TABLE + " WHERE layer_id=" + p[0]['layer_id'];
+          sql_query = "SELECT ST_AsText(ST_Union(the_geom)) AS geom FROM " + window.CARTODB_TABLE + " WHERE layer_id=<%= layer_id %> <%= sql_class_where_clause %>";
+          var query_template = _.template(sql_query);
+          sql = query_template({
+              layer_id: p[0]['layer_id'],
+              sql_class_where_clause: p[0]['sql_class_where_clause']
+          });
           query(sql, function(data) {
             if(!data) {
                 app.Log.to_server("FAIL SQL(" + location.url + "): " + sql);
             }
-
-            var polygons = _.map(data.rows, function(e){
-              p = JSON.parse(e.geom);
-              return new App.Polygon({
-                path:p.coordinates[0][0],
-                layer_id:e.layer_id,
-                polygon_class_id:e.class_id
-              })
-            });
-            app.CartoDB._covered_by_PA(polygons, callback);
+            app.CartoDB._covered_by_PA(data.rows[0].geom, callback);
           });
           return false;
         } else {
-          app.CartoDB._covered_by_PA(p, callback);
+          app.CartoDB._covered_by_PA(wkt_polygon(p), callback);
         }
     };
 
     app.CartoDB._covered_by_PA = function(p, callback){
         // data from protected planet
         // but here to follow the same rule
-        app.WS.ProtectedPlanet.PA_coverage(wkt_polygon(p), function(d) {
+        // params p is WKT Multipolygon to analyse on
+        app.WS.ProtectedPlanet.PA_coverage(p, function(d) {
           if(d && d.sum_pa_cover_km2) {
             var num = 0;
             if(d.results && d.results.length >= 1) {
