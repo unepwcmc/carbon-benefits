@@ -94,7 +94,7 @@ $(function() {
           }
 
           // Add the polygon filtering view
-          $(this.el).append(this.polygon_filter_view.renderTo(data.id).el);
+          $(this.el).append(this.polygon_filter_view.update(data.id).el);
 
           this.loading(this.showing_loading);
           return this;

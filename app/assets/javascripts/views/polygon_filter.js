@@ -15,8 +15,8 @@ $(function() {
       this.polygon_names_collection = new PolygonNamesCollection();
     },
 
-    renderTo: function(layer_id) {
-      // render the view inside the given element, updating the layer if needed
+    update: function(layer_id) {
+      // render, updating the layer if needed
       if (layer_id !== this.polygon_names_collection.layer_id) {
         // if we've updated the layer_id, fetch then render
         this.polygon_names_collection.layer_id = layer_id;
@@ -31,6 +31,7 @@ $(function() {
     },
 
     render: function() {
+      this.polygon_names_collection.setSelected();
       var templateHtml = this.template({polygons: this.polygon_names_collection.models});
       $(this.el).html(templateHtml);
     },
