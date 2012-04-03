@@ -3,7 +3,7 @@ $(function() {
   window.PolygonName = Backbone.Model.extend({
     defaults: function() {
       return {
-        "id": null,
+        "cartodb_id": null,
         "name": null
       };
     }
