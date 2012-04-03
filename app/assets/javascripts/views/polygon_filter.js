@@ -51,7 +51,7 @@ $(function() {
         selected.push($(input).val());
       });
       
-      console.log('selected polygons selected ' + selected + ' in layer ' + this.layer_id);
+      this.hide();
       this.bus.emit('layer:select_polygons', this.polygon_names_collection.layer_id, selected);
     }
 
