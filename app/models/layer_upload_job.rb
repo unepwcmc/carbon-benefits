@@ -43,15 +43,18 @@ private
   end
 
   def create_in_carto_db
+    puts "create in CartoDB"
     res = CartoDB::Connection.create_table '', @layer_file.to_file
     @table_name = res[:name]
   end
 
   def drop_in_carto_db
+    puts "drop in CartoDB"
     CartoDB::Connection.drop_table @table_name
   end
 
   def validate
+    puts "validate"
     res = CartoDB::Connection.query "SELECT GeometryType(the_geom) AS geom_type FROM #{@table_name} LIMIT 1"
     first_row = res.rows.first
     @geom_type = first_row && first_row[:geom_type]
@@ -88,6 +91,7 @@ private
   end
 
   def insert_into_polygons
+    puts "insert into polygons"
     #copy from uploaded table to polygon table
     sql = <<-END_SQL
     INSERT INTO #{TABLENAME} (layer_id, name, #{@class_field ? 'class_name, ' : ''} the_geom)
@@ -106,6 +110,7 @@ private
 
     return unless @class_field
 
+    puts "update classifier dictionary"
     #get the missing classes
     class_names_to_add = CartoDB::Connection.query(
       "SELECT DISTINCT \"#{@class_field}\" FROM #{@table_name}"
@@ -124,13 +129,15 @@ private
         [c.name, c.id]
     end.flatten]
 
+    puts "update polygon class_id"
     polygon_classes_mapping.keys.each do |k|
       CartoDB::Connection.query(
         ActiveRecord::Base.send(
           :sanitize_sql_array,
           [
-            "UPDATE #{TABLENAME} SET class_id = ? WHERE class_name = ?",
+            "UPDATE #{TABLENAME} SET class_id = ? WHERE layer_id = ? AND class_name = ?",
             polygon_classes_mapping[k],
+            @layer.id,
             k
           ]
         )
