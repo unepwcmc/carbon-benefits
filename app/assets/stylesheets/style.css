@@ -2481,6 +2481,11 @@ body.out div.layout footer div.right a.nature {
 
 .polygon_filter {
   display:none;
+  margin: 0 
+}
+.polygon_filter li{
+  padding: 5px;
+  border-top: 1px solid #DDD;
 }
 
 span.beta {
