@@ -32,6 +32,7 @@ App.modules.Data = function(app) {
         setSelectedPolygons: function(selected_ids) {
           // set the selected polygons from their cartodb_ids, and fetch the data
           this.set({'selected_polygon_ids': selected_ids});
+          this.save();
 
           this.fetch();
         },
@@ -140,7 +141,6 @@ App.modules.Data = function(app) {
             sql += selected_polygon_ids.join(',');            
             sql += ')';
           }
-          console.log('fetch where clause: ' + sql);
           return sql;
         }
 

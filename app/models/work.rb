@@ -35,6 +35,9 @@ class Work < ActiveRecord::Base
       end
       ar_layer.attributes= layer.delete_if{|k,v| ['polygons', 'polygons_count', 'selected_class_id'].include?(k)}
 
+      # We store this as txt, so make it JSOn
+      ar_layer.selected_polygon_ids = ar_layer.selected_polygon_ids.to_json
+
       layers<< ar_layer
     end
     self
