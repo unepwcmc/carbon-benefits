@@ -36,6 +36,15 @@ $(function() {
       $(this.el).html(templateHtml);
     },
 
+    toggle: function () {
+      // toggle element visibility
+      if ($(this.el).is(':visible')) {
+        this.hide();
+      } else {
+        this.show();
+      }
+    },
+
     show: function() {
       $(this.el).slideDown();
     },
@@ -51,7 +60,6 @@ $(function() {
         selected.push($(input).val());
       });
       
-      this.hide();
       this.bus.emit('layer:select_polygons', this.polygon_names_collection.layer_id, selected);
     }
 

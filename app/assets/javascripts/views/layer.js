@@ -197,9 +197,10 @@ $(function() {
         this.bus.emit("model:delete_layer", this.rid);
       },
 
-      filter_upload_polygons: function() {
+      filter_upload_polygons: function(e) {
+          e.preventDefault();
           // Show the polygon filter view
-          this.polygon_filter_view.show();
+          this.polygon_filter_view.toggle();
       },
 
       show: function() {
