@@ -55,7 +55,7 @@ class Layer < ActiveRecord::Base
       'selected_class' => selected_name,
       'selected_class_id' => selected_id,
       'selected_colour' => selected_colour,
-      'selected_polygon_ids' => JSON.parse(selected_polygon_ids)
+      'selected_polygon_ids' => selected_polygon_ids.present? && selected_polygon_ids != 'null' ? JSON.parse(selected_polygon_ids) : ''
     }.to_json
   end
 
