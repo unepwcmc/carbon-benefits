@@ -74,7 +74,7 @@ ST_MakeValid(<%= polygon %>) \
 var SQL_COUNTRIES = " \
 SELECT priority, country, ST_Area(ST_Intersection( \
  ST_Union(mg.the_geom)::geography, \
- ST_GeographyFromText('<%= polygon %>') \
+ <%= polygon %> \
 )) AS covered_area \
 FROM gaps_merged mg \
 WHERE ST_Intersects(mg.the_geom, \
@@ -348,8 +348,6 @@ var SQL_UNION_GEOM = " \
     }
 
     app.CartoDB.conservation_priorities = function(p, total_area, callback) {
-      // TODO remove this, you just need to clean up the SQL_COUNTRIES template
-      return;
         stats_query(SQL_COUNTRIES, p, function(data) {
             var countries = {};
             var priorities = {
