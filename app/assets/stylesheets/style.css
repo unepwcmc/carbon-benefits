@@ -1192,7 +1192,6 @@ div.right {
 }
 /* line 242, ../../css_src/partials/_panel.scss */
 #panel #tab_content .layer_stats {
-  position: absolute;
   width: 324px;
   top: 140px;
   bottom: 0;
