@@ -33,7 +33,7 @@ App.modules.Data = function(app) {
           // set the selected polygons from their cartodb_ids, and fetch the data
           this.set({'selected_polygon_ids': selected_ids});
           this.save();
-
+          carbon.map.map.userLayers[this.id].changed = true;
           this.fetch();
         },
 
