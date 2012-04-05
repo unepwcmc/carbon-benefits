@@ -1227,7 +1227,7 @@ div.right {
   margin: 0;
 }
 
-.classes_list {
+.classes_list, .polygon_filters_list {
   padding: 18px 18px 0 18px;
   background: url("sprite.png") no-repeat left bottom;
   float: left;
@@ -1235,17 +1235,25 @@ div.right {
   height: 121px;
   position: absolute;
   z-index: 1;
+}
+
+.classes_list {
   top: 103px;
 }
 
-.classes_list ul {
+.polygon_filters_list {
+  top: 63px;
+  display: none;
+}
+
+.classes_list ul, .polygon_filters_list ul{
   list-style: none;
   margin: 0;
   height: 110px;
   overflow: auto;
 }
 
-.classes_list ul li {
+.classes_list ul li, .polygon_filters_list ul li{
   float: left;
   width: 100%;
   padding: 7px 0;
@@ -2478,15 +2486,6 @@ body.out div.layout footer div.right a.nature {
 #field-picker-table td.wider{
   width: 150px;
   text-align: left;
-}
-
-.polygon_filter {
-  display:none;
-  margin: 0 
-}
-.polygon_filter li{
-  padding: 5px;
-  border-top: 1px solid #DDD;
 }
 
 span.beta {

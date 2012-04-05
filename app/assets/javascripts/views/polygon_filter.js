@@ -1,8 +1,8 @@
 $(function() {
   // View to filter the polygons in an uploaded layer
   window.PolygonFilterView = Backbone.View.extend({
-    tagName: 'ul',
-    className: 'polygon_filter',
+    tagName: 'div',
+    className: 'polygon_filters_list',
     template: JST["templates/polygon_filter"],
 
     events: {
@@ -46,11 +46,11 @@ $(function() {
     },
 
     show: function() {
-      $(this.el).slideDown();
+      $(this.el).show();
     },
 
     hide: function() {
-      $(this.el).slideUp();
+      $(this.el).hide();
     },
 
     changeSelected: function() {
