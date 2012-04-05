@@ -1196,6 +1196,7 @@ div.right {
   top: 140px;
   bottom: 0;
   outline: none;
+  position: absolute;
 }
 /* line 247, ../../css_src/partials/_panel.scss */
 #panel #tab_content .layer_stats .jspVerticalBar {
