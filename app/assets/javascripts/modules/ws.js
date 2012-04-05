@@ -180,8 +180,10 @@ App.modules.WS = function(app) {
                 if(data) {
                     total_stats.conservation_priority_areas = data;
                 }
-                callback(total_stats);
+                /* callback(total_stats); */
+                /* TODO FIXME the callback was not executed for uploaded layers */
             });
+            callback(total_stats);
         }
     };
 }
