@@ -1,0 +1,12 @@
+<%
+var polygon, cartodb_id, name;
+for (var i=0, il = polygons.length; i<il ;i=i+1) {
+  polygon = polygons[i];
+  cartodb_id = polygon.get('cartodb_id');
+  name = polygon.get('name');
+%>
+  <li>
+    <input id='selected_layer_<%= cartodb_id %>' type="checkbox" name="selected_layers" value="<%= cartodb_id %>" <%= polygon.get('selected') ? 'checked=true' : '' %>/>
+    <label for='selected_layer_<%= cartodb_id %>'><%= polygons[i].get('cartodb_id') + ': ' + polygons[i].get('name') %></label>
+  </li>
+<% } %>

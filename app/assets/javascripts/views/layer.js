@@ -20,7 +20,8 @@ $(function() {
           'mouseover .title h2': 'show_tooltip_help',
           'mouseleave .title h2': 'hide_tooltip_help',
           'click .select_classes': 'toggle_classes_list',
-          'click .select_class': 'select_class'
+          'click .select_class': 'select_class',
+          'click .filter_polygons': 'filter_upload_polygons'
       },
 
       initialize: function() {
@@ -28,11 +29,13 @@ $(function() {
           $(this.el).addClass('tab_content_item');
           this.bus = this.options.bus;
           this.rid = this.options.rid;
+
           this.header = null;
           this.showing_loading = false;
           this.showing = false;
           this.render_stats = _.debounce(this._render_stats, 300);
           this.tooltip_timer = undefined;
+          this.polygon_filter_view = new PolygonFilterView({bus: this.bus});
       },
 
       _render_stats: function(data) {
@@ -89,6 +92,10 @@ $(function() {
               this.header = null;
               //this.go_edit();
           }
+
+          // Add the polygon filtering view
+          $(this.el).append(this.polygon_filter_view.update(data.id).el);
+
           this.loading(this.showing_loading);
           return this;
       },
@@ -188,6 +195,12 @@ $(function() {
       remove_polygons: function(e) {
         if(e) e.preventDefault();
         this.bus.emit("model:delete_layer", this.rid);
+      },
+
+      filter_upload_polygons: function(e) {
+          e.preventDefault();
+          // Show the polygon filter view
+          this.polygon_filter_view.toggle();
       },
 
       show: function() {

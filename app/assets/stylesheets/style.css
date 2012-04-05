@@ -1192,7 +1192,6 @@ div.right {
 }
 /* line 242, ../../css_src/partials/_panel.scss */
 #panel #tab_content .layer_stats {
-  position: absolute;
   width: 324px;
   top: 140px;
   bottom: 0;
@@ -2478,6 +2477,15 @@ body.out div.layout footer div.right a.nature {
 #field-picker-table td.wider{
   width: 150px;
   text-align: left;
+}
+
+.polygon_filter {
+  display:none;
+  margin: 0 
+}
+.polygon_filter li{
+  padding: 5px;
+  border-top: 1px solid #DDD;
 }
 
 span.beta {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120329112341) do
+ActiveRecord::Schema.define(:version => 20120402151021) do
 
   create_table "errors", :force => true do |t|
     t.text     "error",      :default => ""
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120329112341) do
     t.text     "meta_data"
     t.boolean  "is_uploaded",                  :default => false
     t.integer  "selected_polygon_class_id"
+    t.text     "selected_polygon_ids"
   end
 
   create_table "polygon_class_colours", :force => true do |t|
