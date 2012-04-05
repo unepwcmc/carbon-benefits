@@ -1,3 +1,4 @@
+<ul>
 <%
 var polygon, cartodb_id, name;
 for (var i=0, il = polygons.length; i<il ;i=i+1) {
@@ -10,3 +11,4 @@ for (var i=0, il = polygons.length; i<il ;i=i+1) {
     <label for='selected_layer_<%= cartodb_id %>'><%= polygons[i].get('cartodb_id') + ': ' + polygons[i].get('name') %></label>
   </li>
 <% } %>
+</ul>
