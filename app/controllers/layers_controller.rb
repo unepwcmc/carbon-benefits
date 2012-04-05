@@ -19,7 +19,7 @@ class LayersController < ApplicationController
       layer_json = $1.gsub('=>', ':')
       @layer_id = JSON.parse(layer_json)['layer_id'] #use the first layer if more
     end
-    carto_count = CartoDB::Connection.query("SELECT cartodb_id FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{@layer_id}")[:total_rows]
+    carto_count = CartoDB::Connection.query("SELECT cartodb_id FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{@layer_id} AND class_id IS NOT NULL")[:total_rows]
 
     # Set status completed if cartodb has rows
     status['status'] = 'completed' if carto_count > 0

@@ -10,6 +10,10 @@ $(function() {
       var i, il;
       var selectedLayerIds = carbon.work.work.findByLayerId(this.layer_id).get('selected_polygon_ids');
      
+      // Parse ids to ints for comparison
+      _.each(selectedLayerIds, function(idString, index) {
+        selectedLayerIds[index] = parseInt(idString, 10);
+      })
 
       this.each(function(polygon) {
         // Reset polygon...
@@ -17,8 +21,9 @@ $(function() {
 
         for (i=0, il=selectedLayerIds.length; i < il; i=i+1) {
           // Set selected if polygon id is in selectedLayerIds
-          if (parseInt(selectedLayerIds[i], 10) === polygon.get('cartodb_id')) {
+          if (selectedLayerIds[i] === polygon.get('cartodb_id')) {
             polygon.set({'selected': true});
+            break;
           }
         }
       });
