@@ -9,7 +9,8 @@ App.modules.Data = function(app) {
                 "selected_class": null,
                 "selected_colour": null,
                 "stats": new Object(),
-                "is_uploaded": false
+                "is_uploaded": false,
+                "selected_polygon_ids": []
             };
         },
 
