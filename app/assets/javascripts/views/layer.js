@@ -87,14 +87,15 @@ $(function() {
                   this.header = this.$('.stats_header');
               }
               this.leave_edit();
+              if(data.is_uploaded){
+                  // Add the polygon filtering view
+                  $(this.el).append(this.polygon_filter_view.update(data.id).el);
+              }
           } else {
               $(this.el).html(this.template_no_content(data));
               this.header = null;
               //this.go_edit();
           }
-
-          // Add the polygon filtering view
-          $(this.el).append(this.polygon_filter_view.update(data.id).el);
 
           this.loading(this.showing_loading);
           return this;
