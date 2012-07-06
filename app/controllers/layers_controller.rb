@@ -15,11 +15,8 @@ class LayersController < ApplicationController
     status = Resque::Plugins::Status::Hash.get(params[:job_id])
 
     # Sometimes the job claims its running when cartodb has imported, so check cartodb
-    if status['name'] =~ /\LayerUploadJob\((.+)\)$/
-      layer_json = $1.gsub('=>', ':')
-      @layer_id = JSON.parse(layer_json)['layer_id'] #use the first layer if more
-    end
-    carto_count = CartoDB::Connection.query("SELECT cartodb_id FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{@layer_id} AND class_id IS NOT NULL")[:total_rows]
+    layer_id = status['options']['layer_id'] #use the first layer if more
+    carto_count = CartoDB::Connection.query("SELECT cartodb_id FROM #{LayerUploadJob::TABLENAME} WHERE layer_id = #{layer_id} AND class_id IS NOT NULL")[:total_rows]
 
     # Set status completed if cartodb has rows
     status['status'] = 'completed' if carto_count > 0
@@ -32,5 +29,4 @@ class LayersController < ApplicationController
 
     render :json => polygons.to_json
   end
-
 end
