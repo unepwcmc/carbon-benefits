@@ -95,6 +95,7 @@ App.modules.WS = function(app) {
                         callback(stats);
                     } else {
                         app.Log.error("can't get stats from cartodb for ", stat);
+                        ready(stat);
                     }
                 });
              }
