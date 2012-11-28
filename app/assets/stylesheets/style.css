@@ -2363,7 +2363,7 @@ body.out div.layout footer div.collab ul li {
   zoom: 1;
   *display: inline;
   width: auto;
-  margin: 0 27px 0 0;
+  margin: 0 19px 0 0;
   padding: 0;
 }
 /* line 327, ../../css_src/partials/_layout.scss */
@@ -2404,6 +2404,14 @@ body.out div.layout footer div.collab ul li a.federal_agency {
   margin-left: -10px;
   background: url("sprite.png") no-repeat left -2312px;
 }
+
+body.out div.layout footer div.collab ul li a.imfn {
+  width: 66px;
+  height: 66px;
+  margin-left: -10px;
+  background: url("sprite.png") no-repeat left -2415px;
+}
+
 /* line 339, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.nature {
   float: left;
