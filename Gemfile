@@ -1,18 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.12'
+gem 'json', '>=1.7.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
-
-#gem 'sqlite3'
-
 gem 'alphadecimal'
 gem 'ejs'
 gem 'pg'
-gem 'cartodb-rb-client', :git => 'git://github.com/agnessa/cartodb-rb-client.git'
+gem 'cartodb-rb-client'
 gem 'resque'
 gem 'resque-status'
 

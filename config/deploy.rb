@@ -5,7 +5,7 @@ require 'brightbox/recipes'
 require 'brightbox/passenger'
 
 set :default_stage, 'staging'
-
+set :rake, 'bundle exec rake'
 load 'deploy/assets'
 
 # The name of your application.  Used for deployment directory and filenames
