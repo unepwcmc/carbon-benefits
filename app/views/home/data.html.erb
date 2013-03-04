@@ -1,7 +1,7 @@
 <% content_for :body_class, 'out' %>
 <div class="layout">
   <header>
-    <h1><a href="/">CARBON CALCULATOR</a></h1>
+    <h1><a href="/">CARBON &amp; BIODIVERSITY CALCULATOR</a></h1>
     <ul>
       <li><a href="/tool">TOOL</a></li>
       <li><a href="/about">ABOUT</a></li>
@@ -10,7 +10,7 @@
   
   <h2>Data sources</h2>
   
-  <article class="data_sources">
+  <article class="data_sources" id="carbon">
     <h4>Carbon</h4>
     <h6>BENIN, BURUNDI, CAMEROON, CÔTE D’LVOIRE, GHANA, GUINEA, KENYA, RWANDA, SIERRA LEONE, TOGO, UGANDA, ZAMBIA</h6>
     <ul>
@@ -106,19 +106,19 @@
 
 </article>
   
-  <article class="data_sources" id="carbon">
+  <article class="data_sources">
   <h4>protected areas</h4> 
   <ul>
     <li> <a href="http://protectedplanet.org">protected planet</a></li>
   </ul>
 
-  <h4>key biodiversity areas</h4>
+  <h4 id="kbas">key biodiversity areas</h4>
     <ul>
       <li>BirdLife International and Conservation International 2010. Key Biodiversity Areas (KBAs) - including Important Bird Areas (IBAs) maintained by BirdLife International and Key Biodiversity Areas maintained by Conservation International. BirdLife International, Cambridge, UK, and Conservation International, Washington DC, USA.</li>
       
     </ul>
 
-  <h4>forest status</h4>
+  <h4 id="fstat">forest status</h4>
   <p>The different classes of forest degradation were derived by comparing spatial data on the potential extent of forest with spatial data on the current extent of forest.</p>
   <ul>
     <li>Bryant, D., Nielsen, D., & Tangley, L. 1997. The last frontier forests: ecosystems and economies on the edge. WRI (World Resources Institute), Washington, D.C.</li>
@@ -136,7 +136,7 @@
     <li>Potapov, P., A. Yaroshenko, S. Turubanova, M. Dubinin, L. Laestadius, C. Thies, D. Aksenov, A. Egorov, Y. Yesipova, I. Glushkov, M. Karpachevskiy, A. Kostikova, A. Manisha, E. Tsybikova, and I. Zhuravleva, 2008: Mapping the World’s Intact Forest Landscapes by Remote Sensing. Ecology and Society, 13 (2) URL: <a href="http://www.ecologyandsociety.org/vol13/iss2/art51/"> http://www.ecologyandsociety.org/vol13/iss2/art51/</a></li>
   </ul>
 
-  <h4>Restoration potential </h4>
+  <h4 id="restp">Restoration potential </h4>
   <p>Opportunities for restoration of degraded lands were assessed by creating a map of land use intensity (human pressure) which in turn was used to classify degraded lands by suitability for different types of restoration. The following data was used:</p>
   <ul>
     <li>Bartholomé, E.; Belward, A. S. 2005. GLC2000: a new approach to global land cover mapping from Earth observation data. International Journal of Remote Sensing, Volume 26, Number 9, 2005 , pp. 1959-1977(19) </li>
@@ -147,7 +147,7 @@
 
   </ul>
 
-  <h4>carbon sequestration potential</h4>
+  <h4 id="carbon_potential">carbon sequestration potential</h4>
   <ul>
     <li>Bartholomé, E.; Belward, A. S. 2005. GLC2000: a new approach to global land cover mapping from Earth observation data. International Journal of Remote Sensing, Volume 26, Number 9, 2005 , pp. 1959-1977(19) </li>
     <li>FAO 2001. Global Forest Resources Assessment 2000. FAO Forestry Paper 140. Food and Agriculture Organization of the United Nations, Rome, Italy.</li>
@@ -155,7 +155,7 @@
     <li>Ruesch, A.S., Gibbs, H. 2008. New IPCC Tier-1 Global Biomass Carbon Map for the Year 2000. Available online from the Carbon Dioxide Information Analysis Center [http://cdiac.ornl.gov/], Oak Ridge National Laboratory, Oak Ridge, Tennessee, USA.</li>
   </ul>
 
-  <h4>ecological gap analyses</h4>
+  <h4 id="ecologycal">ecological gap analyses</h4>
   <h6>Ecuador</h6>
   <ul>
     <li>Campos, F., Peralvo, M., Cuesta-Camacho, F., Luna, S. 2007. Análisis de vacíos y áreas prioritarias para la conservación de la biodiversidad en el Ecuador continental. Instituto Nazca de Investigaciones Marinas, EcoCiencia, Ministerio del Ambiente, The Nature Conservancy, Conservación Internacional, Proyecto GEF: Ecuador Sistema Nacional de Áreas Protegidas, BirdLife International y Aves & Conservación, Quito, Ecuador.</li>
