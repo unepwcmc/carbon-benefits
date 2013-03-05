@@ -6,4 +6,15 @@ To get the workers running:
 
   QUEUE=statused rake resque:work
 
-You can view the status of resque jobs in the browser using the resque-web tool.
+You can view the status of resque jobs in the browser using the resque-web tool, which is a great help for debugging.
+
+== CartoDB config
+We're using the cartodb gem, so you need a config/cartodb_config.yml file. Currently, the gem doesn't support uploading files to create tables, so we've have to manually do the HTTP Post with multipart file, using httpmultiparty. As such, we also need the api_key specified in the config file. 
+List of required keys:
+  
+    host: 'https://...'
+    oauth_key: 'YOUR-OAUTH-KEY'
+    oauth_secret: 'YOUR-OAUTH-SECRET-KEY'
+    username: 'USERNAME'
+    password: 'PASSWORD
+    api_key: 'YOUR-API-KEY'

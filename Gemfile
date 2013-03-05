@@ -9,9 +9,10 @@ gem 'json', '>=1.7.7'
 gem 'alphadecimal'
 gem 'ejs'
 gem 'pg'
-gem 'cartodb-rb-client'
+gem 'cartodb-rb-client', '0.4.3'
 gem 'resque'
 gem 'resque-status'
+gem 'httmultiparty'
 
 # Gems used only for assets and not required
 # in production environments by default.

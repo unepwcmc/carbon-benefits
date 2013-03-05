@@ -172,6 +172,16 @@ namespace :deploy do
     run_remote_rake "resque:restart_workers"
   end
 
+  desc "Stop Resque workers"
+  task :stop_workers, :roles => :db, :only => { :jobs => true } do
+    run_remote_rake "resque:stop_workers"
+  end
+
+  desc "Debug resque worker"
+  task :run_verbose_worker, :roles => :db, :only => { :jobs => true } do
+    run_remote_rake "VVERBOSE=1 QUEUE=statused resque:work"
+  end
+
   desc "Restart Resque scheduler"
   task :restart_scheduler, :roles => :db, :only => { :jobs => true } do
     run_remote_rake "resque:restart_scheduler"
