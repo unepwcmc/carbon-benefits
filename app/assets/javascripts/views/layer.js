@@ -113,7 +113,7 @@ $(function() {
         }
         var pos = el.position();
         var h = tooltip.outerHeight();
-        tooltip.css({top: pos.top + _top + 170 - h - 10 , left: 20});
+        tooltip.css({top: pos.top + _top + 220 - h - 10 , left: 60});
         //set html rendered previousl
         clearTimeout(self.tooltip_timer)
         $('#panel').find('.help_popup').hide();
@@ -127,7 +127,7 @@ $(function() {
         var tooltip = $('#panel').find('.help_popup');
         self.tooltip_timer = setTimeout(function() {
           tooltip.hide();
-        },1000);
+        },3000);
       },
 
       show_tooltip: function(e) {
