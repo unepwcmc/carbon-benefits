@@ -1,3 +1,8 @@
+class ActiveRecord::Base  
+  def self.escape_sql(clause, *rest)
+    self.send(:sanitize_sql_array, rest.empty? ? clause : ([clause] + rest))
+  end
+end
 class LayerUploadJob
   include Resque::Plugins::Status
   MAX_POLYGON_AREA = 8000000*1000*1000
@@ -43,9 +48,30 @@ private
   end
 
   def create_in_carto_db
-    puts "create in CartoDB"
-    res = CartoDB::Connection.create_table '', @layer_file.to_file
-    @table_name = res[:name]
+    # TODO make cartodb stuff into app variables
+    response = HTTMultiParty.post("#{CartoDB::Settings['host']}/api/v1/imports", :query => {
+      :file => @layer_file.to_file,
+      :api_key => CartoDB::Settings['api_key']
+    })
+    upload_result = JSON.parse(response.body)
+    if upload_result["success"]
+      puts "uploaded to cartodb"
+      until @table_name.present? do
+        sleep(2)
+        check_cartodb_import_state upload_result['item_queue_id']
+      end
+    else
+      puts "error uploading to cartodb"
+    end
+  end
+
+  def check_cartodb_import_state item_queue_id
+    response = HTTParty.get("#{CartoDB::Settings['host']}/api/v1/imports/#{item_queue_id}", :query => {:api_key => CartoDB::Settings['api_key']})
+    import_status = JSON.parse(response.body)
+    if import_status['success']
+      @table_name = import_status['table_name']
+      puts "got table name #{@table_name}"
+    end
   end
 
   def drop_in_carto_db
@@ -133,7 +159,7 @@ private
     polygon_classes_mapping.keys.each do |k|
       CartoDB::Connection.query(
         ActiveRecord::Base.send(
-          :sanitize_sql_array,
+          :escape_sql,
           [
             "UPDATE #{TABLENAME} SET class_id = ? WHERE layer_id = ? AND class_name = ?",
             polygon_classes_mapping[k],
