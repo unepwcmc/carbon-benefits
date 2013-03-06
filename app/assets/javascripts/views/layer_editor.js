@@ -2,7 +2,6 @@ $(function() {
   window.LayerEditor = Backbone.View.extend({
     events: {
       'click .expand': 'expand',
-      'mouseleave': 'hiding',
       'click': 'open'
     },
 
@@ -80,16 +79,24 @@ $(function() {
     },
 
     open: function(e) {
+      var _this = this;
       if(e) e.preventDefault();
       this.el.addClass('open');
       this.el.css("z-index","100");      
       this.open = true;
+      $('body').click(function(e){
+        _this.close(e);
+      });
     },
 
     close: function(e) {
-      this.el.removeClass('open');
-      this.el.css("z-index","10");
-      this.open = false;
+      if (this.el.has(e.target).length === 0) {
+        // The click comes from outside the layer menu
+        this.el.removeClass('open');
+        this.el.css("z-index","10");
+        this.open = false;
+        $('body').unbind('click', this.close);
+      }
     },
 
     sort_by: function(layers_order, silent) {
