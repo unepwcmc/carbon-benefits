@@ -166,7 +166,7 @@ def run_remote_rake(rake_cmd)
   set :rakefile, nil if exists?(:rakefile)
 end
 
-namespace :deploy do
+namespace :resque do
   desc "Restart Resque Workers"
   task :restart_workers, :roles => :db, :only => { :jobs => true } do
     run_remote_rake "resque:restart_workers"
@@ -187,6 +187,8 @@ namespace :deploy do
     run_remote_rake "resque:restart_scheduler"
   end
 end
+after "deploy", "resque:restart_workers"
+after "resque:restart_workers", "resque:restart_scheduler"
 
 task :setup_cartodb_configuration do
   host = Capistrano::CLI.ui.ask("CartoDB host: ")

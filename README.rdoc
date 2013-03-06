@@ -8,6 +8,11 @@ To get the workers running:
 
 You can view the status of resque jobs in the browser using the resque-web tool, which is a great help for debugging.
 
+===Deploy
+There are a few capistrano and rake tasks for managing the workers, for a current list, run:
+
+    cap -vT | grep resque
+
 == CartoDB config
 We're using the cartodb gem, so you need a config/cartodb_config.yml file. Currently, the gem doesn't support uploading files to create tables, so we've have to manually do the HTTP Post with multipart file, using httpmultiparty. As such, we also need the api_key specified in the config file. 
 List of required keys:
