@@ -1,7 +1,6 @@
 $(function() {
   window.LayerEditor = Backbone.View.extend({
     events: {
-      'click .expand': 'expand',
       'click': 'open'
     },
 
@@ -13,19 +12,11 @@ $(function() {
       this.render();
     },
 
-    expand: function(e) {
-      if(e) {
-        e.preventDefault();
-      }
-      this.render(this.layers.length);
-    },
-
-    render: function(howmany, order) {
-      howmany = howmany || 3;
+    render: function(unusedToRemove, order) {
       var self = this;
       var el = this.$('.dropdown');
-      el.find('li').each(function(i,el){$(el).remove()});
-      _(this.layers.slice(0, howmany)).each(function(layer) {
+      el.find('li').each(function(i,el){$(el).remove();});
+      _(this.layers).each(function(layer) {
         var v = self.views[layer.name];
         if (v) {
           delete self.views[layer.name];
@@ -35,13 +26,8 @@ $(function() {
           bus: self.bus
         });
         self.views[layer.name] = v;
-        el.find('a.expand').before(v.render().el);
+        el.append(v.render().el);
       });
-      if(howmany === self.layers.length) {
-        this.$('a.expand').hide();
-      } else {
-        this.$('a.expand').show();
-      }
       el.sortable({
         revert: false,
         items: '.sortable',
@@ -90,7 +76,7 @@ $(function() {
     },
 
     close: function(e) {
-      if (this.el.has(e.target).length === 0) {
+      if (typeof e === 'undefined' || this.el.has(e.target).length === 0) {
         // The click comes from outside the layer menu
         this.el.removeClass('open');
         this.el.css("z-index","10");
@@ -128,7 +114,7 @@ $(function() {
       //this.sort_by(layers);
       this.bus.emit("map:reorder_layers", layers);
       this.order = layers;
-      this.render(3);
+      this.render();
       this.close();
     }
   });

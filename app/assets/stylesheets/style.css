@@ -905,20 +905,6 @@ div.right {
   border-top: 1px solid #CCCCCC;
   border-bottom: 1px solid #CCCCCC;
 }
-/* line 364, ../../css_src/partials/_map.scss */
-.map_container .layers div.show ul a.expand {
-  display: block;
-  width: 100%;
-  height: 9px;
-  text-indent: -9999px;
-  font-size: 0;
-  line-height: 0;
-  background: url("sprite.png") no-repeat 0 -1444px;
-}
-/* line 372, ../../css_src/partials/_map.scss */
-.map_container .layers div.show ul a.expand:hover {
-  background-position: 0 -1452px;
-}
 /* line 380, ../../css_src/partials/_map.scss */
 .map_container .layers.open a.view {
   background-position: left -1072px;
