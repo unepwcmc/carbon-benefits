@@ -349,6 +349,7 @@ App.modules.Map = function(app) {
     show_layer: function(rid, data) {
       if (data.is_uploaded){
         this.show_tile_layer(rid, data);
+        this.jump_to_extent(data);
         return;
       }
       this.showing = rid;
@@ -445,6 +446,42 @@ App.modules.Map = function(app) {
         this.map.userLayers[data.id] = $.extend({}, cartodbLayerParams);
         this.map.reorder_layers();
       }
+    },
+
+    jump_to_extent: function(data){
+
+      // CartoDB Uploaded Polygon Layer
+      var sql = "SELECT ST_AsGeoJson(ST_Extent(the_geom)) as bounds FROM " + window.CARTODB_TABLE + " WHERE layer_id = " + data.id;
+      sql = sql + data.class_where_clause();
+
+      var _this = this;
+      $.ajax({
+        url: 'https://carbon-tool.cartodb.com/api/v1/sql',
+        data: {
+          q: sql
+        },
+        success: function(extentData){
+          _this._setBoundsFromCartodbResponse(extentData);
+        }
+      });
+    },
+
+    _setBoundsFromCartodbResponse: function(extentData) {
+      if(typeof extentData.rows[0] !== 'undefined'){
+        bounds = this._geoJsonToBounds(extentData.rows[0].bounds);
+        console.log("Fitting to bounds:");
+        console.log(bounds);
+        this.map.map.fitBounds(bounds);
+      }
+    },
+
+    _geoJsonToBounds: function(geoJson) {
+      var coords = $.parseJSON(geoJson).coordinates[0];
+      var bounds = new google.maps.LatLngBounds();
+      _(coords).each(function(coord){
+        bounds.extend(new google.maps.LatLng(coord[1], coord[0]));
+      });
+      return bounds;
     },
 
     start_edit_polygon: function(p) {
