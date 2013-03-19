@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'json', '>=1.7.7'
 
 # Bundle edge Rails instead:
@@ -9,7 +9,7 @@ gem 'json', '>=1.7.7'
 gem 'alphadecimal'
 gem 'ejs'
 gem 'pg'
-gem 'cartodb-rb-client', '0.4.3'
+gem 'cartodb-rb-client', :git => 'git://github.com/Vizzuality/cartodb-rb-client.git'
 gem 'resque'
 gem 'resque-status'
 gem 'httmultiparty'
