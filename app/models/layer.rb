@@ -78,6 +78,7 @@ class Layer < ActiveRecord::Base
   end
 
   def classes=(the_classes)
+    return if the_classes.nil?
     the_classes.each do |class_name, the_colour|
       polygon_class = PolygonClass.find_or_create_by_name(class_name)
 

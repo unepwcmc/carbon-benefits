@@ -12,7 +12,7 @@ App.modules.Log = function(app) {
     _fake_console.prototype.log= function(){};
 
     //IE7 love
-    if(typeof console !== "undefined") {
+    if(typeof console !== "undefined" && typeof console.log !== 'object') {
         _console = console;
     } else {
         _console = new _fake_console();
