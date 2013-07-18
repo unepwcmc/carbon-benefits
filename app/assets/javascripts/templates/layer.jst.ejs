@@ -58,9 +58,9 @@
     <div class="block">
       <span class="title">
         <% if (stats.carbon_sequestration.qty.toFixed(0).length > 7) { %>
-            <h2>C. SEQ.</h2>
+            <h2>C. SEQ. POT.</h2>
         <% } else { %>
-            <h2>C. SEQUESTRATION</h2>
+            <h2>C. SEQ. POTENTIAL</h2>
         <% } %>
             <p><% print(number_format(stats.carbon_sequestration.qty)); %><small>T</small></p>
         </span>
@@ -74,7 +74,7 @@
   <% if(stats.covered_by_PA && stats.carbon_sequestration) { %>
     <div class="block">
         <span class="title">
-            <h2>COVERED BY PAs</h2>
+            <h2>COVERED BY PROTECTED AREAS</h2>
             <p><% print(Math.min('100', (1e8*stats.covered_by_PA.km2/stats.carbon_sequestration.area).toFixed(0))); %><small>%</small></p>
         </span>
         <ul class="normal list">
@@ -88,7 +88,7 @@
   <% if(stats.covered_by_KBA) { %>
     <div class="block">
         <span class="title">
-            <h2>COVERED BY KBAs</h2>
+            <h2>COVERED BY KEY BIODIVERSITY AREAS</h2>
             <p><%= stats.covered_by_KBA.percent.toFixed(0) %><small>%</small></p>
         </span>
         <ul class="normal list">

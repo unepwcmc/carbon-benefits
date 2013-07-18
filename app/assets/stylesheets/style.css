@@ -967,9 +967,14 @@ div.right {
 /* line 46, ../../css_src/partials/_panel.scss */
 #panel .help_popup .center {
   padding: 0px 18px 0 18px;
-  width: 100%;
-  background: url("sprite.png") left -1480px no-repeat;
+	margin: 0 0 0 6px;
+  width: 178px;
+	/*background: url("sprite.png") left -1488px no-repeat; */
+	background: #fff;
   float: left;
+	border-right: 1px solid #999;
+	border-left: 1px solid #999;
+	
 }
 /* line 52, ../../css_src/partials/_panel.scss */
 #panel .help_popup .bottom {
@@ -2491,4 +2496,9 @@ body.out div.layout footer div.right a.nature {
 
 span.beta {
   color:#DDD;
+}
+
+
+#upload-form form{
+	margin-top: 15px;
 }
