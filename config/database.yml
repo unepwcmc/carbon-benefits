@@ -10,8 +10,8 @@ development:
   encoding: unicode
   database: carbon_benefits_development
   pool: 5
-  username: postgres
-  password: postgres
+  username: timwilkinson
+  password: 
   #template: template_postgis
 
 test:
@@ -20,8 +20,8 @@ test:
   encoding: unicode
   database: carbon_benefits_test
   pool: 5
-  username: postgres
-  password: postgres
+  username: timwilkinson
+  password: 
   #template: template_postgis
 
 #development:

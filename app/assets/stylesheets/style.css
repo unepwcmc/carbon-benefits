@@ -429,11 +429,12 @@ body.tool header div {
   padding: 20px;
 }
 /* line 144, ../../css_src/partials/_page.scss */
-body.tool header div h1 {
+body.tool header div h1,  body.tool header div h1 a{
   font: bold 13px "WhitneyBold","Myriad Pro";
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 black;
   color: #FFFFFF;
+	text-decoration: none;
 }
 /* line 148, ../../css_src/partials/_page.scss */
 body.tool header div h1:hover {
