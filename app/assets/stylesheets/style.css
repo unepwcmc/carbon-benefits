@@ -1996,7 +1996,7 @@ body.out section.results div.inner {
   padding: 38px 0;
 }
 /* line 16, ../../css_src/partials/_layout.scss */
-body.out section.results div.inner h3 {
+body.out section.results div.inner h3, body.out section.results div.inner h3 a {
   padding: 0 0 20px 0;
   font: bold 27px "WhitneyBold","Myriad Pro";
   color: #333333;
@@ -2201,20 +2201,34 @@ body.out div.layout section.start div.mamufas {
   background: url("mamufas.png") no-repeat 0 0;
 }
 /* line 195, ../../css_src/partials/_layout.scss */
-body.out div.layout section.start div.mamufas a {
+body.out div.layout section.start div.mamufas a.start_button {
   position: absolute;
   width: 316px;
   height: 78px;
-  top: 50%;
+  top: 40%;
   left: 50%;
   margin: -39px 0 0 -158px;
   text-decoration: none;
   background: url("sprite.png") no-repeat 0 -1181px;
 }
+body.out div.layout section.start div.mamufas a.questions {
+  position: absolute;
+  width: 316px;
+  height: 78px;
+  top: 60%;
+  left: 50%;
+  margin: -39px 0 0 -158px;
+  text-decoration: none;
+  background: url("sprite.png") no-repeat 0 -2645px;
+}
 /* line 204, ../../css_src/partials/_layout.scss */
 body.out div.layout section.start div.mamufas a:hover {
   background-position: 0 -1259px;
 }
+body.out div.layout section.start div.mamufas a.questions:hover {
+  background-position: 0 -2723px;
+}
+
 /* line 204, ../../css_src/partials/_layout.scss */
 body.out div.layout section.start div.mamufas a:hover span {
   cursor: pointer;
@@ -2235,6 +2249,10 @@ body.out div.layout section.start div.mamufas a span {
   text-shadow: 0 1px 0 #3c7d7d;
   line-height: 17px;
 }
+body.out div.layout section.start div.mamufas a.questions span {
+	width: 280px;
+}
+
 /* line 216, ../../css_src/partials/_layout.scss */
 body.out div.layout section.start div.mamufas a span small {
   padding: 0;
