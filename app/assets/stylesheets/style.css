@@ -786,7 +786,7 @@ div.right {
   float: left;
   height: 13px;
   margin: 0;
-  padding: 11px 32px 9px 5px;
+  padding: 11px 32px 9px 8px;
   font: normal 13px "WhitneyBookRegular","Myriad Pro";
   color: #333333;
   background: url("sprite.png") no-repeat right -1035px;
@@ -811,8 +811,8 @@ div.right {
 .map_container .layers div.show span.top {
   float: right;
   width: 100%;
-  height: 12px;
-  background: url("sprite.png") no-repeat right -2302px;
+  height: 20px;
+  background: url("sprite.png") no-repeat -247px -2302px;
 }
 /* line 286, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul {
@@ -822,7 +822,7 @@ div.right {
   margin: 0;
   list-style: none;
   text-align: left;
-  background: url("sprite.png") no-repeat right bottom;
+  background: url("sprite.png") no-repeat right -2320px;
 }
 /* line 295, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul:last-child {
@@ -856,7 +856,7 @@ div.right {
 .map_container .layers div.show ul li span.color {
   width: 7px;
   height: 7px;
-  background: url("sprite.png") no-repeat -224px -2491px;
+  background: url("sprite.png") no-repeat -224px -2491px; 
   margin-right: 10px;
   display: inline-block;
 }
@@ -908,11 +908,11 @@ div.right {
 }
 /* line 380, ../../css_src/partials/_map.scss */
 .map_container .layers.open a.view {
-  background-position: left -1072px;
+ /* background-position: left -1072px; */
 }
 /* line 383, ../../css_src/partials/_map.scss */
 .map_container .layers.open a.view span {
-  background-position: right -1072px;
+  /* background-position: right -1072px; */
 }
 /* line 388, ../../css_src/partials/_map.scss */
 .map_container .layers.open .show {
