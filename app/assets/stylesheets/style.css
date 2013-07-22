@@ -856,7 +856,7 @@ div.right {
 .map_container .layers div.show ul li span.color {
   width: 7px;
   height: 7px;
-  background: url("sprite.png") no-repeat -224px -2491px; 
+  background: url("sprite.png") no-repeat -231px -2491px; 
   margin-right: 10px;
   display: inline-block;
 }
