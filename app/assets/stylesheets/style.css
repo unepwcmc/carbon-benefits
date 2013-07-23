@@ -2316,7 +2316,7 @@ body.out div.layout section.two_columns p {
 
 body.out div.layout section.two_columns .aichi p{
 	color: #849a1b;
-	padding: 0;
+	padding: 0 0 20px 0;
 	font-size: 15px;
 }
 
