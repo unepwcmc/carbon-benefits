@@ -515,6 +515,24 @@ div.right {
   position: relative;
 }
 
+.aichi {
+	padding: 10px 10px 10px 10px;
+	margin: 0;
+	background: #e6ebc5;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+
 /* line 3, ../../css_src/partials/_map.scss */
 .ie7 .map_container {
   height: 100%;
@@ -2295,11 +2313,31 @@ body.out div.layout section.two_columns p {
   font: normal 17px "Helvetica",Arial;
   color: #666666;
 }
+
+body.out div.layout section.two_columns .aichi p{
+	color: #849a1b;
+	padding: 0;
+	font-size: 15px;
+}
+
+body.out div.layout section.two_columns .aichi a{
+	display: block;
+	font-style: italic;
+	padding: 10px 0;
+	color: #849a1b;
+}
+
 /* line 252, ../../css_src/partials/_layout.scss */
 body.out div.layout section.two_columns p strong {
   font-weight: normal;
   color: #333333;
 }
+
+body.out div.layout section.two_columns .aichi p strong{
+	color: #849a1b;
+	font-weight: bold;
+}
+
 /* line 257, ../../css_src/partials/_layout.scss */
 body.out div.layout section.two_columns p.orange {
   font-style: italic;

@@ -8,6 +8,8 @@ Carbontool::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
   match 'about' => 'home#about'
   match 'data' => 'home#data'
+  match 'carbon' => 'home#carbon-stock'
+  match 'restoration' => 'home#restoration-opportunities'
   match 'nojavascript' => 'home#nojs'
   match 'ie6' => 'home#ie6'
   match 'tool' => 'tool#index'
