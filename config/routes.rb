@@ -11,6 +11,7 @@ Carbontool::Application.routes.draw do
   match 'carbon' => 'home#carbon-stock'
   match 'restoration' => 'home#restoration-opportunities'
   match 'spatial' => 'home#spatial-relationships'
+  match 'biodiversity' => 'home#biodiversity-protection'
   match 'nojavascript' => 'home#nojs'
   match 'ie6' => 'home#ie6'
   match 'tool' => 'tool#index'
