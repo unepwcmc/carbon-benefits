@@ -135,22 +135,22 @@
         <% _.each(stats.conservation_priorities, function(area) { %>
         <span class="conservation_header"><p><%= area.name %></p></span>
         <ul class="inline list">
-            <li>
-                <h5>VERY-HIGH</h5>
-                <p class="info"><%= area.percents[0].toFixed(0) %>%</p>
-            </li>
-            <li>
-                <h5>HIGH</h5>
-                <p class="info"><%= area.percents[1].toFixed(0)  %>%</p>
-            </li>
-            <li>
-                <h5>MEDIUM</h5>
-                <p class="info"><%= area.percents[2].toFixed(0)  %>%</p>
-            </li>
-            <li class="last">
-                <h5>OUT</h5>
-                <p class="info"><%= area.percents[4].toFixed(0)  %>%</p>
-            </li>
+					 <li>
+					                <h5>EXT-HIGH</h5>
+					                <p class="info"><%= area.percents[0].toFixed(0) %>%</p>
+					            </li>
+					            <li>
+					                <h5>VERY-HIGH</h5>
+					                <p class="info"><%= area.percents[1].toFixed(0) %>%</p>
+					            </li>
+					            <li>
+					                <h5>HIGH</h5>
+					                <p class="info"><%= area.percents[2].toFixed(0) %>%</p>
+					            </li>
+					            <li class="last">
+					                <h5>NO PRIORITY</h5>
+					                <p class="info"><%= area.percents[4].toFixed(0) %>%</p>
+					            </li>
         </ul>
         <% }); %>
     </div>
