@@ -1332,6 +1332,18 @@ div.right {
   background-color: #607890;
 }
 
+.alert {
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px 0;
+  background: #d9edf7;
+}
+
+.alert.warning {
+  color: #c09853;
+  background: #fcf8e3;
+}
+
 /* line 265, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.tools {
   width: 100%;

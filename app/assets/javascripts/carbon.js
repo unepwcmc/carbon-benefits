@@ -49,28 +49,6 @@ App.modules.Carbon = function(app) {
             this.router.bind('route:work', this.on_route);
 
             this.bus.on('app:route_to', this.on_route_to);
-            this.bus.on('app:work_loaded', function() {
-                /*
- *        var default_pos = new google.maps.LatLng(28.488005204159457, 7.403798828124986);
-                self.map.map.set_center(default_pos);
-                self.map.map.set_zoom(2);
-
-                if(self.work.work.polygon_count() === 0) {
-                    self.map.editing(true);
-                } else {
-                    var polys = self.work.work.get_all_polygons();
-                    // I <3 my code
-                    var b = new google.maps.LatLngBounds();
-                    _.each(polys, function(p) {
-                        _.each(p, function(point) {
-                            var pos = new google.maps.LatLng(point[0], point[1]);
-                            b.extend(pos);
-                        });
-                    });
-                    self.map.map.map.fitBounds(b);
-                }
-                */
-            });
 
             this.bus.on('view:show_error', function(error) {
               app.Error.show(error);

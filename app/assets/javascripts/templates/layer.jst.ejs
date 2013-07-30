@@ -26,8 +26,17 @@
   </div>
 <% } %>
 
-<div class="layer_stats"<% if(selected_class === null) { %> style="top: 120px"<% } %>>
+<div class="layer_stats"<% if(selected_class === null) { %> style="top: 80px"<% } %>>
   <% if(stats.carbon) { %>
+    <% var area_in_hectares = Math.round(stats.carbon.area / 1000); %>
+    <% if (area_in_hectares <= 400) { %>
+      <div class="alert warning">
+        The polygon you have selected is very small. Because of the resolution
+        of the data, the resulting calculations may not be reliable. If
+        possible, please select a larger polygon.
+      </div>
+    <% } %>
+
     <div class="block">
         <span class="title">
             <h2>CARBON</h2>
@@ -135,22 +144,22 @@
         <% _.each(stats.conservation_priorities, function(area) { %>
         <span class="conservation_header"><p><%= area.name %></p></span>
         <ul class="inline list">
-					 <li>
-					                <h5>EXT-HIGH</h5>
-					                <p class="info"><%= area.percents[0].toFixed(0) %>%</p>
-					            </li>
-					            <li>
-					                <h5>VERY-HIGH</h5>
-					                <p class="info"><%= area.percents[1].toFixed(0) %>%</p>
-					            </li>
-					            <li>
-					                <h5>HIGH</h5>
-					                <p class="info"><%= area.percents[2].toFixed(0) %>%</p>
-					            </li>
-					            <li class="last">
-					                <h5>NO PRIORITY</h5>
-					                <p class="info"><%= area.percents[4].toFixed(0) %>%</p>
-					            </li>
+           <li>
+                          <h5>EXT-HIGH</h5>
+                          <p class="info"><%= area.percents[0].toFixed(0) %>%</p>
+                      </li>
+                      <li>
+                          <h5>VERY-HIGH</h5>
+                          <p class="info"><%= area.percents[1].toFixed(0) %>%</p>
+                      </li>
+                      <li>
+                          <h5>HIGH</h5>
+                          <p class="info"><%= area.percents[2].toFixed(0) %>%</p>
+                      </li>
+                      <li class="last">
+                          <h5>NO PRIORITY</h5>
+                          <p class="info"><%= area.percents[4].toFixed(0) %>%</p>
+                      </li>
         </ul>
         <% }); %>
     </div>
