@@ -218,7 +218,8 @@ var MapView = Backbone.View.extend({
         var idx = 0;
         this.layers_order = names || this.layers_order;
         self.map.overlayMapTypes.clear();
-        var order = _.clone(this.layers_order).reverse();
+        // Remove `undefined` from array
+        var order = $.grep(this.layers_order, function(l){ return l; }).reverse();
         _(order).each(function(name) {
             var layer = self.layers[name];
             if(layer.enabled) {

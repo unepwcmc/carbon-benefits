@@ -828,24 +828,33 @@ div.right {
 }
 /* line 279, ../../css_src/partials/_map.scss */
 .map_container .layers div.show span.top {
-  float: right;
-  width: 100%;
+  position: absolute;
+  width: 222px;
   height: 20px;
-  background: url("sprite.png") no-repeat -247px -2302px;
+  background: white;
+  border-top-left-radius: 5px;
+  border: 1px solid #d9d9d9;
+  right: 5px;
+  top: 9px;
+  box-shadow: 6px 3px 26px -3px #888;
 }
 /* line 286, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul {
-  float: right;
-  width: 212px;
+  position: absolute;
+  width: 210px;
   padding: 0 6px 6px;
   margin: 0;
   list-style: none;
   text-align: left;
-  background: url("sprite.png") no-repeat right -2320px;
+  background: white;
+  border: 1px solid #d9d9d9;
+  border-top: none;
+  top: 20px;
+  right: 5px;
+  box-shadow: 0px 15px 26px -1px #888;
 }
 /* line 295, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul:last-child {
-  border: none;
   -moz-border-radius-bottomleft: 4px;
   -webkit-border-bottom-left-radius: 4px;
   -o-border-bottom-left-radius: 4px;
@@ -916,6 +925,12 @@ div.right {
   background-color: #EDEDED;
   cursor: pointer!important;
 }
+
+.map_container .layers div.show ul li:last-child:hover {
+  background: #EDEDED;
+  border: 0;
+}
+
 /* line 354, ../../css_src/partials/_map.scss */
 .map_container .layers div.show ul li.enabled {
   font-weight: bold;

@@ -95,7 +95,8 @@ App.modules.Carbon = function(app) {
             var layers = self.map.map.layers;
             var layer_data = [];
             var layer_indexes = _.pluck(app.config.MAP_LAYERS,'name');
-            _(self.map.map.layers_order).each(function(name) {
+            var order = $.grep(self.map.map.layers_order, function(l){return l;});
+            _(order).each(function(name) {
                 var layer = layers[name];
                 var idx = _.indexOf(layer_indexes, name);
                 layer_data.push(idx);

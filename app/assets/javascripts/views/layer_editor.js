@@ -1,7 +1,7 @@
 $(function() {
   window.LayerEditor = Backbone.View.extend({
     events: {
-      'click': 'open'
+      'click .view': 'open'
     },
 
     initialize: function() {
@@ -45,6 +45,7 @@ $(function() {
         }
       });
       this.updateLayerNumber();
+      el.append('<li><a href="/about#carbon" target="_blank">More Info</a></li>');
       return this;
     },
 
