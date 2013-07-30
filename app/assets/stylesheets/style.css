@@ -176,20 +176,6 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
-/* line 99, ../../../../../../.rvm/gems/ruby-1.9.2-p180@imazon/gems/html5-boilerplate-1.0.0/stylesheets/html5-boilerplate/_styles.scss */
-::-moz-selection {
-  background: #ff5e99;
-  color: white;
-  text-shadow: none;
-}
-
-/* line 100, ../../../../../../.rvm/gems/ruby-1.9.2-p180@imazon/gems/html5-boilerplate-1.0.0/stylesheets/html5-boilerplate/_styles.scss */
-::selection {
-  background: #ff5e99;
-  color: white;
-  text-shadow: none;
-}
-
 /* line 105, ../../../../../../.rvm/gems/ruby-1.9.2-p180@imazon/gems/html5-boilerplate-1.0.0/stylesheets/html5-boilerplate/_styles.scss */
 a:link {
   -webkit-tap-highlight-color: #ff5e99;
