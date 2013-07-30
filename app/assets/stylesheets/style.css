@@ -752,7 +752,7 @@ div.right {
   display: none;
   position: absolute;
   top: 25px;
-  right: 190px;
+  right: 165px;
   width: 192px;
   height: 25px;
   z-index: 10;
@@ -1487,7 +1487,7 @@ div.right {
 /* line 389, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.action_button span {
   float: left;
-  width: 103px;
+  width: auto;
   height: 14px;
   padding: 8px 12px 8px 0;
   background: url("sprite.png") right -820px no-repeat;
