@@ -67,10 +67,12 @@ $(function() {
 
     open: function(e) {
       var _this = this;
-      if(e) e.preventDefault();
-      this.el.addClass('open');
-      this.el.css("z-index","100");      
-      this.open = true;
+
+      if(e) { e.preventDefault(); }
+
+      this.el.toggleClass('open');
+      this.open = !this.open;
+
       $('body').click(function(e){
         _this.close(e);
       });
