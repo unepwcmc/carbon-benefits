@@ -1,7 +1,9 @@
 <div class="inner">
     <h1>File Uploaded - Select Fields</h1>
+
+    <p>Please tell us which of these fields is the <b>layer name</b> and which is the <b>classifier</b> <i>(This enables you to define which column in your table contains the 'names' of the features, and which column you want to choose as your classifier)</i></p>
+
     <div id='upload-form'>
-      <p>Please tell us which of these fields is the <b>layer name</b> and which is the <b>classifier</b> <i>(This enables you to define which column in your table contains the 'names' of the features, and which column you want to choose as your classifier)</i></p>
       <form action="/layers/<%= layer_id %>/select_fields/" method="post">
         <table id='field-picker-table'>
           <thead>

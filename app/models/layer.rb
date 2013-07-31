@@ -43,6 +43,7 @@ class Layer < ActiveRecord::Base
                                  selected_polygon_class_id,
                                  selected_polygon_class ? polygon_class_colours.find_by_polygon_class_id(selected_polygon_class_id).colour : nil ]
                            end
+
     {
       'id' => id,
       'polygons' => polygons.map{|p| p.as_json},
@@ -55,7 +56,7 @@ class Layer < ActiveRecord::Base
       'selected_class' => selected_name,
       'selected_class_id' => selected_id,
       'selected_colour' => selected_colour,
-      'selected_polygon_ids' => selected_polygon_ids.present? && selected_polygon_ids != 'null' ? JSON.parse(selected_polygon_ids) : ''
+      'selected_polygon_ids' => ''
     }.to_json
   end
 

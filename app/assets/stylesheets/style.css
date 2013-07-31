@@ -738,7 +738,7 @@ div.right {
   display: none;
   position: absolute;
   top: 25px;
-  right: 165px;
+  right: 130px;
   width: 192px;
   height: 25px;
   z-index: 10;
@@ -1845,7 +1845,7 @@ html, body {
 }
 
 #upload_box {
-  height:auto;
+  height:400px;
   display: none;
   width: 50%;
   left: 25%;
@@ -1892,7 +1892,13 @@ html, body {
   color: #333333;
 }
 
+#upload_box .inner p {
+  margin: 10px 0;
+}
+
 #upload-form {
+  height: 200px;
+  overflow: scroll;
   padding: 15px;
 }
 
