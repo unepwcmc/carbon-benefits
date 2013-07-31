@@ -6,10 +6,10 @@ $(function() {
 
     LEGENDS: {
       'carbon': 'layer_carbon_legend.png',
-      'carbon sequestration': 'layer_carbon_seq_legend.png',
+      'carbon seq. potential': 'layer_carbon_seq_legend.png',
       'restoration potential': 'layer_res_pot_legend.png',
       'forest status': 'layer_forest_status_legend.png',
-      'Gap Analysis': 'gap_analysis_legend.png'
+      'Ecological Gap Analysis': 'gap_analysis_legend.png'
     },
 
     events: {
