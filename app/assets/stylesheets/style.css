@@ -2431,7 +2431,7 @@ body.out div.layout footer div.collab ul li {
   zoom: 1;
   *display: inline;
   width: auto;
-  margin: 0 19px 0 0;
+  margin: 0 17px 0 0;
   padding: 0;
 }
 /* line 327, ../../css_src/partials/_layout.scss */
@@ -2443,53 +2443,60 @@ body.out div.layout footer div.collab ul li a {
 }
 /* line 334, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.cbd {
-  width: 145px;
-  height: 48px;
+  width: 131px;
+  height: 43px;
   background: url("sprite.png") no-repeat 0 -1126px;
 }
 /* line 335, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.lifeweb {
-  width: 121px;
-  height: 48px;
-  background: url("sprite.png") no-repeat -150px -1127px;
+  width: 108px;
+  height: 43px;
+  background: url("sprite.png") no-repeat -135px -1126px;
 }
 /* line 336, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.unep-wcmc {
-  width: 96px;
-  height: 49px;
-  background: url("sprite.png") no-repeat -375px -1123px;
+  width: 86px;
+  height: 45px;
+  background: url("sprite.png") no-repeat -338px -1126px;
 }
 /* line 337, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.vizzuality {
-  width: 89px;
-  height: 47px;
-  background: url("sprite.png") no-repeat -280px -1126px;
+  width: 82px;
+  height: 44px;
+  background: url("sprite.png") no-repeat -251px -1126px;
 }
 /* line 338, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.federal_agency {
-  width: 211px;
-  height: 92px;
+  width: 170px;
+  height: 63px;
   margin-left: -10px;
-  background: url("sprite.png") no-repeat left -2312px;
+  background: url("sprite.png") no-repeat 0 -2330px;
 }
 
 body.out div.layout footer div.collab ul li a.imfn {
-  width: 66px;
-  height: 66px;
+  width: 61px;
+  height: 52px;
   margin-left: -10px;
   background: url("sprite.png") no-repeat left -2415px;
+}
+
+body.out div.layout footer div.collab ul li a.defra {
+  width: 97px;
+  height: 53px;
+  background: url("sprite.png") no-repeat 0 -2487px;
 }
 
 /* line 339, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.nature {
   float: left;
-  width: 53px;
-  height: 57px;
+  width: 47px;
+  height: 49px;
   margin: -8px 0 0 12px;
-  background: url("sprite.png") no-repeat 0 -1369px;
+  background: url("sprite.png") no-repeat 0 -1375px;
   text-indent: -9999px;
   line-height: 0;
   font-size: 0;
+	
 }
 /* line 351, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li.last {
