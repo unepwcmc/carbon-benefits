@@ -1245,12 +1245,27 @@ div.right {
 
 .classes_list, .polygon_filters_list {
   padding: 18px 18px 0 18px;
-  background: url("sprite.png") no-repeat right bottom;
+	background: #eff9f9;
+	border: 1px solid #ccc;
+	border-top: 0px;
+  /* background: url("sprite.png") no-repeat right bottom; */
   float: left;
   width: 188px;
   height: 121px;
   position: absolute;
   z-index: 100;
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -o-border-bottom-left-radius: 4px;
+  -ms-border-bottom-left-radius: 4px;
+  -khtml-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -o-border-bottom-right-radius: 4px;
+  -ms-border-bottom-right-radius: 4px;
+  -khtml-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .classes_list {
@@ -2191,6 +2206,7 @@ body.out div.layout article.data_sources h4 {
   color: #333333;
   text-transform: capitalize;
 }
+
 /* line 146, ../../css_src/partials/_layout.scss */
 body.out div.layout article.data_sources h6 {
   padding: 20px 0 5px 0;
@@ -2332,6 +2348,8 @@ body.out div.layout section.two_columns h4 {
   color: #333333;
   border-bottom: 2px solid #333333;
 }
+
+
 /* line 247, ../../css_src/partials/_layout.scss */
 body.out div.layout section.two_columns p {
   padding: 12px 0;
@@ -2340,14 +2358,12 @@ body.out div.layout section.two_columns p {
 }
 
 body.out div.layout section.two_columns .aichi p{
-	color: #849a1b;
-	padding: 0 0 20px 0;
-	font-size: 15px;
+	padding: 20px 0 0 0;
+	font-size: 13px;
 }
 
 body.out div.layout section.two_columns .aichi a{
 	display: block;
-	font-style: italic;
 	padding: 10px 0;
 	color: #849a1b;
 }
@@ -2359,7 +2375,7 @@ body.out div.layout section.two_columns p strong {
 }
 
 body.out div.layout section.two_columns .aichi p strong{
-	color: #849a1b;
+
 	font-weight: bold;
 }
 
@@ -2442,7 +2458,7 @@ body.out div.layout footer div.collab ul li {
   zoom: 1;
   *display: inline;
   width: auto;
-  margin: 0 19px 0 0;
+  margin: 0 17px 0 0;
   padding: 0;
 }
 /* line 327, ../../css_src/partials/_layout.scss */
@@ -2454,53 +2470,60 @@ body.out div.layout footer div.collab ul li a {
 }
 /* line 334, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.cbd {
-  width: 145px;
-  height: 48px;
+  width: 131px;
+  height: 43px;
   background: url("sprite.png") no-repeat 0 -1126px;
 }
 /* line 335, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.lifeweb {
-  width: 121px;
-  height: 48px;
-  background: url("sprite.png") no-repeat -150px -1127px;
+  width: 108px;
+  height: 43px;
+  background: url("sprite.png") no-repeat -135px -1126px;
 }
 /* line 336, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.unep-wcmc {
-  width: 96px;
-  height: 49px;
-  background: url("sprite.png") no-repeat -375px -1123px;
+  width: 86px;
+  height: 45px;
+  background: url("sprite.png") no-repeat -338px -1126px;
 }
 /* line 337, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.vizzuality {
-  width: 89px;
-  height: 47px;
-  background: url("sprite.png") no-repeat -280px -1126px;
+  width: 82px;
+  height: 44px;
+  background: url("sprite.png") no-repeat -251px -1126px;
 }
 /* line 338, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.federal_agency {
-  width: 211px;
-  height: 92px;
+  width: 170px;
+  height: 63px;
   margin-left: -10px;
-  background: url("sprite.png") no-repeat left -2312px;
+  background: url("sprite.png") no-repeat 0 -2330px;
 }
 
 body.out div.layout footer div.collab ul li a.imfn {
-  width: 66px;
-  height: 66px;
+  width: 61px;
+  height: 52px;
   margin-left: -10px;
   background: url("sprite.png") no-repeat left -2415px;
+}
+
+body.out div.layout footer div.collab ul li a.defra {
+  width: 97px;
+  height: 53px;
+  background: url("sprite.png") no-repeat 0 -2487px;
 }
 
 /* line 339, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li a.nature {
   float: left;
-  width: 53px;
-  height: 57px;
+  width: 47px;
+  height: 49px;
   margin: -8px 0 0 12px;
-  background: url("sprite.png") no-repeat 0 -1369px;
+  background: url("sprite.png") no-repeat 0 -1375px;
   text-indent: -9999px;
   line-height: 0;
   font-size: 0;
+	
 }
 /* line 351, ../../css_src/partials/_layout.scss */
 body.out div.layout footer div.collab ul li.last {
@@ -2582,4 +2605,45 @@ span.beta {
 
 #upload-form form{
 	margin-top: 15px;
+}
+
+
+.example-graphic a{
+  float: left;
+  text-indent: -9999px;
+  line-height: 0;
+  font-size: 0;
+	height: 366px;
+	width: 234px;	
+	margin: 0 20px 0 0;
+}
+
+.example-graphic strong{
+	display: block;
+	padding: 0 0 10px 0;
+}
+
+body.out div.layout section.two_columns div.example-graphic h4{
+  font: bold 18px "WhitneyBold";
+  color: #333333;
+  padding: 0 0 8px;
+	margin: 0 0 10px 0;
+  border-bottom: 2px solid #666666;
+}
+
+#carbon-example{
+	background: url("carbon-example.png") no-repeat;
+}
+
+#spatial-example{
+	background: url("spatial-example.png") no-repeat;
+}
+
+#restoration-example{
+	background: url("restoration-example.png") no-repeat;
+	padding: 0 0 10px 0;
+}
+
+#protected-example{
+	background: url("protected-example.png") no-repeat;
 }

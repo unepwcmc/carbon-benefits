@@ -18,7 +18,7 @@ App.modules.Config = function(app) {
              url: 'http://lifeweb-maps.unep-wcmc.org/ArcGIS/rest/services/lifeweb/carbon/MapServer/tile/{Z}/{Y}/{X}',
              enabled: true 
           }, {
-            name: 'carbon sequestration',
+            name: 'carbon seq. potential',
             opacity: 0.7,
             url: 'http://lifeweb-maps.unep-wcmc.org/ArcGIS/rest/services/lifeweb/carb_seq/MapServer/tile/{Z}/{Y}/{X}',
              enabled: false
@@ -38,7 +38,7 @@ App.modules.Config = function(app) {
             opacity: 0.7,
             enabled: false
           }, {
-              name: 'Gap Analysis',
+              name: 'Ecological Gap Analysis',
               url: 'http://carbon-tool.cartodb.com/tiles/gap_analysis/{Z}/{X}/{Y}.png',
               opacity: 0.7,
               enabled: false
