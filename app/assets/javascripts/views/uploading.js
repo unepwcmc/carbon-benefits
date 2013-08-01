@@ -2,6 +2,10 @@ $(function() {
   window.UploadingView = Backbone.View.extend({
     tagName:  "div",
 
+    events: {
+      'click .cancel': 'cancel'
+    },
+
     template_upload_feedback: JST["templates/layer_common_upload_feedback"],
     initialize: function() {
       this.layerId = this.options.layerId;
@@ -12,6 +16,16 @@ $(function() {
     render: function(data) {
       $('#tab_content').append($(this.el).html(this.template_upload_feedback(data)));
       this.show();
+    },
+
+    cancel: function() {
+      var layer = this.work.get(this.layerId);
+      this.work.delete_layer(layer.cid);
+      // dear lord
+      layer.url = "/layers/"+layer.id;
+      layer.destroy();
+
+      location.reload(true);
     },
 
     pollForUploadProgress: function(jobId){

@@ -29,4 +29,14 @@ class LayersController < ApplicationController
 
     render :json => polygons.to_json
   end
+
+  def destroy
+    layer = Layer.find(params[:id])
+
+    if layer.destroy
+      render :json => layer.to_json
+    else
+      render :json => {error: 'Could not delete layer'}
+    end
+  end
 end
