@@ -2201,6 +2201,7 @@ body.out div.layout article.data_sources h4 {
   color: #333333;
   text-transform: capitalize;
 }
+
 /* line 146, ../../css_src/partials/_layout.scss */
 body.out div.layout article.data_sources h6 {
   padding: 20px 0 5px 0;
@@ -2342,6 +2343,8 @@ body.out div.layout section.two_columns h4 {
   color: #333333;
   border-bottom: 2px solid #333333;
 }
+
+
 /* line 247, ../../css_src/partials/_layout.scss */
 body.out div.layout section.two_columns p {
   padding: 12px 0;
@@ -2597,4 +2600,45 @@ span.beta {
 
 #upload-form form{
 	margin-top: 15px;
+}
+
+
+.example-graphic a{
+  float: left;
+  text-indent: -9999px;
+  line-height: 0;
+  font-size: 0;
+	height: 366px;
+	width: 234px;	
+	margin: 0 20px 0 0;
+}
+
+.example-graphic strong{
+	display: block;
+	padding: 0 0 10px 0;
+}
+
+body.out div.layout section.two_columns div.example-graphic h4{
+  font: bold 18px "WhitneyBold";
+  color: #333333;
+  padding: 0 0 8px;
+	margin: 0 0 10px 0;
+  border-bottom: 2px solid #666666;
+}
+
+#carbon-example{
+	background: url("carbon-example.png") no-repeat;
+}
+
+#spatial-example{
+	background: url("spatial-example.png") no-repeat;
+}
+
+#restoration-example{
+	background: url("restoration-example.png") no-repeat;
+	padding: 0 0 10px 0;
+}
+
+#protected-example{
+	background: url("protected-example.png") no-repeat;
 }
