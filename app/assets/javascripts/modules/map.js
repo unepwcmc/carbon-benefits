@@ -469,8 +469,6 @@ App.modules.Map = function(app) {
     _setBoundsFromCartodbResponse: function(extentData) {
       if(typeof extentData.rows[0] !== 'undefined'){
         bounds = this._geoJsonToBounds(extentData.rows[0].bounds);
-        console.log("Fitting to bounds:");
-        console.log(bounds);
         this.map.map.fitBounds(bounds);
       }
     },

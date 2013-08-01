@@ -25,7 +25,6 @@ $(function() {
             } else if (data['status'] === 'failed'){
               that.upload_finished({status: 'error', 'message': data['message']});
             }
-            console.log(data);
           },
           error: function(data){
             alert('error');
