@@ -459,7 +459,7 @@ body.tool header div ul li {
 body.tool header div ul li a {
   float: left;
   height: 28px;
-  height: 26px\9;
+  height: 26px;
   padding: 0 0 0 12px;
   background: url("sprite.png") 0 0 no-repeat;
   font: normal 13px "WhitneyBookRegular","Myriad Pro", Arial;
@@ -479,7 +479,7 @@ body.tool header div ul li a span {
   float: left;
   width: auto;
   height: 14px;
-  height: 12px\9;
+  height: 12px;
   padding: 6px 12px 8px 0;
   margin: 0;
   background: url("sprite.png") right -28px no-repeat;
@@ -1957,7 +1957,6 @@ html, body {
 /* line 56, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner .help button span, #upload_box .inner button span {
   float: right;
-  min-width: 150px\9;
   height: 15px;
   padding: 17px 21px 19px 0;
   background: url("sprite.png") right -427px no-repeat;
@@ -2654,4 +2653,29 @@ body.out div.layout section.two_columns div.example-graphic h4{
 
 #protected-example{
 	background: url("protected-example.png") no-repeat;
+}
+
+.no_content button.cancel {
+  width: auto;
+  height: 47px;
+  margin: 23px 0 25px 0;
+  padding: 0 0 0 21px;
+  border: none;
+  background: url("sprite.png") left -380px no-repeat;
+  font: bold 15px "WhitneyBold","Myriad Pro" Arial;
+  color: #333333;
+}
+
+.no_content button.cancel span {
+  float: right;
+  height: 15px;
+  padding: 17px 21px 19px 0;
+  background: url("sprite.png") right -427px no-repeat;
+  line-height: 15px;
+  text-transform: uppercase;
+}
+
+.no_content button.cancel:hover span {
+  color: black;
+  text-decoration: underline;
 }
