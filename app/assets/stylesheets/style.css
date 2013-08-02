@@ -1503,6 +1503,11 @@ div.right {
   text-align: center;
   overflow: hidden;
 }
+
+#panel #tab_content div.no_content .cancel:hover {
+  cursor: pointer;
+}
+
 /* line 376, ../../css_src/partials/_panel.scss */
 #panel #tab_content div.no_content a.action_button {
   float: left;

@@ -154,7 +154,6 @@ var SQL_UNION_GEOM = " \
             console.log('countries', data);
         });*/
         app.CartoDB.restoration_potential(p, function(data) {
-            console.log("restoration", data);
         });
         /*
         app.CartoDB.forest_status(p, function(data) {

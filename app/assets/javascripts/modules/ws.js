@@ -50,7 +50,6 @@ App.modules.WS = function(app) {
         test: function() {
           var p = [[[-1.4170918294416264,23.148193359375],[-1.6806671337507222,25.125732421875],[-3.743671274749718,24.290771484375]]];
           this.PA_coverage(app.CartoDB.wtk_polygon(p), function(d) {
-            console.log(d);
           });
         }
     };
