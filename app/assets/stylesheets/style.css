@@ -264,6 +264,14 @@ nav ul, nav li {
   font-style: bold;
 }
 
+@font-face{
+	font-family: 'Helvetica Neue';
+	src: url("/fonts/helveticaneue-webfont.eot");
+	src: url("/fonts/helveticaneue-webfont.eot?iefix") format("embedded-opentype"),  url("/fonts/helveticaneue-webfont.ttf") format("truetype");
+	font-weight: normal;
+	font-weight: normal;
+}
+
 /* Golden ratio scale from http://modularscale.com/scale/?px1=12&px2=48&ra1=1.618&ra2=0
 ---------------------------------------- */
 /* line 36, ../../css_src/partials/_base.scss */
@@ -359,7 +367,7 @@ body.tool div#error_dialog p {
 body.tool div#error_dialog a {
   margin: 35px 0 0 105px;
   font-size: 15px;
-  font: bold 13px "Helvetica Neue", "Helvetica";
+  font: bold 13px "Helvetica Neue", "Helvetica", Arial;
   color: black;
 }
 /* line 90, ../../css_src/partials/_page.scss */
@@ -417,7 +425,7 @@ body.tool header div {
 }
 /* line 144, ../../css_src/partials/_page.scss */
 body.tool header div h1,  body.tool header div h1 a{
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 black;
   color: #FFFFFF;
@@ -429,7 +437,7 @@ body.tool header div h1:hover {
 }
 /* line 151, ../../css_src/partials/_page.scss */
 body.tool header div p {
-  font: normal 13px "WhitneyBookRegular","Myriad Pro";
+  font: normal 13px "WhitneyBookRegular","Myriad Pro", Arial ;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 black;
   color: white;
@@ -454,7 +462,7 @@ body.tool header div ul li a {
   height: 26px\9;
   padding: 0 0 0 12px;
   background: url("sprite.png") 0 0 no-repeat;
-  font: normal 13px "WhitneyBookRegular","Myriad Pro";
+  font: normal 13px "WhitneyBookRegular","Myriad Pro", Arial;
   filter: progid:DXImageTransform.Microsoft.Shadow(color='#000000', Direction=180, Strength=1);
   text-shadow: 0 1px 0 black;
   color: white;
@@ -650,7 +658,7 @@ div.right {
 }
 /* line 134, ../../css_src/partials/_map.scss */
 .map_container .popup_text h1.name {
-  font: bold 13px "WhitneyBookRegular","Myriad Pro";
+  font: bold 13px "WhitneyBookRegular","Myriad Pro", Arial;
   color: #333333;
   text-transform: uppercase;
   border-bottom: 2px solid #333;
@@ -717,7 +725,7 @@ div.right {
   vertical-align: top;
   zoom: 1;
   width: 42px;
-  font: bold 11px "","Myriad Pro";
+  font: bold 11px "","Myriad Pro", Arial;
   color: #66CCCC;
   text-decoration: none;
   text-align: center;
@@ -751,7 +759,7 @@ div.right {
   padding: 0;
   display: inline;
   text-transform: uppercase;
-  font: bold 13px "WhitneyBookRegular","Myriad Pro";
+  font: bold 13px "WhitneyBookRegular","Myriad Pro", Arial;
   color: #333333;
   letter-spacing: -1px;
 }
@@ -761,7 +769,7 @@ div.right {
   width: 105px;
   display: inline;
   border: 0;
-  font: normal 13px "Helvetica";
+  font: normal 13px "Helvetica Neue", Arial;
 }
 /* line 232, ../../css_src/partials/_map.scss */
 .map_container .search a {
@@ -792,7 +800,7 @@ div.right {
   height: 13px;
   margin: 0;
   padding: 11px 32px 9px 8px;
-  font: normal 13px "WhitneyBookRegular","Myriad Pro";
+  font: normal 13px "WhitneyBookRegular","Myriad Pro", Arial;
   color: #333333;
   background: url("sprite.png") no-repeat right -1035px;
   text-indent: 0px;
@@ -800,7 +808,7 @@ div.right {
 }
 /* line 265, ../../css_src/partials/_map.scss */
 .map_container .layers a.view span strong {
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
 }
 /* line 271, ../../css_src/partials/_map.scss */
 .map_container .layers div.show {
@@ -859,7 +867,7 @@ div.right {
   padding: 5px 9px;
   border: none;
   border-bottom: 1px solid #F2F2F2;
-  font: normal 13px "Helvetica Neue";
+  font: normal 13px "Helvetica Neue", Arial;
   color: #333333;
 }
 /* line 307, ../../css_src/partials/_map.scss */
@@ -964,7 +972,7 @@ div.right {
 }
 /* line 25, ../../css_src/partials/_panel.scss */
 #panel .help_popup h1.name {
-  font: bold 13px "WhitneyBookRegular","Myriad Pro";
+  font: bold 13px "WhitneyBookRegular","Myriad Pro", Arial;
   color: #333333;
   text-transform: uppercase;
   border-bottom: 2px solid #333;
@@ -974,7 +982,7 @@ div.right {
 }
 /* line 34, ../../css_src/partials/_panel.scss */
 #panel .help_popup a {
-  font: bold 11px "Helvetica Neue";
+  font: bold 11px "Helvetica Neue", Arial;
   color: #333333;
 }
 /* line 39, ../../css_src/partials/_panel.scss */
@@ -1040,7 +1048,7 @@ div.right {
 #panel div.list_tooltip span h6 {
   margin: 0;
   padding: 0;
-  font: bold 13px "Helvetica",Arial;
+  font: bold 13px "Helvetica Neue",Arial;
   color: #333333;
 }
 /* line 91, ../../css_src/partials/_panel.scss */
@@ -1048,7 +1056,7 @@ div.right {
   float: left;
   margin: 2px 0 0 0;
   padding: 0;
-  font: normal 10px "Helvetica",Arial;
+  font: normal 10px "Helvetica Neue",Arial;
   color: #666666;
 }
 /* line 95, ../../css_src/partials/_panel.scss */
@@ -1086,7 +1094,7 @@ div.right {
   width: 100%;
   height: 15px;
   padding: 17px 0;
-  font: bold 15px "WhitneyBold","Myriad Pro";
+  font: bold 15px "WhitneyBold","Myriad Pro", Arial;
   color: #666666;
   text-decoration: none;
   text-transform: uppercase;
@@ -1141,7 +1149,7 @@ div.right {
 /* line 170, ../../css_src/partials/_panel.scss */
 #panel #tabs ul li span.stats h5 {
   margin: 0;
-  font: bold 15px "WhitneyBold","Myriad Pro";
+  font: bold 15px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
 }
 /* line 176, ../../css_src/partials/_panel.scss */
@@ -1584,7 +1592,7 @@ div.right {
   float: left;
   padding: 0 12px 0 0;
   margin: 27px 0 0 0;
-  font: bold 11px "WhitneyBold","Myriad Pro";
+  font: bold 11px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   background: url("icons/help.png") no-repeat right 2px;
 }
@@ -1892,7 +1900,7 @@ html, body {
   padding: 0 0 10px 0;
   border-bottom: 2px solid #666666;
   text-transform: uppercase;
-  font: bold 11px "WhitneyBold","Myriad Pro";
+  font: bold 11px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
 }
 
@@ -1938,7 +1946,7 @@ html, body {
   padding: 0 0 0 21px;
   border: none;
   background: url("sprite.png") left -380px no-repeat;
-  font: bold 15px "WhitneyBold","Myriad Pro";
+  font: bold 15px "WhitneyBold","Myriad Pro" Arial;
   color: #333333;
 }
 /* line 56, ../../css_src/partials/_start_banner.scss */
@@ -2051,7 +2059,7 @@ body.out section.results div.inner {
 /* line 16, ../../css_src/partials/_layout.scss */
 body.out section.results div.inner h3, body.out section.results div.inner h3 a {
   padding: 0 0 20px 0;
-  font: bold 27px "WhitneyBold","Myriad Pro";
+  font: bold 27px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
 }
 /* line 22, ../../css_src/partials/_layout.scss */
@@ -2066,7 +2074,7 @@ body.out section.results div.inner table div {
 /* line 27, ../../css_src/partials/_layout.scss */
 body.out section.results div.inner table h6 {
   width: 100%;
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro" Arial;
   color: #333333;
   padding: 0 0 5px;
   border-bottom: 2px solid #323232;
@@ -2079,7 +2087,7 @@ body.out section.results div.inner table h6 a {
 body.out section.results div.inner table p {
   margin: 7px 0 0 0;
   padding: 0 0 15px 0;
-  font: normal 13px "Helvetica",Arial;
+  font: normal 13px "Helvetica Neue", Arial;
   color: #666666;
 }
 /* line 46, ../../css_src/partials/_layout.scss */
@@ -2090,7 +2098,7 @@ body.out section.results div.inner table a.butt {
   padding: 0 0 0 4px;
   margin: 0 4px 0 0;
   background: url("sprite.png") no-repeat 0 -1337px;
-  font: bold 11px "WhitneyBold","Myriad Pro";
+  font: bold 11px "WhitneyBold","Myriad Pro", Arial;
   color: #66CCCC;
   text-decoration: none;
 }
@@ -2122,7 +2130,7 @@ body.out div.layout header h1 {
 }
 /* line 81, ../../css_src/partials/_layout.scss */
 body.out div.layout header h1 a {
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   text-decoration: none;
 }
@@ -2146,7 +2154,7 @@ body.out div.layout header ul li {
 }
 /* line 101, ../../css_src/partials/_layout.scss */
 body.out div.layout header ul li a {
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   text-decoration: none;
 }
@@ -2165,7 +2173,7 @@ body.out div.layout header ul li.selected a:hover {
 /* line 113, ../../css_src/partials/_layout.scss */
 body.out div.layout h2 {
   margin: 45px 0 0 0;
-  font: bold 47px "WhitneyBold","Myriad Pro";
+  font: bold 47px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   line-height: 47px;
 }
@@ -2197,7 +2205,7 @@ body.out div.layout article.data_sources {
 /* line 139, ../../css_src/partials/_layout.scss */
 body.out div.layout article.data_sources h4 {
   margin-top: 20px;
-  font: bold 27px "WhitneyBold","Myriad Pro";
+  font: bold 27px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   text-transform: capitalize;
 }
@@ -2205,7 +2213,7 @@ body.out div.layout article.data_sources h4 {
 /* line 146, ../../css_src/partials/_layout.scss */
 body.out div.layout article.data_sources h6 {
   padding: 20px 0 5px 0;
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   border-bottom: 2px solid #333333;
 }
@@ -2339,7 +2347,7 @@ body.out div.layout section.two_columns div.right {
 /* line 240, ../../css_src/partials/_layout.scss */
 body.out div.layout section.two_columns h4 {
   padding: 0 0 5px 0;
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   border-bottom: 2px solid #333333;
 }
@@ -2407,7 +2415,7 @@ body.out div.layout section.video div.right {
 }
 /* line 282, ../../css_src/partials/_layout.scss */
 body.out div.layout section.video h3 {
-  font: bold 27px "WhitneyBold","Myriad Pro";
+  font: bold 27px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
   padding: 0 0 5px 0;
 }
@@ -2433,7 +2441,7 @@ body.out div.layout footer div h6 {
   width: 100%;
   padding: 0 0 5px 0;
   border-bottom: 2px solid #CCCCCC;
-  font: bold 13px "WhitneyBold","Myriad Pro";
+  font: bold 13px "WhitneyBold","Myriad Pro", Arial;
   color: #333333;
 }
 /* line 313, ../../css_src/partials/_layout.scss */
