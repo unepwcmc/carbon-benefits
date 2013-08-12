@@ -2187,6 +2187,12 @@ body.out div.layout p.subtitle {
   font: normal 17px "Helvetica",Arial;
   color: #999999;
 }
+body.out div.layout p.intro {
+  padding: 20px 0 0 0;
+  font: normal 25px "Helvetica",Arial;
+	line-height: 1.2em;
+  color: #999999;
+}
 /* line 127, ../../css_src/partials/_layout.scss */
 body.out div.layout section.error {
   width: 600px;
