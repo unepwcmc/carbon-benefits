@@ -32,6 +32,8 @@
   <!-- <script src="js/libs/modernizr-2.0.6.js"></script> -->
   <%= csrf_meta_tags %>
 
+  <%= javascript_include_tag :ie %>
+
   <%= render "shared/analytics" %>
 </head>
 <body class="<%= yield :body_class %>">
