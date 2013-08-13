@@ -1212,7 +1212,7 @@ div.right {
 /* line 238, ../../css_src/partials/_panel.scss */
 #panel #tab_content .stats_header {
   overflow: hidden;
-  height: 44px;
+  height: 90px;
 }
 /* line 242, ../../css_src/partials/_panel.scss */
 #panel #tab_content .layer_stats {
