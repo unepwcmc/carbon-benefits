@@ -116,11 +116,7 @@
               <p>
                 Formats supported are Shapefile, KML, CSV and GeoJSON. Shapefiles should be uploaded as a zipped archive containing all the mandatory files (.shp, .shx, .dbf).</p>
 								<p><br/>
-                The preferred projection for all filetypes is WGS-84 (EPSG:4326). If you have any problems uploading, please reproject your file and try again.
-                <br/>
-              </p>
-							<p></br>
-							Please note that this function is not available on Microsoft Internet Explorer.
+                The preferred projection for all filetypes is WGS-84 (EPSG:4326). If you have any problems uploading, please reproject your file and try again. Please note that this function is not available on Microsoft Internet Explorer.
 							</p>
               <%= form_tag upload_layer_file_url, :multipart => true do%>
                 <%= hidden_field_tag "layer_id" %>
