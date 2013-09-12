@@ -94,7 +94,7 @@
       <div id="start_banner">
           <div class="inner">
               <div class="help">
-                <h1>welcome to the carbon calculator <span class='beta'> beta</span></h1>
+                <h1>welcome to the carbon calculator</h1>
                   <p>This tool provides an initial estimate for the potential contribution of any area of your interest to climate change mitigation as well as information on its conservation values, forest status and opportunities for forest and landscape restoration. <b>A</b>reas <b>O</b>f <b>I</b>nterest (<b>AOI</b>s) can be drawn on the map or uploaded to the tool.</p>
                   <button id="create_work"><span class="button_info">Start</span></button>
               </div> <!-- help -->
@@ -114,10 +114,10 @@
             <h1>Upload a layer to analyse</h1>
             <div id='upload-form'>
               <p>
-                Formats supported are Shapefile, KML, CSV and GeoJSON. Shapefiles should be uploaded as a zipped archive containing all the mandatory files (.shp, .shx, .dbf).</p><p><br/>
-                The preferred projection for all filetypes is WGS-84 (EPSG:4326). If you have any problems uploading, please reproject your file and try again.
-                <br/>
-              </p>
+                Formats supported are Shapefile, KML, CSV and GeoJSON. Shapefiles should be uploaded as a zipped archive containing all the mandatory files (.shp, .shx, .dbf).</p>
+								<p><br/>
+                The preferred projection for all filetypes is WGS-84 (EPSG:4326). If you have any problems uploading, please reproject your file and try again. Please note that this function is not available on Microsoft Internet Explorer.
+							</p>
               <%= form_tag upload_layer_file_url, :multipart => true do%>
                 <%= hidden_field_tag "layer_id" %>
                 <p>
