@@ -9,7 +9,7 @@ gem 'json', '>=1.7.7'
 gem 'alphadecimal'
 gem 'ejs'
 gem 'pg'
-gem 'cartodb-rb-client', :git => 'git://github.com/Vizzuality/cartodb-rb-client.git'
+gem 'cartodb-rb-client', :git => 'git@github.com:unepwcmc/cartodb-rb-client.git'
 gem 'resque'
 gem 'resque-status'
 gem 'httmultiparty'
@@ -26,7 +26,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem "jquery-rails", "= 2.1.4"
 
 gem "paperclip", "~> 2.7"
 gem "rubyzip"
