@@ -26,7 +26,12 @@ List of required keys:
 
 == Troubleshooting
 
-If you get the following error, when running ```bundle install```:
-``` NoMethodError: undefined method `write' for #<Syck::Emitter> ```
-then try ```RUBYOPT='-rpsych' bundle install```
+If you get the following error, when running 
+
+    bundle install
+    NoMethodError: undefined method `write' for #<Syck::Emitter>
+
+then try 
+
+    RUBYOPT='-rpsych' bundle install
 
