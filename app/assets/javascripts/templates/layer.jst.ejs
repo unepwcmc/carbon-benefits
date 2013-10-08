@@ -28,7 +28,7 @@
 
 <div class="layer_stats"<% if(selected_class === null) { %> style="top: 115px"<% } %>>
   <% if(stats.carbon) { %>
-    <% var area_in_hectares = Math.round(stats.carbon.area * 100); %>
+    <% var area_in_hectares = Math.round( (stats.carbon.area / 1000000) * 100); %>
     <% if (area_in_hectares <= 400) { %>
       <div class="alert warning">
         The polygon you have selected is very small. Because of the resolution
