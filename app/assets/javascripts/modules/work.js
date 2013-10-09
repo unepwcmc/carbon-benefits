@@ -51,7 +51,9 @@ App.modules.Data = function(app) {
         },
 
         remove_polygon: function(index) {
-            this.get('polygons').remove(this.get('polygons').at(index));
+            var poly = this.get('polygons').at(index);
+            poly.destroy();
+            this.get('polygons').remove(poly);
             this.trigger('change:polygons', this);
             this.trigger('change', this);
             this.save();
