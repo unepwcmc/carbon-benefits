@@ -44,6 +44,8 @@ App.modules.Carbon = function(app) {
 
             this.panel.hide();
 
+            this.bus.on('freeze_tabs', this.freeze_tabs);
+
             // init routing
             this.router = new Router();
             this.router.bind('route:work', this.on_route);
@@ -163,6 +165,22 @@ App.modules.Carbon = function(app) {
         on_route_to: function(route) {
             app.Log.debug("route => ", route);
             this.router.navigate(route, true);
+        },
+
+        // If a calculation is still going, 
+        // then opening a tab will create problems!
+        freeze_tabs: function(context, freeze, selectors) {
+          if (freeze) {
+            context.$(selectors)
+              .css("opacity", "0")
+              .css("cursor", "default");
+            context.tabs_frozen = true;
+          } else {
+            context.$(selectors)
+              .css("opacity", "1")
+              .css("cursor", "pointer");
+            context.tabs_frozen = false;
+          }
         }
 
     });
