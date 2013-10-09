@@ -15,20 +15,26 @@ $(function() {
       this.tabs = new Tabs({el: this.$('#tabs')});
       this.tabs.bind('enable', function() {});
       this.tab_contents = this.$('#tab_content');
+      this.tabs_frozen = false; 
       this.bus.on('loading_started', function() {
         _(self.layers).each(function(r) {
           r.loading(true);
         });
+        self.bus.emit("freeze_tabs", self, true, '#tabs li:not(.enabled) a');
       });
       this.bus.on('loading_finished', function() {
         _(self.layers).each(function(r) {
           r.loading(false);
         });
+        self.bus.emit("freeze_tabs", self, false, '#tabs li:not(.enabled) a');
       });
     },
 
     create_layer: function(e) {
       e.preventDefault();
+      if (this.tabs_frozen === true) {
+        return;
+      }
       this.trigger("add_layer");
     },
 
