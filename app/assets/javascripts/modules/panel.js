@@ -32,11 +32,11 @@ App.modules.Panel = function(app) {
 
         hide: function() {
             if(this.count === 0) return;
-            //var el = $('.loader');
             this.count--;
             if(this.count === 0) {
                 app.bus.emit("loading_finished");
-                //el.hide();
+                var el = $('.loader');
+                el.hide();
                 //clearInterval(this.interval);
             }
         }
