@@ -12,4 +12,8 @@ class PolygonsController < ApplicationController
     @polygon.update_attributes(params[:polygon])
     render :json => @polygon.as_json
   end
+
+  def destroy
+    Polygon.find(params[:id]).destroy
+  end
 end
