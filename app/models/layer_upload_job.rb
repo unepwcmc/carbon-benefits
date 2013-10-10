@@ -7,7 +7,7 @@ class LayerUploadJob
   include Resque::Plugins::Status
   MAX_POLYGON_AREA = 8000000*1000*1000
   TABLENAME = APP_CONFIG['cartodb_table']
-  COLOR_ARY = ['red', 'blue', 'green', 'yellow', 'purple', 'brown', 'black', 'white']
+  COLOR_ARY = ['red', 'blue', 'green', 'yellow', 'purple', 'brown', 'black']
 
   def perform
     puts options['layer_id'].inspect
