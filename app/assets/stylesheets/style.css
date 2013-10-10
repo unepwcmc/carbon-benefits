@@ -883,7 +883,7 @@ div.right {
   display: inline-block;
 }
 
-.map_container .layers div.show ul li.enabled span.color.carbon_seq._potential {
+.map_container .layers div.show ul li.enabled span.color.carbon_seq_potential {
   background: url("sprite.png") no-repeat -239px -2491px;
 }
 .map_container .layers div.show ul li.enabled span.color.Ecological_Gap_Analysis {
