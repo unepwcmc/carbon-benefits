@@ -42,7 +42,6 @@ $(function() {
       if(leg = this.LEGENDS[this.map_layer.name]) {
         html += '<img src="/assets/'+ leg +'" />';
       }
-      console.log("xxx", this.map_layer.name, this.map_layer.name.replace(".", ""));
       el.html(html).addClass('sortable').attr('id', this.map_layer.name.replace(".", ""));
       if(this.map_layer.enabled) {
         el.addClass('enabled');
