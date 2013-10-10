@@ -22,11 +22,10 @@ App.modules.Panel = function(app) {
             this.count++;
             if(this.count === 1) {
                 app.bus.emit("loading_started");
-                /*this.interval = setInterval(function() {
+                this.interval = setInterval(function() {
                    var el = $('.loader');
                    el.show();
-                }, 400);
-                */
+                }, 800);
             }
         },
 
@@ -37,7 +36,7 @@ App.modules.Panel = function(app) {
                 app.bus.emit("loading_finished");
                 var el = $('.loader');
                 el.hide();
-                //clearInterval(this.interval);
+                clearInterval(this.interval);
             }
         }
     });

@@ -1838,7 +1838,7 @@ div.right {
   margin: 2px 0 0 0;
 }
 /* line 646, ../../css_src/partials/_panel.scss */
-#panel div.loader {
+#panel span.loader {
   float: left;
   width: 312px;
   height: 47px;
