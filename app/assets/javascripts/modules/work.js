@@ -1,5 +1,10 @@
 App.modules.Data = function(app) {
     var Layer = Backbone.Model.extend({
+
+        url: function() {
+          return 'layers/' + this.id;
+        },
+
         defaults: function() {
             return {
                 'id': null,
@@ -39,7 +44,9 @@ App.modules.Data = function(app) {
         },
 
         _save: function() {
+          if (this.collection) {
             return this.collection.save();
+          }
         },
 
         update_polygon: function(index, path) {
@@ -247,23 +254,41 @@ App.modules.Data = function(app) {
 
         delete_layer: function(rid) {
             var r = this.getByCid(rid);
+            var polygons = this.get_all_polygons_from_layer(r);
+            this.delete_all_polygons_from_layer(r, polygons);
+
             this.remove(r);
             r.unbind('change', this.on_layer_change);
-            //r.remove();
+            r.destroy();
             this.save();
             this.aggregate_stats();
         },
 
+        get_all_polygons_from_layer: function(layer) {
+          var polygons = [];
+          _.each(layer.get('polygons')
+            .findByClass(layer.get('selected_class')), function(p) {
+              polygons.push(p);
+          });
+          return polygons;
+        },
+
+        delete_all_polygons_from_layer: function(layer, polygons) {
+          this.remove(polygons);
+          _.each(polygons, function(p, index) {
+            layer.remove_polygon(index);
+          });
+        },
+
         get_all_polygons: function() {
           // get all polygons in the same array
+          var self = this;
           var layers = _(this.get_layers()).filter(function(r) {
-                return r.get('stats') !== undefined;
+            return r.get('stats') !== undefined;
           });
           var polygons = [];
           _.each(layers, function(r) {
-              _.each(r.get('polygons').findByClass(r.get('selected_class')), function(p) {
-                  polygons.push(p);
-              });
+              polygons.concat(self.get_all_polygons_from_layer(r));
           });
           return polygons;
         },
