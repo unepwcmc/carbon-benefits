@@ -68,19 +68,19 @@ SELECT (overlapped_area / ( SELECT ST_Area( ST_MakeValid(<%= polygon %>) \
 ST_MakeValid(<%= polygon %>) \
 )) AS overlapped_area FROM kba WHERE ST_Intersects( \
 ST_MakeValid(<%= polygon %>) \
-, the_geom) ) foo"
+, the_geom) ) foo;"
 
 
-var SQL_COUNTRIES = " \
+var SQL_COUNTRIES = "\
 SELECT priority, country, ST_Area(ST_Intersection( \
- ST_Union(mg.the_geom)::geography, \
+ ST_Union(mg.the_geom), \
  <%= polygon %> \
-)) AS covered_area \
+)::geography) AS covered_area \
 FROM gaps_merged mg \
 WHERE ST_Intersects(mg.the_geom, \
  <%= polygon %> \
 ) \
-GROUP BY priority, country";
+GROUP BY priority, country;";
 
 
 var SQL_UNION_GEOM = " \
