@@ -288,7 +288,8 @@ App.modules.Data = function(app) {
           });
           var polygons = [];
           _.each(layers, function(r) {
-              polygons.concat(self.get_all_polygons_from_layer(r));
+              var layer_polygons = self.get_all_polygons_from_layer(r);
+              polygons = polygons.concat(layer_polygons);
           });
           return polygons;
         },
