@@ -9,7 +9,7 @@ set :domain, "unepwcmc-005.vm.brightbox.net"
 ## List of servers
 server "unepwcmc-005.vm.brightbox.net", :app, :web, :db, :primary => true, :jobs => true
 
-set :branch, "2013-FinalEdits"
+set :branch, "master"
 
 ## Local Shared Area
 # These are the list of files and directories that you want

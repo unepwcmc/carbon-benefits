@@ -36,7 +36,7 @@ $(function() {
       var leg;
       var el = $(this.el);
       var d = _.extend(this.map_layer, {
-        normalized_name: this.map_layer.name.replace(/ /g, '_')
+        normalized_name: this.map_layer.name.replace(/ /g, '_').replace(".", "")
       });
       var html = this.template(d);
       if(leg = this.LEGENDS[this.map_layer.name]) {
