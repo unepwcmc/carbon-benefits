@@ -8,6 +8,7 @@ window.FieldPicker = Backbone.View.extend({
 
   initialize: function() {
     _.bindAll(this, 'render', 'submit');
+    this.bus = this.options.bus;
     this.fields = this.options['fields'];
     this.layer_id = this.options['layer_id'];
 
@@ -29,7 +30,11 @@ window.FieldPicker = Backbone.View.extend({
       dataType: 'json',
       beforeSend: function(){
         $(that.el).hide();
-        that.uploadingView = new UploadingView({layerId: that.layer_id, work: carbon.work.work});
+        that.uploadingView = new UploadingView({
+          layerId: that.layer_id, 
+          work: carbon.work.work,
+          bus: this.bus
+        });
       },
       success: function(res_json){
         that.uploadingView.pollForUploadProgress(res_json['job_id']);

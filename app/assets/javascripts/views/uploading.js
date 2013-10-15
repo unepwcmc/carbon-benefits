@@ -8,6 +8,7 @@ $(function() {
 
     template_upload_feedback: JST["templates/layer_common_upload_feedback"],
     initialize: function() {
+      this.bus = this.options.bus;
       this.layerId = this.options.layerId;
       this.work = this.options.work;
       this.render({message: 'Please wait'});
@@ -50,6 +51,7 @@ $(function() {
     },
     upload_started: function() {
       var r = this.work.get(this.layerId);
+      this.bus.emit("freeze_tabs", this, true, '#tabs li:not(.enabled) a');
       if(r) {
           this.render({message: 'Upload in progress...'});
       } else {
@@ -57,6 +59,7 @@ $(function() {
       }
     },
     upload_finished: function(data){
+      this.bus.emit("freeze_tabs", this, false, '#tabs li:not(.enabled) a');
       if(data['status'] == 'success'){
         this.render({message: 'Upload complete'});
         //this.hide();

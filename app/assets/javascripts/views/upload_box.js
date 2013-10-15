@@ -9,10 +9,10 @@ window.UploadBox = Backbone.View.extend({
   initialize: function() {
     var that = this;
     _.bindAll(this, 'open', 'chooseFields');
+    this.bus = this.options.bus;
     this.form_el = this.$('form');
     this.layer_id = this.options['layer_id'];
-
-    this.status = $('#status'); 
+    this.status = $('#status');
 
     $(this.form_el).ajaxForm({
       dataType: 'json',
@@ -69,7 +69,11 @@ window.UploadBox = Backbone.View.extend({
     // takes the server response with the users fields and creates a new fieldPicker view
     this.status.html('Upload complete');
     $(this.el).empty();
-    this.fieldPicker = new FieldPicker({fields:res_json['data'], layer_id: this.layer_id});
+    this.fieldPicker = new FieldPicker({
+      fields:res_json['data'], 
+      layer_id: this.layer_id,
+      bus: this.bus
+    });
   },
 
   resetValidationErrors: function(){

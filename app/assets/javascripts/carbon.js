@@ -171,12 +171,12 @@ App.modules.Carbon = function(app) {
         // then opening a tab will create problems!
         freeze_tabs: function(context, freeze, selectors) {
           if (freeze) {
-            context.$(selectors)
+            $(selectors)
               .css("opacity", "0")
               .css("cursor", "default");
             context.tabs_frozen = true;
           } else {
-            context.$(selectors)
+            $(selectors)
               .css("opacity", "1")
               .css("cursor", "pointer");
             context.tabs_frozen = false;

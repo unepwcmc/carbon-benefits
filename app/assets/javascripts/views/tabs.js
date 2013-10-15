@@ -11,12 +11,11 @@ $(function() {
           this.tab_el = this.$("ul");
           this.tab_count = 0;
           this.tabs_frozen = false;
-          this.bus.on("freeze_tabs", function(e) {
-            var frozen = !e.tabs_frozen;
+          this.bus.on("freeze_tabs", function(context, freeze, selectors) {
             function slow_unfreeze () {
               self.tabs_frozen = false;
             }
-            if (!frozen) {
+            if (!freeze) {
               window.setTimeout(slow_unfreeze, 800);
             } else {
               self.tabs_frozen = true;
