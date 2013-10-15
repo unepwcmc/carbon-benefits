@@ -42,7 +42,8 @@ class ApiController < ApplicationController
     url = params[:url].sub(/(http|https)(:\/)/, '\1\2/')
     uri = URI.parse(url)
     if params[:q]
-      proxy_page = Net::HTTP.get_response(uri.host, uri.path+"?q=#{params[:q]}")
+      query = CGI::escape(params[:q])
+      proxy_page = Net::HTTP.get_response(uri.host, uri.path+"?q=#{query}")
     elsif request.method == "POST"
       proxy_page = Net::HTTP.post_form(uri, data: params[:data])
     else
