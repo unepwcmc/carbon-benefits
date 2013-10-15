@@ -172,7 +172,10 @@ $(function() {
 
       go_upload: function(e) {
         if(e) e.preventDefault();
-        var uB = new UploadBox({layer_id:$(e.target).attr('data-layer-id')});
+        var uB = new UploadBox({
+          layer_id:$(e.target).attr('data-layer-id'),
+          bus: this.bus
+        });
         uB.open();
       },
 

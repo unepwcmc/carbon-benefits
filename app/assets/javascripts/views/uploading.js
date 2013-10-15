@@ -31,6 +31,7 @@ $(function() {
 
     pollForUploadProgress: function(jobId){
       var that = this;
+      this.bus.emit("freeze_tabs", this, true, '#tabs li:not(.enabled) a');
       this.timerId = setInterval(function(){
         $.ajax({
           url: "/layers/get_job_status?job_id="+jobId,
@@ -51,7 +52,6 @@ $(function() {
     },
     upload_started: function() {
       var r = this.work.get(this.layerId);
-      this.bus.emit("freeze_tabs", this, true, '#tabs li:not(.enabled) a');
       if(r) {
           this.render({message: 'Upload in progress...'});
       } else {
