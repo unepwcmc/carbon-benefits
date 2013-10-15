@@ -12,7 +12,16 @@ $(function() {
           this.tab_count = 0;
           this.tabs_frozen = false;
           this.bus.on("freeze_tabs", function(e) {
-            self.tabs_frozen = !e.tabs_frozen;
+            var frozen = !e.tabs_frozen;
+            function slow_unfreeze () {
+              self.tabs_frozen = false;
+            }
+            if (!frozen) {
+              window.setTimeout(slow_unfreeze, 800);
+            } else {
+              self.tabs_frozen = true;
+            }
+            
           });
       },
 
