@@ -51,6 +51,7 @@ $(function() {
     },
     upload_started: function() {
       var r = this.work.get(this.layerId);
+      console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
       this.bus.emit("freeze_tabs", this, true, '#tabs li:not(.enabled) a');
       if(r) {
           this.render({message: 'Upload in progress...'});
