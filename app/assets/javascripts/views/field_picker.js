@@ -33,7 +33,7 @@ window.FieldPicker = Backbone.View.extend({
         that.uploadingView = new UploadingView({
           layerId: that.layer_id, 
           work: carbon.work.work,
-          bus: this.bus
+          bus: that.bus
         });
       },
       success: function(res_json){
