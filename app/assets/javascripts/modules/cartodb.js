@@ -127,10 +127,11 @@ var SQL_UNION_GEOM = " \
     }
 
     function wtk_polygon(poly) {
-        return "ST_GeomFromText('" + wkt_polygon(poly) + "',4326)";
+        return "ST_GeomFromText('" + wkt_multy_polygon(poly) + "',4326)";
+        //return wkt_polygon(poly);
     }
 
-    function wkt_polygon(poly) {
+    function wkt_multy_polygon(poly) {
         var multipoly = [];
         _.each(poly, function(p) {
             p = p.get('path');
@@ -141,6 +142,21 @@ var SQL_UNION_GEOM = " \
             multipoly.push("((" + wtk + "))");
         });
         return "MULTIPOLYGON(" + multipoly.join(',') + ")";
+    }
+
+    // Alternative for overlapping polygons.
+    // FIXME: this needs fixing, before possible use.
+    function wkt_polygon(poly) {
+        var polies = [];
+        _.each(poly, function(p) {
+            p = p.get('path');
+            var closed = p.concat([p[0]]);
+            var wtk = _.map(closed, function(point) {
+                return point[1] + " " + point[0];
+            }).join(',');
+            polies.push("ST_GeomFromText('POLYGON((" + wtk + "))',4326)");
+        });
+        return "ST_Union(" + polies.join(',') + ")";
     }
 
     app.CartoDB = {};
