@@ -127,11 +127,11 @@ var SQL_UNION_GEOM = " \
     }
 
     function wtk_polygon(poly) {
-        return "ST_GeomFromText('" + wkt_multy_polygon(poly) + "',4326)";
-        //return wkt_polygon(poly);
+        return "ST_GeomFromText('" + wkt_polygon(poly) + "',4326)";
+        //return wkt_polygon_(poly);
     }
 
-    function wkt_multy_polygon(poly) {
+    function wkt_polygon(poly) {
         var multipoly = [];
         _.each(poly, function(p) {
             p = p.get('path');
@@ -146,7 +146,7 @@ var SQL_UNION_GEOM = " \
 
     // Alternative for overlapping polygons.
     // FIXME: this needs fixing, before possible use.
-    function wkt_polygon(poly) {
+    function wkt_polygon_(poly) {
         var polies = [];
         _.each(poly, function(p) {
             p = p.get('path');
