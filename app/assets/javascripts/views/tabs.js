@@ -6,8 +6,14 @@ $(function() {
       },
 
       initialize: function() {
+          self = this;
+          this.bus = this.options.bus;
           this.tab_el = this.$("ul");
           this.tab_count = 0;
+          this.tabs_frozen = false;
+          this.bus.on("freeze_tabs", function(e) {
+            self.tabs_frozen = !e.tabs_frozen;
+          });
       },
 
       toggleUserLayerVisibility: function(e){
@@ -93,6 +99,9 @@ $(function() {
 
       click_activate: function(e) {
           e.preventDefault();
+          if (this.tabs_frozen) {
+            return;
+          }
           //this.trigger('enable', $(e.target).attr('href').slice(1));
           //IE7 love
           this.trigger('enable', $(e.target).attr('href').split('#')[1]);

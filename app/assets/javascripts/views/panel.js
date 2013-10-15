@@ -12,10 +12,10 @@ $(function() {
       this.bus = this.options.bus;
       this.layers = [];
       this.layers_map = {};
-      this.tabs = new Tabs({el: this.$('#tabs')});
+      this.tabs = new Tabs({el: this.$('#tabs'), bus: this.bus});
       this.tabs.bind('enable', function() {});
       this.tab_contents = this.$('#tab_content');
-      this.tabs_frozen = false; 
+      this.tabs_frozen = false;
       this.bus.on('loading_started', function() {
         _(self.layers).each(function(r) {
           r.loading(true);
