@@ -103,7 +103,7 @@ $(function() {
           .css("cursor", "default");
         this.tabs_frozen = true;
       } else {
-        window.setTimeout(slow_unfreeze, 1000);
+        window.setTimeout(slow_unfreeze, 1500);
       }
     }
 

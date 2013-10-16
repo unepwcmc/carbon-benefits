@@ -16,7 +16,7 @@ $(function() {
               self.tabs_frozen = false;
             }
             if (!freeze) {
-              window.setTimeout(slow_unfreeze, 1000);
+              window.setTimeout(slow_unfreeze, 1500);
             } else {
               self.tabs_frozen = true;
             }
