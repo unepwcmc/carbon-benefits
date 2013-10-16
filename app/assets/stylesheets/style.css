@@ -1902,8 +1902,8 @@ html, body {
 }
 /* line 24, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner .help{
-  width: 385px;
-  padding: 58px 0 0 0;
+  width: 405px;
+  padding: 50px 0 0 0;
 }
 /* line 28, ../../css_src/partials/_start_banner.scss */
 #start_banner .inner .help h1, #upload_box .inner h1 {
