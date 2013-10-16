@@ -374,7 +374,8 @@ App.modules.Map = function(app) {
             var p = new PolygonView({
               mapview: self.map,
               polygon: polygon,
-              color: rid == layer_id ? "#66CCCC": "#FFCC00"
+              color: rid == layer_id ? "#66CCCC": "#aaaaaa",
+              opacity: rid == layer_id ? 0.7: 0.3
             });
             p.layer = rid;
             p.polygon_id = i;

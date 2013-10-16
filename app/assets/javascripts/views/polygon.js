@@ -6,6 +6,7 @@ var PolygonView = Backbone.View.extend({
       this.mapview = this.options.mapview;
       this.polygon = this.options.polygon;
       this.color = this.options.color || this.COLOR;
+      this.opacity = this.options.opacity || 0.7;
     },
 
     path: function() {
@@ -25,10 +26,11 @@ var PolygonView = Backbone.View.extend({
     render: function() {
       var self = this;
       var fillColor = this.color;
+      var fillOpacity = this.opacity;
 
       var poly = new google.maps.Polygon({
         paths: this.path(),
-        fillOpacity: 0.3,
+        fillOpacity: fillOpacity,
         fillColor: fillColor,
         strokeColor: "#fff",
         strokeWeight: 2.5
