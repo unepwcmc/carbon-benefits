@@ -89,16 +89,21 @@ $(function() {
     // If a calculation is still going, 
     // then opening a tab will create problems!
     freeze_tabs: function(freeze, selectors) {
+      var self = this;
+      var selectors = selectors;
+      function slow_unfreeze () {
+        $(selectors)
+          .css("opacity", "1")
+          .css("cursor", "pointer");
+        self.tabs_frozen = false;
+      }
       if (freeze) {
         $(selectors)
           .css("opacity", "0")
           .css("cursor", "default");
         this.tabs_frozen = true;
       } else {
-        $(selectors)
-          .css("opacity", "1")
-          .css("cursor", "pointer");
-        this.tabs_frozen = false;
+        window.setTimeout(slow_unfreeze, 1000);
       }
     }
 
