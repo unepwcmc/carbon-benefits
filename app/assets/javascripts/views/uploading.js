@@ -31,7 +31,7 @@ $(function() {
 
     pollForUploadProgress: function(jobId){
       var that = this;
-      this.bus.emit("freeze_tabs", this, true, '#tabs li:not(.enabled) a');
+      this.bus.emit("freeze_tabs", true, '#tabs li:not(.enabled) a');
       this.timerId = setInterval(function(){
         $.ajax({
           url: "/layers/get_job_status?job_id="+jobId,
@@ -59,7 +59,7 @@ $(function() {
       }
     },
     upload_finished: function(data){
-      this.bus.emit("freeze_tabs", this, false, '#tabs li:not(.enabled) a');
+      this.bus.emit("freeze_tabs", false, '#tabs li:not(.enabled) a');
       if(data['status'] == 'success'){
         this.render({message: 'Upload complete'});
         //this.hide();

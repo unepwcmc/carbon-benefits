@@ -11,7 +11,7 @@ $(function() {
           this.tab_el = this.$("ul");
           this.tab_count = 0;
           this.tabs_frozen = false;
-          this.bus.on("freeze_tabs", function(context, freeze, selectors) {
+          this.bus.on("freeze_tabs", function(freeze, selectors) {
             function slow_unfreeze () {
               self.tabs_frozen = false;
             }

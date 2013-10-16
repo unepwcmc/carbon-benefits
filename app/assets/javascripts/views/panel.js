@@ -20,13 +20,15 @@ $(function() {
         _(self.layers).each(function(r) {
           r.loading(true);
         });
-        self.bus.emit("freeze_tabs", self, true, '#tabs li:not(.enabled) a');
+        self.bus.emit("freeze_tabs", true, '#tabs li:not(.enabled) a');
+        self.freeze_tabs(true, '#tabs li:not(.enabled) a');
       });
       this.bus.on('loading_finished', function() {
         _(self.layers).each(function(r) {
           r.loading(false);
         });
-        self.bus.emit("freeze_tabs", self, false, '#tabs li:not(.enabled) a');
+        self.bus.emit("freeze_tabs", false, '#tabs li:not(.enabled) a');
+        self.freeze_tabs(false, '#tabs li:not(.enabled) a');
       });
     },
 
@@ -81,6 +83,23 @@ $(function() {
 
     show: function() {
       this.el.show();
+    },
+
+    // If a calculation is still going, 
+    // then opening a tab will create problems!
+    freeze_tabs: function(freeze, selectors) {
+      if (freeze) {
+        $(selectors)
+          .css("opacity", "0")
+          .css("cursor", "default");
+        this.tabs_frozen = true;
+      } else {
+        $(selectors)
+          .css("opacity", "1")
+          .css("cursor", "pointer");
+        this.tabs_frozen = false;
+      }
     }
+
   });
 });
