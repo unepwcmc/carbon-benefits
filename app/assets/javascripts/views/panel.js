@@ -21,14 +21,15 @@ $(function() {
           r.loading(true);
         });
         self.bus.emit("freeze_tabs", true, '#tabs li:not(.enabled) a');
-        self.freeze_tabs(true, '#tabs li:not(.enabled) a');
       });
       this.bus.on('loading_finished', function() {
         _(self.layers).each(function(r) {
           r.loading(false);
         });
         self.bus.emit("freeze_tabs", false, '#tabs li:not(.enabled) a');
-        self.freeze_tabs(false, '#tabs li:not(.enabled) a');
+      });
+      this.bus.on("freeze_tabs", function(freeze, selectors) {
+        self.freeze_tabs(freeze, selectors);
       });
     },
 
