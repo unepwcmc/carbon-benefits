@@ -36,10 +36,9 @@ App.modules.Carbon = function(app) {
             this.bus = new app.Bus();
             // set a global bus
             app.bus = this.bus;
-            this.panel = new app.Panel(this.bus);
             this.map = new app.Map(this.bus);
             this.work = new app.Work(this.bus);
-            
+            this.panel = new app.Panel(this.bus);
             this.banner = new app.StartBanner(this.bus);
             this.header = new app.Header();
 
