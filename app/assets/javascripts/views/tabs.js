@@ -96,7 +96,7 @@ $(function() {
               a = data.stats.carbon_sum.area;
           }
           a = a || 0;
-          this.tab_el.find("a[href=#" + rid +"]").parent().find('.area').html((a/100000).toFixed(0));
+          this.tab_el.find("a[href=#" + rid +"]").parent().find('.area').html((a/1000000).toFixed(0));
       },
 
       clear: function() {
