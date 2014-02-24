@@ -5,7 +5,7 @@ var SQL_CARBON= "SELECT SUM((ST_Value(rast, 1, x, y) / 100) * ((ST_Area(ST_Trans
 ST_Area(<%= polygon %>::geography) as area \
 FROM carbonsequestration CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y \
-WHERE rid in ( SELECT rid FROM carbonsequestration WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
@@ -20,7 +20,7 @@ FROM carbonintersection \
 CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN countries \
  \
-WHERE rid IN ( SELECT rid FROM carbonintersection WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 objectid IN ( SELECT objectid FROM countries WHERE ST_Intersects(the_geom, <%= polygon %>) ) \
 AND \
@@ -39,7 +39,7 @@ var SQL_RESTORATION ="  \
 SELECT band, AVG(ST_Value(rast, band, x, y)) AS percentage \
 FROM restorationpotencial CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN generate_series(1,4) As band \
-WHERE rid in ( SELECT rid FROM restorationpotencial WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
@@ -52,7 +52,7 @@ var SQL_FOREST = " \
 SELECT band, SUM(ST_Value(rast, band, x, y)) AS total \
 FROM forestintactness CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN generate_series(1,4) As band \
-WHERE rid in ( SELECT rid FROM forestintactness WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
@@ -68,19 +68,19 @@ SELECT (overlapped_area / ( SELECT ST_Area( ST_MakeValid(<%= polygon %>) \
 ST_MakeValid(<%= polygon %>) \
 )) AS overlapped_area FROM kba WHERE ST_Intersects( \
 ST_MakeValid(<%= polygon %>) \
-, the_geom) ) foo"
+, the_geom) ) foo;"
 
 
-var SQL_COUNTRIES = " \
+var SQL_COUNTRIES = "\
 SELECT priority, country, ST_Area(ST_Intersection( \
- ST_Union(mg.the_geom)::geography, \
+ ST_Union(mg.the_geom), \
  <%= polygon %> \
-)) AS covered_area \
+)::geography) AS covered_area \
 FROM gaps_merged mg \
 WHERE ST_Intersects(mg.the_geom, \
  <%= polygon %> \
 ) \
-GROUP BY priority, country";
+GROUP BY priority, country;";
 
 
 var SQL_UNION_GEOM = " \
