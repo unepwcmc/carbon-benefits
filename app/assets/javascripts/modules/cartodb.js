@@ -5,7 +5,7 @@ var SQL_CARBON= "SELECT SUM((ST_Value(rast, 1, x, y) / 100) * ((ST_Area(ST_Trans
 ST_Area(<%= polygon %>::geography) as area \
 FROM carbonsequestration CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y \
-WHERE rid in ( SELECT rid FROM carbonsequestration WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
@@ -20,7 +20,7 @@ FROM carbonintersection \
 CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN countries \
  \
-WHERE rid IN ( SELECT rid FROM carbonintersection WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 objectid IN ( SELECT objectid FROM countries WHERE ST_Intersects(the_geom, <%= polygon %>) ) \
 AND \
@@ -52,7 +52,7 @@ var SQL_FOREST = " \
 SELECT band, SUM(ST_Value(rast, band, x, y)) AS total \
 FROM forestintactness CROSS JOIN \
 generate_series(1,10) As x CROSS JOIN generate_series(1,10) As y CROSS JOIN generate_series(1,4) As band \
-WHERE rid in ( SELECT rid FROM forestintactness WHERE ST_Intersects(rast, <%= polygon %>) ) \
+WHERE ST_Intersects(rast, <%= polygon %>) \
 AND \
 ST_Intersects( \
   ST_Translate(ST_SetSRID(ST_Point(ST_UpperLeftX(rast), ST_UpperLeftY(rast)), 4326), ST_ScaleX(rast)*x, ST_ScaleY(rast)*y), \
